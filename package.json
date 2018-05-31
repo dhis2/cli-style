@@ -1,0 +1,23 @@
+{
+  "name": "@dhis2/code-style",
+  "version": "1.0.0",
+  "description": "The JavaScript code style for DHIS2.",
+  "bin": "code-style.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Viktor Varland",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-react-app": "^2.1.0",
+    "eslint-plugin-flowtype": "^2.48.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.8.2",
+    "prettier": "^1.13.3"
+  }
+}
