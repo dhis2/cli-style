@@ -1,6 +1,7 @@
 module.exports = {
     "extends": [
-        "prettier"
+        "prettier",
+        "react-app"
     ],
     "rules": {
         "no-console": "off"
