@@ -1,117 +1,59 @@
 #!/usr/bin/env node
 "use strict"
 
+// built-ins
 const path = require('path')
 const fs = require('fs')
 
-const { spawnSync } = require('child_process')
+// support crew
+const {
+    collectFiles,
+    readFile,
+    writeFile
+} = require('./lib/files.js')
+const log = require('./lib/log.js')
 
-const prettier = require('prettier')
-const CLIEngine = require("eslint").CLIEngine
+// heavy lifters
+const prettify = require('./lib/prettier.js')
+const delint = require('./lib/eslint.js')
+const stage = require('./lib/git.js')
 
-const whitelist = ['.js', '.json', '.css', '.scss', '.md', '.jsx']
-const blacklist = ['node_modules', 'build', 'dist']
+function exit(code) {
+    process.exit(code)
+}
 
-/*
- * log level options
- * -----------------
- * 0 = nothing
- * 1 = error
- * 2 = info
- * 3 = debug
- * 4 = trace
+/**
+ * `repoDir`   - points to the repo which needs to be formatted
+ * `dir`       - points to the code-style package in node_modules
+ * `codeDir`   - root directory for the code to format
+ * `codeFiles` - files to format from `codeDir`
  */
-const loglevel = 1
-const log = {
-    error: (msg, ...args) =>  loglevel > 0 ? console.error('[CODESTYLE]', msg, ...args) : null,
-    info: (msg, ...args) => loglevel > 1 ? console.info('[CODESTYLE]', msg, ...args) : null,
-    debug: (msg, ...args) => loglevel > 2 ? console.log('[CODESTYLE]', msg, ...args) : null,
-    trace: (msg, ...args) => loglevel > 3 ? console.trace(msg, ...args) : null,
-}
-
-function collectFiles(target) {
-    const files = fs.readdirSync(target)
-
-    return files.map(file => {
-        const fullPath = path.join(target, file)
-        const stat = fs.statSync(fullPath)
-
-        if (stat.isDirectory() && !blacklist.includes(file)) {
-            return collectFiles(fullPath)
-        } else {
-            return fullPath
-        }
-    }).reduce((a, b) => a.concat(b), [])
-}
-
-// get the repo dir from argv to ensure that symlinks are respected
-const repoDir = process.cwd() //path.join(path.dirname(process.argv[1]), '..', '..')
-log.debug('repoDir', repoDir)
-
-// `dir` points to the code-style directory to get the configs
+const repoDir = process.cwd()
 const dir = path.join(repoDir, 'node_modules', '@dhis2', 'code-style')
-log.debug('dir', dir)
-
 const codeDir = path.join(repoDir)
-log.debug('codeDir', codeDir)
+const codeFiles = collectFiles(codeDir)
 
-const codeFiles = collectFiles(codeDir).filter(f => whitelist.includes(path.extname(f)))
-log.debug('codeFiles', codeFiles)
+// debug information about the folders
+log.debug('repoDir?', repoDir)
+log.debug('dir?', dir)
+log.debug('codeDir?', codeDir)
+log.debug('codeFiles?', codeFiles)
 
-// Prettier setup
-const prettierConfig = path.join(dir, 'prettier.config.js')
-log.debug('prettierConfig', prettierConfig)
+const pretty = prettify(dir, codeFiles)
+log.debug('Pretty?', pretty)
 
-codeFiles.map(file => {
-    let text
-    try {
-        text = fs.readFileSync(file, 'utf8')
-    } catch (error) {
-        log.error('Reading failed', file, error)
-    }
+const clean = delint(dir, codeFiles)
+log.debug('Lint?', clean)
 
-    if (!text) {
-        log.error('No text work on.', file, text)
-        return
-    }
-
-    let formatted
-    try {
-        const options = prettier.resolveConfig.sync(file, { editorconfig: false, config: prettierConfig })
-        formatted = prettier.format(text, { ...options, filepath: file })
-    } catch (error) {
-        log.error('Formatting failed.', file, error)
-    }
-
-    if (formatted === text) {
-        log.info('Input/output identical, skipping...', file)
-        return
-    }
-
-    try {
-        log.info('Writing prettified...', file)
-        fs.writeFileSync(file, formatted, 'utf8')
-
-        const added = spawnSync('git', ['add', file], { cwd: codeDir })
-        added.status === 0
-            ? log.info('Staging file OK...', file)
-            : log.info('Staging file FAILED...', file)
-
-    } catch (error) {
-        log.error('writing failed', file, error)
-    }
-})
-
-// ESLint setup
-const eslintCLI = new CLIEngine({
-    envs: ["browser", "node"],
-    configFile: path.join(dir, 'eslint.config.js'),
-    useEslintrc: false,
-    fix: true
-})
-
-const report = eslintCLI.executeOnFiles(codeFiles)
-
-CLIEngine.outputFixes(report)
+if (pretty && clean) {
+    const staged = stage(codeDir)
+    staged === 0
+        ? log.info('Staging files OK...')
+        : log.info('Staging files FAILED...')
+} else {
+    log.error('Code is either linty or not pretty, manual intervention required.')
+    exit(1)
+}
 
 log.info('Code style complete.')
+exit(0)

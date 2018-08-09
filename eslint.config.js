@@ -1,8 +1,8 @@
 /** @format */
 
 module.exports = {
-    extends: ['prettier', 'react-app'],
+    extends: ['react-app', 'prettier'],
     rules: {
         'no-console': 'off',
-    },
+    }
 }
