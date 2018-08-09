@@ -6,7 +6,7 @@ const path = require('path')
 const fs = require('fs')
 
 // support crew
-const { collectFiles, readFile, writeFile } = require('./lib/files.js')
+const { collectFiles } = require('./lib/files.js')
 const log = require('./lib/log.js')
 
 // heavy lifters
