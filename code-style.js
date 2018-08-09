@@ -1,16 +1,12 @@
 #!/usr/bin/env node
-"use strict"
+/** @format */
 
 // built-ins
 const path = require('path')
 const fs = require('fs')
 
 // support crew
-const {
-    collectFiles,
-    readFile,
-    writeFile
-} = require('./lib/files.js')
+const { collectFiles, readFile, writeFile } = require('./lib/files.js')
 const log = require('./lib/log.js')
 
 // heavy lifters
@@ -22,14 +18,30 @@ function exit(code) {
     process.exit(code)
 }
 
+function cwd() {
+    try {
+        const nodeModulePath = path.join(
+            repoDir,
+            'node_modules',
+            '@dhis2',
+            'code-style'
+        )
+        fs.accessSync(nodeModulePath)
+        return nodeModulePath
+    } catch (err) {
+        return process.cwd()
+    }
+}
+
 /**
  * `repoDir`   - points to the repo which needs to be formatted
- * `dir`       - points to the code-style package in node_modules
+ * `dir`       - points to the code-style package in node_modules, and
+ *               if it doesn't exist, use the `cwd`
  * `codeDir`   - root directory for the code to format
  * `codeFiles` - files to format from `codeDir`
  */
 const repoDir = process.cwd()
-const dir = path.join(repoDir, 'node_modules', '@dhis2', 'code-style')
+const dir = cwd()
 const codeDir = path.join(repoDir)
 const codeFiles = collectFiles(codeDir)
 
@@ -51,7 +63,9 @@ if (pretty && clean) {
         ? log.info('Staging files OK...')
         : log.info('Staging files FAILED...')
 } else {
-    log.error('Code is either linty or not pretty, manual intervention required.')
+    log.error(
+        'Code is either linty or not pretty, manual intervention required.'
+    )
     exit(1)
 }
 

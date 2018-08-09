@@ -1,16 +1,18 @@
+/** @format */
+
 module.exports = {
     printWidth: 80,
     tabWidth: 4,
     useTabs: false,
     semi: false,
     singleQuote: true,
-    trailingComma: "es5",
+    trailingComma: 'es5',
     bracketSpacing: true,
     jsxBracketSameLine: false,
-    arrowParens: "avoid",
+    arrowParens: 'avoid',
     rangeStart: 0,
     rangeEnd: Infinity,
-    proseWrap: "preserve",
+    proseWrap: 'preserve',
     requirePragma: false,
-    insertPragma: true
+    insertPragma: true,
 }
