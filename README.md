@@ -1,11 +1,13 @@
+<!-- @format -->
+
 # code-style
 
 DHIS2 JavaScript code style
 
 Applies our configuration for:
 
-- ESLint
-- Prettier
+-   ESLint
+-   Prettier
 
 ## Rationale
 

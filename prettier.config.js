@@ -5,12 +5,12 @@ module.exports = {
     semi: false,
     singleQuote: true,
     trailingComma: "es5",
-    bracketSpace: true,
+    bracketSpacing: true,
     jsxBracketSameLine: false,
     arrowParens: "avoid",
     rangeStart: 0,
     rangeEnd: Infinity,
     proseWrap: "preserve",
-    requirePragma: true,
+    requirePragma: false,
     insertPragma: true
 }
