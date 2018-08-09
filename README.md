@@ -9,16 +9,6 @@ Applies our configuration for:
 -   ESLint
 -   Prettier
 
-## Rationale
-
-Adding Prettier and ESLint to each application we build and setting up
-the configuration (through copypaste or otherwise) is error prone and
-leads to a divergence in style.
-
-The time has come to wrap code style configuration in a package we can
-pull in and just run without fiddling with configuration in the app
-itself.
-
 ## Usage
 
 ### Yarn
@@ -38,12 +28,12 @@ Add this to `package.json` in the script part:
 ```
 {
     scripts: {
-        "codestyle": "code-style"
+        "format": "code-style"
     }
 }
 ```
 
-Run the `codestyle` script to apply our common JS standards.
+Run the `format` script to apply our common JS standards.
 
 ## Migrating from custom configs
 
@@ -52,3 +42,5 @@ be removed as they will be overridden by the configuration bundled with
 `code-style` anyway.
 
 Any dependencies to ESLint and Prettier can also be removed.
+
+Works with CRA (with or without ejecting).
