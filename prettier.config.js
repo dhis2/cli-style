@@ -14,5 +14,5 @@ module.exports = {
     rangeEnd: Infinity,
     proseWrap: 'preserve',
     requirePragma: false,
-    insertPragma: true,
+    insertPragma: false,
 }
