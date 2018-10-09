@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/** @format */
 
 // built-ins
 const path = require('path')
@@ -13,6 +12,7 @@ const log = require('./lib/log.js')
 const prettify = require('./lib/prettier.js')
 const delint = require('./lib/eslint.js')
 const stage = require('./lib/git.js')
+const configure = require('./lib/config.js')
 
 function exit(code) {
     process.exit(code)
@@ -52,10 +52,12 @@ log.debug('codeDir?', codeDir)
 log.debug('codeFiles?', codeFiles)
 
 const pretty = prettify(dir, codeFiles)
+const clean = delint(dir, codeFiles)
+
+log.debug('Lint?', clean)
 log.debug('Pretty?', pretty)
 
-const clean = delint(dir, codeFiles)
-log.debug('Lint?', clean)
+configure(dir, repoDir)
 
 if (pretty && clean) {
     const staged = stage(codeDir)
