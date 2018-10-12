@@ -51,8 +51,12 @@ log.debug('dir?', dir)
 log.debug('codeDir?', codeDir)
 log.debug('codeFiles?', codeFiles)
 
+eslintFiles = codeFiles
+    .filter(f => ![ '.css', '.scss', '.md', '.json' ].includes(path.extname(f)))
+    .filter(f => ![ '.prettierrc', '.eslintrc', '.browserslistrc' ].includes(path.parse(f).name))
+
 const pretty = prettify(dir, codeFiles)
-const clean = delint(dir, codeFiles)
+const clean = delint(dir, eslintFiles)
 
 log.debug('Lint?', clean)
 log.debug('Pretty?', pretty)
