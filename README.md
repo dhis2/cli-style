@@ -1,13 +1,12 @@
-<!-- @format -->
-
 # code-style
 
 DHIS2 JavaScript code style
 
 Applies our configuration for:
 
--   ESLint
+-   Commit messages
 -   Prettier
+-   ESLint
 
 ## Usage
 
@@ -23,12 +22,33 @@ yarn add -D @dhis2/code-style
 npm install --save-dev @dhis2/code-style
 ```
 
+### Add `script`
+
 Add this to `package.json` in the script part:
 
 ```
 {
     scripts: {
         "format": "code-style"
+    }
+}
+```
+
+### Add pre-commit hook for `commit-style`
+
+Install [Husky](https://github.com/typicode/husky) or other hook handler:
+
+```
+npm install husky --save-dev
+```
+
+Add prop to `package.json`:
+
+```
+"husky": {
+    "hooks": {
+        "commit-msg": "commit-style",
+        "pre-commit": "npm run format"
     }
 }
 ```
