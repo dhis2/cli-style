@@ -1,6 +1,6 @@
 {
     "name": "@dhis2/code-style",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "description": "The JavaScript code style for DHIS2.",
     "bin": {
         "code-style": "./code-style",
@@ -18,15 +18,15 @@
         "@commitlint/lint": "^7.2.1",
         "@commitlint/load": "^7.2.1",
         "@commitlint/read": "^7.1.2",
-        "babel-eslint": "^7.2.3",
-        "eslint": "^4.19.1",
-        "eslint-config-prettier": "^2.9.0",
-        "eslint-config-react-app": "^2.1.0",
-        "eslint-plugin-flowtype": "^2.48.0",
-        "eslint-plugin-import": "^2.12.0",
-        "eslint-plugin-jsx-a11y": "^5.1.1",
-        "eslint-plugin-prettier": "^2.6.0",
-        "eslint-plugin-react": "^7.8.2",
-        "prettier": "^1.13.3"
+        "babel-eslint": "^10.0.1",
+        "eslint": "^5.8.0",
+        "eslint-config-prettier": "^3.1.0",
+        "eslint-config-react-app": "^3.0.5",
+        "eslint-plugin-flowtype": "^3.1.4",
+        "eslint-plugin-import": "^2.14.0",
+        "eslint-plugin-jsx-a11y": "^6.1.2",
+        "eslint-plugin-prettier": "^3.0.0",
+        "eslint-plugin-react": "^7.11.1",
+        "prettier": "^1.14.3"
     }
 }
