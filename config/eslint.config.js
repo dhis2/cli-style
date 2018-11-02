@@ -5,4 +5,9 @@ module.exports = {
     rules: {
         'no-console': 'off',
     },
+    parserOptions: {
+        ecmaFeatures: {
+            legacyDecorators: true,
+        },
+    }
 }
