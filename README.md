@@ -4,9 +4,9 @@ DHIS2 JavaScript code style
 
 Applies our configuration for:
 
--   Commit messages
+-   Git commit messages
 -   Prettier
--   ESLint
+-   Browserslist
 
 ## Usage
 
@@ -57,10 +57,10 @@ Run the `format` script to apply our common JS standards.
 
 ## Migrating from custom configs
 
-Existing configuration in e.g. `.prettierrc`, `.eslintrc`, et. al. can
+Existing configuration in e.g. `.prettierrc`, et. al. can
 be removed as they will be overridden by the configuration bundled with
 `code-style` anyway.
 
-Any dependencies to ESLint and Prettier can also be removed.
+Any dependencies to Prettier can also be removed.
 
 Works with CRA (with or without ejecting).

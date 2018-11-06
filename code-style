@@ -10,7 +10,6 @@ const log = require('./lib/log.js')
 
 // heavy lifters
 const prettify = require('./lib/prettier.js')
-const delint = require('./lib/eslint.js')
 const stage = require('./lib/git.js')
 const configure = require('./lib/config.js')
 
@@ -51,26 +50,20 @@ log.debug('dir?', dir)
 log.debug('codeDir?', codeDir)
 log.debug('codeFiles?', codeFiles)
 
-eslintFiles = codeFiles
-    .filter(f => ![ '.css', '.scss', '.md', '.json' ].includes(path.extname(f)))
-    .filter(f => ![ '.prettierrc', '.eslintrc', '.browserslistrc' ].includes(path.parse(f).name))
-
 const pretty = prettify(dir, codeFiles)
-const clean = delint(dir, eslintFiles)
 
-log.debug('Lint?', clean)
 log.debug('Pretty?', pretty)
 
 configure(dir, repoDir)
 
-if (pretty && clean) {
+if (pretty) {
     const staged = stage(codeDir)
     staged === 0
         ? log.info('Staging files OK...')
         : log.info('Staging files FAILED...')
 } else {
     log.error(
-        'Code is either linty or not pretty, manual intervention required.'
+        'Code is not pretty, manual intervention required.'
     )
     exit(1)
 }
