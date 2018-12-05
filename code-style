@@ -5,7 +5,7 @@ const path = require('path')
 const fs = require('fs')
 
 // support crew
-const { collectFiles } = require('./lib/files.js')
+const { collectFiles, whitelisted } = require('./lib/files.js')
 const log = require('./lib/log.js')
 
 // heavy lifters
@@ -45,9 +45,9 @@ const codeDir = path.join(repoDir)
 
 let codeFiles
 if (process.argv[2] === 'all') {
-    codeFiles = collectFiles(codeDir)
+    codeFiles = collectFiles(codeDir).filter(whitelisted)
 } else {
-    codeFiles = staged(codeDir)
+    codeFiles = staged(codeDir).filter(whitelisted)
 }
 
 
