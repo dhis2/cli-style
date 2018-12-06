@@ -48,7 +48,7 @@ Add prop to `package.json`:
 "husky": {
     "hooks": {
         "commit-msg": "commit-style",
-        "pre-commit": "npm run format"
+        "pre-commit": "code-style"
     }
 }
 ```
