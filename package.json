@@ -3,12 +3,12 @@
   "version": "1.6.3",
   "description": "The JavaScript code style for DHIS2.",
   "bin": {
-    "code-style": "./code-style",
-    "commit-style": "./commit-style"
+    "code-style": "./code-style.js",
+    "commit-style": "./commit-style.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "./code-style"
+    "format": "./code-style.js"
   },
   "author": "Viktor Varland",
   "license": "BSD-3-Clause",

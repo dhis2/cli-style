@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 // built-ins
 const path = require('path')
 const fs = require('fs')
@@ -49,7 +48,6 @@ if (process.argv[2] === 'all') {
 } else {
     codeFiles = staged(codeDir).filter(whitelisted)
 }
-
 
 // debug information about the folders
 log.debug('repoDir?', repoDir)
