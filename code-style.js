@@ -7,9 +7,6 @@
  * `codeFiles` - files to format from `codeDir`
  */
 const argv = require('yargs')
-    .config({
-        root_dir: process.cwd(),
-    })
     .usage('usage: $0 <command> [options]')
     .command(require('./lib/cmds/fmt-code.js'))
     .help().argv
