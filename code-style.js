@@ -3,23 +3,26 @@
 const path = require('path')
 const fs = require('fs')
 
-// support crew
-const { collectFiles, whitelisted } = require('./lib/files.js')
-const log = require('./lib/log.js')
-
-// heavy lifters
-const prettify = require('./lib/prettier.js')
-const { stage, staged } = require('./lib/git.js')
-const configure = require('./lib/config.js')
-
-function exit(code) {
-    process.exit(code)
-}
+/**
+ * `repoDir`   - points to the repo which needs to be formatted
+ * `dir`       - points to the code-style package in node_modules, and
+ *               if it doesn't exist, use the `cwd`
+ * `codeDir`   - root directory for the code to format
+ * `codeFiles` - files to format from `codeDir`
+ */
+const argv = require('yargs')
+    .config({
+        root_dir: process.cwd(),
+        cwd: cwd(),
+    })
+    .usage('usage: $0 <command> [options]')
+    .command(require('./lib/cmds/fmt-code.js'))
+    .help().argv
 
 function cwd() {
     try {
         const nodeModulePath = path.join(
-            repoDir,
+            process.cwd(),
             'node_modules',
             '@dhis2',
             'code-style'
@@ -30,39 +33,3 @@ function cwd() {
         return process.cwd()
     }
 }
-
-/**
- * `repoDir`   - points to the repo which needs to be formatted
- * `dir`       - points to the code-style package in node_modules, and
- *               if it doesn't exist, use the `cwd`
- * `codeDir`   - root directory for the code to format
- * `codeFiles` - files to format from `codeDir`
- */
-const repoDir = process.cwd()
-const dir = cwd()
-const codeDir = path.join(repoDir)
-
-let codeFiles
-if (process.argv[2] === 'all') {
-    codeFiles = collectFiles(codeDir).filter(whitelisted)
-} else {
-    codeFiles = staged(codeDir).filter(whitelisted)
-}
-
-// debug information about the folders
-log.debug('repoDir?', repoDir)
-log.debug('dir?', dir)
-log.debug('codeDir?', codeDir)
-log.debug('codeFiles?', codeFiles)
-
-const prettyFiles = prettify(dir, codeFiles)
-
-log.debug('Pretty?', prettyFiles)
-
-configure(dir, repoDir)
-
-const stagedFiles = stage(prettyFiles, codeDir)
-log.debug('Staged files', stagedFiles)
-
-log.info('Code style complete.')
-exit(0)
