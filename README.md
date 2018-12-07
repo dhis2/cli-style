@@ -1,4 +1,6 @@
 # code-style
+[![Packages Compatible](https://img.shields.io/badge/dhis2-packages-ff69b4.svg)](https://github.com/dhis2/packages)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 DHIS2 JavaScript code style
 
