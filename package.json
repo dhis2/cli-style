@@ -1,6 +1,6 @@
 {
   "name": "@dhis2/code-style",
-  "version": "1.6.3",
+  "version": "1.7.0",
   "description": "The JavaScript code style for DHIS2.",
   "bin": {
     "code-style": "./code-style.js",
