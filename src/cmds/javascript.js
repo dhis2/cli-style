@@ -30,31 +30,31 @@ function cwd() {
 }
 
 // plugin
-exports.command = 'js <action>'
+exports.command = 'js <cmd>'
 
 exports.describe = 'Format javascript according to standards'
 
-exports.builder = yargs => {
-    yargs
-        .positional('action', {
-            describe: 'Print the changes to stdout or apply them to your files',
-            choices: ['check', 'apply'],
-            type: 'string',
-        })
-        .option('all', {
-            describe: 'If set scans all files, default is to scan staged files',
-            default: false,
-            type: 'boolean',
-        })
+exports.builder = {
+    cmd: {
+        describe: 'check or apply style',
+        choices: ['check', 'apply'],
+        type: 'string',
+    },
+    all: {
+        type: 'boolean',
+        default: false,
+        describe:
+            'default is to only check staged files, use this to check all files',
+    },
 }
 
 exports.handler = function(argv) {
-    const { all, action } = argv
+    const { all, cmd } = argv
     const root_dir = process.cwd()
     const dep_dir = cwd()
 
-    const check = action === 'check'
-    const apply = action === 'apply'
+    const check = cmd === 'check'
+    const apply = cmd === 'apply'
 
     let codeFiles
     if (all) {
@@ -70,9 +70,11 @@ exports.handler = function(argv) {
 
     const prettyFiles = prettify(dep_dir, codeFiles, check)
 
-    if (apply) {
-        log.debug('Pretty?', prettyFiles)
+    prettyFiles.length > 0
+        ? log.info(`Files to style:\n${prettyFiles.join('\n')}`)
+        : log.info('No files to style.')
 
+    if (apply) {
         configure(dep_dir, root_dir)
 
         const stagedFiles = stage(prettyFiles, root_dir)

@@ -13,6 +13,7 @@ function prettify(cwd, files, check = false) {
     return files
         .map(file => {
             const text = readFile(file)
+            const name = path.basename(file)
 
             if (!text) {
                 log.debug('No text work on.', file, text)
@@ -26,15 +27,15 @@ function prettify(cwd, files, check = false) {
                     config: prettierConfig,
                 })
 
-
                 if (check) {
                     const checked = prettier.check(text, {
                         ...options,
                         filepath: file,
                     })
 
-                    if (!checked) {
-                        log.info(`... ${file}`)
+                    if (checked) {
+                        log.debug(`${name} is formatted according to style`)
+                        return null
                     }
                 } else {
                     if (text.startsWith('#!')) {
@@ -59,11 +60,11 @@ function prettify(cwd, files, check = false) {
                             ? log.debug('file written to disk')
                             : log.debug('file write FAILED')
                     } else {
-                        log.debug('Input/output identical, skipping.', file)
+                        log.debug('Input/output identical, skipping.', name)
                         return null
                     }
 
-                    log.info(`Reformatted: ${file}`)
+                    log.info(`Reformatted: ${name}`)
                 }
             } catch (error) {
                 log.error('Formatting failed.', file, error)

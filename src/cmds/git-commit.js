@@ -43,4 +43,3 @@ exports.handler = async function(argv) {
         process.exit(1)
     }
 }
-
