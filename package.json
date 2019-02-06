@@ -28,7 +28,7 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "./bin/d2-style commit",
+      "commit-msg": "./bin/d2-style commit apply",
       "pre-commit": "./bin/d2-style js apply"
     }
   }

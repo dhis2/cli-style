@@ -3,18 +3,45 @@ const load = require('@commitlint/load')
 const lint = require('@commitlint/lint')
 const format = require('@commitlint/format')
 
-exports.command = 'commit'
+const log = require('@dhis2/cli-helpers-engine').reporter
 
-exports.describe = 'Format commit messages according to DHIS2 rules.'
+exports.command = 'commit <cmd> [msg]'
 
-exports.builder = {}
+exports.describe = 'Format commit messages according to standards.'
+
+exports.builder = {
+    cmd: {
+        describe: 'check or apply style',
+        choices: ['check', 'apply'],
+        type: 'string',
+    },
+    msg: {
+        describe: 'arbitrary string to check',
+        type: 'string',
+    },
+}
 
 exports.handler = async function(argv) {
     const config = require('@commitlint/config-conventional')
+    const { cmd, msg } = argv
+
+    const check = cmd === 'check'
+    const apply = cmd === 'apply'
+
+    if (check && !msg) {
+        log.error('A commit msg is required when using check')
+        process.exit(1)
+    }
 
     try {
         const opts = await load(config)
-        const commit = await read({ edit: true })
+
+        let commit
+        if (apply) {
+            commit = await read({ edit: true })
+        } else {
+            commit = [msg]
+        }
 
         const report = await lint(
             commit[0],
@@ -39,7 +66,7 @@ exports.handler = async function(argv) {
             process.exit(1)
         }
     } catch (err) {
-        process.stderr.write(err)
+        log.error(err)
         process.exit(1)
     }
 }
