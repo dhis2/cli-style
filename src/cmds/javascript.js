@@ -30,18 +30,31 @@ function cwd() {
 }
 
 // plugin
-exports.command = 'js'
+exports.command = 'js <action>'
 
-exports.describe = 'Format js code according to DHIS2 rules.'
+exports.describe = 'Format javascript according to standards'
 
-exports.builder = {
-    all: { boolean: true },
+exports.builder = yargs => {
+    yargs
+        .positional('action', {
+            describe: 'Print the changes to stdout or apply them to your files',
+            choices: ['check', 'apply'],
+            type: 'string',
+        })
+        .option('all', {
+            describe: 'If set scans all files, default is to scan staged files',
+            default: false,
+            type: 'boolean',
+        })
 }
 
 exports.handler = function(argv) {
-    const { all } = argv
+    const { all, action } = argv
     const root_dir = process.cwd()
     const dep_dir = cwd()
+
+    const check = action === 'check'
+    const apply = action === 'apply'
 
     let codeFiles
     if (all) {
@@ -55,14 +68,14 @@ exports.handler = function(argv) {
     log.debug('depDir?', dep_dir)
     log.debug('codeFiles?', codeFiles)
 
-    const prettyFiles = prettify(dep_dir, codeFiles)
+    const prettyFiles = prettify(dep_dir, codeFiles, check)
 
-    log.debug('Pretty?', prettyFiles)
+    if (apply) {
+        log.debug('Pretty?', prettyFiles)
 
-    configure(dep_dir, root_dir)
+        configure(dep_dir, root_dir)
 
-    const stagedFiles = stage(prettyFiles, root_dir)
-    log.debug('Staged files', stagedFiles)
-
-    log.info('Code style complete.')
+        const stagedFiles = stage(prettyFiles, root_dir)
+        log.debug('Staged files', stagedFiles)
+    }
 }
