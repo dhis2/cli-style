@@ -16,7 +16,7 @@ exports.builder = {
         type: 'string',
     },
     msg: {
-        describe: 'arbitrary string to check',
+        describe: 'arbitrary string to use with "check"',
         type: 'string',
     },
 }

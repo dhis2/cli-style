@@ -22,7 +22,7 @@ function cwd() {
         fs.accessSync(nodeModulePath)
         return nodeModulePath
     } catch (err) {
-        log.error(
+        log.debug(
             `could not find 'node_modules/@dhis2/code-style' in '${process.cwd()}', falling back to latter.`
         )
         return process.cwd()
