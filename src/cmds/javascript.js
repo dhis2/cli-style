@@ -4,7 +4,7 @@ const fs = require('fs')
 
 // support crew
 const { collectFiles, whitelisted } = require('../files.js')
-const log = require('../log.js')
+const log = require('@dhis2/cli-helpers-engine').reporter
 
 // heavy lifters
 const prettify = require('../prettier.js')

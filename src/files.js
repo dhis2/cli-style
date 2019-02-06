@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const log = require('./log.js')
+const log = require('@dhis2/cli-helpers-engine').reporter
 
 const whitelist = ['.js', '.json', '.css', '.scss', '.md', '.jsx']
 const blacklist = ['node_modules', 'build', 'dist', 'target']

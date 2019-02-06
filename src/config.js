@@ -3,7 +3,8 @@
 const path = require('path')
 const fs = require('fs')
 
-const log = require('./log.js')
+const log = require('@dhis2/cli-helpers-engine').reporter
+
 const { readFile, writeFile } = require('./files.js')
 
 function wipe_prop_cfg(repo) {

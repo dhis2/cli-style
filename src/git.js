@@ -4,7 +4,7 @@
 
 const { execSync } = require('child_process')
 
-const log = require('./log.js')
+const log = require('@dhis2/cli-helpers-engine').reporter
 
 function stage(files, dir) {
     log.info(`Stage ${files.length} file(s).`)

@@ -1,7 +1,7 @@
 const prettier = require('prettier')
 const path = require('path')
 
-const log = require('./log.js')
+const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { readFile, writeFile } = require('./files.js')
 
