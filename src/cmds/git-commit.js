@@ -3,7 +3,7 @@ const load = require('@commitlint/load')
 const lint = require('@commitlint/lint')
 const format = require('@commitlint/format')
 
-exports.command = '$0'
+exports.command = 'commit'
 
 exports.describe = 'Format commit messages according to DHIS2 rules.'
 
