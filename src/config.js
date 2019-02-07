@@ -3,7 +3,7 @@ const fs = require('fs')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { cwd, readFile, writeFile } = require('./files.js')
+const { readFile, writeFile } = require('./files.js')
 
 function wipe_prop_cfg(repo) {
     const pkg_path = path.join(repo, 'package.json')
@@ -68,11 +68,11 @@ function configure(repo) {
     // then fun stuff
     const cfgs = [
         [
-            path.join(cwd(), 'config', 'prettier.config.js'),
+            path.join(__dirname, '..', 'config', 'prettier.config.js'),
             path.join(repo, '.prettierrc.js'),
         ],
         [
-            path.join(cwd(), 'config', 'browserslist.config.rc'),
+            path.join(__dirname, '..', 'config', 'browserslist.config.rc'),
             path.join(repo, '.browserslistrc'),
         ],
     ].map(cfg => copy(cfg[0], cfg[1]))

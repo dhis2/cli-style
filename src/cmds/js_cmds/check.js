@@ -1,4 +1,4 @@
-const { cwd, collectFiles, whitelisted } = require('../../files.js')
+const { collectFiles, whitelisted } = require('../../files.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { check_fmt } = require('../../prettier.js')
@@ -12,12 +12,10 @@ exports.describe = 'Check JS format.'
 
 exports.builder = {
     all: {
+        describe:
+            'Default behaviour is to only format files staged with Git, use this option to format all files.',
         type: 'boolean',
         default: 'false',
-    },
-    staged: {
-        type: 'boolean',
-        default: 'true',
     },
 }
 

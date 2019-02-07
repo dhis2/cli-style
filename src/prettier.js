@@ -3,10 +3,16 @@ const path = require('path')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { cwd, readFile, writeFile } = require('./files.js')
+const { readFile, writeFile } = require('./files.js')
 
 exports.check_fmt = function check_prettier(files) {
-    const prettierConfig = path.join(cwd(), 'config', 'prettier.config.js')
+    const prettierConfig = path.join(
+        __dirname,
+        '..',
+        'config',
+        'prettier.config.js'
+    )
+    log.debug('Prettier configuration file', prettierConfig)
 
     const not_pretty_files = []
     for (const file of files) {
@@ -44,8 +50,13 @@ exports.check_fmt = function check_prettier(files) {
 
 exports.apply_fmt = function apply_prettier(files) {
     // Prettier setup
-    const prettierConfig = path.join(cwd(), 'config', 'prettier.config.js')
-    log.debug('prettierConfig', prettierConfig)
+    const prettierConfig = path.join(
+        __dirname,
+        '..',
+        'config',
+        'prettier.config.js'
+    )
+    log.debug('Prettier configuration file', prettierConfig)
 
     const pretty_files = []
     for (const file of files) {

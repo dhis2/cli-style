@@ -1,8 +1,8 @@
-const { cwd, collectFiles, whitelisted } = require('../../files.js')
+const { collectFiles, whitelisted } = require('../../files.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { apply_fmt } = require('../../prettier.js')
-const { stage, staged } = require('../../git.js')
+const { stage_files, staged_files } = require('../../git.js')
 
 const configure = require('../../config.js')
 
@@ -12,24 +12,28 @@ exports.describe = 'Apply JS format.'
 
 exports.builder = {
     all: {
+        describe:
+            'Default behaviour is to only format files staged with Git, use this option to format all files.',
         type: 'boolean',
         default: 'false',
     },
-    staged: {
+    stage: {
+        describe:
+            'By default the changed files are staged automatically, use `--no-stage` to avoid staging files automatically.',
         type: 'boolean',
         default: 'true',
     },
 }
 
 exports.handler = argv => {
-    const { all } = argv
+    const { all, stage } = argv
     const root_dir = process.cwd()
 
     let codeFiles
     if (all) {
         codeFiles = collectFiles(root_dir).filter(whitelisted)
     } else {
-        codeFiles = staged(root_dir).filter(whitelisted)
+        codeFiles = staged_files(root_dir).filter(whitelisted)
     }
 
     // debug information about the folders
@@ -44,6 +48,8 @@ exports.handler = argv => {
 
     configure(root_dir)
 
-    const stagedFiles = stage(prettyFiles, root_dir)
-    log.debug('Staged files', stagedFiles)
+    if (stage) {
+        const stagedFiles = stage_files(prettyFiles, root_dir)
+        log.debug('Staged files', stagedFiles)
+    }
 }

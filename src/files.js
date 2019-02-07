@@ -47,14 +47,9 @@ function writeFile(fp, content) {
     }
 }
 
-function cwd() {
-    return path.join(__dirname, '..')
-}
-
 module.exports = {
     collectFiles,
     readFile,
     writeFile,
     whitelisted,
-    cwd,
 }
