@@ -2,11 +2,11 @@ const { collectFiles, whitelisted } = require('../../files.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { check_fmt } = require('../../prettier.js')
-const { staged } = require('../../git.js')
+const { staged_files } = require('../../git.js')
 
 const configure = require('../../config.js')
 
-exports.command = 'check'
+exports.command = 'check [files..]'
 
 exports.describe = 'Check JS format.'
 
@@ -20,14 +20,16 @@ exports.builder = {
 }
 
 exports.handler = argv => {
-    const { all } = argv
+    const { all, files } = argv
     const root_dir = process.cwd()
 
     let codeFiles
     if (all) {
         codeFiles = collectFiles(root_dir).filter(whitelisted)
+    } else if (files) {
+        codeFiles = files
     } else {
-        codeFiles = staged(root_dir).filter(whitelisted)
+        codeFiles = staged_files(root_dir).filter(whitelisted)
     }
 
     // debug information about the folders

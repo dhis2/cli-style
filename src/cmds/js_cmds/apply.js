@@ -6,7 +6,7 @@ const { stage_files, staged_files } = require('../../git.js')
 
 const configure = require('../../config.js')
 
-exports.command = 'apply'
+exports.command = 'apply [files..]'
 
 exports.describe = 'Apply JS format.'
 
@@ -26,12 +26,14 @@ exports.builder = {
 }
 
 exports.handler = argv => {
-    const { all, stage } = argv
+    const { all, stage, files } = argv
     const root_dir = process.cwd()
 
     let codeFiles
     if (all) {
         codeFiles = collectFiles(root_dir).filter(whitelisted)
+    } else if (files) {
+        codeFiles = files
     } else {
         codeFiles = staged_files(root_dir).filter(whitelisted)
     }
