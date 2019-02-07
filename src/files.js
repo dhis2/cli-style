@@ -36,6 +36,7 @@ function readFile(fp) {
         return null
     }
 }
+
 function writeFile(fp, content) {
     try {
         fs.writeFileSync(fp, content, 'utf8')
@@ -46,9 +47,28 @@ function writeFile(fp, content) {
     }
 }
 
+function cwd() {
+    try {
+        const nodeModulePath = path.join(
+            process.cwd(),
+            'node_modules',
+            '@dhis2',
+            'code-style'
+        )
+        fs.accessSync(nodeModulePath)
+        return nodeModulePath
+    } catch (err) {
+        log.debug(
+            `could not find 'node_modules/@dhis2/code-style' in '${process.cwd()}', falling back to latter.`
+        )
+        return process.cwd()
+    }
+}
+
 module.exports = {
     collectFiles,
     readFile,
     writeFile,
     whitelisted,
+    cwd,
 }
