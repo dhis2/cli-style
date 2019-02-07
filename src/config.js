@@ -68,11 +68,11 @@ function configure(repo) {
     // then fun stuff
     const cfgs = [
         [
-            path.join(__dirname, '..', 'config', 'prettier.config.js'),
+            path.join(__dirname, '../config/prettier.config.js'),
             path.join(repo, '.prettierrc.js'),
         ],
         [
-            path.join(__dirname, '..', 'config', 'browserslist.config.rc'),
+            path.join(__dirname, '../config/browserslist.config.rc'),
             path.join(repo, '.browserslistrc'),
         ],
     ].map(cfg => copy(cfg[0], cfg[1]))

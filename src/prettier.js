@@ -6,12 +6,8 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 const { readFile, writeFile } = require('./files.js')
 
 // Prettier setup
-const prettierConfig = path.join(
-    __dirname,
-    '..',
-    'config',
-    'prettier.config.js'
-)
+const prettierConfig = path.join(__dirname, '../config/prettier.config.js')
+
 log.debug('Prettier configuration file', prettierConfig)
 
 exports.check_fmt = function check_prettier(files) {
