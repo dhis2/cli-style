@@ -48,21 +48,7 @@ function writeFile(fp, content) {
 }
 
 function cwd() {
-    try {
-        const nodeModulePath = path.join(
-            process.cwd(),
-            'node_modules',
-            '@dhis2',
-            'code-style'
-        )
-        fs.accessSync(nodeModulePath)
-        return nodeModulePath
-    } catch (err) {
-        log.debug(
-            `could not find 'node_modules/@dhis2/code-style' in '${process.cwd()}', falling back to latter.`
-        )
-        return process.cwd()
-    }
+    return path.join(__dirname, '..')
 }
 
 module.exports = {
