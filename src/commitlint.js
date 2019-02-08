@@ -2,19 +2,20 @@ const read = require('@commitlint/read')
 const load = require('@commitlint/load')
 const lint = require('@commitlint/lint')
 const format = require('@commitlint/format')
+const config = require('@commitlint/config-conventional')
 
-exports.command = '$0'
+const log = require('@dhis2/cli-helpers-engine').reporter
 
-exports.describe = 'Format commit messages according to DHIS2 rules.'
-
-exports.builder = {}
-
-exports.handler = async function(argv) {
-    const config = require('@commitlint/config-conventional')
-
+module.exports = async function check(msg = '') {
     try {
         const opts = await load(config)
-        const commit = await read({ edit: true })
+
+        let commit
+        if (msg) {
+            commit = [msg]
+        } else {
+            commit = await read({ edit: true })
+        }
 
         const report = await lint(
             commit[0],
@@ -30,16 +31,11 @@ exports.handler = async function(argv) {
             results: [report],
         })
 
-        process.stdout.write(result)
-        process.stdout.write('\n')
+        log.print(result)
 
-        if (report.valid) {
-            process.exit(0)
-        } else {
-            process.exit(1)
-        }
+        return report
     } catch (err) {
-        process.stderr.write(err)
+        log.error(err)
         process.exit(1)
     }
 }
