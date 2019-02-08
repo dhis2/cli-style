@@ -1,4 +1,4 @@
-exports.command = 'js <cmd>'
+exports.command = 'js'
 
 exports.describe = 'Format javascript according to standards'
 

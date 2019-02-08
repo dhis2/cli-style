@@ -1,4 +1,4 @@
-exports.command = 'commit <cmd>'
+exports.command = 'commit'
 
 exports.describe = 'Format commit messages according to standards.'
 

@@ -4,6 +4,8 @@ const lint = require('@commitlint/lint')
 const format = require('@commitlint/format')
 const config = require('@commitlint/config-conventional')
 
+const log = require('@dhis2/cli-helpers-engine').reporter
+
 module.exports = async function check(msg = '') {
     try {
         const opts = await load(config)
@@ -29,8 +31,7 @@ module.exports = async function check(msg = '') {
             results: [report],
         })
 
-        process.stdout.write(result)
-        process.stdout.write('\n')
+        log.print(result)
 
         return report
     } catch (err) {
