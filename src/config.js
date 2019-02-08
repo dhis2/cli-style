@@ -35,6 +35,7 @@ function wipe_file_cfg(repo) {
         '.prettierrc.toml',
         '.prettier.config.js',
         'prettier.config.js',
+        '.editorconfig',
     ]
 
     wipe_cfg_list.map(cfg => {
@@ -74,6 +75,10 @@ function configure(repo) {
         [
             path.join(__dirname, '../config/browserslist.config.rc'),
             path.join(repo, '.browserslistrc'),
+        ],
+        [
+            path.join(__dirname, '../config/editorconfig.config.rc'),
+            path.join(repo, '.editorconfig'),
         ],
     ].map(cfg => copy(cfg[0], cfg[1]))
 }
