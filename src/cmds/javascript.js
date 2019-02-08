@@ -1,9 +1,11 @@
-exports.command = 'js'
+const { namespace } = require('@dhis2/cli-helpers-engine')
 
-exports.describe = 'Format javascript according to standards'
+const command = namespace('javascript', {
+    aliases: ['js'],
+    describe: 'Format javascript according to standards',
+    builder: yargs => {
+        return yargs.commandDir('js_cmds')
+    },
+})
 
-exports.builder = yargs => {
-    return yargs.commandDir('js_cmds')
-}
-
-exports.handler = argv => {}
+module.exports = command
