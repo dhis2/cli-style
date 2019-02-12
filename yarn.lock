@@ -129,6 +129,19 @@
     update-notifier "^2.5.0"
     yargs "^12.0.5"
 
+"@dhis2/cli-helpers-engine@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/cli-helpers-engine/-/cli-helpers-engine-0.11.0.tgz#d809eacb623c93cdbcc9df0e992ce2b0dee72c08"
+  integrity sha512-pz4BIxK9LkxmnV/I3XVs5bHWpCowbj5Z1XhulKOA5RJvGdPijkYKLxJd0PlciibXq/boH7F2miJAlh3StUwISw==
+  dependencies:
+    chalk "^2.4.2"
+    mkdirp "^0.5.1"
+    request "^2.88.0"
+    rimraf "^2.6.3"
+    tar "^4.4.8"
+    update-notifier "^2.5.0"
+    yargs "^12.0.5"
+
 "@dhis2/cli-packages@^2.0.2":
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/@dhis2/cli-packages/-/cli-packages-2.0.2.tgz#efaa62097dde9577aa7e6835bdd4ed1235cac142"
