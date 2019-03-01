@@ -1,10 +1,16 @@
-const { collectFiles, whitelisted } = require('../../files.js')
+const { collectFiles } = require('../../files.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { check_fmt } = require('../../prettier.js')
 const { staged_files } = require('../../git.js')
 
 const configure = require('../../config.js')
+
+const whitelist = [ '.js', '.jsx', '.ts',]
+
+function whitelisted(file) {
+    return whitelist.includes(path.extname(file))
+}
 
 exports.command = 'check [files..]'
 
