@@ -6,7 +6,7 @@
 This tool applies our configuration for:
 
 -   Git commit messages
--   Prettier (prettifies `.js`, `.json`, `.css`, `.scss`, `.md`, `.jsx`)
+-   Prettier (prettifies JavaScript)
 -   Browserslist
 
 This tool is part of the [dhis2/cli](https://github.com/dhis2/cli)
