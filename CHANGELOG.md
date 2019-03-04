@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.0"></a>
+
+# [2.1.0](https://github.com/dhis2/cli-style/compare/2.0.1...2.1.0) (2019-03-04)
+
+### Bug Fixes
+
+-   only whitelist js under js subcommand ([9dc010a](https://github.com/dhis2/cli-style/commit/9dc010a))
+
+### Features
+
+-   add editorconfig ([#13](https://github.com/dhis2/cli-style/issues/13)) ([8b0c392](https://github.com/dhis2/cli-style/commit/8b0c392))
+
 <a name="2.0.1"></a>
 
 ## [2.0.1](https://github.com/dhis2/cli-style/compare/2.0.0...2.0.1) (2019-02-08)
