@@ -4,7 +4,7 @@ node_js:
 before_script:
 - npm install --global @dhis2/deploy-build
 script:
-- echo "We don't have any tests yet..."
+- ./bin/d2-style js check --all
 deploy:
 - provider: script
   script: publish-build
