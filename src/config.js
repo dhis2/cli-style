@@ -43,7 +43,7 @@ function wipe_file_cfg(repo) {
     wipe_cfg_list.map(cfg => {
         try {
             fs.unlinkSync(path.join(repo, cfg))
-            log.info(cfg + ' removed from repo: ' + repo)
+            log.debug(cfg + ' removed from repo: ' + repo)
         } catch (err) {
             log.debug('no such file', err)
         }
