@@ -1,12 +1,11 @@
+const path = require('path')
 const { collectFiles } = require('../../files.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { check_fmt } = require('../../prettier.js')
 const { staged_files } = require('../../git.js')
 
-const configure = require('../../config.js')
-
-const whitelist = [ '.js', '.jsx', '.ts',]
+const whitelist = ['.js', '.jsx', '.ts']
 
 function whitelisted(file) {
     return whitelist.includes(path.extname(file))
@@ -44,7 +43,17 @@ exports.handler = argv => {
 
     const prettyFiles = check_fmt(codeFiles)
 
-    prettyFiles.length > 0
-        ? log.info(`Files to style:\n${prettyFiles.join('\n')}`)
-        : log.info('No files to style.')
+    const success = prettyFiles.length > 0
+
+    if (success) {
+        log.info(`Files to style:`)
+        prettyFiles.forEach(f =>
+            log.print(`\t${path.relative(process.cwd(), f)}`)
+        )
+        log.error('One or more files failed the style check')
+        process.exit(1)
+    } else {
+        log.info('No files to style.')
+        process.exit(0)
+    }
 }
