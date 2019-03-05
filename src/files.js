@@ -16,6 +16,11 @@ function whitelisted(whitelist) {
     }
 }
 
+function jsFiles(arr) {
+    const whitelist = whitelisted(whitelists.js)
+    return arr.filter(whitelist)
+}
+
 function collectJsFiles(target) {
     const whitelist = whitelisted(whitelists.js)
     return collectFiles(target).filter(whitelist)
@@ -67,6 +72,7 @@ module.exports = {
     collectFiles,
     collectAllFiles,
     collectJsFiles,
+    jsFiles,
     readFile,
     writeFile,
     whitelisted,
