@@ -35,6 +35,8 @@ function wipe_file_cfg(repo) {
         '.prettierrc.toml',
         '.prettier.config.js',
         'prettier.config.js',
+        '.prettierrc.js',
+        '.browserslistrc',
         '.editorconfig',
     ]
 
