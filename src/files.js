@@ -3,11 +3,27 @@ const path = require('path')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const whitelist = ['.js', '.json', '.css', '.scss', '.md', '.jsx']
-const blacklist = ['node_modules', 'build', 'dist', 'target']
+const blacklist = ['node_modules', 'build', 'dist', 'target', '.git']
 
-function whitelisted(file) {
-    return whitelist.includes(path.extname(file))
+const whitelists = {
+    js: ['.js', '.jsx', '.ts'],
+    all: ['.js', '.json', '.css', '.scss', '.md', '.jsx', '.ts'],
+}
+
+function whitelisted(whitelist) {
+    return function(file) {
+        return whitelist.includes(path.extname(file))
+    }
+}
+
+function collectJsFiles(target) {
+    const whitelist = whitelisted(whitelists.js)
+    return collectFiles(target).filter(whitelist)
+}
+
+function collectAllFiles(target) {
+    const whitelist = whitelisted(whitelists.all)
+    return collectFiles(target).filter(whitelist)
 }
 
 function collectFiles(target) {
@@ -49,7 +65,10 @@ function writeFile(fp, content) {
 
 module.exports = {
     collectFiles,
+    collectAllFiles,
+    collectJsFiles,
     readFile,
     writeFile,
     whitelisted,
+    whitelists,
 }
