@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.2.0"></a>
+# [2.2.0](https://github.com/dhis2/cli-style/compare/2.1.0...2.2.0) (2019-03-05)
+
+
+### Bug Fixes
+
+* only the apply command was properly whitelisted ([#19](https://github.com/dhis2/cli-style/issues/19)) ([8a7556a](https://github.com/dhis2/cli-style/commit/8a7556a))
+
+
+### Features
+
+* set an exit code if js check fails ([#18](https://github.com/dhis2/cli-style/issues/18)) ([3833bea](https://github.com/dhis2/cli-style/commit/3833bea))
+
+
+
 <a name="2.1.0"></a>
 
 # [2.1.0](https://github.com/dhis2/cli-style/compare/2.0.1...2.1.0) (2019-03-04)
