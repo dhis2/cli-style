@@ -1,4 +1,4 @@
-const { collectFiles, whitelisted } = require('../../files.js')
+const { collectJsFiles, whitelists, whitelisted } = require('../../files.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { apply_fmt } = require('../../prettier.js')
@@ -31,11 +31,12 @@ exports.handler = argv => {
 
     let codeFiles
     if (all) {
-        codeFiles = collectFiles(root_dir).filter(whitelisted)
+        codeFiles = collectJsFiles(root_dir)
     } else if (files) {
         codeFiles = files
     } else {
-        codeFiles = staged_files(root_dir).filter(whitelisted)
+        const whitelist = whitelisted(whitelists.js)
+        codeFiles = staged_files(root_dir).filter(whitelist)
     }
 
     // debug information about the folders
