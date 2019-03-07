@@ -47,7 +47,7 @@ exports.handler = argv => {
 
     if (prettyFiles.length === 0) {
         if (js.length > 0) {
-            log.info(`${js.length} checked file(s) passes the style check.`)
+            log.info(`${js.length} file(s) reformatted.`)
         } else {
             log.info('No files to format.')
         }
