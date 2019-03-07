@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.2.2"></a>
+## [2.2.2](https://github.com/dhis2/cli-style/compare/2.2.1...2.2.2) (2019-03-07)
+
+
+### Bug Fixes
+
+* clean up js filter mechanism ([#21](https://github.com/dhis2/cli-style/issues/21)) ([ece8c53](https://github.com/dhis2/cli-style/commit/ece8c53))
+* do not put a scary error message when checking files ([#27](https://github.com/dhis2/cli-style/issues/27)) ([4cecb27](https://github.com/dhis2/cli-style/commit/4cecb27))
+* make the messages more meaningful ([#25](https://github.com/dhis2/cli-style/issues/25)) ([d2ae8af](https://github.com/dhis2/cli-style/commit/d2ae8af))
+
+
+
 <a name="2.2.1"></a>
 ## [2.2.1](https://github.com/dhis2/cli-style/compare/2.2.0...2.2.1) (2019-03-05)
 
