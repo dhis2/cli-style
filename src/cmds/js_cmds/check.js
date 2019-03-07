@@ -35,19 +35,25 @@ exports.handler = argv => {
     log.debug('rootDir?', root_dir)
     log.debug('codeFiles?', codeFiles)
 
-    const prettyFiles = check_fmt(jsFiles(codeFiles))
+    const js = jsFiles(codeFiles)
+    const prettyFiles = check_fmt(js)
 
     const success = prettyFiles.length > 0
 
     if (success) {
         log.info(`Files to style:`)
         prettyFiles.forEach(f =>
-            log.print(`\t${path.relative(process.cwd(), f)}`)
+            log.print(`${path.relative(process.cwd(), f)}`)
         )
-        log.error('One or more files failed the style check')
+        log.print('')
+        log.error(`${prettyFiles.length} file(s) failed the style check`)
         process.exit(1)
     } else {
-        log.info('No files to style.')
+        if (js.length > 0) {
+            log.info(`${js.length} file(s) checked pass the style check.`)
+        } else {
+            log.info('No files were checked.')
+        }
         process.exit(0)
     }
 }

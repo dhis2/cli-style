@@ -42,10 +42,15 @@ exports.handler = argv => {
     log.debug('rootDir?', root_dir)
     log.debug('codeFiles?', codeFiles)
 
-    const prettyFiles = apply_fmt(jsFiles(codeFiles))
+    const js = jsFiles(codeFiles)
+    const prettyFiles = apply_fmt(js)
 
     if (prettyFiles.length === 0) {
-        log.info('No files to style.')
+        if (js.length > 0) {
+            log.info(`${js.length} checked file(s) passes the style check.`)
+        } else {
+            log.info('No JavaScript files were checked.')
+        }
     }
 
     configure(root_dir)
