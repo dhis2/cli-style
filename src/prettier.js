@@ -89,7 +89,6 @@ exports.apply_fmt = function apply_prettier(files) {
                 ? log.debug('file written to disk')
                 : log.debug('file write FAILED')
 
-            log.info(`Reformatted: ${file}`)
             pretty_files.push(file)
         } catch (error) {
             log.error('Formatting failed.', file, error)
