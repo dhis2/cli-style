@@ -49,7 +49,7 @@ exports.handler = argv => {
         if (js.length > 0) {
             log.info(`${js.length} checked file(s) passes the style check.`)
         } else {
-            log.info('No JavaScript files were checked.')
+            log.info('No files to format.')
         }
     }
 
