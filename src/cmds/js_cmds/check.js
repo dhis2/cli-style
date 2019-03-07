@@ -41,12 +41,11 @@ exports.handler = argv => {
     const success = prettyFiles.length > 0
 
     if (success) {
-        log.info(`Files to style:`)
+        log.info(`${prettyFiles.length} file(s) needs to be formatted:`)
         prettyFiles.forEach(f =>
             log.print(`${path.relative(process.cwd(), f)}`)
         )
         log.print('')
-        log.error(`${prettyFiles.length} file(s) failed the style check`)
         process.exit(1)
     } else {
         if (js.length > 0) {
