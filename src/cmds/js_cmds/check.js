@@ -52,7 +52,7 @@ exports.handler = argv => {
         if (js.length > 0) {
             log.info(`${js.length} file(s) checked pass the style check.`)
         } else {
-            log.info('No files were checked.')
+            log.info('No files to check.')
         }
         process.exit(0)
     }
