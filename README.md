@@ -69,7 +69,7 @@ Add prop to `package.json`:
 ```json
 "husky": {
     "hooks": {
-        "commit-msg": "d2-style commit apply",
+        "commit-msg": "d2-style commit check",
         "pre-commit": "d2-style js apply"
     }
 }
