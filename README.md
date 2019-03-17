@@ -34,6 +34,7 @@ d2-style --help
 d2-style js --help
 d2-style js check --help
 d2-style js apply --help
+d2-style js install --help
 ```
 
 ## Setup for JavaScript project
