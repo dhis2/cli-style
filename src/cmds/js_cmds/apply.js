@@ -4,8 +4,6 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 const { apply_fmt } = require('../../prettier.js')
 const { stage_files, staged_files } = require('../../git.js')
 
-const configure = require('../../config.js')
-
 exports.command = 'apply [files..]'
 
 exports.describe = 'Apply JS format.'
@@ -52,8 +50,6 @@ exports.handler = argv => {
             log.info('No files to format.')
         }
     }
-
-    configure(root_dir)
 
     if (stage) {
         const stagedFiles = stage_files(prettyFiles, root_dir)
