@@ -1,16 +1,21 @@
 language: node_js
 node_js:
-- 10
-before_script:
-- npm install --global @dhis2/deploy-build
+- lts/*
 script:
-- ./bin/d2-style js check --all
+- "./bin/d2-style js check --all"
 deploy:
 - provider: script
-  script: publish-build
   skip_cleanup: true
+  script:
+  - npx @dhis2/cli-utils release --publish npm
   on:
-    tags: true
+    tags: false
+    branch: master
 env:
   global:
-    secure: HZIxsw268cQ+HAnxzPboVrpCJxcB58F9jPplxj01RJGT7UTS2Qws+efPnY8IVIKHGjgZdcWCrIb0Wp1l2lIrfq6utHYr+LqX5Ir6w8j76nVUyk5XZLe1VlMXvCpcg9eKsdh3Rup12mZQ8acA9EVPdqNk5ScE/WIQRSNfgi3eUDvm3lIMgWUt9EAyAfb88wtH+1Rw8WshLl40gXcmhNN6oZLItnuMat6VtSUfQvLKTQ3KrgFwCkl5Wp5Ag5o/zPCsaKCuKkmkeGs47rWvgaDTLcXmzUZlpG/PpIkyRWwLSVMlXWkiEirDyYdKrlz5yPwkuMB5Zip6nSS3us60rxVpZ+ixedX340Y4gmuOEhoBmR8cOzobRUfU4PxK/jQv7QPMa/2vuA0R0QyHqc+v38sIogd1JqQdCVffQNKY76kRGaDzrJ3CHo1Emh9or+pNT4Xs7qYIaBrzrj3J/OR7SdNfvy2yVKO8RQalOPDDj+Otoig6JFpM3Eb/xek57BVy5EOwOvqRxmPzQTrw6yh+6eS6Qo/1R9FXQmR6oWIHxauzwsPbrh6bXpm44X7ipDl76l4j/6XbQhbvZ6tOMY2W7u0/w2yV5ADWG1ulkhWE59xCjLsFEXrtwZs4JMqxfgD6sSxG5QO3CidL9Rc1RD4I1ABbuSuJ+WTRuGqMvOUD6jWhFNE=
+  - GIT_AUTHOR_NAME=@dhis2-bot
+  - GIT_AUTHOR_EMAIL=ci@dhis2.org
+  - GIT_COMMITTER_NAME=@dhis2-bot
+  - GIT_COMMITTER_EMAIL=ci@dhis2.org
+  - secure: Vu6O2SmZO/9Y3CPAAxhcF/T4jgkkQl0YKNR5xOI7eX9l30yyNUSJoPQP7QP3mr6131zfW20mpngAF1LtYXI9UzUsmR8SxUNhfYbg75snL7tHlFYyzwWZRp2pyqq/+g9FvJ/Uhlo8DyPkjUIBAsxdmS8RQJcmJ/UNgLEQ3HNBIWrJZxM/LaTbnDVBZjQduy+nEuYcO7NqUcMHWmakybqUpJI5QeH3R2IvsH4NjS4yjakDjPNs3Ps35N1dxDQWMY+e5JQw9Y1H9GSxd9AWwgVfhZvi+pTLP+AIBjwbc69hMuTKeSDlIeE+GpMqIDvSbEBAlR8dj7UOesNH/7nLWKf7GV8vyzAH4VoRuQls4tJhrh+BpNy+HbB+U9XDUJpTaz4wOsNH55ho6W3fSXs4frs+WVJmlFleKeooC8FypJx9jAeViEqdf1h7sJXhu6zelLtdRmQ34HeL549pcgD4SSWViy3DbIVAhBBS3hn56Q/dMsARUPGe0GzbdJ23p6cy1X0Qoazorzdvf2LJkSQFpzvqFqHh7skiXs23ieM4HJwQFBuJsEeJaAw8MaBduUUGMx/NiuwNkOYWSTJKvn8rNFqsmoX5ETWWR6fE/elL5VfHEwXGcofBTlbzyV/yhOfJ37nlJveJ3taE8+Ox0rp5W9KuS1VGVegUVQGsYPMtUj/PGvw=
+  - secure: WVmmczf+QKindtCL31cVE0seCeXdnvZy6Z8o0eHAoj9IO60U9ucOCeBQBGxEQ70PkMVPRatrF6ndPvLszJBDDxSr/+7viKlCuA8rCdsZl5r0FVTxDuCV+xWCoKKfTR2WLHBAFGsv7hF5yKOQqP34FVk8XT3t1TN1fgQ428xpz6a/GKpH95oj+TUP7sbbo2bm8hEM+E19xblXk35J7qcXrYAFnWALuhiT4IrM1Od2r/h3ONtcjzQU2AIUAmVMzDun+xiEs9JNV74pV0H6QHXc+HmvikgQZ7LvxrXuNegTzHH5IEyEGd0CN5NXmKPi946Hrv9odlSKqqEaHySm156x0s570hg+RySJVa8DsdD1hAcS3wto9KzWO0qFiI20P5EHxhpwq6FYATHpDt+ybcXtKITfJujy3WN5VomXihkRXWX4cYl/0fxWNtgUnOnExfkckXPX+gHLDhOuxQBsflEZShwqw8YB6fgmoEbWgggQt6jkb+HWDGooBV0oZk9daAps8bX0Qf4nPGSgObMiLTQInc1PfuSBV7gA0n/EEdmjRLFJiVS1KPsfqCZPjWoR137MF8SERkmY8ckvkF24DNTHch0gjdWflongbwJ8/dFS7h1p/Uj7woIZZnGKf+ELmhISwCbDC4W0TZ90nrpTLMHjFr4QUBoUGkw8zXj55B7oo2w=
