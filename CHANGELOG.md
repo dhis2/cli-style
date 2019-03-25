@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/dhis2/cli-style/compare/v2.0.0...v3.0.0) (2019-03-25)
+
+
+### Bug Fixes
+
+* bump to 3.x ([6a99cb8](https://github.com/dhis2/cli-style/commit/6a99cb8))
+
+
+### BREAKING CHANGES
+
+* Need to get away from the old versions on npm.
+
 # [2.0.0](https://github.com/dhis2/cli-style/compare/v1.7.0...v2.0.0) (2019-03-25)
 
 
