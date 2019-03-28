@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/dhis2/cli-style/compare/v3.0.0...v3.0.1) (2019-03-28)
+
+
+### Bug Fixes
+
+* link to build in readme and actually trigger a build ([16fcfca](https://github.com/dhis2/cli-style/commit/16fcfca))
+
 # [3.0.0](https://github.com/dhis2/cli-style/compare/v2.0.0...v3.0.0) (2019-03-25)
 
 
