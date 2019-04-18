@@ -64,6 +64,7 @@ exports.handler = argv => {
 
     if (stage) {
         const filesToStage = combined.map(f => f.file)
+        console.log(filesToStage)
         const stagedFiles = stage_files(filesToStage, root_dir)
         log.debug('Staged files', stagedFiles)
     }

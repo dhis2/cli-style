@@ -29,8 +29,6 @@ function fixFile(file) {
     }
 }
 
-
-
 // runs the checkers
 exports.check_fmt = files => {
     return files.map(checkFile)
