@@ -1,7 +1,7 @@
 const { collectFiles, jsFiles } = require('../../files.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { apply_fmt } = require('../../prettier.js')
+const { apply_fmt } = require('../../run-js.js')
 const { stage_files, staged_files } = require('../../git.js')
 
 exports.command = 'apply [files..]'

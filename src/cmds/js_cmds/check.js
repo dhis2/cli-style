@@ -2,7 +2,7 @@ const path = require('path')
 const { collectFiles, jsFiles } = require('../../files.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { check_fmt } = require('../../prettier.js')
+const { check_fmt } = require('../../run-js.js')
 const { staged_files } = require('../../git.js')
 
 exports.command = 'check [files..]'
@@ -38,21 +38,22 @@ exports.handler = argv => {
     const js = jsFiles(codeFiles)
     const prettyFiles = check_fmt(js)
 
-    const success = prettyFiles.length > 0
+    const combined = prettyFiles
+        .filter(violations)
 
-    if (success) {
-        log.info(`${prettyFiles.length} file(s) needs to be formatted:`)
-        prettyFiles.forEach(f =>
-            log.print(`${path.relative(process.cwd(), f)}`)
-        )
-        log.print('')
+    if (combined.length > 0) {
+        log.error(`${combined.length} file(s) are in violation of code standards:`)
+        combined.forEach(f => {
+            const p = path.relative(process.cwd(), f.file)
+            log.info('')
+            log.print(`${p}`)
+            f.messages.map(m => log.info(`${m.message}`))
+        })
+        log.info('')
         process.exit(1)
-    } else {
-        if (js.length > 0) {
-            log.info(`${js.length} file(s) passed the style check.`)
-        } else {
-            log.info('No files to check.')
-        }
-        process.exit(0)
     }
+}
+
+function violations (file) {
+    return file.messages.length > 0
 }

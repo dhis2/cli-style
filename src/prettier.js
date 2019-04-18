@@ -10,52 +10,54 @@ const prettierConfig = path.join(__dirname, '../config/prettier.config.js')
 
 log.debug('Prettier configuration file', prettierConfig)
 
-exports.check_fmt = function check_prettier(files) {
-    const not_pretty_files = []
-    for (const file of files) {
-        const text = readFile(file)
-        const name = path.basename(file)
+exports.check = function check_prettier(file, text) {
+    if (!text) {
+        text = readFile(file)
+    }
 
-        if (!text) {
-            log.debug('No text work on.', file, text)
-            continue
-        }
+    const name = path.basename(file)
+    const messages = []
 
+    if (text) {
         try {
             const options = prettier.resolveConfig.sync(file, {
                 editorconfig: false,
                 config: prettierConfig,
             })
 
-            const checked = prettier.check(text, {
+            const valid = prettier.check(text, {
                 ...options,
                 filepath: file,
             })
 
-            if (checked) {
-                log.debug(`${name} is formatted according to style`)
-            } else {
-                not_pretty_files.push(file)
+            if (!valid) {
+                messages.push({
+                    checker: 'prettier',
+                    rule: 'code-style',
+                    message: 'File is not formatted according to standards.'
+                })
             }
+
         } catch (error) {
-            log.error('Formatting failed.', file, error)
+            messages.push({
+                message: `Formatting failed: ${error}`
+            }
         }
     }
 
-    return not_pretty_files
+    return messages
 }
 
-exports.apply_fmt = function apply_prettier(files) {
-    const pretty_files = []
-    for (const file of files) {
-        const text = readFile(file)
-        const name = path.basename(file)
+exports.apply = function apply_prettier(file, text) {
+    if (!text) {
+        text = readFile(file)
+    }
 
-        if (!text) {
-            log.debug('No text work on.', file, text)
-            continue
-        }
+    const messages = []
 
+    const name = path.basename(file)
+
+    if (!text) {
         try {
             const options = prettier.resolveConfig.sync(file, {
                 editorconfig: false,
@@ -80,20 +82,22 @@ exports.apply_fmt = function apply_prettier(files) {
             }
 
             if (formatted === text) {
-                log.debug('Input/output identical, skipping.', name)
-                continue
+                messages.push({ message: 'Input/output identical, skipping.' })
             }
 
             const success = writeFile(file, formatted)
-            success
-                ? log.debug('file written to disk')
-                : log.debug('file write FAILED')
 
-            pretty_files.push(file)
+            messages.push({
+                message: success
+                    ? 'File successfully reformatted and written to disk'
+                    : 'File failed to be written to disk'
+            })
         } catch (error) {
-            log.error('Formatting failed.', file, error)
+            messages.push({
+                message: `Formatting failed: ${error}`
+            }
         }
     }
 
-    return pretty_files
+    return messages
 }
