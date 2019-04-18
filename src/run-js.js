@@ -29,10 +29,14 @@ function fixFile(file) {
     }
 }
 
+
+
+// runs the checkers
 exports.check_fmt = files => {
     return files.map(checkFile)
 }
 
+// runs the appliers
 exports.apply_fmt = files => {
     return files.map(fixFile)
 }
