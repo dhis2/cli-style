@@ -10,7 +10,7 @@ const prettierConfig = path.join(__dirname, '../config/prettier.config.js')
 
 log.debug('Prettier configuration file', prettierConfig)
 
-exports.check = function check_prettier(file, text) {
+exports.check = (file, text) => {
     if (!text) {
         text = readFile(file)
     }
@@ -34,21 +34,21 @@ exports.check = function check_prettier(file, text) {
                 messages.push({
                     checker: 'prettier',
                     rule: 'code-style',
-                    message: 'File is not formatted according to standards.'
+                    message: 'File is not formatted according to standards.',
                 })
             }
-
         } catch (error) {
             messages.push({
-                message: `Formatting failed: ${error}`
-            }
+                checker: 'prettier',
+                message: `Formatting failed: ${error}`,
+            })
         }
     }
 
     return messages
 }
 
-exports.apply = function apply_prettier(file, text) {
+exports.apply = (file, text) => {
     if (!text) {
         text = readFile(file)
     }
@@ -57,7 +57,7 @@ exports.apply = function apply_prettier(file, text) {
 
     const name = path.basename(file)
 
-    if (!text) {
+    if (text) {
         try {
             const options = prettier.resolveConfig.sync(file, {
                 editorconfig: false,
@@ -82,20 +82,22 @@ exports.apply = function apply_prettier(file, text) {
             }
 
             if (formatted === text) {
-                messages.push({ message: 'Input/output identical, skipping.' })
+                log.debug('Input/output identical, skipping.')
+            } else {
+                const success = writeFile(file, formatted)
+
+                if (!success) {
+                    messages.push({
+                        checker: 'prettier',
+                        message: 'File failed to be written to disk',
+                    })
+                }
             }
-
-            const success = writeFile(file, formatted)
-
-            messages.push({
-                message: success
-                    ? 'File successfully reformatted and written to disk'
-                    : 'File failed to be written to disk'
-            })
         } catch (error) {
             messages.push({
-                message: `Formatting failed: ${error}`
-            }
+                checker: 'prettier',
+                message: `Formatting failed: ${error}`,
+            })
         }
     }
 

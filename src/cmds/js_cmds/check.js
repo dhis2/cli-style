@@ -38,11 +38,12 @@ exports.handler = argv => {
     const js = jsFiles(codeFiles)
     const prettyFiles = check_fmt(js)
 
-    const combined = prettyFiles
-        .filter(violations)
+    const combined = prettyFiles.filter(violations)
 
     if (combined.length > 0) {
-        log.error(`${combined.length} file(s) are in violation of code standards:`)
+        log.error(
+            `${combined.length} file(s) are in violation of code standards:`
+        )
         combined.forEach(f => {
             const p = path.relative(process.cwd(), f.file)
             log.info('')
@@ -54,6 +55,6 @@ exports.handler = argv => {
     }
 }
 
-function violations (file) {
+function violations(file) {
     return file.messages.length > 0
 }

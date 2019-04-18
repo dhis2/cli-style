@@ -1,3 +1,5 @@
+const path = require('path')
+
 const { collectFiles, jsFiles } = require('../../files.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
@@ -43,16 +45,30 @@ exports.handler = argv => {
     const js = jsFiles(codeFiles)
     const prettyFiles = apply_fmt(js)
 
-    if (prettyFiles.length === 0) {
-        if (js.length > 0) {
-            log.info(`${js.length} file(s) reformatted.`)
-        } else {
-            log.info('No files to format.')
-        }
+    const combined = prettyFiles.filter(violations)
+
+    if (combined.length > 0) {
+        log.error(
+            `${combined.length} file(s) are in violation of code standards:`
+        )
+        combined.forEach(f => {
+            const p = path.relative(process.cwd(), f.file)
+            log.info('')
+            log.print(`${p}`)
+            f.messages.map(m => log.info(`${m.message}`))
+        })
+
+        log.info('')
+        process.exit(1)
     }
 
     if (stage) {
-        const stagedFiles = stage_files(prettyFiles, root_dir)
+        const filesToStage = combined.map(f => f.file)
+        const stagedFiles = stage_files(filesToStage, root_dir)
         log.debug('Staged files', stagedFiles)
     }
+}
+
+function violations(file) {
+    return file.messages.length > 0
 }
