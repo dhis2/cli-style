@@ -3,7 +3,7 @@ const path = require('path')
 const { collectFiles, jsFiles } = require('../../files.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { apply_fmt } = require('../../run-js.js')
+const { apply } = require('../../all-js.js')
 const { stage_files, staged_files } = require('../../git.js')
 
 exports.command = 'apply [files..]'
@@ -43,7 +43,7 @@ exports.handler = argv => {
     log.debug('codeFiles?', codeFiles)
 
     const js = jsFiles(codeFiles)
-    const prettyFiles = apply_fmt(js)
+    const prettyFiles = apply(js)
 
     const combined = prettyFiles.filter(violations)
 
@@ -67,6 +67,8 @@ exports.handler = argv => {
         const stagedFiles = stage_files(filesToStage, root_dir)
         log.debug('Staged files', stagedFiles)
     }
+
+    process.exit(0)
 }
 
 function violations(file) {

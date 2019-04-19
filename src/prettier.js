@@ -10,7 +10,7 @@ const prettierConfig = path.join(__dirname, '../config/prettier.config.js')
 
 log.debug('Prettier configuration file', prettierConfig)
 
-exports.check = (file, text) => {
+module.exports = (file, text, apply = false) => {
     if (!text) {
         text = readFile(file)
     }
@@ -31,65 +31,37 @@ exports.check = (file, text) => {
             })
 
             if (!valid) {
-                messages.push({
-                    checker: 'prettier',
-                    rule: 'code-style',
-                    message: 'File is not formatted according to standards.',
-                })
-            }
-        } catch (error) {
-            messages.push({
-                checker: 'prettier',
-                message: `Formatting failed: ${error}`,
-            })
-        }
-    }
+                if (apply) {
+                    let formatted
+                    if (text.startsWith('#!')) {
+                        const firstNL = text.indexOf('\n')
+                        const hashbang = text.slice(0, firstNL + 1)
+                        const rest = text.slice(firstNL, -1)
+                        const restFormatted = prettier.format(rest, {
+                            ...options,
+                            filepath: file,
+                        })
+                        formatted = hashbang.concat(restFormatted)
+                    } else {
+                        formatted = prettier.format(text, {
+                            ...options,
+                            filepath: file,
+                        })
+                    }
 
-    return messages
-}
+                    const success = writeFile(file, formatted)
 
-exports.apply = (file, text) => {
-    if (!text) {
-        text = readFile(file)
-    }
-
-    const messages = []
-
-    const name = path.basename(file)
-
-    if (text) {
-        try {
-            const options = prettier.resolveConfig.sync(file, {
-                editorconfig: false,
-                config: prettierConfig,
-            })
-
-            let formatted
-            if (text.startsWith('#!')) {
-                const firstNL = text.indexOf('\n')
-                const hashbang = text.slice(0, firstNL + 1)
-                const rest = text.slice(firstNL, -1)
-                const restFormatted = prettier.format(rest, {
-                    ...options,
-                    filepath: file,
-                })
-                formatted = hashbang.concat(restFormatted)
-            } else {
-                formatted = prettier.format(text, {
-                    ...options,
-                    filepath: file,
-                })
-            }
-
-            if (formatted === text) {
-                log.debug('Input/output identical, skipping.')
-            } else {
-                const success = writeFile(file, formatted)
-
-                if (!success) {
+                    if (!success) {
+                        messages.push({
+                            checker: 'prettier',
+                            message: 'File failed to be written to disk',
+                        })
+                    }
+                } else {
                     messages.push({
                         checker: 'prettier',
-                        message: 'File failed to be written to disk',
+                        rule: 'code-style',
+                        message: 'Not formatted according to standards.',
                     })
                 }
             }

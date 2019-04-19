@@ -1,3 +1,5 @@
+const ERROR = 2
+
 module.exports = {
     root: true,
 
@@ -11,10 +13,27 @@ module.exports = {
 
     rules: {
         'max-params': [
-            2,
+            ERROR,
             {
                 max: 3,
             },
         ],
+        'prefer-const': [
+            ERROR,
+            {
+                destructuring: 'any',
+                ignoreReadBeforeAssign: false,
+            },
+        ],
+        'sort-imports': [
+            ERROR,
+            {
+                ignoreCase: false,
+                ignoreDeclarationSort: false,
+                ignoreMemberSort: false,
+                memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
+            },
+        ],
+        'no-mixed-spaces-and-tabs': [ERROR],
     },
 }

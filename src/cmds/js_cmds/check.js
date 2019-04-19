@@ -2,7 +2,7 @@ const path = require('path')
 const { collectFiles, jsFiles } = require('../../files.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { check_fmt } = require('../../run-js.js')
+const { check } = require('../../all-js.js')
 const { staged_files } = require('../../git.js')
 
 exports.command = 'check [files..]'
@@ -36,22 +36,23 @@ exports.handler = argv => {
     log.debug('codeFiles?', codeFiles)
 
     const js = jsFiles(codeFiles)
-    const prettyFiles = check_fmt(js)
+    const prettyFiles = check(js)
 
     const combined = prettyFiles.filter(violations)
 
     if (combined.length > 0) {
-        log.error(
-            `${combined.length} file(s) are in violation of code standards:`
-        )
+        log.error(`${combined.length} file(s) violate the code standards:`)
         combined.forEach(f => {
             const p = path.relative(process.cwd(), f.file)
             log.info('')
             log.print(`${p}`)
-            f.messages.map(m => log.info(`${m.message}`))
+            f.messages.map(m => log.info(`[${m.checker}] ${m.message}`))
         })
         log.info('')
         process.exit(1)
+    } else {
+        log.info(`${prettyFiles.length} file(s) pass the style checks.`)
+        process.exit(0)
     }
 }
 
