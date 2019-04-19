@@ -22,9 +22,6 @@ exports.handler = argv => {
     const { all, files } = argv
     const root_dir = process.cwd()
 
-    const foo = 0
-    console.log(foo)
-
     let codeFiles
     if (all) {
         codeFiles = collectFiles(root_dir)
