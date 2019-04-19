@@ -1,4 +1,4 @@
-const ERROR = 2
+const SEVERITY = 2
 
 module.exports = {
     root: true,
@@ -20,18 +20,18 @@ module.exports = {
 
     rules: {
         'max-params': [
-            ERROR,
+            SEVERITY,
             {
                 max: 3,
             },
         ],
         'prefer-const': [
-            ERROR,
+            SEVERITY,
             {
                 destructuring: 'any',
                 ignoreReadBeforeAssign: false,
             },
         ],
-        'no-mixed-spaces-and-tabs': [ERROR],
+        'no-mixed-spaces-and-tabs': [SEVERITY],
     },
 }
