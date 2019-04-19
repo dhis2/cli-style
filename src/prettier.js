@@ -10,6 +10,15 @@ const prettierConfig = path.join(__dirname, '../config/prettier.config.js')
 
 log.debug('Prettier configuration file', prettierConfig)
 
+/**
+ * This a checker used by {run-js} and needs to follow a specific
+ * format.
+ *
+ * @param {string} file File path
+ * @param {string} text Content of File
+ * @param {boolean} apply Write autofixes to disk
+ * @return {Array} messages An array of Messages
+ */
 module.exports = (file, text, apply = false) => {
     if (!text) {
         text = readFile(file)

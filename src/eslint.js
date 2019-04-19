@@ -9,7 +9,20 @@ const eslintConfig = path.join(__dirname, '../config/eslint.config.js')
 
 log.debug('ESLint configuration file', eslintConfig)
 
+/**
+ * This a checker used by {run-js} and needs to follow a specific
+ * format.
+ *
+ * @param {string} file File path
+ * @param {string} text Content of File
+ * @param {boolean} apply Write autofixes to disk
+ * @return {Array} messages An array of Messages
+ */
 module.exports = (file, text, apply = false) => {
+    if (!text) {
+        text = readFile(file)
+    }
+
     const messages = []
 
     const cli = new eslint.CLIEngine({
@@ -17,10 +30,6 @@ module.exports = (file, text, apply = false) => {
         useEslintrc: false,
         fix: apply,
     })
-
-    if (!text) {
-        text = readFile(file)
-    }
 
     if (text) {
         try {
@@ -42,9 +51,12 @@ module.exports = (file, text, apply = false) => {
             if (apply && result.output) {
                 const success = writeFile(file, result.output)
 
-                success
-                    ? log.debug(`${file} write success`)
-                    : log.error(`${file} write fail`)
+                if (!success) {
+                    messages.push({
+                        checker: 'eslint',
+                        message: 'File failed to be written to disk',
+                    })
+                }
             }
         } catch (error) {
             messages.push({
