@@ -3,11 +3,18 @@ const ERROR = 2
 module.exports = {
     root: true,
 
+    env: {
+        browser: true,
+        node: true,
+        jest: true,
+    },
+
     parserOptions: {
         // latest standard is ok, eq. to 9
         ecmaVersion: 2018,
         ecmaFeatures: {
             jsx: true,
+            modules: true,
         },
     },
 

@@ -25,14 +25,22 @@ module.exports = (file, text, apply = false) => {
 
     const messages = []
 
-    const cli = new eslint.CLIEngine({
-        configFile: eslintConfig,
-        useEslintrc: false,
-        fix: apply,
-    })
-
     if (text) {
+        // TODO: reliably switch between 'script' and 'module' based on
+        // source code. For now module seems to work for node too.
+        const sourceType = 'module'
+
         try {
+            const cli = new eslint.CLIEngine({
+                baseConfig: {
+                    parserOptions: {
+                        sourceType,
+                    },
+                },
+                configFile: eslintConfig,
+                useEslintrc: false,
+                fix: apply,
+            })
             const report = cli.executeOnText(text)
 
             // when using `executeOnText` the results array always has a
