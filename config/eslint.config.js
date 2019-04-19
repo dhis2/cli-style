@@ -32,15 +32,6 @@ module.exports = {
                 ignoreReadBeforeAssign: false,
             },
         ],
-        'sort-imports': [
-            ERROR,
-            {
-                ignoreCase: false,
-                ignoreDeclarationSort: false,
-                ignoreMemberSort: false,
-                memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-            },
-        ],
         'no-mixed-spaces-and-tabs': [ERROR],
     },
 }
