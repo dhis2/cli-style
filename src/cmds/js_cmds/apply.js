@@ -48,13 +48,13 @@ exports.handler = argv => {
     log.debug('jsFiles?', js)
     log.debug('prettyFiles', prettyFiles)
 
-    const messages = prettyFiles.filter(f => f.messages.length > 0 )
+    const messages = prettyFiles.filter(f => f.messages.length > 0)
 
     if (messages.length > 0) {
         log.error(
-            `${combined.length} file(s) are in violation of code standards:`
+            `${messages.length} file(s) are in violation of code standards:`
         )
-        combined.forEach(f => {
+        messages.forEach(f => {
             const p = path.relative(process.cwd(), f.file)
             log.info('')
             log.print(`${p}`)

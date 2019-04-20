@@ -21,7 +21,7 @@ log.debug('ESLint configuration file', eslintConfig)
 module.exports = (file, text, apply = false) => {
     const response = {
         messages: [],
-        output: '',
+        output: text,
     }
 
     try {
@@ -36,17 +36,17 @@ module.exports = (file, text, apply = false) => {
         // single element
         const result = report.results[0]
 
+        if (result.output) {
+            response.output = result.output
+        }
+
         for (const message of result.messages) {
             response.messages.push({
                 checker: 'eslint',
-                line: message.line,
-                rule: message.ruleId,
-                message: `${message.message} (${message.ruleId})`,
+                message: `${message.line}: ${message.message} (${
+                    message.ruleId
+                })`,
             })
-        }
-
-        if (result.output) {
-            response.output = result.output
         }
     } catch (error) {
         log.error(`ESLint format failed with error:\n${error}`)

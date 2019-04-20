@@ -12,7 +12,7 @@ const tools = [
     eslint,
 
     // run the formatter last!
-    prettier
+    prettier,
 ]
 
 function checkFile(file) {
@@ -21,7 +21,7 @@ function checkFile(file) {
     let messages = []
     let source = text
     for (const tool of tools) {
-        const result = tool(file, source)
+        const result = tool(file, source, false)
 
         source = result.output
         messages = messages.concat(result.messages)
