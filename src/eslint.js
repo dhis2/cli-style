@@ -16,62 +16,42 @@ log.debug('ESLint configuration file', eslintConfig)
  * @param {string} file File path
  * @param {string} text Content of File
  * @param {boolean} apply Write autofixes to disk
- * @return {Array} messages An array of Messages
+ * @return {Object} object with messages and output
  */
 module.exports = (file, text, apply = false) => {
-    if (!text) {
-        text = readFile(file)
+    const response = {
+        messages: [],
+        output: '',
     }
 
-    const messages = []
+    try {
+        const cli = new eslint.CLIEngine({
+            configFile: eslintConfig,
+            useEslintrc: false,
+            fix: apply,
+        })
+        const report = cli.executeOnText(text)
 
-    if (text) {
-        // TODO: reliably switch between 'script' and 'module' based on
-        // source code. For now module seems to work for node too.
-        const sourceType = 'module'
+        // when using `executeOnText` the results array always has a
+        // single element
+        const result = report.results[0]
 
-        try {
-            const cli = new eslint.CLIEngine({
-                baseConfig: {
-                    parserOptions: {
-                        sourceType,
-                    },
-                },
-                configFile: eslintConfig,
-                useEslintrc: false,
-                fix: apply,
-            })
-            const report = cli.executeOnText(text)
-
-            // when using `executeOnText` the results array always has a
-            // single element
-            const result = report.results[0]
-
-            for (const message of result.messages) {
-                messages.push({
-                    checker: 'eslint',
-                    line: message.line,
-                    rule: message.ruleId,
-                    message: `${message.message} (${message.ruleId})`,
-                })
-            }
-
-            if (apply && result.output) {
-                const success = writeFile(file, result.output)
-
-                if (!success) {
-                    messages.push({
-                        checker: 'eslint',
-                        message: 'File failed to be written to disk',
-                    })
-                }
-            }
-        } catch (error) {
-            messages.push({
-                message: `Formatting ${file} failed: ${error}`,
+        for (const message of result.messages) {
+            response.messages.push({
+                checker: 'eslint',
+                line: message.line,
+                rule: message.ruleId,
+                message: `${message.message} (${message.ruleId})`,
             })
         }
+
+        if (result.output) {
+            response.output = result.output
+        }
+    } catch (error) {
+        log.error(`ESLint format failed with error:\n${error}`)
+        process.exit(1)
     }
 
-    return messages
+    return response
 }

@@ -38,7 +38,10 @@ exports.handler = argv => {
     const js = jsFiles(codeFiles)
     const prettyFiles = check(js)
 
-    const combined = prettyFiles.filter(violations)
+    log.debug('jsFiles?', js)
+    log.debug('prettyFiles', prettyFiles)
+
+    const combined = prettyFiles.filter(f => f.messages.length > 0)
 
     if (combined.length > 0) {
         log.error(`${combined.length} file(s) violate the code standards:`)
@@ -54,8 +57,4 @@ exports.handler = argv => {
         log.info(`${prettyFiles.length} file(s) pass the style checks.`)
         process.exit(0)
     }
-}
-
-function violations(file) {
-    return file.messages.length > 0
 }

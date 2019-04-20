@@ -1,10 +1,10 @@
 const path = require('path')
 
-const { collectFiles, jsFiles } = require('../../files.js')
+const { collectFiles, jsFiles, writeFile } = require('../../files.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { apply } = require('../../all-js.js')
-const { stage_files, staged_files } = require('../../git.js')
+const { stage_file, staged_files } = require('../../git.js')
 
 exports.command = 'apply [files..]'
 
@@ -45,9 +45,12 @@ exports.handler = argv => {
     const js = jsFiles(codeFiles)
     const prettyFiles = apply(js)
 
-    const combined = prettyFiles.filter(violations)
+    log.debug('jsFiles?', js)
+    log.debug('prettyFiles', prettyFiles)
 
-    if (combined.length > 0) {
+    const messages = prettyFiles.filter(f => f.messages.length > 0 )
+
+    if (messages.length > 0) {
         log.error(
             `${combined.length} file(s) are in violation of code standards:`
         )
@@ -62,15 +65,23 @@ exports.handler = argv => {
         process.exit(1)
     }
 
-    if (stage) {
-        const filesToStage = prettyFiles.map(f => f.file)
-        const stagedFiles = stage_files(filesToStage, root_dir)
-        log.debug('Staged files', stagedFiles)
-    }
+    const autofix = prettyFiles
+        .filter(f => f.output)
+        .map(f => {
+            const success = writeFile(f.file, f.output)
 
+            if (!success) {
+                log.error(`Failed to write ${f.name} to disk`)
+                process.exit(1)
+            }
+
+            if (stage) {
+                stage_file(f.file, root_dir)
+            }
+
+            return f
+        })
+
+    log.debug(`${autofix.length} file(s) auto fixed.`)
     process.exit(0)
-}
-
-function violations(file) {
-    return file.messages.length > 0
 }

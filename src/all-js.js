@@ -5,27 +5,52 @@ const prettier = require('./prettier.js')
 
 const { readFile } = require('./files.js')
 
-const tools = [eslint, prettier]
+/*
+ *  Order of the tools is important.
+ */
+const tools = [
+    eslint,
+
+    // run the formatter last!
+    prettier
+]
 
 function checkFile(file) {
     const text = readFile(file)
 
+    let messages = []
+    let source = text
+    for (const tool of tools) {
+        const result = tool(file, source)
+
+        source = result.output
+        messages = messages.concat(result.messages)
+    }
+
     return {
-        file: file,
+        file,
+        messages,
         name: path.basename(file),
-        messages: tools.map(c => c(file, text)).reduce((a, b) => a.concat(b)),
     }
 }
 
 function fixFile(file) {
     const text = readFile(file)
 
+    let messages = []
+    let source = text
+    for (const tool of tools) {
+        const result = tool(file, source, true)
+
+        source = result.output
+        messages = messages.concat(result.messages)
+    }
+
     return {
-        file: file,
+        file,
+        messages,
+        output: source,
         name: path.basename(file),
-        messages: tools
-            .map(c => c(file, text, true))
-            .reduce((a, b) => a.concat(b)),
     }
 }
 
