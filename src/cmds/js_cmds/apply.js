@@ -46,9 +46,7 @@ exports.handler = argv => {
     const messages = report.filter(f => f.messages.length > 0)
 
     if (messages.length > 0) {
-        log.error(
-            `${messages.length} file(s) are in violation of code standards:`
-        )
+        log.error(`${messages.length} file(s) violate the code standards:`)
         messages.forEach(f => {
             const p = path.relative(process.cwd(), f.file)
             log.info('')
