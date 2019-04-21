@@ -36,8 +36,6 @@ exports.handler = argv => {
     log.debug(`Files to operate on:\n${js}`)
 
     const report = check(js)
-    log.debug(`Report from tools:\n${report}`)
-
     const messages = report.filter(f => f.messages.length > 0)
 
     if (messages.length > 0) {

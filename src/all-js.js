@@ -22,6 +22,7 @@ const tools = [
 ]
 
 function checkFile(file) {
+    const p = path.relative(process.cwd(), file)
     const text = readFile(file)
 
     let messages = []
@@ -34,7 +35,7 @@ function checkFile(file) {
         source = result.output
         messages = messages.concat(result.messages)
     }
-    log.debug(`${file}: ${perf.end('check-file').milliseconds}ms`)
+    log.debug(`${p}: ${perf.end('check-file').summary}`)
 
     return {
         file,
@@ -45,6 +46,7 @@ function checkFile(file) {
 
 function fixFile(file) {
     const text = readFile(file)
+    const p = path.relative(process.cwd(), file)
 
     let messages = []
     let source = text
@@ -56,7 +58,7 @@ function fixFile(file) {
         source = result.output
         messages = messages.concat(result.messages)
     }
-    log.debug(`${file}: ${perf.end('fix-file').milliseconds}ms`)
+    log.debug(`${p}: ${perf.end('fix-file').summary}`)
 
     return {
         file,
@@ -67,17 +69,17 @@ function fixFile(file) {
 }
 
 exports.check = files => {
-    perf.start('check-files')
+    perf.start('check-all-files')
     const checked = files.map(checkFile)
-    log.debug(`All files: ${perf.end('check-files').milliseconds}ms`)
+    log.debug(`${perf.end('check-all-files').summary}`)
 
     return checked
 }
 
 exports.apply = files => {
-    perf.start('fix-files')
+    perf.start('fix-all-files')
     const applied = files.map(fixFile)
-    log.debug(`All files: ${perf.end('fix-files').milliseconds}ms`)
+    log.debug(`${perf.end('fix-all-files').summary}`)
 
     return applied
 }

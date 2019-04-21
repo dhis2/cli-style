@@ -42,7 +42,7 @@ module.exports = (file, text, apply = false) => {
         for (const message of result.messages) {
             response.messages.push({
                 checker: 'eslint',
-                message: `${message.line}: ${message.message} (${
+                message: `Line ${message.line}: ${message.message} (${
                     message.ruleId
                 })`,
             })
