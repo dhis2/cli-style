@@ -35,6 +35,11 @@ exports.handler = argv => {
     const js = jsFiles(codeFiles)
     log.debug(`Files to operate on:\n${js}`)
 
+    if (js.length === 0) {
+        log.info('No files to check.')
+        process.exit(0)
+    }
+
     const report = check(js)
     const messages = report.filter(f => f.messages.length > 0)
 
