@@ -27,28 +27,25 @@ exports.builder = {
 
 exports.handler = argv => {
     const { all, stage, files } = argv
-    const root_dir = process.cwd()
+    const root = process.cwd()
+    log.debug(`Root directory: ${root}`)
 
     let codeFiles
     if (all) {
-        codeFiles = collectFiles(root_dir)
+        codeFiles = collectFiles(root)
     } else if (files) {
         codeFiles = files
     } else {
-        codeFiles = staged_files(root_dir)
+        codeFiles = staged_files(root)
     }
 
-    // debug information about the folders
-    log.debug('rootDir?', root_dir)
-    log.debug('codeFiles?', codeFiles)
-
     const js = jsFiles(codeFiles)
-    const prettyFiles = apply(js)
+    log.debug(`Files to operate on:\n${js}`)
 
-    log.debug('jsFiles?', js)
-    log.debug('prettyFiles', prettyFiles)
+    const report = apply(js)
+    log.debug(`Report from tools:\n${report}`)
 
-    const messages = prettyFiles.filter(f => f.messages.length > 0)
+    const messages = report.filter(f => f.messages.length > 0)
 
     if (messages.length > 0) {
         log.error(
@@ -65,10 +62,11 @@ exports.handler = argv => {
         process.exit(1)
     }
 
-    const autofix = prettyFiles
+    const autofix = report
         .filter(f => f.output)
         .map(f => {
             const success = writeFile(f.file, f.output)
+            log.debug(`${f.file} written successfully: ${success}`)
 
             if (!success) {
                 log.error(`Failed to write ${f.name} to disk`)
@@ -76,12 +74,12 @@ exports.handler = argv => {
             }
 
             if (stage) {
-                stage_file(f.file, root_dir)
+                stage_file(f.file, root)
             }
 
             return f
         })
 
-    log.debug(`${autofix.length} file(s) auto fixed.`)
+    log.info(`${autofix.length} file(s) automatically fixed.`)
     process.exit(0)
 }

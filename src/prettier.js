@@ -1,13 +1,11 @@
-const prettier = require('prettier')
 const path = require('path')
+const prettier = require('prettier')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { readFile, writeFile } = require('./files.js')
 
-// Prettier setup
 const prettierConfig = path.join(__dirname, '../config/prettier.config.js')
-
 log.debug('Prettier configuration file', prettierConfig)
 
 /**
@@ -20,8 +18,6 @@ log.debug('Prettier configuration file', prettierConfig)
  * @return {Object} object with messages and output
  */
 module.exports = (file, text, apply = false) => {
-    const name = path.basename(file)
-
     const response = {
         messages: [],
         output: text,

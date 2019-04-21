@@ -20,28 +20,25 @@ exports.builder = {
 
 exports.handler = argv => {
     const { all, files } = argv
-    const root_dir = process.cwd()
+    const root = process.cwd()
+    log.debug(`Root directory: ${root}`)
 
     let codeFiles
     if (all) {
-        codeFiles = collectFiles(root_dir)
+        codeFiles = collectFiles(root)
     } else if (files) {
         codeFiles = files
     } else {
-        codeFiles = staged_files(root_dir)
+        codeFiles = staged_files(root)
     }
 
-    // debug information about the folders
-    log.debug('rootDir?', root_dir)
-    log.debug('codeFiles?', codeFiles)
-
     const js = jsFiles(codeFiles)
-    const prettyFiles = check(js)
+    log.debug(`Files to operate on:\n${js}`)
 
-    log.debug('jsFiles?', js)
-    log.debug('prettyFiles', prettyFiles)
+    const report = check(js)
+    log.debug(`Report from tools:\n${report}`)
 
-    const messages = prettyFiles.filter(f => f.messages.length > 0)
+    const messages = report.filter(f => f.messages.length > 0)
 
     if (messages.length > 0) {
         log.error(`${messages.length} file(s) violate the code standards:`)
@@ -54,7 +51,7 @@ exports.handler = argv => {
         log.info('')
         process.exit(1)
     } else {
-        log.info(`${prettyFiles.length} file(s) pass the style checks.`)
+        log.info(`${report.length} file(s) pass the style checks.`)
         process.exit(0)
     }
 }
