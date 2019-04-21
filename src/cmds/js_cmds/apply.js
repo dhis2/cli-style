@@ -4,7 +4,7 @@ const { collectFiles, jsFiles, writeFile } = require('../../files.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { apply } = require('../../all-js.js')
-const { stage_file, staged_files } = require('../../git.js')
+const { stage_files, staged_files } = require('../../git.js')
 
 exports.command = 'apply [files..]'
 
@@ -73,13 +73,14 @@ exports.handler = argv => {
                 process.exit(1)
             }
 
-            if (stage) {
-                stage_file(f.file, root)
-            }
-
-            return f
+            return f.file
         })
 
     log.info(`${autofix.length} file(s) automatically fixed.`)
+
+    if (stage) {
+        stage_files(autofix, root)
+    }
+
     process.exit(0)
 }
