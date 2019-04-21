@@ -20,6 +20,7 @@
     "@dhis2/cli-helpers-engine": "^1.0.1",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
+    "perfy": "^1.1.5",
     "prettier": "^1.15.3",
     "yargs": "^13.1.0"
   },

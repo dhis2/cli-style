@@ -7,18 +7,18 @@ const { execSync } = require('child_process')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const stage_file = (file, dir) => {
-    log.info(`Staging ${file}...`)
+    log.debug(`Staging ${file}...`)
     const added = execSync(`git add ${file}`, {
         cwd: dir,
         encoding: 'utf8',
     })
-    log.debug(added)
     return file
 }
 
 const stage_files = (files, dir) => {
-    log.info(`Stage ${files.length} file(s).`)
-    return files.map(f => stage_file(f, dir))
+    const staged = files.map(f => stage_file(f, dir))
+    log.info(`Staged ${files.length} file(s).`)
+    return staged
 }
 
 const staged_files = dir => {
