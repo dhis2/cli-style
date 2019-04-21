@@ -71,7 +71,7 @@ function fixFile(file) {
 exports.check = files => {
     perf.start('check-all-files')
     const checked = files.map(checkFile)
-    log.debug(`${perf.end('check-all-files').summary}`)
+    log.debug(`${files.length} file(s): ${perf.end('check-all-files').summary}`)
 
     return checked
 }
@@ -79,7 +79,7 @@ exports.check = files => {
 exports.apply = files => {
     perf.start('fix-all-files')
     const applied = files.map(fixFile)
-    log.debug(`${perf.end('fix-all-files').summary}`)
+    log.debug(`${files.length} file(s): ${perf.end('fix-all-files').summary}`)
 
     return applied
 }
