@@ -38,7 +38,7 @@ const staged_files = dir => {
 }
 
 module.exports = {
-    check: commitlint,
+    runner: commitlint,
     staged_files,
     stage_files,
     stage_file,

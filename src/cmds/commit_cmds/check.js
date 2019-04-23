@@ -1,5 +1,5 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
-const { check } = require('../../tools/git')
+const { runner } = require('../../tools/git')
 
 exports.command = 'check [msg]'
 
@@ -10,7 +10,7 @@ exports.builder = {}
 exports.handler = async function(argv) {
     const { msg } = argv
 
-    const report = await check(msg)
+    const report = await runner(msg)
 
     if (report.valid) {
         log.info('Commit message is valid')
