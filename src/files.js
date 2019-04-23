@@ -3,7 +3,7 @@ const path = require('path')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { staged_files } = require('./git-files.js')
+const { stagedFiles } = require('./git-files.js')
 
 const blacklist = ['node_modules', 'build', 'dist', 'target', '.git']
 
@@ -57,7 +57,7 @@ function selectFiles(files, all, dir) {
     } else if (files) {
         codeFiles = files
     } else {
-        codeFiles = staged_files(dir)
+        codeFiles = stagedFiles(dir)
     }
 
     return codeFiles

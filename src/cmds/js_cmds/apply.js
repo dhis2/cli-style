@@ -3,7 +3,7 @@ const path = require('path')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { selectFiles } = require('../../files.js')
-const { stage_files } = require('../../git-files.js')
+const { stageFiles } = require('../../git-files.js')
 
 const { runner } = require('../../tools/js')
 
@@ -44,6 +44,6 @@ exports.handler = argv => {
     const fixed = report.fix()
 
     if (stage) {
-        stage_files(fixed, root)
+        stageFiles(fixed, root)
     }
 }
