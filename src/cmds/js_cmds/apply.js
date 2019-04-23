@@ -44,7 +44,7 @@ exports.handler = argv => {
 
     report.summary()
 
-    if (report.violations()) {
+    if (report.hasViolations) {
         process.exit(1)
     }
 

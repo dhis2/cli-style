@@ -35,7 +35,7 @@ exports.handler = argv => {
     const report = runner(codeFiles)
     report.summary()
 
-    if (report.violations()) {
+    if (report.hasViolations) {
         process.exit(1)
     }
 }
