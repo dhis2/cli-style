@@ -33,7 +33,7 @@ exports.handler = argv => {
     log.debug(`Root directory: ${root}`)
 
     const codeFiles = selectFiles(files, all, root)
-    const report = runner(codeFiles)
+    const report = runner(codeFiles, true)
 
     report.summary()
 

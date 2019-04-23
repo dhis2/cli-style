@@ -25,7 +25,7 @@ const TOOLS = [
  * @param {string} path to the file to run tools on
  * @param {boolean} if the tool should apply fixes
  */
-function runTools(file, fix) {
+function runTools(file, apply = false) {
     const p = path.relative(process.cwd(), file)
     const text = readFile(file)
 
@@ -34,7 +34,7 @@ function runTools(file, fix) {
 
     perf.start('exec-file')
     for (const tool of TOOLS) {
-        const result = tool(file, source, fix)
+        const result = tool(file, source, apply)
 
         source = result.output
         messages = messages.concat(result.messages)
@@ -49,9 +49,9 @@ function runTools(file, fix) {
     }
 }
 
-function exec(files) {
+function exec(files, apply = false) {
     perf.start('exec-all-files')
-    const report = files.map(f => runTools(f, true))
+    const report = files.map(f => runTools(f, apply))
     log.debug(`${files.length} file(s): ${perf.end('exec-all-files').summary}`)
 
     return report
@@ -102,22 +102,22 @@ function fix(report) {
     return fixed
 }
 
-exports.runner = files => {
+exports.runner = (files, apply = false) => {
     const js = jsFiles(files)
     log.debug(`Files to operate on:\n${js}`)
 
-    const report = exec(js)
+    const report = exec(js, apply)
     const violations = getViolations(report)
     const hasViolations = violations.length > 0
 
     log.debug(`Violations: ${violations.length}`)
 
     return {
+        files: js,
         summary: () => print(report, violations),
         fix: () => fix(report),
         violations,
         hasViolations,
-        files: js,
         report,
     }
 }
