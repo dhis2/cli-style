@@ -5,29 +5,29 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { readFile, writeFile } = require('./files.js')
 
-function wipe_prop_cfg(repo) {
-    const pkg_path = path.join(repo, 'package.json')
+function wipeConfigProperties(repo) {
+    const pkgPath = path.join(repo, 'package.json')
 
     try {
-        const fd = fs.readFileSync(pkg_path)
+        const fd = fs.readFileSync(pkgPath)
         const data = JSON.parse(fd.toString('utf8'))
 
         delete data.prettier
 
         const out = JSON.stringify(data, null, 2) + '\n'
         try {
-            fs.writeFileSync(pkg_path, out)
-            log.debug(pkg_path + ' updated and saved')
+            fs.writeFileSync(pkgPath, out)
+            log.debug(pkgPath + ' updated and saved')
         } catch (err) {
             log.error('failed to get package.json for repo: ' + repo)
         }
     } catch (e) {
-        log.error('failed to get package.json: ' + pkg_path)
+        log.error('failed to get package.json: ' + pkgPath)
     }
 }
 
-function wipe_file_cfg(repo) {
-    const wipe_cfg_list = [
+function wipeConfigFiles(repo) {
+    const configs = [
         '.prettierrc',
         '.prettierrc.yaml',
         '.prettierrc.yml',
@@ -40,7 +40,7 @@ function wipe_file_cfg(repo) {
         '.editorconfig',
     ]
 
-    wipe_cfg_list.map(cfg => {
+    configs.map(cfg => {
         try {
             fs.unlinkSync(path.join(repo, cfg))
             log.debug(cfg + ' removed from repo: ' + repo)
@@ -51,8 +51,8 @@ function wipe_file_cfg(repo) {
 }
 
 function cleanup(repo) {
-    wipe_prop_cfg(repo)
-    wipe_file_cfg(repo)
+    wipeConfigProperties(repo)
+    wipeConfigFiles(repo)
 }
 
 function copy(from, to) {
