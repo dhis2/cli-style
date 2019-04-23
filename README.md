@@ -9,11 +9,15 @@
 [![travis.com build](https://img.shields.io/travis/com/dhis2/cli-style.svg)](https://travis-ci.com/dhis2/cli-style)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org) [![Greenkeeper badge](https://badges.greenkeeper.io/dhis2/cli-style.svg)](https://greenkeeper.io/)
 
-This tool applies our configuration for:
+This tool enforces DHIS2 configuration for:
 
--   Git commit messages
--   Prettier (prettifies JavaScript)
--   Browserslist
+- Git
+-  * Git commit messages
+
+- JavaScript
+- * Prettier
+- * ESLint
+- * Browserslist
 
 This tool is part of the [dhis2/cli](https://github.com/dhis2/cli)
 suite, but can also be used standalone which is useful for project level
