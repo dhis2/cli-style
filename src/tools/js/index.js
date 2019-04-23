@@ -75,8 +75,6 @@ function print(report, violations) {
         })
 
         log.info('')
-    } else {
-        log.info(`${report.length} file(s) pass the style checks.`)
     }
 }
 
