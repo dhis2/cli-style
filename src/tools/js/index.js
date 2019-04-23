@@ -59,11 +59,8 @@ function exec(files, apply = false) {
     return report
 }
 
-function print(report, violations) {
-    if (report.length === 0) {
-        log.info('No files to check.')
-        return
-    }
+function print(report, violations, autofixes) {
+    log.info(`${report.length} file(s) checked.`)
 
     if (violations.length > 0) {
         log.error(`${violations.length} file(s) violate the code standards:`)
@@ -79,26 +76,27 @@ function print(report, violations) {
 }
 
 function getViolations(report) {
-    const result = report.filter(f => f.messages.length > 0)
-    return result
+    return report.filter(f => f.messages.length > 0)
 }
 
-function fix(report) {
-    const fixed = report
-        .filter(f => f.modified)
-        .map(f => {
-            const success = writeFile(f.file, f.output)
-            log.debug(`${f.file} written successfully: ${success}`)
+function getAutoFixable(report) {
+    return report.filter(f => f.modified)
+}
 
-            if (!success) {
-                log.error(`Failed to write ${f.name} to disk`)
-                process.exit(1)
-            }
+function fix(fixable) {
+    const fixed = fixable.map(f => {
+        const success = writeFile(f.file, f.output)
+        log.debug(`${f.file} written successfully: ${success}`)
 
-            return f.file
-        })
+        if (!success) {
+            log.error(`Failed to write ${f.name} to disk`)
+            process.exit(1)
+        }
 
-    log.debug(`${fixed.length} file(s) automatically fixed.`)
+        return f.file
+    })
+
+    log.info(`Applied fixes for ${fixed.length} file(s).`)
     return fixed
 }
 
@@ -107,15 +105,18 @@ exports.runner = (files, apply = false) => {
     log.debug(`Files to operate on:\n${js.join('\n')}`)
 
     const report = exec(js, apply)
+    const autofixes = getAutoFixable(report)
     const violations = getViolations(report)
+
     const hasViolations = violations.length > 0
 
     log.debug(`Violations: ${violations.length}`)
+    log.debug(`Autofixes: ${autofixes.length}`)
 
     return {
         files: js,
-        summarize: () => print(report, violations),
-        fix: () => fix(report),
+        summarize: () => print(report, violations, autofixes),
+        fix: () => fix(autofixes),
         violations,
         hasViolations,
         report,
