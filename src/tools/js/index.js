@@ -57,17 +57,15 @@ function exec(files) {
     return report
 }
 
-function print(report) {
+function print(report, violations) {
     if (report.length === 0) {
         log.info('No files to check.')
         return
     }
 
-    const messages = violations(report)
-
-    if (messages.length > 0) {
-        log.error(`${messages.length} file(s) violate the code standards:`)
-        messages.forEach(f => {
+    if (violations.length > 0) {
+        log.error(`${violations.length} file(s) violate the code standards:`)
+        violations.forEach(f => {
             const p = path.relative(process.cwd(), f.file)
             log.info('')
             log.print(`${p}`)
@@ -80,9 +78,8 @@ function print(report) {
     }
 }
 
-function violations(report) {
+function getViolations(report) {
     const result = report.filter(f => f.messages.length > 0)
-    log.debug(`Violations: ${result.length}`)
     return result
 }
 
@@ -110,11 +107,16 @@ exports.runner = files => {
     log.debug(`Files to operate on:\n${js}`)
 
     const report = exec(js)
+    const violations = getViolations(report)
+    const hasViolations = violations.length > 0
+
+    log.debug(`Violations: ${violations.length}`)
 
     return {
-        summary: () => print(report),
+        summary: () => print(report, violations),
         fix: () => fix(report),
-        violations: () => violations(report).length > 0,
+        violations,
+        hasViolations,
         files: js,
         report,
     }
