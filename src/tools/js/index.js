@@ -21,44 +21,25 @@ const tools = [
     prettier,
 ]
 
-function checkFile(file) {
+/**
+ * @param {string} path to the file to run tools on
+ * @param {boolean} if the tool should apply fixes
+ */
+function run(file, fix) {
     const p = path.relative(process.cwd(), file)
     const text = readFile(file)
 
     let messages = []
     let source = text
 
-    perf.start('check-file')
+    perf.start('exec-file')
     for (const tool of tools) {
-        const result = tool(file, source, false)
+        const result = tool(file, source, fix)
 
         source = result.output
         messages = messages.concat(result.messages)
     }
-    log.debug(`${p}: ${perf.end('check-file').summary}`)
-
-    return {
-        file,
-        messages,
-        name: path.basename(file),
-    }
-}
-
-function fixFile(file) {
-    const text = readFile(file)
-    const p = path.relative(process.cwd(), file)
-
-    let messages = []
-    let source = text
-
-    perf.start('fix-file')
-    for (const tool of tools) {
-        const result = tool(file, source, true)
-
-        source = result.output
-        messages = messages.concat(result.messages)
-    }
-    log.debug(`${p}: ${perf.end('fix-file').summary}`)
+    log.debug(`${p}: ${perf.end('exec-file').summary}`)
 
     return {
         file,
@@ -70,7 +51,7 @@ function fixFile(file) {
 
 exports.check = files => {
     perf.start('check-all-files')
-    const checked = files.map(checkFile)
+    const checked = files.map(f => run(f, false))
     log.debug(`${files.length} file(s): ${perf.end('check-all-files').summary}`)
 
     return checked
@@ -78,7 +59,7 @@ exports.check = files => {
 
 exports.apply = files => {
     perf.start('fix-all-files')
-    const applied = files.map(fixFile)
+    const applied = files.map(f => run(f, true))
     log.debug(`${files.length} file(s): ${perf.end('fix-all-files').summary}`)
 
     return applied
