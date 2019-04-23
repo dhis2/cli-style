@@ -6,7 +6,7 @@ const config = require('@commitlint/config-conventional')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-module.exports = async function check(msg = '') {
+module.exports = async (msg = '') => {
     try {
         const opts = await load(config)
 
