@@ -24,7 +24,6 @@ module.exports = (file, text, apply = false) => {
     const response = {
         messages: [],
         output: text,
-        modified: false,
     }
 
     try {
@@ -49,9 +48,7 @@ module.exports = (file, text, apply = false) => {
             })
         }
 
-        response.modified = text !== response.output
-
-        if (!apply && response.modified) {
+        if (!apply && text !== response.output) {
             response.messages.push({
                 checker: 'prettier',
                 message: 'Not formatted according to standards.',

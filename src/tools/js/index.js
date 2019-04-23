@@ -27,16 +27,17 @@ const TOOLS = [
  */
 function runTools(file, apply = false) {
     const p = path.relative(process.cwd(), file)
-    const text = readFile(file)
+    const original = readFile(file)
 
     let messages = []
-    let source = text
+    let source = original
 
     perf.start('exec-file')
     for (const tool of TOOLS) {
         const result = tool(file, source, apply)
 
         source = result.output
+
         messages = messages.concat(result.messages)
     }
     log.debug(`${p}: ${perf.end('exec-file').summary}`)
@@ -45,6 +46,7 @@ function runTools(file, apply = false) {
         file,
         messages,
         output: source,
+        modified: original !== source,
         name: path.basename(file),
     }
 }
@@ -104,7 +106,7 @@ function fix(report) {
 
 exports.runner = (files, apply = false) => {
     const js = jsFiles(files)
-    log.debug(`Files to operate on:\n${js}`)
+    log.debug(`Files to operate on:\n${js.join('\n')}`)
 
     const report = exec(js, apply)
     const violations = getViolations(report)
