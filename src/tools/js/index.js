@@ -84,6 +84,10 @@ function getAutoFixable(report) {
 }
 
 function fix(fixable) {
+    if (fixable.length === 0) {
+        return []
+    }
+
     const fixed = fixable.map(f => {
         const success = writeFile(f.file, f.output)
         log.debug(`${f.file} written successfully: ${success}`)

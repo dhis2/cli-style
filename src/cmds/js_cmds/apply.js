@@ -43,7 +43,7 @@ exports.handler = argv => {
 
     const fixed = report.fix()
 
-    if (stage) {
+    if (stage && fixed.length > 0) {
         stageFiles(fixed, root)
     }
 }
