@@ -114,7 +114,7 @@ exports.runner = (files, apply = false) => {
 
     return {
         files: js,
-        summary: () => print(report, violations),
+        summarize: () => print(report, violations),
         fix: () => fix(report),
         violations,
         hasViolations,

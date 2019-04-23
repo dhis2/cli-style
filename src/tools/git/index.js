@@ -8,7 +8,7 @@ exports.runner = async function(msg) {
     const { result, report } = await commitlint(msg)
 
     return {
-        summary: () => log.print(result),
-        valid: () => report.valid,
+        summarize: () => log.print(result),
+        hasViolations: () => report.valid,
     }
 }
