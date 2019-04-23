@@ -59,7 +59,7 @@ function exec(files, apply = false) {
     return report
 }
 
-function print(report, violations, autofixes) {
+function print(report, violations) {
     log.info(`${report.length} file(s) checked.`)
 
     if (violations.length > 0) {
@@ -119,7 +119,7 @@ exports.runner = (files, apply = false) => {
 
     return {
         files: js,
-        summarize: () => print(report, violations, autofixes),
+        summarize: () => print(report, violations),
         fix: () => fix(autofixes),
         violations,
         hasViolations,
