@@ -14,7 +14,7 @@ exports.handler = async function(argv) {
 
     report.summarize()
 
-    if (report.hasViolations()) {
+    if (report.hasViolations) {
         log.info('Commit message is valid')
         process.exit(0)
     } else {

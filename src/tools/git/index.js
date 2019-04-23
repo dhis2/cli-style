@@ -9,6 +9,6 @@ exports.runner = async function(msg) {
 
     return {
         summarize: () => log.print(result),
-        hasViolations: () => report.valid,
+        hasViolations: report.valid,
     }
 }
