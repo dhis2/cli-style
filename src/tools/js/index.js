@@ -101,7 +101,7 @@ function fix(report) {
             return f.file
         })
 
-    log.info(`${fixed.length} file(s) automatically fixed.`)
+    log.debug(`${fixed.length} file(s) automatically fixed.`)
     return fixed
 }
 

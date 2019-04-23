@@ -31,9 +31,7 @@ module.exports = async (msg = '') => {
             results: [report],
         })
 
-        log.print(result)
-
-        return report
+        return { report, result }
     } catch (err) {
         log.error(err)
         process.exit(1)

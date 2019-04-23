@@ -2,9 +2,10 @@ const path = require('path')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { collectFiles, jsFiles, writeFile } = require('../../files.js')
+const { selectFiles } = require('../../files.js')
+const { stage_files } = require('../../git-files.js')
+
 const { runner } = require('../../tools/js')
-const { stage_files, staged_files } = require('../../tools/git')
 
 exports.command = 'apply [files..]'
 
@@ -31,15 +32,7 @@ exports.handler = argv => {
     const root = process.cwd()
     log.debug(`Root directory: ${root}`)
 
-    let codeFiles
-    if (all) {
-        codeFiles = collectFiles(root)
-    } else if (files) {
-        codeFiles = files
-    } else {
-        codeFiles = staged_files(root)
-    }
-
+    const codeFiles = selectFiles(files, all, root)
     const report = runner(codeFiles)
 
     report.summary()

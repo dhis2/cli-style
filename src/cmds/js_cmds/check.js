@@ -1,8 +1,7 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { runner } = require('../../tools/js')
-const { collectFiles } = require('../../files.js')
-const { staged_files } = require('../../tools/git')
+const { selectFiles } = require('../../files.js')
 
 exports.command = 'check [files..]'
 
@@ -23,16 +22,9 @@ exports.handler = argv => {
     const root = process.cwd()
     log.debug(`Root directory: ${root}`)
 
-    let codeFiles
-    if (all) {
-        codeFiles = collectFiles(root)
-    } else if (files) {
-        codeFiles = files
-    } else {
-        codeFiles = staged_files(root)
-    }
-
+    const codeFiles = selectFiles(files, all, root)
     const report = runner(codeFiles)
+
     report.summary()
 
     if (report.violations()) {

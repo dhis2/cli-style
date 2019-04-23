@@ -12,7 +12,9 @@ exports.handler = async function(argv) {
 
     const report = await runner(msg)
 
-    if (report.valid) {
+    report.summary()
+
+    if (report.valid()) {
         log.info('Commit message is valid')
         process.exit(0)
     } else {
