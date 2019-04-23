@@ -85,7 +85,7 @@ function getViolations(report) {
 
 function fix(report) {
     const fixed = report
-        .filter(f => f.output)
+        .filter(f => f.modified)
         .map(f => {
             const success = writeFile(f.file, f.output)
             log.debug(`${f.file} written successfully: ${success}`)

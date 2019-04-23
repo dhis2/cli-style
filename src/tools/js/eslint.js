@@ -18,10 +18,11 @@ log.debug('ESLint configuration file', eslintConfig)
  * @return {Object} object with messages and output
  */
 module.exports = (file, text, apply = false) => {
-    const response = {
+    let response = {
         messages: [],
         output: text,
-    }
+        modified: false,
+    };
 
     try {
         const cli = new eslint.CLIEngine({
@@ -29,7 +30,11 @@ module.exports = (file, text, apply = false) => {
             useEslintrc: false,
             fix: apply,
         })
-        const report = cli.executeOnText(text)
+        const report = cli.executeOnText(text, file)
+
+        if (report.results.length === 0) {
+            return response
+        }
 
         // when using `executeOnText` the results array always has a
         // single element
@@ -37,6 +42,7 @@ module.exports = (file, text, apply = false) => {
 
         if (result.output) {
             response.output = result.output
+            response.modified = result.output !== text
         }
 
         for (const message of result.messages) {
