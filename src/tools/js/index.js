@@ -9,7 +9,7 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 const eslint = require('./eslint.js')
 const prettier = require('./prettier.js')
 
-const { readFile } = require('./files.js')
+const { readFile } = require('../../files.js')
 
 /*
  *  Order of the tools is important.

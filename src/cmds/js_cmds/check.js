@@ -2,8 +2,8 @@ const path = require('path')
 const { collectFiles, jsFiles } = require('../../files.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { check } = require('../../all-js.js')
-const { staged_files } = require('../../git.js')
+const { check } = require('../../tools/js')
+const { staged_files } = require('../../tools/git')
 
 exports.command = 'check [files..]'
 

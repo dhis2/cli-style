@@ -6,6 +6,8 @@ const { execSync } = require('child_process')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
+const commitlint = require('./commitlint.js')
+
 const stage_file = (file, dir) => {
     log.debug(`Staging ${file}...`)
     const added = execSync(`git add ${file}`, {
@@ -36,6 +38,7 @@ const staged_files = dir => {
 }
 
 module.exports = {
+    check: commitlint,
     staged_files,
     stage_files,
     stage_file,

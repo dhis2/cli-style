@@ -3,8 +3,8 @@ const path = require('path')
 const { collectFiles, jsFiles, writeFile } = require('../../files.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { apply } = require('../../all-js.js')
-const { stage_files, staged_files } = require('../../git.js')
+const { apply } = require('../../tools/js')
+const { stage_files, staged_files } = require('../../tools/git')
 
 exports.command = 'apply [files..]'
 

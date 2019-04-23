@@ -3,9 +3,9 @@ const eslint = require('eslint')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { readFile, writeFile } = require('./files.js')
+const { readFile, writeFile } = require('../../files.js')
 
-const eslintConfig = path.join(__dirname, '../config/eslint.config.js')
+const eslintConfig = path.join(__dirname, '../../../config/eslint.config.js')
 log.debug('ESLint configuration file', eslintConfig)
 
 /**
