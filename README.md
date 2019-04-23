@@ -11,13 +11,15 @@
 
 This tool enforces DHIS2 configuration for:
 
-- Git
--  * Git commit messages
+#### Git
 
-- JavaScript
-- * Prettier
-- * ESLint
-- * Browserslist
+- Git commit messages
+
+#### JavaScript
+
+- Prettier
+- ESLint
+- Browserslist
 
 This tool is part of the [dhis2/cli](https://github.com/dhis2/cli)
 suite, but can also be used standalone which is useful for project level
