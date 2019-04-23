@@ -6,24 +6,19 @@ const perf = require('perfy')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const eslint = require('./eslint.js')
-const prettier = require('./prettier.js')
-
 const { readFile, writeFile, jsFiles } = require('../../files.js')
 
-/*
- *  Order of the tools is important.
- */
-const TOOLS = [
-    eslint,
+const tools = [
+    // the order of tools is important
+    require('./eslint.js'),
 
     // run the formatter last!
-    prettier,
+    require('./prettier.js'),
 ]
 
 /**
- * @param {string} path to the file to run tools on
- * @param {boolean} if the tool should apply fixes
+ * @param {string} file path to the file to run tools on
+ * @param {boolean} apply set to true if the tool should apply fixes
  */
 function runTools(file, apply = false) {
     const p = path.relative(process.cwd(), file)
@@ -33,7 +28,7 @@ function runTools(file, apply = false) {
     let source = original
 
     perf.start('exec-file')
-    for (const tool of TOOLS) {
+    for (const tool of tools) {
         const result = tool(file, source, apply)
 
         source = result.output
@@ -51,6 +46,9 @@ function runTools(file, apply = false) {
     }
 }
 
+/**
+ * The executor which gathers an array of report objects
+ */
 function exec(files, apply = false) {
     perf.start('exec-all-files')
     const report = files.map(f => runTools(f, apply))
@@ -59,6 +57,33 @@ function exec(files, apply = false) {
     return report
 }
 
+/**
+ * Apply fixes for code standard violations automatically.
+ */
+function fix(fixable) {
+    if (fixable.length === 0) {
+        return []
+    }
+
+    const fixed = fixable.map(f => {
+        const success = writeFile(f.file, f.output)
+        log.debug(`${f.file} written successfully: ${success}`)
+
+        if (!success) {
+            log.error(`Failed to write ${f.name} to disk`)
+            process.exit(1)
+        }
+
+        return f.file
+    })
+
+    log.info(`Applied fixes for ${fixed.length} file(s).`)
+    return fixed
+}
+
+/**
+ * Pretty print a report object
+ */
 function print(report, violations) {
     log.info(`${report.length} file(s) checked.`)
 
@@ -83,27 +108,12 @@ function getAutoFixable(report) {
     return report.filter(f => f.modified)
 }
 
-function fix(fixable) {
-    if (fixable.length === 0) {
-        return []
-    }
-
-    const fixed = fixable.map(f => {
-        const success = writeFile(f.file, f.output)
-        log.debug(`${f.file} written successfully: ${success}`)
-
-        if (!success) {
-            log.error(`Failed to write ${f.name} to disk`)
-            process.exit(1)
-        }
-
-        return f.file
-    })
-
-    log.info(`Applied fixes for ${fixed.length} file(s).`)
-    return fixed
-}
-
+/**
+ * @param {Array} files list of files to check
+ * @param {boolean} apply set to true should fixes be automatically applied
+ *
+ * @return {Object} a report object
+ */
 exports.runner = (files, apply = false) => {
     const js = jsFiles(files)
     log.debug(`Files to operate on:\n${js.join('\n')}`)
