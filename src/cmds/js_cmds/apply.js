@@ -1,8 +1,11 @@
-const { collectFiles, jsFiles } = require('../../files.js')
+const path = require('path')
+
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { apply_fmt } = require('../../prettier.js')
-const { stage_files, staged_files } = require('../../git.js')
+const { selectFiles } = require('../../files.js')
+const { stageFiles } = require('../../git-files.js')
+
+const { runner } = require('../../tools/js')
 
 exports.command = 'apply [files..]'
 
@@ -25,34 +28,22 @@ exports.builder = {
 
 exports.handler = argv => {
     const { all, stage, files } = argv
-    const root_dir = process.cwd()
 
-    let codeFiles
-    if (all) {
-        codeFiles = collectFiles(root_dir)
-    } else if (files) {
-        codeFiles = files
-    } else {
-        codeFiles = staged_files(root_dir)
+    const root = process.cwd()
+    log.debug(`Root directory: ${root}`)
+
+    const codeFiles = selectFiles(files, all, root)
+    const report = runner(codeFiles, true)
+
+    report.summarize()
+
+    if (report.hasViolations) {
+        process.exit(1)
     }
 
-    // debug information about the folders
-    log.debug('rootDir?', root_dir)
-    log.debug('codeFiles?', codeFiles)
+    const fixed = report.fix()
 
-    const js = jsFiles(codeFiles)
-    const prettyFiles = apply_fmt(js)
-
-    if (prettyFiles.length === 0) {
-        if (js.length > 0) {
-            log.info(`${js.length} file(s) reformatted.`)
-        } else {
-            log.info('No files to format.')
-        }
-    }
-
-    if (stage) {
-        const stagedFiles = stage_files(prettyFiles, root_dir)
-        log.debug('Staged files', stagedFiles)
+    if (stage && fixed.length > 0) {
+        stageFiles(fixed, root)
     }
 }

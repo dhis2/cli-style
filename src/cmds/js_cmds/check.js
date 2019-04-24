@@ -1,9 +1,7 @@
-const path = require('path')
-const { collectFiles, jsFiles } = require('../../files.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { check_fmt } = require('../../prettier.js')
-const { staged_files } = require('../../git.js')
+const { runner } = require('../../tools/js')
+const { selectFiles } = require('../../files.js')
 
 exports.command = 'check [files..]'
 
@@ -19,40 +17,17 @@ exports.builder = {
 }
 
 exports.handler = argv => {
-    const { all, files } = argv
-    const root_dir = process.cwd()
+    const { files, all } = argv
 
-    let codeFiles
-    if (all) {
-        codeFiles = collectFiles(root_dir)
-    } else if (files) {
-        codeFiles = files
-    } else {
-        codeFiles = staged_files(root_dir)
-    }
+    const root = process.cwd()
+    log.debug(`Root directory: ${root}`)
 
-    // debug information about the folders
-    log.debug('rootDir?', root_dir)
-    log.debug('codeFiles?', codeFiles)
+    const codeFiles = selectFiles(files, all, root)
+    const report = runner(codeFiles)
 
-    const js = jsFiles(codeFiles)
-    const prettyFiles = check_fmt(js)
+    report.summarize()
 
-    const success = prettyFiles.length > 0
-
-    if (success) {
-        log.info(`${prettyFiles.length} file(s) needs to be formatted:`)
-        prettyFiles.forEach(f =>
-            log.print(`${path.relative(process.cwd(), f)}`)
-        )
-        log.print('')
+    if (report.hasViolations) {
         process.exit(1)
-    } else {
-        if (js.length > 0) {
-            log.info(`${js.length} file(s) passed the style check.`)
-        } else {
-            log.info('No files to check.')
-        }
-        process.exit(0)
     }
 }

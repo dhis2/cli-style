@@ -1,5 +1,5 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
-const fmt = require('../../commitlint.js')
+const { runner } = require('../../tools/git')
 
 exports.command = 'check [msg]'
 
@@ -10,9 +10,11 @@ exports.builder = {}
 exports.handler = async function(argv) {
     const { msg } = argv
 
-    const report = await fmt(msg)
+    const report = await runner(msg)
 
-    if (report.valid) {
+    report.summarize()
+
+    if (report.hasViolations) {
         log.info('Commit message is valid')
         process.exit(0)
     } else {
