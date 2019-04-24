@@ -1,16 +1,18 @@
 const path = require('path')
 const eslint = require('eslint')
+const linter = new eslint.Linter()
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { readFile, writeFile } = require('../../files.js')
 
-const eslintConfig = path.join(__dirname, '../../../config/eslint.config.js')
+const eslintConfig = require('../../../config/eslint.config.js')
+
 log.debug('ESLint configuration file', eslintConfig)
 
 /**
- * This a checker used by {run-js} and needs to follow a specific
- * format.
+ * This a checker used by {tools/js/index.js} and needs to follow a
+ * specific format.
  *
  * @param {string} file File path
  * @param {string} text Content of File
@@ -21,32 +23,31 @@ module.exports = (file, text, apply = false) => {
     const response = {
         messages: [],
         output: text,
+        fixed: false,
     }
 
     try {
-        const cli = new eslint.CLIEngine({
-            configFile: eslintConfig,
-            useEslintrc: false,
-            fix: apply,
-            allowInlineConfig: true,
-            ignore: false,
-        })
-        const report = cli.executeOnText(text)
+        const { messages, fixed, output } = linter.verifyAndFix(
+            text,
+            eslintConfig,
+            {
+                filename: path.basename(file),
+                allowInlineConfig: true,
+                reportUnusedDisableDirectives: false,
+            }
+        )
 
-        // when using `executeOnText` the results array always has a
-        // single element
-        const result = report.results[0]
+        response.fixed = fixed
+        response.output = output
 
-        if (result.output) {
-            response.output = result.output
-        }
-
-        for (const message of result.messages) {
+        for (const message of messages) {
+            let rule = ''
+            if (message.ruleId) {
+                rule = `(${message.ruleId})`
+            }
             response.messages.push({
                 checker: 'eslint',
-                message: `Line ${message.line}: ${message.message} (${
-                    message.ruleId
-                })`,
+                message: `Line ${message.line}: ${message.message} ${rule}`,
             })
         }
     } catch (error) {

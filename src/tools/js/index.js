@@ -26,12 +26,16 @@ function runTools(file, apply = false) {
 
     let messages = []
     let source = original
+    let fixed = false
 
     perf.start('exec-file')
     for (const tool of tools) {
         const result = tool(file, source, apply)
 
-        source = result.output
+        if (result.fixed) {
+            source = result.output
+            fixed = result.fixed
+        }
 
         messages = messages.concat(result.messages)
     }
@@ -40,8 +44,8 @@ function runTools(file, apply = false) {
     return {
         file,
         messages,
+        fixed,
         output: source,
-        modified: original !== source,
         name: path.basename(file),
     }
 }
@@ -88,7 +92,6 @@ function print(report, violations) {
     log.info(`${report.length} file(s) checked.`)
 
     if (violations.length > 0) {
-        log.error(`${violations.length} file(s) violate the code standards:`)
         violations.forEach(f => {
             const p = path.relative(process.cwd(), f.file)
             log.info('')
@@ -97,6 +100,7 @@ function print(report, violations) {
         })
 
         log.info('')
+        log.error(`${violations.length} file(s) violate the code standard.`)
     }
 }
 
@@ -105,7 +109,7 @@ function getViolations(report) {
 }
 
 function getAutoFixable(report) {
-    return report.filter(f => f.modified)
+    return report.filter(f => f.fixed)
 }
 
 /**
