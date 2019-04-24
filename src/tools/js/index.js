@@ -109,7 +109,7 @@ function getViolations(report) {
 }
 
 function getAutoFixable(report) {
-    return report.filter(f => f.modified)
+    return report.filter(f => f.fixed)
 }
 
 /**
