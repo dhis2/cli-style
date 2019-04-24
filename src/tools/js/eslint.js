@@ -31,7 +31,7 @@ module.exports = (file, text, apply = false) => {
             allowInlineConfig: true,
             ignore: false,
         })
-        const report = cli.executeOnText(text, path.basename(file))
+        const report = cli.executeOnText(text)
 
         // when using `executeOnText` the results array always has a
         // single element
