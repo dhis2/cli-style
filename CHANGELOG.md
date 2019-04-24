@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/dhis2/cli-style/compare/v3.0.1...v3.1.0) (2019-04-24)
+
+
+### Features
+
+* add support for eslint for code style enforcement ([#33](https://github.com/dhis2/cli-style/issues/33)) ([85cf53a](https://github.com/dhis2/cli-style/commit/85cf53a))
+
 ## [3.0.1](https://github.com/dhis2/cli-style/compare/v3.0.0...v3.0.1) (2019-03-28)
 
 
