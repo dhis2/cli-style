@@ -5,7 +5,7 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { stagedFiles } = require('./git-files.js')
 
-const blacklist = ['node_modules', 'build', 'dist', 'target', '.git']
+const blacklist = ['node_modules', 'build', 'dist', 'target', '.git', 'vendor']
 
 const whitelists = {
     js: ['.js', '.jsx', '.ts'],
