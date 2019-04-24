@@ -28,8 +28,10 @@ module.exports = (file, text, apply = false) => {
             configFile: eslintConfig,
             useEslintrc: false,
             fix: apply,
+            allowInlineConfig: true,
+            ignore: false,
         })
-        const report = cli.executeOnText(text)
+        const report = cli.executeOnText(text, path.basename(file))
 
         // when using `executeOnText` the results array always has a
         // single element
