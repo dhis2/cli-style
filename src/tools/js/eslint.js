@@ -30,7 +30,7 @@ module.exports = (file, text, apply = false) => {
         const { messages, fixed, output } = linter.verifyAndFix(text, eslintConfig, {
             filename: path.basename(file),
             allowInlineConfig: true,
-            reportUnusedDisableDirectives: true,
+            reportUnusedDisableDirectives: false,
         })
 
         response.fixed = fixed
