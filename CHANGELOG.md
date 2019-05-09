@@ -1,3 +1,10 @@
+## [3.1.2](https://github.com/dhis2/cli-style/compare/v3.1.1...v3.1.2) (2019-05-09)
+
+
+### Bug Fixes
+
+* pin commitlint versions ([#37](https://github.com/dhis2/cli-style/issues/37)) ([37de6ab](https://github.com/dhis2/cli-style/commit/37de6ab))
+
 ## [3.1.1](https://github.com/dhis2/cli-style/compare/v3.1.0...v3.1.1) (2019-04-24)
 
 
