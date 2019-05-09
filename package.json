@@ -15,7 +15,7 @@
     "@commitlint/config-conventional": "7.5.0",
     "@commitlint/format": "7.5.0",
     "@commitlint/lint": "7.5.0",
-    "@commitlint/load": "7.5.0",
+    "@commitlint/load": "7.6.1",
     "@commitlint/read": "7.5.0",
     "@dhis2/cli-helpers-engine": "^1.0.1",
     "babel-eslint": "^10.0.1",
