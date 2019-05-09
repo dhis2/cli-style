@@ -13,7 +13,7 @@
   "license": "BSD-3-Clause",
   "dependencies": {
     "@commitlint/config-conventional": "7.5.0",
-    "@commitlint/format": "7.5.0",
+    "@commitlint/format": "7.6.1",
     "@commitlint/lint": "7.5.0",
     "@commitlint/load": "7.5.0",
     "@commitlint/read": "7.5.0",
