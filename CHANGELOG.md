@@ -1,3 +1,10 @@
+## [3.1.3](https://github.com/dhis2/cli-style/compare/v3.1.2...v3.1.3) (2019-05-09)
+
+
+### Bug Fixes
+
+* unpin deps as problem is fixed upstream ([#38](https://github.com/dhis2/cli-style/issues/38)) ([aeff5b1](https://github.com/dhis2/cli-style/commit/aeff5b1))
+
 ## [3.1.2](https://github.com/dhis2/cli-style/compare/v3.1.1...v3.1.2) (2019-05-09)
 
 
