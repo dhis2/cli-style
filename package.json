@@ -1,6 +1,6 @@
 {
   "name": "@dhis2/cli-style",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "The code and commit style for DHIS2.",
   "bin": {
     "d2-style": "bin/d2-style"
@@ -12,11 +12,11 @@
   "author": "Viktor Varland",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@commitlint/config-conventional": "^7.1.2",
-    "@commitlint/format": "^7.2.1",
-    "@commitlint/lint": "^7.2.1",
-    "@commitlint/load": "^7.2.1",
-    "@commitlint/read": "^7.1.2",
+    "@commitlint/config-conventional": "7.5.0",
+    "@commitlint/format": "7.5.0",
+    "@commitlint/lint": "7.5.0",
+    "@commitlint/load": "7.5.0",
+    "@commitlint/read": "7.5.0",
     "@dhis2/cli-helpers-engine": "^1.0.1",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
