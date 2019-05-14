@@ -21,15 +21,20 @@ const stageFiles = (files, dir) => {
 }
 
 const stagedFiles = dir => {
-    const files = execSync('git diff --cached --name-only --relative', {
-        cwd: dir,
-        encoding: 'utf8',
-    }).trim()
+    const files = execSync(
+        'git diff --cached --name-only --relative --diff-filter=d',
+        {
+            cwd: dir,
+            encoding: 'utf8',
+        }
+    ).trim()
+
     if (!!files) {
         const s = files.split('\n')
         log.info(`Fetching staged files: ${s.length} file(s).`)
         return s
     }
+
     log.info('No staged files found.')
     return []
 }
