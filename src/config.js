@@ -82,6 +82,10 @@ function configure(repo) {
             path.join(__dirname, '../config/editorconfig.config.rc'),
             path.join(repo, '.editorconfig'),
         ],
+        [
+            path.join(__dirname, '../config/eslint.config.js'),
+            path.join(repo, '.eslintrc.js'),
+        ],
     ].map(cfg => copy(cfg[0], cfg[1]))
 }
 
