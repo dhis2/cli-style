@@ -1,3 +1,10 @@
+## [3.2.1](https://github.com/dhis2/cli-style/compare/v3.2.0...v3.2.1) (2019-05-14)
+
+
+### Bug Fixes
+
+* update @dhis2/cli-helpers-engine to the latest version 🚀 ([#45](https://github.com/dhis2/cli-style/issues/45)) ([dec2e34](https://github.com/dhis2/cli-style/commit/dec2e34))
+
 # [3.2.0](https://github.com/dhis2/cli-style/compare/v3.1.3...v3.2.0) (2019-05-14)
 
 
