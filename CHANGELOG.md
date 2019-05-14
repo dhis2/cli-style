@@ -1,3 +1,10 @@
+## [3.2.2](https://github.com/dhis2/cli-style/compare/v3.2.1...v3.2.2) (2019-05-14)
+
+
+### Bug Fixes
+
+* ignore deleted files when formatting ([#46](https://github.com/dhis2/cli-style/issues/46)) ([4ebee0e](https://github.com/dhis2/cli-style/commit/4ebee0e))
+
 ## [3.2.1](https://github.com/dhis2/cli-style/compare/v3.2.0...v3.2.1) (2019-05-14)
 
 
