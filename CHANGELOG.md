@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/dhis2/cli-style/compare/v3.1.3...v3.2.0) (2019-05-14)
+
+
+### Features
+
+* install .eslintrc ([#44](https://github.com/dhis2/cli-style/issues/44)) ([1c0f905](https://github.com/dhis2/cli-style/commit/1c0f905))
+
 ## [3.1.3](https://github.com/dhis2/cli-style/compare/v3.1.2...v3.1.3) (2019-05-09)
 
 
