@@ -19,9 +19,11 @@
     "@commitlint/read": "^7.6.0",
     "@dhis2/cli-helpers-engine": "1.2.1",
     "babel-eslint": "^10.0.1",
+    "chalk": "^2.4.2",
     "eslint": "^5.16.0",
     "perfy": "^1.1.5",
     "prettier": "^1.15.3",
+    "semver": "^6.0.0",
     "yargs": "^13.1.0"
   },
   "devDependencies": {
