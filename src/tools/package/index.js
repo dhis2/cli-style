@@ -117,7 +117,6 @@ function getAutoFixable(report) {
  * @return {Object} a report object
  */
 exports.runner = (files = [], apply = false) => {
-    console.log(files)
     const packages = jsonFiles(files).filter(f => f.includes('package.json'))
 
     log.debug(`Files to operate on:\n${packages.join('\n')}`)
