@@ -1,5 +1,7 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
 const chalk = require('chalk')
+const path = require('path')
+const fs = require('fs')
 
 function isEmpty(obj) {
     for (const x in obj) {
@@ -32,11 +34,26 @@ function validate(hook, cmd) {
     }
 }
 
+function isRootPackage(fp) {
+    const dir = path.dirname(fp)
+    try {
+        // TODO: this won't work if the repo is not cloned by git
+        fs.accessSync(path.join(dir, '.git'))
+        return true
+    } catch (e) {
+        return false
+    }
+}
+
 module.exports = (file, text, apply = false) => {
     const response = {
         messages: [],
         output: text,
         fixed: false,
+    }
+
+    if (!isRootPackage(file)) {
+        return response
     }
 
     const pkg = JSON.parse(text)
