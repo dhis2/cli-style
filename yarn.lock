@@ -204,10 +204,10 @@
   dependencies:
     find-up "^2.1.0"
 
-"@dhis2/cli-helpers-engine@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/cli-helpers-engine/-/cli-helpers-engine-1.2.0.tgz#ffec930cf57668aa29c91de3d871d7898ac915b7"
-  integrity sha512-zITy3oTErzjdtqBjd1VklovliJOJxGCV2HRcHCm9aA+aHuBmH0svwh7snJFH0Lvma0/EayCFcFBywSgtJM8N0Q==
+"@dhis2/cli-helpers-engine@1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/cli-helpers-engine/-/cli-helpers-engine-1.2.1.tgz#9dbe6a0621c741863570113158c68079a520db2f"
+  integrity sha512-+hM4IMcjiS67kTW9KkcPB6GLTDAly3qLTHGnar3OvrhYHNjaFF+7EZHhigEtvcFG15sKBLjefOexoEWR0+rw/A==
   dependencies:
     chalk "^2.4.2"
     mkdirp "^0.5.1"
