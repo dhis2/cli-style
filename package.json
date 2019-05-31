@@ -14,7 +14,7 @@
   "dependencies": {
     "@commitlint/config-conventional": "^7.6.0",
     "@commitlint/format": "^7.6.1",
-    "@commitlint/lint": "^7.6.0",
+    "@commitlint/lint": "^8.0.0",
     "@commitlint/load": "^7.6.2",
     "@commitlint/read": "^7.6.0",
     "@dhis2/cli-helpers-engine": "1.2.0",
