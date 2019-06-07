@@ -76,7 +76,7 @@ function copy(from, to, overwrite = true) {
 }
 
 module.exports = {
-    configure: function configure(repo, group = ['all'], init) {
+    configure: function configure(repo, group = ['all'], overwrite) {
         const validGroups = group.filter(isValidGroup)
 
         if (validGroups.length === 0) {
@@ -90,7 +90,7 @@ module.exports = {
         }
 
         return validGroups.map(g =>
-            groups[g].configs.map(c => copy(c[0], c[1], init))
+            groups[g].configs.map(c => copy(c[0], c[1], overwrite))
         )
     },
     cleanup: function cleanup(repo) {

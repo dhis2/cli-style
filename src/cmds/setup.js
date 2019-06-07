@@ -7,7 +7,7 @@ exports.command = 'setup [group..]'
 exports.describe = 'Setup DHIS2 configurations for a/all group(s)'
 
 exports.builder = {
-    init: {
+    force: {
         describe: 'Overwrites existing configuration',
         type: 'boolean',
         default: 'false',
@@ -16,9 +16,9 @@ exports.builder = {
 
 exports.handler = argv => {
     log.info('Setting up configuration files...')
-    const { init, group } = argv
+    const { force, group } = argv
 
     const root = process.cwd()
 
-    configure(root, group, init)
+    configure(root, group, force)
 }
