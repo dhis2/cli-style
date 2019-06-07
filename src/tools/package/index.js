@@ -12,6 +12,7 @@ const tools = [
     require('./rules/valid-json.js'),
     require('./rules/pin-dhis2-package-versions.js'),
     require('./rules/husky-hooks.js'),
+    require('./rules/public-publish-access.js'),
 ]
 
 /**
