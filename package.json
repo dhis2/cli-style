@@ -1,39 +1,42 @@
 {
-  "name": "@dhis2/cli-style",
-  "version": "3.2.2",
-  "description": "The code and commit style for DHIS2.",
-  "bin": {
-    "d2-style": "bin/d2-style"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "./bin/d2-style js"
-  },
-  "author": "Viktor Varland",
-  "license": "BSD-3-Clause",
-  "dependencies": {
-    "@commitlint/config-conventional": "^7.6.0",
-    "@commitlint/format": "^7.6.1",
-    "@commitlint/lint": "^7.6.0",
-    "@commitlint/load": "^7.6.2",
-    "@commitlint/read": "^7.6.0",
-    "@dhis2/cli-helpers-engine": "1.2.1",
-    "babel-eslint": "^10.0.1",
-    "chalk": "^2.4.2",
-    "eslint": "^5.16.0",
-    "fs-extra": "^8.0.1",
-    "perfy": "^1.1.5",
-    "prettier": "^1.15.3",
-    "semver": "^6.0.0",
-    "yargs": "^13.1.0"
-  },
-  "devDependencies": {
-    "husky": "^2.2.0"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "./bin/d2-style commit check",
-      "pre-commit": "./bin/d2-style js apply"
+    "name": "@dhis2/cli-style",
+    "version": "3.2.2",
+    "description": "The code and commit style for DHIS2.",
+    "bin": {
+        "d2-style": "bin/d2-style"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "format": "./bin/d2-style js"
+    },
+    "author": "Viktor Varland",
+    "license": "BSD-3-Clause",
+    "dependencies": {
+        "@commitlint/config-conventional": "^7.6.0",
+        "@commitlint/format": "^7.6.1",
+        "@commitlint/lint": "^7.6.0",
+        "@commitlint/load": "^7.6.2",
+        "@commitlint/read": "^7.6.0",
+        "@dhis2/cli-helpers-engine": "1.2.1",
+        "babel-eslint": "^10.0.1",
+        "chalk": "^2.4.2",
+        "eslint": "^5.16.0",
+        "fs-extra": "^8.0.1",
+        "perfy": "^1.1.5",
+        "prettier": "^1.15.3",
+        "semver": "^6.0.0",
+        "yargs": "^13.1.0"
+    },
+    "devDependencies": {
+        "husky": "^2.2.0"
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "./bin/d2-style commit check",
+            "pre-commit": "./bin/d2-style js apply && ./bin/d2-style package apply"
+        }
+    },
+    "publishConfig": {
+        "access": "public"
     }
-  }
 }
