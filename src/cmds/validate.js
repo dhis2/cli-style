@@ -41,8 +41,6 @@ exports.handler = argv => {
     let violations = 0
     const fixedFiles = []
     for (const report of reports) {
-        log.info('')
-        log.info(`Results for group '${report.name}':`)
         report.summarize()
 
         if (report.hasViolations) {
@@ -70,6 +68,7 @@ function runners(files, groups = ['all'], fix = false) {
     const reports = []
     let tools
 
+    log.info(`Running validations for groups: ${groups.join(', ')}`)
     try {
         tools = fs.readdirSync(path.join(__dirname, '../tools'))
         tools = tools.filter(tool => tool !== 'git')
@@ -84,8 +83,6 @@ function runners(files, groups = ['all'], fix = false) {
     const loadedTools = tools.map(t =>
         require(path.join(__dirname, '../tools', t))
     )
-
-    log.info(`Validating groups: ${tools.join(', ')}`)
 
     for (const t in loadedTools) {
         const result = loadedTools[t].runner(files, fix)

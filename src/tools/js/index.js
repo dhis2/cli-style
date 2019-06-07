@@ -89,7 +89,7 @@ function fix(fixable) {
  * Pretty print a report object
  */
 function print(report, violations) {
-    log.info(`${report.length} file(s) checked.`)
+    log.info(`${report.length} javascript file(s) checked.`)
 
     if (violations.length > 0) {
         violations.forEach(f => {
