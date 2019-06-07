@@ -24,7 +24,7 @@
     "fs-extra": "^8.0.1",
     "perfy": "^1.1.5",
     "prettier": "^1.15.3",
-    "semver": "^6.0.0",
+    "semver": "^6.1.1",
     "yargs": "^13.1.0"
   },
   "devDependencies": {
