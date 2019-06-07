@@ -7,7 +7,7 @@ const { readFile, writeFile } = require('../../files.js')
 
 const prettierConfig = path.join(
     __dirname,
-    '../../../config/prettier.config.js'
+    '../../../config/js/prettier.config.js'
 )
 log.debug('Prettier configuration file', prettierConfig)
 
