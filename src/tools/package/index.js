@@ -84,7 +84,7 @@ function fix(fixable) {
     }
 
     const fixed = fixable.map(f => {
-        const success = writeFile(f.file, f.output)
+        const success = writeFile(f.file, formatJSON(f.output))
         log.debug(`${f.file} written successfully: ${success}`)
 
         if (!success) {

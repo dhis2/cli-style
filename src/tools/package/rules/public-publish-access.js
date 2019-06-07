@@ -11,6 +11,13 @@ function verify(pkg) {
         }
     }
 
+    if (publishConfig.access !== 'public') {
+        return {
+            checker: 'public-publish-access',
+            message: chalk`publishConfig.access must be set to 'public'.`,
+        }
+    }
+
     return null
 }
 
