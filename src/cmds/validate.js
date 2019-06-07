@@ -5,8 +5,9 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { selectFiles } = require('../files.js')
 const { stageFiles } = require('../git-files.js')
+const { groups, isValidGroup } = require('../groups.js')
 
-exports.command = 'validate [groups..]'
+exports.command = 'validate [group..]'
 
 exports.describe = 'Validate DHIS2 configurations for a/all group(s)'
 
@@ -31,15 +32,16 @@ exports.builder = {
 }
 
 exports.handler = argv => {
-    const { fix, groups, stage, all } = argv
+    const { fix, group, stage, all } = argv
     const root = process.cwd()
 
     const files = selectFiles(null, all, root)
 
-    const reports = runners(files, groups, fix)
+    const reports = runners(files, group, fix)
 
     let violations = 0
     const fixedFiles = []
+
     for (const report of reports) {
         report.summarize()
 
@@ -54,7 +56,6 @@ exports.handler = argv => {
     }
 
     if (violations > 0) {
-        log.info('')
         log.error(`${violations} file(s) violate the code standard.`)
         process.exit(1)
     }
@@ -64,30 +65,20 @@ exports.handler = argv => {
     }
 }
 
-function runners(files, groups = ['all'], fix = false) {
-    const reports = []
-    let tools
+function runners(files, group = ['all'], fix = false) {
+    const validGroups = group.filter(isValidGroup)
 
-    log.info(`Running validations for groups: ${groups.join(', ')}`)
-    try {
-        tools = fs.readdirSync(path.join(__dirname, '../tools'))
-        tools = tools.filter(tool => tool !== 'git')
-
-        if (!groups.includes('all')) {
-            tools = tools.filter(t => groups.includes(t))
-        }
-    } catch (e) {
-        log.error(e)
+    if (validGroups.length === 0) {
+        log.warn(
+            `No valid group selected, use one of: ${Object.keys(groups).join(
+                ', '
+            )}`
+        )
+    } else {
+        log.info(`Running validations for group(s): ${validGroups.join(', ')}`)
     }
 
-    const loadedTools = tools.map(t =>
-        require(path.join(__dirname, '../tools', t))
-    )
-
-    for (const t in loadedTools) {
-        const result = loadedTools[t].runner(files, fix)
-        reports.push(result)
-    }
-
-    return reports
+    return validGroups
+        .map(g => groups[g].map(fn => fn(files, fix)))
+        .reduce((a, b) => a.concat(b), [])
 }

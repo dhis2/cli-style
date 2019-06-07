@@ -111,6 +111,7 @@ function print(report, violations) {
             log.info('')
             log.print(`${p}`)
             f.messages.map(m => log.info(`${m.message}`))
+            log.info('')
         })
     }
 }
