@@ -45,18 +45,16 @@ function isRootPackage(fp) {
     }
 }
 
-module.exports = (file, text, apply = false) => {
+module.exports = (file, pkg, apply = false) => {
     const response = {
         messages: [],
-        output: text,
+        output: pkg,
         fixed: false,
     }
 
     if (!isRootPackage(file)) {
         return response
     }
-
-    const pkg = JSON.parse(text)
 
     const { husky } = pkg
 

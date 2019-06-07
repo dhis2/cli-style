@@ -15,26 +15,20 @@ function verify(pkg) {
 }
 
 function fix(pkg) {
-    return JSON.stringify(
-        {
-            ...pkg,
-            publishConfig: {
-                access: 'public',
-            },
+    return JSON.stringify({
+        ...pkg,
+        publishConfig: {
+            access: 'public',
         },
-        null,
-        4
-    )
+    })
 }
 
-module.exports = (file, text, apply = false) => {
+module.exports = (file, pkg, apply = false) => {
     const response = {
         messages: [],
-        output: text,
+        output: pkg,
         fixed: false,
     }
-
-    const pkg = JSON.parse(text)
 
     const result = verify(pkg)
 

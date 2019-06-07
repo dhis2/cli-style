@@ -9,7 +9,6 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 const { readFile, writeFile, jsonFiles } = require('../../files.js')
 
 const tools = [
-    require('./rules/valid-json.js'),
     require('./rules/pin-dhis2-package-versions.js'),
     require('./rules/husky-hooks.js'),
     require('./rules/public-publish-access.js'),
@@ -24,7 +23,18 @@ function runTools(file, apply = false) {
     const original = readFile(file)
 
     let messages = []
-    let source = original
+    let source
+
+    try {
+        source = JSON.parse(original)
+    } catch (e) {
+        log.error(
+            `${file} is not valid JSON, cannot proceed with JSON validations. Aborting...\n`,
+            e
+        )
+        process.exit(1)
+    }
+
     let fixed = false
 
     perf.start('exec-file')
@@ -58,6 +68,11 @@ function exec(files, apply = false) {
     log.debug(`${files.length} file(s): ${perf.end('exec-all-files').summary}`)
 
     return report
+}
+
+function formatJSON(string) {
+    const obj = JSON.parse(string)
+    return JSON.stringify(obj, null, 2)
 }
 
 /**

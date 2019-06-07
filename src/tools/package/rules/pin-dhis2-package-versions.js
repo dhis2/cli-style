@@ -16,14 +16,12 @@ function verify(dependency, version, category) {
     return null
 }
 
-module.exports = (file, text, apply = false) => {
+module.exports = (file, pkg, apply = false) => {
     const response = {
         messages: [],
-        output: text,
+        output: pkg,
         fixed: false,
     }
-
-    const pkg = JSON.parse(text)
 
     const { dependencies, peerDependencies, devDependencies } = pkg
 
