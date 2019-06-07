@@ -79,6 +79,6 @@ function runners(files, group = ['all'], fix = false) {
     }
 
     return validGroups
-        .map(g => groups[g].map(fn => fn(files, fix)))
+        .map(g => groups[g].tools.map(fn => fn(files, fix)))
         .reduce((a, b) => a.concat(b), [])
 }

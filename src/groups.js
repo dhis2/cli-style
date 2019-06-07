@@ -11,16 +11,55 @@ const tools = {
 const groups = {
     //git: [tools.git],
 
-    js: [tools.js],
+    repo: {
+        tools: [],
+        configs: [
+            [
+                path.join(__dirname, '../config/editorconfig.config.rc'),
+                path.join('.editorconfig'),
+            ],
+            [
+                path.join(__dirname, '../config/github/dependabot.yml'),
+                path.join('.dependabot', 'config.yml'),
+            ],
+            [
+                path.join(__dirname, '../config/github/stale.yml'),
+                path.join('.github', 'stale.yml'),
+            ],
+        ],
+    },
 
-    package: [tools.package],
+    js: {
+        tools: [tools.js],
+        configs: [
+            [
+                path.join(__dirname, '../config/js/eslint.config.js'),
+                path.join('.eslintrc.js'),
+            ],
+            [
+                path.join(__dirname, '../config/js/prettier.config.js'),
+                path.join('.prettierrc.js'),
+            ],
+            [
+                path.join(__dirname, '../config/js/browserslist.config.rc'),
+                path.join('.browserslistrc'),
+            ],
+            [
+                path.join(__dirname, '../config/commitlint.config.js'),
+                path.join('.commitlintrc.js'),
+            ],
+        ],
+    },
+
+    package: {
+        tools: [tools.package],
+        configs: [],
+    },
 
     all: Object.values(tools),
 }
 
-function isValidGroup(group) {
-    return groups.hasOwnProperty(group)
-}
+const isValidGroup = group => groups.hasOwnProperty(group)
 
 module.exports = {
     tools,

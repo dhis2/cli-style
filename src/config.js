@@ -4,41 +4,7 @@ const fs = require('fs-extra')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { readFile, writeFile } = require('./files.js')
-
-const cfgs = {
-    repo: [
-        [
-            path.join(__dirname, '../config/editorconfig.config.rc'),
-            path.join('.editorconfig'),
-        ],
-        [
-            path.join(__dirname, '../config/github/dependabot.yml'),
-            path.join('.dependabot', 'config.yml'),
-        ],
-        [
-            path.join(__dirname, '../config/github/stale.yml'),
-            path.join('.github', 'stale.yml'),
-        ],
-    ],
-    js: [
-        [
-            path.join(__dirname, '../config/js/eslint.config.js'),
-            path.join('.eslintrc.js'),
-        ],
-        [
-            path.join(__dirname, '../config/js/prettier.config.js'),
-            path.join('.prettierrc.js'),
-        ],
-        [
-            path.join(__dirname, '../config/js/browserslist.config.rc'),
-            path.join('.browserslistrc'),
-        ],
-        [
-            path.join(__dirname, '../config/commitlint.config.js'),
-            path.join('.commitlintrc.js'),
-        ],
-    ],
-}
+const { groups, isValidGroup } = require('./groups.js')
 
 function wipeConfigProperties(repo) {
     const pkgPath = path.join(repo, 'package.json')
@@ -109,40 +75,23 @@ function copy(from, to, overwrite = true) {
     }
 }
 
-function validateGroups(groups) {
-    const result = []
-
-    for (const group of groups) {
-        if (!cfgs.hasOwnProperty(group) && group !== 'all') {
-            result.push(group)
-        }
-    }
-
-    return result
-}
-
 module.exports = {
-    configure: function configure(repo, groups = ['all'], init) {
-        const valid = validateGroups(groups)
+    configure: function configure(repo, group = ['all'], init) {
+        const validGroups = group.filter(isValidGroup)
 
-        if (valid.length !== 0) {
-            log.error(`Invalid groups detected: ${valid.join(', ')}`)
-            process.exit(1)
-        }
-
-        if (groups.includes('all')) {
-            for (const prop in cfgs) {
-                cfgs[prop].map(cfg =>
-                    copy(cfg[0], path.join(repo, cfg[1]), init)
-                )
-            }
+        if (validGroups.length === 0) {
+            log.warn(
+                `No valid group selected, use one of: ${Object.keys(
+                    groups
+                ).join(', ')}`
+            )
         } else {
-            for (const group of groups) {
-                cfgs[group].map(cfg =>
-                    copy(cfg[0], path.join(repo, cfg[1]), init)
-                )
-            }
+            log.info(`Running setup for group(s): ${validGroups.join(', ')}`)
         }
+
+        return validGroups.map(g =>
+            groups[g].configs.map(c => copy(c[0], c[1], init))
+        )
     },
     cleanup: function cleanup(repo) {
         wipeConfigProperties(repo)
