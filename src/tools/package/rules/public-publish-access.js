@@ -1,5 +1,19 @@
+const path = require('path')
+const fs = require('fs-extra')
+
 const semver = require('semver')
 const chalk = require('chalk')
+
+function isRootPackage(fp) {
+    const dir = path.dirname(fp)
+    try {
+        // TODO: this won't work if the repo is not cloned by git
+        fs.accessSync(path.join(dir, '.git'))
+        return true
+    } catch (e) {
+        return false
+    }
+}
 
 function verify(pkg) {
     const { publishConfig } = pkg
@@ -35,6 +49,10 @@ module.exports = (file, pkg, apply = false) => {
         messages: [],
         output: pkg,
         fixed: false,
+    }
+
+    if (isRootPackage(file)) {
+        return response
     }
 
     const result = verify(pkg)
