@@ -38,6 +38,10 @@ exports.handler = argv => {
     report.summarize()
 
     if (report.hasViolations) {
+        log.info('')
+        log.error(
+            `${report.violations.length} file(s) violate the code standard.`
+        )
         process.exit(1)
     }
 

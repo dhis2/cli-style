@@ -109,19 +109,39 @@ function copy(from, to, overwrite = true) {
     }
 }
 
+function validateGroups(groups) {
+    const result = []
+
+    for (const group of groups) {
+        if (!cfgs.hasOwnProperty(group) && group !== 'all') {
+            result.push(group)
+        }
+    }
+
+    return result
+}
+
 module.exports = {
-    configure: function configure(repo, type = 'all', init) {
-        if (type === 'all') {
+    configure: function configure(repo, groups = ['all'], init) {
+        const valid = validateGroups(groups)
+
+        if (valid.length !== 0) {
+            log.error(`Invalid groups detected: ${valid.join(', ')}`)
+            process.exit(1)
+        }
+
+        if (groups.includes('all')) {
             for (const prop in cfgs) {
                 cfgs[prop].map(cfg =>
                     copy(cfg[0], path.join(repo, cfg[1]), init)
                 )
             }
-        } else if (cfgs.hasOwnProperty(type)) {
-            cfgs[type].map(cfg => copy(cfg[0], path.join(repo, cfg[1]), init))
         } else {
-            log.error(`Could not find ${type} in configs`)
-            process.exit(1)
+            for (const group of groups) {
+                cfgs[group].map(cfg =>
+                    copy(cfg[0], path.join(repo, cfg[1]), init)
+                )
+            }
         }
     },
     cleanup: function cleanup(repo) {

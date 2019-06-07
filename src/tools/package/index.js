@@ -112,9 +112,6 @@ function print(report, violations) {
             log.print(`${p}`)
             f.messages.map(m => log.info(`${m.message}`))
         })
-
-        log.info('')
-        log.error(`${violations.length} file(s) violate the code standard.`)
     }
 }
 
@@ -147,6 +144,7 @@ exports.runner = (files = [], apply = false) => {
     log.debug(`Autofixes: ${autofixes.length}`)
 
     return {
+        name: 'package',
         files: packages,
         summarize: () => print(report, violations),
         fix: () => fix(autofixes),

@@ -20,7 +20,7 @@ function message(msg) {
 function validate(hook, cmd) {
     const rules = {
         'commit-msg': /.*style commit check.*/,
-        'pre-commit': /.*style \w+ apply.*/,
+        'pre-commit': /.*style (validate|(\w+ apply)).*/,
     }
 
     if (!rules[hook].test(cmd)) {
