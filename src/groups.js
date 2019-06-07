@@ -55,8 +55,13 @@ const groups = {
         tools: [tools.package],
         configs: [],
     },
+}
 
-    all: Object.values(tools),
+groups.all = {
+    tools: Object.values(tools),
+    configs: Object.values(groups)
+        .map(t => t.configs)
+        .reduce((a, b) => a.concat(b), []),
 }
 
 const isValidGroup = group => groups.hasOwnProperty(group)
