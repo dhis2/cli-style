@@ -16,7 +16,7 @@
     "@commitlint/format": "^8.0.0",
     "@commitlint/lint": "^7.6.0",
     "@commitlint/load": "^7.6.2",
-    "@commitlint/read": "^7.6.0",
+    "@commitlint/read": "^8.0.0",
     "@dhis2/cli-helpers-engine": "1.2.1",
     "babel-eslint": "^10.0.1",
     "chalk": "^2.4.2",
