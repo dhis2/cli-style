@@ -1,9 +1,10 @@
 const path = require('path')
-const fs = require('fs')
+const fs = require('fs-extra')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { readFile, writeFile } = require('./files.js')
+const { groups, isValidGroup } = require('./groups.js')
 
 function wipeConfigProperties(repo) {
     const pkgPath = path.join(repo, 'package.json')
@@ -50,43 +51,50 @@ function wipeConfigFiles(repo) {
     })
 }
 
-function cleanup(repo) {
-    wipeConfigProperties(repo)
-    wipeConfigFiles(repo)
-}
-
-function copy(from, to) {
+function copy(from, to, overwrite = true) {
     try {
-        fs.copyFileSync(from, to)
-        log.debug('copied cfg successfully: ' + to)
+        fs.ensureDirSync(path.dirname(to))
+        fs.copySync(from, to, { overwrite })
+        if (fs.existsSync(to) && overwrite) {
+            log.info(
+                `Installing configuration file: ${path.relative(
+                    process.cwd(),
+                    to
+                )}`
+            )
+        } else {
+            log.warn(
+                `Skip existing configuration file: ${path.relative(
+                    process.cwd(),
+                    to
+                )}`
+            )
+        }
     } catch (err) {
-        log.error('failed to copy cfg to: ' + to, err)
+        log.error(`Failed to install configuration file: ${to}`, err)
     }
 }
 
-function configure(repo) {
-    // first house keeping
-    cleanup(repo)
+module.exports = {
+    configure: function configure(repo, group = ['all'], overwrite) {
+        const validGroups = group.filter(isValidGroup)
 
-    // then fun stuff
-    const cfgs = [
-        [
-            path.join(__dirname, '../config/prettier.config.js'),
-            path.join(repo, '.prettierrc.js'),
-        ],
-        [
-            path.join(__dirname, '../config/browserslist.config.rc'),
-            path.join(repo, '.browserslistrc'),
-        ],
-        [
-            path.join(__dirname, '../config/editorconfig.config.rc'),
-            path.join(repo, '.editorconfig'),
-        ],
-        [
-            path.join(__dirname, '../config/eslint.config.js'),
-            path.join(repo, '.eslintrc.js'),
-        ],
-    ].map(cfg => copy(cfg[0], cfg[1]))
+        if (validGroups.length === 0) {
+            log.warn(
+                `No valid group selected, use one of: ${Object.keys(
+                    groups
+                ).join(', ')}`
+            )
+        } else {
+            log.info(`Running setup for group(s): ${validGroups.join(', ')}`)
+        }
+
+        return validGroups.map(g =>
+            groups[g].configs.map(c => copy(c[0], c[1], overwrite))
+        )
+    },
+    cleanup: function cleanup(repo) {
+        wipeConfigProperties(repo)
+        wipeConfigFiles(repo)
+    },
 }
-
-module.exports = configure

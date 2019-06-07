@@ -9,6 +9,7 @@ const blacklist = ['node_modules', 'build', 'dist', 'target', '.git', 'vendor']
 
 const whitelists = {
     js: ['.js', '.jsx', '.ts'],
+    json: ['.json'],
     all: ['.js', '.json', '.css', '.scss', '.md', '.jsx', '.ts'],
 }
 
@@ -20,6 +21,11 @@ function whitelisted(whitelist) {
 
 function jsFiles(arr) {
     const whitelist = whitelisted(whitelists.js)
+    return arr.filter(whitelist)
+}
+
+function jsonFiles(arr) {
+    const whitelist = whitelisted(whitelists.json)
     return arr.filter(whitelist)
 }
 
@@ -89,6 +95,7 @@ module.exports = {
     collectJsFiles,
     selectFiles,
     jsFiles,
+    jsonFiles,
     readFile,
     writeFile,
     whitelisted,

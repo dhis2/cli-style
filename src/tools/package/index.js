@@ -6,14 +6,12 @@ const perf = require('perfy')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { readFile, writeFile, jsFiles } = require('../../files.js')
+const { readFile, writeFile, jsonFiles } = require('../../files.js')
 
 const tools = [
-    // the order of tools is important
-    require('./eslint.js'),
-
-    // run the formatter last!
-    require('./prettier.js'),
+    require('./rules/pin-dhis2-package-versions.js'),
+    require('./rules/husky-hooks.js'),
+    require('./rules/public-publish-access.js'),
 ]
 
 /**
@@ -25,7 +23,18 @@ function runTools(file, apply = false) {
     const original = readFile(file)
 
     let messages = []
-    let source = original
+    let source
+
+    try {
+        source = JSON.parse(original)
+    } catch (e) {
+        log.error(
+            `${file} is not valid JSON, cannot proceed with JSON validations. Aborting...\n`,
+            e
+        )
+        process.exit(1)
+    }
+
     let fixed = false
 
     perf.start('exec-file')
@@ -61,6 +70,11 @@ function exec(files, apply = false) {
     return report
 }
 
+function formatJSON(string) {
+    const obj = JSON.parse(string)
+    return JSON.stringify(obj, null, 2)
+}
+
 /**
  * Apply fixes for code standard violations automatically.
  */
@@ -70,7 +84,7 @@ function fix(fixable) {
     }
 
     const fixed = fixable.map(f => {
-        const success = writeFile(f.file, f.output)
+        const success = writeFile(f.file, formatJSON(f.output))
         log.debug(`${f.file} written successfully: ${success}`)
 
         if (!success) {
@@ -89,7 +103,7 @@ function fix(fixable) {
  * Pretty print a report object
  */
 function print(report, violations) {
-    log.info(`${report.length} javascript file(s) checked.`)
+    log.info(`${report.length} package.json file(s) checked.`)
 
     if (violations.length > 0) {
         violations.forEach(f => {
@@ -116,11 +130,12 @@ function getAutoFixable(report) {
  *
  * @return {Object} a report object
  */
-exports.runner = (files, apply = false) => {
-    const js = jsFiles(files)
-    log.debug(`Files to operate on:\n${js.join('\n')}`)
+exports.runner = (files = [], apply = false) => {
+    const packages = jsonFiles(files).filter(f => f.includes('package.json'))
 
-    const report = exec(js, apply)
+    log.debug(`Files to operate on:\n${packages.join('\n')}`)
+
+    const report = exec(packages, apply)
     const autofixes = getAutoFixable(report)
     const violations = getViolations(report)
 
@@ -130,8 +145,8 @@ exports.runner = (files, apply = false) => {
     log.debug(`Autofixes: ${autofixes.length}`)
 
     return {
-        name: 'js',
-        files: js,
+        name: 'package',
+        files: packages,
         summarize: () => print(report, violations),
         fix: () => fix(autofixes),
         violations,
