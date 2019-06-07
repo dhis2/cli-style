@@ -1,3 +1,10 @@
+## [3.3.1](https://github.com/dhis2/cli-style/compare/v3.3.0...v3.3.1) (2019-06-07)
+
+
+### Bug Fixes
+
+* update broken dependabot config ([#55](https://github.com/dhis2/cli-style/issues/55)) ([c6bca3f](https://github.com/dhis2/cli-style/commit/c6bca3f))
+
 # [3.3.0](https://github.com/dhis2/cli-style/compare/v3.2.2...v3.3.0) (2019-06-07)
 
 
