@@ -28,7 +28,7 @@
     "yargs": "^13.1.0"
   },
   "devDependencies": {
-    "husky": "^2.2.0"
+    "husky": "^2.4.0"
   },
   "husky": {
     "hooks": {
