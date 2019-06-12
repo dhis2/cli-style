@@ -2,4 +2,4 @@
 const { makeEntryPoint } = require('@dhis2/cli-helpers-engine')
 const command = require('..')
 
-makeEntryPoint(command).parse()
+makeEntryPoint(command)
