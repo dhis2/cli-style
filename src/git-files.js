@@ -5,6 +5,24 @@ const { execSync } = require('child_process')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
+const stashUnstagedChanges = dir => {
+    log.debug('Stashing all unstaged changes')
+    execSync('git stash --keep-index', {
+        cwd: dir,
+        encoding: 'utf8',
+    })
+}
+
+const popStash = dir => {
+    log.debug(
+        'Remove latest sashed state and apply to current working tree state'
+    )
+    execSync('git stash pop', {
+        cwd: dir,
+        encoding: 'utf8',
+    })
+}
+
 const stageFile = (file, dir) => {
     log.debug(`Staging ${file}...`)
     const added = execSync(`git add ${file}`, {
@@ -40,7 +58,9 @@ const stagedFiles = dir => {
 }
 
 module.exports = {
+    stashUnstagedChanges,
     stagedFiles,
     stageFiles,
     stageFile,
+    popStash,
 }
