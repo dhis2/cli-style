@@ -1,6 +1,6 @@
 {
   "name": "@dhis2/cli-style",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "description": "The code and commit style for DHIS2.",
   "bin": {
     "d2-style": "bin/d2-style"

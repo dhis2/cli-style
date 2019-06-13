@@ -1,3 +1,10 @@
+## [3.3.3](https://github.com/dhis2/cli-style/compare/v3.3.2...v3.3.3) (2019-06-13)
+
+
+### Bug Fixes
+
+* log the message before copying ([#71](https://github.com/dhis2/cli-style/issues/71)) ([531e115](https://github.com/dhis2/cli-style/commit/531e115))
+
 ## [3.3.2](https://github.com/dhis2/cli-style/compare/v3.3.1...v3.3.2) (2019-06-12)
 
 
