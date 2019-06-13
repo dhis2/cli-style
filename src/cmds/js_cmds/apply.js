@@ -32,6 +32,7 @@ exports.handler = argv => {
     const root = process.cwd()
     log.debug(`Root directory: ${root}`)
 
+    stashUnstagedChanges(root)
     const codeFiles = selectFiles(files, all, root)
     const report = runner(codeFiles, true)
 
@@ -49,4 +50,6 @@ exports.handler = argv => {
     if (stage && fixed.length > 0) {
         stageFiles(fixed, root)
     }
+
+    popStash(root)
 }
