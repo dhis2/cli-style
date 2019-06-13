@@ -53,23 +53,23 @@ function wipeConfigFiles(repo) {
 
 function copy(from, to, overwrite = true) {
     try {
-        fs.ensureDirSync(path.dirname(to))
-        fs.copySync(from, to, { overwrite })
-        if (fs.existsSync(to) && overwrite) {
-            log.info(
-                `Installing configuration file: ${path.relative(
-                    process.cwd(),
-                    to
-                )}`
-            )
-        } else {
+        if (fs.existsSync(to) && !overwrite) {
             log.warn(
                 `Skip existing configuration file: ${path.relative(
                     process.cwd(),
                     to
                 )}`
             )
+        } else {
+            log.info(
+                `Installing configuration file: ${path.relative(
+                    process.cwd(),
+                    to
+                )}`
+            )
         }
+        fs.ensureDirSync(path.dirname(to))
+        fs.copySync(from, to, { overwrite })
     } catch (err) {
         log.error(`Failed to install configuration file: ${to}`, err)
     }
