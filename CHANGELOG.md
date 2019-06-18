@@ -1,3 +1,10 @@
+## [3.3.4](https://github.com/dhis2/cli-style/compare/v3.3.3...v3.3.4) (2019-06-14)
+
+
+### Bug Fixes
+
+* setup semantic configuration for prs ([#73](https://github.com/dhis2/cli-style/issues/73)) ([ef0738a](https://github.com/dhis2/cli-style/commit/ef0738a))
+
 ## [3.3.3](https://github.com/dhis2/cli-style/compare/v3.3.2...v3.3.3) (2019-06-13)
 
 
