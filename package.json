@@ -12,7 +12,7 @@
   "author": "Viktor Varland",
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@commitlint/config-conventional": "^7.6.0",
+    "@commitlint/config-conventional": "^8.0.0",
     "@commitlint/format": "^8.0.0",
     "@commitlint/lint": "^8.0.0",
     "@commitlint/load": "^8.0.0",
