@@ -7,6 +7,7 @@ const {
     popStash,
     stageFiles,
     stashUnstagedChanges,
+    getStagedFilesAmount,
 } = require('../../git-files.js')
 
 const { runner } = require('../../tools/js')
@@ -36,7 +37,9 @@ exports.handler = argv => {
     const root = process.cwd()
     log.debug(`Root directory: ${root}`)
 
-    if (!all) stashUnstagedChanges(root)
+    const stashFiles = !all && getStagedFilesAmount(root)
+
+    if (stashFiles) stashUnstagedChanges(root)
     const codeFiles = selectFiles(files, all, root)
     const report = runner(codeFiles, true)
 
@@ -55,5 +58,5 @@ exports.handler = argv => {
         stageFiles(fixed, root)
     }
 
-    if (!all) popStash(root)
+    if (stashFiles) popStash(root)
 }
