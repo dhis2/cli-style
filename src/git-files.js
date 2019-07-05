@@ -26,12 +26,12 @@ const stashUnstagedChanges = dir => {
 
 const popStash = dir => {
     log.debug(
-        'Remove latest sashed state and apply to current working tree state'
+        'Remove latest stashed state and apply to current working tree state'
     )
-    execSync('git stash pop', {
-        cwd: dir,
-        encoding: 'utf8',
-    })
+
+    execSync('git stash', { cwd: dir, encoding: 'utf8' })
+    execSync('git stash pop --index 1', { cwd: dir, encoding: 'utf8' })
+    execSync('git stash pop --index 0', { cwd: dir, encoding: 'utf8' })
 }
 
 const stageFile = (file, dir) => {
