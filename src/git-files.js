@@ -7,7 +7,7 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 
 const stashUnstagedChanges = dir => {
     log.debug('Stashing all unstaged changes')
-    execSync('git stash --keep-index', {
+    execSync('git stash --keep-index --include-tracked', {
         cwd: dir,
         encoding: 'utf8',
     })
