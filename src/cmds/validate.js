@@ -8,6 +8,7 @@ const {
     popStash,
     stageFiles,
     stashUnstagedChanges,
+    getStagedFilesAmount,
 } = require('../git-files.js')
 const { groups, isValidGroup } = require('../groups.js')
 
@@ -43,10 +44,12 @@ exports.handler = argv => {
 
     const reports = runners(files, group, fix)
 
+    const stashChanges = !all && getStagedFilesAmount(root)
+
     let violations = 0
     const fixedFiles = []
 
-    if (!all) stashUnstagedChanges(root)
+    if (stashChanges) stashUnstagedChanges(root)
 
     for (const report of reports) {
         report.summarize()
@@ -70,7 +73,7 @@ exports.handler = argv => {
         stageFiles(fixedFiles, root)
     }
 
-    if (!all) popStash(root)
+    if (stashChanges) popStash(root)
 }
 
 function runners(files, group = ['all'], fix = false) {
