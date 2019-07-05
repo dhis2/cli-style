@@ -4,7 +4,11 @@ const path = require('path')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { selectFiles } = require('../files.js')
-const { stageFiles } = require('../git-files.js')
+const {
+    popStash,
+    stageFiles,
+    stashUnstagedChanges,
+} = require('../git-files.js')
 const { groups, isValidGroup } = require('../groups.js')
 
 exports.command = 'validate [group..]'
@@ -42,6 +46,8 @@ exports.handler = argv => {
     let violations = 0
     const fixedFiles = []
 
+    if (!all) stashUnstagedChanges(root)
+
     for (const report of reports) {
         report.summarize()
 
@@ -63,6 +69,8 @@ exports.handler = argv => {
     if (stage && fixedFiles.length > 0) {
         stageFiles(fixedFiles, root)
     }
+
+    if (!all) popStash(root)
 }
 
 function runners(files, group = ['all'], fix = false) {
