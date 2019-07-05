@@ -26,6 +26,10 @@ const groups = {
                 path.join(__dirname, '../config/github/stale.yml'),
                 path.join('.github', 'stale.yml'),
             ],
+            [
+                path.join(__dirname, '../config/github/semantic.yml'),
+                path.join('.github', 'semantic.yml'),
+            ],
         ],
     },
 
