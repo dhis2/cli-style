@@ -3,7 +3,11 @@ const path = require('path')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { selectFiles } = require('../../files.js')
-const { stageFiles } = require('../../git-files.js')
+const {
+    popStash,
+    stageFiles,
+    stashUnstagedChanges,
+} = require('../../git-files.js')
 
 const { runner } = require('../../tools/js')
 
