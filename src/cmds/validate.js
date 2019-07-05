@@ -64,16 +64,22 @@ exports.handler = argv => {
         }
     }
 
-    if (violations > 0) {
+    const hasViolations = violations > 0
+
+    if (hasViolations) {
         log.error(`${violations} file(s) violate the code standard.`)
-        process.exit(1)
     }
 
-    if (stage && fixedFiles.length > 0) {
+    log.debug(`Fixed filed count: ${fixedFiles.length}`)
+    if (!hasViolations && stage && fixedFiles.length > 0) {
         stageFiles(fixedFiles, root)
     }
 
     if (stashChanges) popStash(root)
+
+    if (hasViolations) {
+        process.exit(1)
+    }
 }
 
 function runners(files, group = ['all'], fix = false) {
