@@ -11,10 +11,10 @@ const prettierConfig = path.join(
 )
 log.debug('Prettier configuration file', prettierConfig)
 
+const editorconfig = false
+const useCache = true
+
 /**
- * This a checker used by {run-js} and needs to follow a specific
- * format.
- *
  * @param {string} file File path
  * @param {string} text Content of File
  * @param {boolean} apply Write autofixes to disk
@@ -28,10 +28,12 @@ module.exports = (file, text, apply = false) => {
     }
 
     try {
-        const options = prettier.resolveConfig.sync(file, {
-            editorconfig: false,
-            config: prettierConfig,
-        })
+        const options = resolveConfig(file)
+
+        if (!options) {
+            log.error('Failed to resolve a Prettier configuration')
+            process.exit(1)
+        }
 
         if (text.startsWith('#!')) {
             const firstNL = text.indexOf('\n')
@@ -63,4 +65,26 @@ module.exports = (file, text, apply = false) => {
     }
 
     return response
+}
+
+function resolveConfig(file) {
+    let options
+
+    try {
+        options = prettier.resolveConfig.sync(file, {
+            editorconfig,
+            useCache,
+            config: path.join(process.cwd(), '.prettierrc.js'),
+        })
+        log.debug('Using extended Prettier configuration from repo')
+    } catch (e) {
+        options = prettier.resolveConfig.sync(file, {
+            editorconfig,
+            useCache,
+            config: prettierConfig,
+        })
+        log.debug('Using default Prettier configuration')
+    }
+
+    return options
 }

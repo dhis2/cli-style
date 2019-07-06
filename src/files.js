@@ -89,10 +89,15 @@ function writeFile(fp, content) {
     }
 }
 
+function fileExists(fp) {
+    return fs.existsSync(fp)
+}
+
 module.exports = {
     collectFiles,
     collectAllFiles,
     collectJsFiles,
+    fileExists,
     selectFiles,
     jsFiles,
     jsonFiles,

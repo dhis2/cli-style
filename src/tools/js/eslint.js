@@ -4,18 +4,12 @@ const linter = new eslint.Linter()
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { readFile, writeFile } = require('../../files.js')
+const { readFile, writeFile, fileExists } = require('../../files.js')
 
-const eslintConfig = require(path.join(
-    __dirname,
-    '../../../config/js/eslint.config.js'
-))
+const eslintConfig = resolveConfig()
 log.debug('ESLint configuration file', eslintConfig)
 
 /**
- * This a checker used by {tools/js/index.js} and needs to follow a
- * specific format.
- *
  * @param {string} file File path
  * @param {string} text Content of File
  * @param {boolean} apply Write autofixes to disk
@@ -58,4 +52,33 @@ module.exports = (file, text, apply = false) => {
     }
 
     return response
+}
+
+function resolveConfig() {
+    const repoEslintConfig = path.join(process.cwd(), '.eslintrc.js')
+    const defaultEslintConfig = path.join(
+        __dirname,
+        '../../../config/js/eslint.config.js'
+    )
+
+    if (
+        fileExists(repoEslintConfig) &&
+        fileExists(
+            path.join(
+                process.cwd(),
+                'node_modules',
+                '@dhis2',
+                'cli-style',
+                'config',
+                'js',
+                'eslint.config.js'
+            )
+        )
+    ) {
+        log.debug('Using extended ESLint configuration from repo')
+        return require(repoEslintConfig)
+    } else {
+        log.debug('Using default ESLint configuration')
+        return require(defaultEslintConfig)
+    }
 }
