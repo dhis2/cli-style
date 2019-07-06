@@ -54,18 +54,16 @@ module.exports = (file, text, apply = false) => {
 
 function resolveConfig() {
     const config = {
-        resolvePluginsRelativeTo: path.join(process.cwd(), 'node_modules'),
-        useEslintrc: false,
+        useEslintrc: true,
         fix: true,
-        cwd: process.cwd(),
-        ignore: false,
+        ignorePattern: '!.*',
         globInputPaths: false,
     }
     let cli
     try {
         cli = new eslint.CLIEngine({
             ...config,
-            baseConfig: require(path.join(process.cwd(), '.eslintrc.js')),
+            baseConfig: require('@dhis2/eslint-config-base'),
         })
         log.info('Using extended ESLint configuration from repo')
     } catch (e) {

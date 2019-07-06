@@ -25,9 +25,7 @@ function validate(hook, cmd) {
 
     if (!rules[hook].test(cmd)) {
         return message(
-            chalk`The hook {yellow ${hook}} needs to run the style rules ({green ${
-                rules[hook]
-            }})`
+            chalk`The hook {yellow ${hook}} needs to run the style rules ({green ${rules[hook]}})`
         )
     } else {
         return null
