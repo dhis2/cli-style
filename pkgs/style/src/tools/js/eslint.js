@@ -1,13 +1,11 @@
 const path = require('path')
 const eslint = require('eslint')
+
 const linter = new eslint.Linter()
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { readFile, writeFile, fileExists } = require('../../files.js')
-
-const eslintConfig = resolveConfig()
-log.debug('ESLint configuration file', eslintConfig)
 
 /**
  * @param {string} file File path
@@ -22,16 +20,16 @@ module.exports = (file, text, apply = false) => {
         fixed: false,
     }
 
+    const cli = resolveConfig(apply)
+
     try {
-        const { messages, fixed, output } = linter.verifyAndFix(
-            text,
-            eslintConfig,
-            {
-                filename: path.basename(file),
-                allowInlineConfig: true,
-                reportUnusedDisableDirectives: false,
-            }
-        )
+        const report = cli.executeOnText(text, path.basename(file), true)
+
+        // there is always one (1) result from executeOnText
+        const result = report.results[0]
+        const fixed = !!result.output ? true : false
+        const output = result.output || result.source
+        const messages = result.messages
 
         response.fixed = fixed
         response.output = output
@@ -55,30 +53,29 @@ module.exports = (file, text, apply = false) => {
 }
 
 function resolveConfig() {
-    const repoEslintConfig = path.join(process.cwd(), '.eslintrc.js')
-    const defaultEslintConfig = path.join(
-        __dirname,
-        '../../../config/js/eslint.config.js'
-    )
-
-    if (
-        fileExists(repoEslintConfig) &&
-        fileExists(
-            path.join(
-                process.cwd(),
-                'node_modules',
-                '@dhis2',
-                'cli-style',
-                'config',
-                'js',
-                'eslint.config.js'
-            )
-        )
-    ) {
-        log.debug('Using extended ESLint configuration from repo')
-        return require(repoEslintConfig)
-    } else {
-        log.debug('Using default ESLint configuration')
-        return require(defaultEslintConfig)
+    const config = {
+        resolvePluginsRelativeTo: path.join(process.cwd(), 'node_modules'),
+        useEslintrc: false,
+        fix: true,
+        cwd: process.cwd(),
+        ignore: false,
+        globInputPaths: false,
     }
+    let cli
+    try {
+        cli = new eslint.CLIEngine({
+            ...config,
+            baseConfig: require(path.join(process.cwd(), '.eslintrc.js')),
+        })
+        log.info('Using extended ESLint configuration from repo')
+    } catch (e) {
+        console.error(e)
+        cli = new eslint.CLIEngine({
+            ...config,
+            baseConfig: require('@dhis2/eslint-config-base'),
+        })
+        log.info('Using default ESLint configuration')
+    }
+
+    return cli
 }

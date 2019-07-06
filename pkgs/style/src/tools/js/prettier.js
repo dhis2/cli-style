@@ -5,12 +5,6 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { readFile, writeFile } = require('../../files.js')
 
-const prettierConfig = path.join(
-    __dirname,
-    '../../../config/js/prettier.config.js'
-)
-log.debug('Prettier configuration file', prettierConfig)
-
 const editorconfig = false
 const useCache = true
 
@@ -81,7 +75,10 @@ function resolveConfig(file) {
         options = prettier.resolveConfig.sync(file, {
             editorconfig,
             useCache,
-            config: prettierConfig,
+            config: path.join(
+                __dirname,
+                '../../../config/js/prettier.config.js'
+            ),
         })
         log.debug('Using default Prettier configuration')
     }

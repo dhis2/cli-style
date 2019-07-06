@@ -1,5 +1,6 @@
 #!/usr/bin/env node
+const path = require('path')
 const { makeEntryPoint } = require('@dhis2/cli-helpers-engine')
-const command = require('..')
+const command = require(path.join(__dirname, '..'))
 
 makeEntryPoint(command)

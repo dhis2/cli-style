@@ -39,11 +39,11 @@ const groups = {
         tools: [tools.js],
         configs: [
             [
-                path.join(configDir, 'js', 'eslint-shared.config.js'),
+                path.join(configDir, 'js', 'eslint.config.js'),
                 path.join('.eslintrc.js'),
             ],
             [
-                path.join(configDir, 'js', 'prettier-shared.config.js'),
+                path.join(configDir, 'js', 'prettier.config.js'),
                 path.join('.prettierrc.js'),
             ],
             [
