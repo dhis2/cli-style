@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - lts/*
 script:
-- "./bin/d2-style js check --all"
+- "./bin/d2-style validate --all"
 deploy:
 - provider: script
   skip_cleanup: true
