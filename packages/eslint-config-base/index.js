@@ -3,12 +3,11 @@ const SEVERITY = 2
 module.exports = {
     root: true,
 
-    parser: 'babel-eslint',
-
     env: {
         browser: true,
         node: true,
         jest: true,
+        es6: true,
     },
 
     parserOptions: {
@@ -16,8 +15,8 @@ module.exports = {
         ecmaVersion: 2018,
         ecmaFeatures: {
             jsx: true,
-            modules: true,
         },
+        sourceType: 'module',
     },
 
     rules: {
