@@ -70,7 +70,7 @@ exports.handler = argv => {
         log.error(`${violations} file(s) violate the code standard.`)
     }
 
-    log.debug(`Fixed filed count: ${fixedFiles.length}`)
+    log.debug(`Fixed files count: ${fixedFiles.length}`)
     if (!hasViolations && stage && fixedFiles.length > 0) {
         stageFiles(fixedFiles, root)
     }
