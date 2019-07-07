@@ -7,6 +7,8 @@ const { selectFiles } = require('../files.js')
 const { stageFiles } = require('../git-files.js')
 const { groups, isValidGroup } = require('../groups.js')
 
+const { spawnSync } = require('child_process')
+
 exports.command = 'validate [group..]'
 
 exports.describe = 'Validate DHIS2 configurations for a/all group(s)'
@@ -32,6 +34,37 @@ exports.builder = {
 }
 
 exports.handler = argv => {
+    const { fix, group, stage, all } = argv
+
+    const cmd = 'npx'
+    const args = [
+        '--no-install',
+        'lint-staged',
+        '--config',
+        path.join(__dirname, '..', '..', 'config', 'lint-staged.config.js'),
+    ]
+
+    const run = spawnSync(cmd, args, {
+        env: {
+            ...process.env,
+            CLI_STYLE_FIX: fix,
+            CLI_STYLE_STAGE: stage,
+            CLI_STYLE_ALL: all,
+        },
+        cwd: process.cwd(),
+        encoding: 'utf8',
+    })
+
+    console.log(run)
+
+    if (run.stderr) {
+        log.warn(run.stderr)
+        process.exit(1)
+    }
+}
+
+/*
+argv => {
     const { fix, group, stage, all } = argv
     const root = process.cwd()
 
@@ -82,3 +115,4 @@ function runners(files, group = ['all'], fix = false) {
         .map(g => groups[g].tools.map(fn => fn(files, fix)))
         .reduce((a, b) => a.concat(b), [])
 }
+*/
