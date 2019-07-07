@@ -68,7 +68,6 @@ exports.handler = argv => {
     })
         .then(s => {
             if (!s) {
-                log.error('There were validation errors')
                 process.exit(1)
             }
             process.exit(0)

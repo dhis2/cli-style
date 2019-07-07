@@ -24,7 +24,7 @@ if (violations > 0) {
     log.error(`${violations} file(s) violate the code standard.`)
     report.violations.map(f => {
         log.error(`${f.file}`)
-        f.messages.map(m => log.error(`${m.message}`))
+        f.messages.map(m => log.error(`${m.message}`));
     })
     process.exit(1)
 }
