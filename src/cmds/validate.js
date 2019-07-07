@@ -5,7 +5,6 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { groups, isValidGroup } = require('../groups.js')
 const {
-    CONFIG_DIR,
     PRETTIER_CONFIG,
     ESLINT_CONFIG,
     LINT_STAGED_CONFIG,
