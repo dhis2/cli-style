@@ -4,7 +4,7 @@ const prettier = require('prettier')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { readFile, writeFile } = require('../../files.js')
-const { PRETTIER_CONFIG } = require('../../config.js')
+const { PRETTIER_CONFIG } = require('../../paths.js')
 
 /**
  * This a checker used by {run-js} and needs to follow a specific
@@ -24,12 +24,11 @@ module.exports = (file, text, apply = false) => {
 
     const prettierConfig =
         process.env.CLI_STYLE_PRETTIER_CONFIG || PRETTIER_CONFIG
-    const resolvedConfig = path.resolve(process.cwd(), prettierConfig)
 
     try {
         const options = prettier.resolveConfig.sync(file, {
             editorconfig: false,
-            config: resolvedConfig,
+            config: prettierConfig,
         })
 
         if (text.startsWith('#!')) {

@@ -10,20 +10,11 @@ const {
     DEPENDABOT_CONFIG,
     EDITORCONFIG_CONFIG,
     SEMANTIC_PR_CONFIG,
-} = require('./config.js')
-
-const tool = t => `node ${path.join(__dirname, 'tools', 'cli.js')} ${t}`
-const tools = {
-    js: tool('js'),
-    //git: tool('git'),
-    package: tool('package'),
-}
+    LINT_STAGED_CONFIG,
+} = require('./paths.js')
 
 const groups = {
-    //git: [tools.git],
-
     repo: {
-        tools: [],
         configs: [
             [EDITORCONFIG_CONFIG, path.join('.editorconfig')],
             [DEPENDABOT_CONFIG, path.join('.dependabot', 'config.yml')],
@@ -33,23 +24,17 @@ const groups = {
     },
 
     js: {
-        tools: [tools.js],
         configs: [
             [ESLINT_CONFIG, path.join('.eslintrc.js')],
             [PRETTIER_CONFIG, path.join('.prettierrc.js')],
             [BROWSERSLIST_CONFIG, path.join('.browserslistrc')],
             [COMMITLINT_CONFIG, path.join('.commitlintrc.js')],
+            [LINT_STAGED_CONFIG, path.join('.lint-stagedrc.js')],
         ],
-    },
-
-    package: {
-        tools: [tools.package],
-        configs: [],
     },
 }
 
 groups.all = {
-    tools: Object.values(tools),
     configs: Object.values(groups)
         .map(t => t.configs)
         .reduce((a, b) => a.concat(b), []),
@@ -58,7 +43,6 @@ groups.all = {
 const isValidGroup = group => groups.hasOwnProperty(group)
 
 module.exports = {
-    tools,
     groups,
     isValidGroup,
 }

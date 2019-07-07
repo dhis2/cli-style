@@ -5,7 +5,7 @@ const linter = new eslint.Linter()
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { readFile, writeFile } = require('../../files.js')
-const { ESLINT_CONFIG } = require('../../config.js')
+const { ESLINT_CONFIG } = require('../../paths.js')
 
 /**
  * This a checker used by {tools/js/index.js} and needs to follow a
@@ -24,12 +24,11 @@ module.exports = (file, text, apply = false) => {
     }
 
     const eslintConfig = process.env.CLI_STYLE_ESLINT_CONFIG || ESLINT_CONFIG
-    const resolvedConfig = path.resolve(process.cwd(), eslintConfig)
 
     try {
         const { messages, fixed, output } = linter.verifyAndFix(
             text,
-            require(resolvedConfig),
+            require(eslintConfig),
             {
                 filename: path.basename(file),
                 allowInlineConfig: true,

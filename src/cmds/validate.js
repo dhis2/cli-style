@@ -10,13 +10,13 @@ const {
     PRETTIER_CONFIG,
     ESLINT_CONFIG,
     LINT_STAGED_CONFIG,
-} = require('../config.js')
+} = require('../paths.js')
 
 const { collectRejectedFiles, deleteFile } = require('../files.js')
 
-exports.command = 'validate [group..]'
+exports.command = 'validate'
 
-exports.describe = 'Validate DHIS2 configurations for a/all group(s)'
+exports.describe = 'Run validation pre-commit hook'
 
 exports.builder = {
     fix: {
@@ -40,35 +40,27 @@ exports.builder = {
         type: 'string',
         default: PRETTIER_CONFIG,
     },
+    lintStagedConfig: {
+        describe: 'Override the Lint Staged configuration.',
+        type: 'string',
+        default: LINT_STAGED_CONFIG,
+    },
 }
 
 exports.handler = argv => {
-    const { fix, group = ['all'], stage, eslintConfig, prettierConfig } = argv
-
-    const validGroups = group.filter(isValidGroup)
-    if (validGroups.length === 0) {
-        log.warn(
-            `No valid group selected, use one of: ${Object.keys(groups).join(
-                ', '
-            )}`
-        )
-        process.exit(1)
-    } else {
-        log.info(`Running validations for group(s): ${validGroups.join(', ')}`)
-    }
+    const { fix, stage, eslintConfig, prettierConfig, lintStagedConfig } = argv
 
     process.env = {
         ...process.env,
-        CLI_STYLE_ESLINT_CONFIG: eslintConfig,
-        CLI_STYLE_PRETTIER_CONFIG: prettierConfig,
+        CLI_STYLE_ESLINT_CONFIG: path.resolve(CONSUMING_ROOT, eslintConfig),
+        CLI_STYLE_PRETTIER_CONFIG: path.resolve(CONSUMING_ROOT, prettierConfig),
         CLI_STYLE_FIX: `${fix}`,
         CLI_STYLE_STAGE: `${stage}`,
-        CLI_STYLE_GROUPS: validGroups.join(','),
     }
 
     lintStaged({
-        configPath: LINT_STAGED_CONFIG,
-        quiet: true,
+        configPath: path.resolve(CONSUMING_ROOT, lintStagedConfig),
+        quiet: false,
         debug: false,
     })
         .then(s => {
