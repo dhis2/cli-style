@@ -1,16 +1,19 @@
-const fs = require('fs-extra')
 const path = require('path')
+const fs = require('fs-extra')
 
+const lintStaged = require('lint-staged')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { selectFiles } = require('../files.js')
+
 const {
     popStash,
     stageFiles,
     stashUnstagedChanges,
     getStagedFilesAmount,
 } = require('../git-files.js')
-const { groups, isValidGroup } = require('../groups.js')
+
+const { groups, isValidGroup, CONFIG_DIR } = require('../groups.js')
 
 exports.command = 'validate [group..]'
 
@@ -36,6 +39,47 @@ exports.builder = {
     },
 }
 
+exports.handler = argv => {
+    const { fix, group = ['all'], stage, all } = argv
+
+    const validGroups = group.filter(isValidGroup)
+    if (validGroups.length === 0) {
+        log.warn(
+            `No valid group selected, use one of: ${Object.keys(groups).join(
+                ', '
+            )}`
+        )
+        process.exit(1)
+    } else {
+        log.info(`Running validations for group(s): ${validGroups.join(', ')}`)
+    }
+
+    process.env = {
+        ...process.env,
+        CLI_STYLE_FIX: `${fix}`,
+        CLI_STYLE_STAGE: `${stage}`,
+        CLI_STYLE_GROUPS: validGroups.join(','),
+    }
+
+    lintStaged({
+        configPath: path.join(CONFIG_DIR, 'lint-staged.config.js'),
+        quiet: true,
+        debug: false,
+    })
+        .then(s => {
+            if (!s) {
+                log.error('There were validation errors')
+                process.exit(1)
+            }
+            process.exit(0)
+        })
+        .catch(e => {
+            log.error('Failed to parse lint-staged configuration', e)
+            process.exit(1)
+        })
+}
+
+/*
 exports.handler = argv => {
     const { fix, group, stage, all } = argv
     const root = process.cwd()
@@ -99,3 +143,4 @@ function runners(files, group = ['all'], fix = false) {
         .map(g => groups[g].tools.map(fn => fn(files, fix)))
         .reduce((a, b) => a.concat(b), [])
 }
+*/
