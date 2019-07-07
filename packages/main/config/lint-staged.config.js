@@ -5,7 +5,6 @@ const { selectFiles } = require('../src/files.js')
 
 const fix = process.env.CLI_STYLE_FIX === 'true'
 const stage = process.env.CLI_STYLE_STAGE === 'true'
-const all = process.env.CLI_STYLE_ALL === 'true'
 
 const selectedGroups = process.env.CLI_STYLE_GROUPS.split(',')
 
@@ -13,7 +12,7 @@ const tools = {}
 
 selectedGroups.map(g => {
     const { glob, command } = groups[g]
-    tools[glob] = command(fix, all, stage)
+    tools[glob] = command(fix, stage)
 })
 
 module.exports = tools

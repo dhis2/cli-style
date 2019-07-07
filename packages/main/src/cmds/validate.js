@@ -5,7 +5,7 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { selectFiles } = require('../files.js')
 const { stageFiles } = require('../git-files.js')
-const { groups, isValidGroup } = require('../groups.js')
+const { groups, isValidGroup, CONFIG_DIR } = require('../groups.js')
 
 const { spawnSync } = require('child_process')
 
@@ -53,15 +53,17 @@ exports.handler = argv => {
         '--no-install',
         'lint-staged',
         '--config',
-        path.join(__dirname, '..', '..', 'config', 'lint-staged.config.js'),
+        path.join(CONFIG_DIR, 'lint-staged.config.js'),
     ]
 
+    // TODO: if `all` is set to true, we need to bypass lint-staged and run
+    // the commands manually as lint-staged only ever runs on staged
+    // files, hence the name.
     const run = spawnSync(cmd, args, {
         env: {
             ...process.env,
             CLI_STYLE_FIX: fix,
             CLI_STYLE_STAGE: stage,
-            CLI_STYLE_ALL: all,
             CLI_STYLE_GROUPS: validGroups.join(','),
         },
         cwd: process.cwd(),
@@ -69,9 +71,9 @@ exports.handler = argv => {
     })
 
     if (run.stderr) {
-        log.warn(run.stderr)
+        log.error(run.stderr)
         process.exit(1)
     }
 
-    console.log(run.stdout)
+    log.info(run.stdout)
 }
