@@ -24,11 +24,12 @@ module.exports = (file, text, apply = false) => {
 
     const prettierConfig =
         process.env.CLI_STYLE_PRETTIER_CONFIG || PRETTIER_CONFIG
+    const resolvedConfig = path.resolve(process.cwd(), prettierConfig)
 
     try {
         const options = prettier.resolveConfig.sync(file, {
             editorconfig: false,
-            config: prettierConfig,
+            config: resolvedConfig,
         })
 
         if (text.startsWith('#!')) {

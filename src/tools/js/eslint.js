@@ -24,11 +24,12 @@ module.exports = (file, text, apply = false) => {
     }
 
     const eslintConfig = process.env.CLI_STYLE_ESLINT_CONFIG || ESLINT_CONFIG
+    const resolvedConfig = path.resolve(process.cwd(), eslintConfig)
 
     try {
         const { messages, fixed, output } = linter.verifyAndFix(
             text,
-            require(eslintConfig),
+            require(resolvedConfig),
             {
                 filename: path.basename(file),
                 allowInlineConfig: true,
