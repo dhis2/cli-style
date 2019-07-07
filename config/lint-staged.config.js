@@ -15,7 +15,7 @@ module.exports = {
         const cmds = selectedGroups
             .map(g => groups[g].tools.map(fn => `${fn} ${fix} ${files}`))
             .reduce((a, b) => a.concat(b), [])
-            .concat(stage ? ['git add'] : [])
+            .concat(stage ? [`git add ${files.join(' ')}`] : [])
         return cmds
     },
 }
