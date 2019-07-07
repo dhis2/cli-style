@@ -59,7 +59,7 @@ const groups = {
     },
 
     package: {
-        tools: [tools.package],
+        tools: [`${tools.package}`],
         configs: [],
     },
 }

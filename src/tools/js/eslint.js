@@ -6,10 +6,7 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { readFile, writeFile } = require('../../files.js')
 
-const eslintConfig = require(path.join(
-    __dirname,
-    '../../../config/js/eslint.config.js'
-))
+const eslintConfig = require(process.env.CLI_STYLE_ESLINT_CONFIG)
 log.debug('ESLint configuration file', eslintConfig)
 
 /**

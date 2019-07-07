@@ -37,10 +37,27 @@ exports.builder = {
         type: 'boolean',
         default: 'false',
     },
+    eslintConfig: {
+        describe: 'Override the ESLint configuration.',
+        type: 'string',
+        default: path.join(CONFIG_DIR, 'js', 'eslint.config.js'),
+    },
+    prettierConfig: {
+        describe: 'Override the Prettier configuration.',
+        type: 'string',
+        default: path.join(CONFIG_DIR, 'js', 'prettier.config.js'),
+    },
 }
 
 exports.handler = argv => {
-    const { fix, group = ['all'], stage, all } = argv
+    const {
+        fix,
+        group = ['all'],
+        stage,
+        all,
+        eslintConfig,
+        prettierConfig,
+    } = argv
 
     const validGroups = group.filter(isValidGroup)
     if (validGroups.length === 0) {
@@ -56,6 +73,8 @@ exports.handler = argv => {
 
     process.env = {
         ...process.env,
+        CLI_STYLE_ESLINT_CONFIG: eslintConfig,
+        CLI_STYLE_PRETTIER_CONFIG: prettierConfig,
         CLI_STYLE_FIX: `${fix}`,
         CLI_STYLE_STAGE: `${stage}`,
         CLI_STYLE_GROUPS: validGroups.join(','),
