@@ -27,12 +27,6 @@ exports.builder = {
         type: 'boolean',
         default: 'true',
     },
-    all: {
-        describe:
-            'Default behaviour is to only format files staged with Git, use this option to format all files.',
-        type: 'boolean',
-        default: 'false',
-    },
     eslintConfig: {
         describe: 'Override the ESLint configuration.',
         type: 'string',
@@ -46,14 +40,7 @@ exports.builder = {
 }
 
 exports.handler = argv => {
-    const {
-        fix,
-        group = ['all'],
-        stage,
-        all,
-        eslintConfig,
-        prettierConfig,
-    } = argv
+    const { fix, group = ['all'], stage, eslintConfig, prettierConfig } = argv
 
     const validGroups = group.filter(isValidGroup)
     if (validGroups.length === 0) {
