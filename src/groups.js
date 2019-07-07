@@ -33,7 +33,7 @@ const groups = {
     },
 
     js: {
-        tools: [`${tools.js}`],
+        tools: [tools.js],
         configs: [
             [ESLINT_CONFIG, path.join('.eslintrc.js')],
             [PRETTIER_CONFIG, path.join('.prettierrc.js')],
@@ -43,7 +43,7 @@ const groups = {
     },
 
     package: {
-        tools: [`${tools.package}`],
+        tools: [tools.package],
         configs: [],
     },
 }
