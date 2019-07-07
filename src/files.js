@@ -94,7 +94,7 @@ function writeFile(fp, content) {
     }
 }
 
-function removeFile(fp) {
+function deleteFile(fp) {
     try {
         log.debug(`Deleting file: ${fp}`)
         fs.unlinkSync(fp)
@@ -110,6 +110,7 @@ module.exports = {
     collectAllFiles,
     collectJsFiles,
     collectRejectedFiles,
+    deleteFile,
     selectFiles,
     jsFiles,
     jsonFiles,
