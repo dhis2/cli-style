@@ -39,6 +39,11 @@ function collectAllFiles(target) {
     return collectFiles(target).filter(whitelist)
 }
 
+function collectRejectedFiles(target) {
+    const whitelist = whitelisted(['.rej'])
+    return collectFiles(target).filter(whitelist)
+}
+
 function collectFiles(target) {
     const files = fs.readdirSync(target)
 
@@ -89,10 +94,22 @@ function writeFile(fp, content) {
     }
 }
 
+function removeFile(fp) {
+    try {
+        log.debug(`Deleting file: ${fp}`)
+        fs.unlinkSync(fp)
+        return true
+    } catch (error) {
+        log.error('File deletion failed', fp, error)
+        return false
+    }
+}
+
 module.exports = {
     collectFiles,
     collectAllFiles,
     collectJsFiles,
+    collectRejectedFiles,
     selectFiles,
     jsFiles,
     jsonFiles,

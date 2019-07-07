@@ -4,11 +4,15 @@ const lintStaged = require('lint-staged')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { groups, isValidGroup } = require('../groups.js')
+
 const {
+    CONSUMING_ROOT,
     PRETTIER_CONFIG,
     ESLINT_CONFIG,
     LINT_STAGED_CONFIG,
 } = require('../config.js')
+
+const { collectRejectedFiles, deleteFile } = require('../files.js')
 
 exports.command = 'validate [group..]'
 
@@ -68,6 +72,7 @@ exports.handler = argv => {
         debug: false,
     })
         .then(s => {
+            collectRejectedFiles(CONSUMING_ROOT).map(deleteFile)
             if (!s) {
                 process.exit(1)
             }

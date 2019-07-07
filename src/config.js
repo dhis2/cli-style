@@ -5,6 +5,7 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { readFile, writeFile } = require('./files.js')
 
+const CONSUMING_ROOT = path.join(process.cwd())
 const CONFIG_ROOT = path.join(__dirname, '..')
 const CONFIG_DIR = path.join(CONFIG_ROOT, 'config')
 
@@ -66,6 +67,7 @@ function configure(repo, group = ['all'], overwrite) {
 }
 
 module.exports = {
+    CONSUMING_ROOT,
     BROWSERSLIST_CONFIG,
     COMMITLINT_CONFIG,
     CONFIG_ROOT,
