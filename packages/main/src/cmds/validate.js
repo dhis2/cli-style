@@ -34,7 +34,19 @@ exports.builder = {
 }
 
 exports.handler = argv => {
-    const { fix, group, stage, all } = argv
+    const { fix, group = ['all'], stage, all } = argv
+
+    const validGroups = group.filter(isValidGroup)
+    if (validGroups.length === 0) {
+        log.warn(
+            `No valid group selected, use one of: ${Object.keys(groups).join(
+                ', '
+            )}`
+        )
+        process.exit(1)
+    } else {
+        log.info(`Running validations for group(s): ${validGroups.join(', ')}`)
+    }
 
     const cmd = 'npx'
     const args = [
@@ -50,69 +62,16 @@ exports.handler = argv => {
             CLI_STYLE_FIX: fix,
             CLI_STYLE_STAGE: stage,
             CLI_STYLE_ALL: all,
+            CLI_STYLE_GROUPS: validGroups.join(','),
         },
         cwd: process.cwd(),
         encoding: 'utf8',
     })
 
-    console.log(run)
-
     if (run.stderr) {
         log.warn(run.stderr)
         process.exit(1)
     }
+
+    console.log(run.stdout)
 }
-
-/*
-argv => {
-    const { fix, group, stage, all } = argv
-    const root = process.cwd()
-
-    const files = selectFiles(null, all, root)
-
-    const reports = runners(files, group, fix)
-
-    let violations = 0
-    const fixedFiles = []
-
-    for (const report of reports) {
-        report.summarize()
-
-        if (report.hasViolations) {
-            violations += report.violations.length
-        }
-
-        if (fix) {
-            const fixed = report.fix()
-            fixedFiles.push(...fixed)
-        }
-    }
-
-    if (violations > 0) {
-        log.error(`${violations} file(s) violate the code standard.`)
-        process.exit(1)
-    }
-
-    if (stage && fixedFiles.length > 0) {
-        stageFiles(fixedFiles, root)
-    }
-}
-
-function runners(files, group = ['all'], fix = false) {
-    const validGroups = group.filter(isValidGroup)
-
-    if (validGroups.length === 0) {
-        log.warn(
-            `No valid group selected, use one of: ${Object.keys(groups).join(
-                ', '
-            )}`
-        )
-    } else {
-        log.info(`Running validations for group(s): ${validGroups.join(', ')}`)
-    }
-
-    return validGroups
-        .map(g => groups[g].tools.map(fn => fn(files, fix)))
-        .reduce((a, b) => a.concat(b), [])
-}
-*/

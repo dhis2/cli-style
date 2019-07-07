@@ -1,23 +1,19 @@
 const path = require('path')
 
+const { groups } = require('../src/groups.js')
+const { selectFiles } = require('../src/files.js')
+
 const fix = process.env.CLI_STYLE_FIX === 'true'
 const stage = process.env.CLI_STYLE_STAGE === 'true'
 const all = process.env.CLI_STYLE_ALL === 'true'
 
-const prettierCmd = `prettier ${
-    fix ? '--write' : '--check'
-} --config ${path.resolve(__dirname, 'js', 'prettier.config.js')}`
+const selectedGroups = process.env.CLI_STYLE_GROUPS.split(',')
 
-const eslintCmd = `eslint ${fix ? '--fix' : ''} --config ${path.resolve(
-    __dirname,
-    'js',
-    'eslint.config.js'
-)}`
+const tools = {}
 
-const gitAdd = `git add`
+selectedGroups.map(g => {
+    const { glob, command } = groups[g]
+    tools[glob] = command(fix, all, stage)
+})
 
-// TODO: add support for groups
-module.exports = {
-    '*.{js,jsx,ts,tsx,json,md,yaml}': [prettierCmd, ...(stage ? [gitAdd] : [])],
-    '*.{js,jsx,ts,tsx}': [eslintCmd, ...(stage ? [gitAdd] : [])],
-}
+module.exports = tools
