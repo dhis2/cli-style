@@ -9,6 +9,8 @@ const { groups, isValidGroup, CONFIG_DIR } = require('../groups.js')
 
 const { spawnSync } = require('child_process')
 
+const lintStaged = require('lint-staged')
+
 exports.command = 'validate [group..]'
 
 exports.describe = 'Validate DHIS2 configurations for a/all group(s)'
@@ -48,6 +50,31 @@ exports.handler = argv => {
         log.info(`Running validations for group(s): ${validGroups.join(', ')}`)
     }
 
+    process.env = {
+        ...process.env,
+        CLI_STYLE_FIX: `${fix}`,
+        CLI_STYLE_STAGE: `${stage}`,
+        CLI_STYLE_GROUPS: validGroups.join(','),
+    }
+    lintStaged({
+        configPath: path.join(CONFIG_DIR, 'lint-staged.config.js'),
+        quiet: true,
+        debug: false,
+    })
+        .then(s => {
+            log.info('Linting?', s)
+            process.exit(0)
+        })
+        .catch(e => {
+            log.error('Failed to parse lint-staged configuration', e)
+            process.exit(1)
+        })
+}
+
+// TODO: if `all` is set to true, we need to bypass lint-staged and run
+// the commands manually as lint-staged only ever runs on staged
+// files, hence the name.
+/*
     const cmd = 'npx'
     const args = [
         '--no-install',
@@ -56,9 +83,6 @@ exports.handler = argv => {
         path.join(CONFIG_DIR, 'lint-staged.config.js'),
     ]
 
-    // TODO: if `all` is set to true, we need to bypass lint-staged and run
-    // the commands manually as lint-staged only ever runs on staged
-    // files, hence the name.
     const run = spawnSync(cmd, args, {
         env: {
             ...process.env,
@@ -77,3 +101,4 @@ exports.handler = argv => {
 
     log.info(run.stdout)
 }
+    */
