@@ -6,6 +6,12 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 const { readFile, writeFile } = require('./files.js')
 const { groups, isValidGroup } = require('./groups.js')
 
+const CONFIG_ROOT = path.join(__dirname, '..')
+const CONFIG_DIR = path.join(CONFIG_ROOT, 'config')
+const ESLINT_CONFIG = path.join(CONFIG_DIR, 'js', 'eslint.config.js')
+const PRETTIER_CONFIG = path.join(CONFIG_DIR, 'js', 'prettier.config.js')
+const LINT_STAGED_CONFIG = path.join(CONFIG_DIR, 'lint-staged.config.js')
+
 function wipeConfigProperties(repo) {
     const pkgPath = path.join(repo, 'package.json')
 
@@ -76,6 +82,12 @@ function copy(from, to, overwrite = true) {
 }
 
 module.exports = {
+    CONFIG_ROOT,
+    CONFIG_DIR,
+    PRETTIER_CONFIG,
+    ESLINT_CONFIG,
+    LINT_STAGED_CONFIG,
+
     configure: function configure(repo, group = ['all'], overwrite) {
         const validGroups = group.filter(isValidGroup)
 

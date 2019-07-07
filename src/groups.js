@@ -1,15 +1,14 @@
 const path = require('path')
 const fs = require('fs-extra')
 
+const { CONFIG_DIR, ESLINT_CONFIG, PRETTIER_CONFIG } = require('./config.js')
+
 const tool = t => `node ${path.join(__dirname, 'tools', 'cli.js')} ${t}`
 const tools = {
     js: tool('js'),
     //git: tool('git'),
     package: tool('package'),
 }
-
-const CONFIG_ROOT = path.join(__dirname, '..')
-const CONFIG_DIR = path.join(CONFIG_ROOT, 'config')
 
 const groups = {
     //git: [tools.git],
@@ -39,14 +38,8 @@ const groups = {
     js: {
         tools: [`${tools.js}`],
         configs: [
-            [
-                path.join(__dirname, '../config/js/eslint.config.js'),
-                path.join('.eslintrc.js'),
-            ],
-            [
-                path.join(__dirname, '../config/js/prettier.config.js'),
-                path.join('.prettierrc.js'),
-            ],
+            [ESLINT_CONFIG, path.join('.eslintrc.js')],
+            [PRETTIER_CONFIG, path.join('.prettierrc.js')],
             [
                 path.join(__dirname, '../config/js/browserslist.config.rc'),
                 path.join('.browserslistrc'),
@@ -77,5 +70,4 @@ module.exports = {
     tools,
     groups,
     isValidGroup,
-    CONFIG_DIR,
 }

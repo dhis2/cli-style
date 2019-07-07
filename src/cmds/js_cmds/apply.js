@@ -3,12 +3,7 @@ const path = require('path')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { selectFiles } = require('../../files.js')
-const {
-    popStash,
-    stageFiles,
-    stashUnstagedChanges,
-    getStagedFilesAmount,
-} = require('../../git-files.js')
+const { stageFiles } = require('../../git-files.js')
 
 const { runner } = require('../../tools/js')
 
@@ -25,9 +20,9 @@ exports.builder = {
     },
     stage: {
         describe:
-            'By default the changed files are staged automatically, use `--no-stage` to avoid staging files automatically.',
+            'By default the changed files are not staged automatically, use `--stage` to stage files automatically.',
         type: 'boolean',
-        default: 'true',
+        default: 'false',
     },
 }
 
@@ -37,9 +32,6 @@ exports.handler = argv => {
     const root = process.cwd()
     log.debug(`Root directory: ${root}`)
 
-    const stashFiles = !all && getStagedFilesAmount(root)
-
-    if (stashFiles) stashUnstagedChanges(root)
     const codeFiles = selectFiles(files, all, root)
     const report = runner(codeFiles, true)
 
@@ -57,6 +49,4 @@ exports.handler = argv => {
     if (stage && fixed.length > 0) {
         stageFiles(fixed, root)
     }
-
-    if (stashFiles) popStash(root)
 }

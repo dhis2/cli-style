@@ -5,35 +5,6 @@ const { execSync } = require('child_process')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const getStagedFilesAmount = dir => {
-    const staged = execSync('git diff --name-only --cached', {
-        cwd: dir,
-        encoding: 'utf8',
-    })
-        .split('\n')
-        .filter(val => val)
-
-    return staged.length
-}
-
-const stashUnstagedChanges = dir => {
-    log.debug('Stashing all unstaged changes')
-    execSync('git stash --keep-index --include-untracked', {
-        cwd: dir,
-        encoding: 'utf8',
-    })
-}
-
-const popStash = dir => {
-    log.debug(
-        'Remove latest stashed state and apply to current working tree state'
-    )
-
-    execSync('git stash', { cwd: dir, encoding: 'utf8' })
-    execSync('git stash pop --index 1', { cwd: dir, encoding: 'utf8' })
-    execSync('git stash pop --index 0', { cwd: dir, encoding: 'utf8' })
-}
-
 const stageFile = (file, dir) => {
     log.debug(`Staging ${file}...`)
     const added = execSync(`git add ${file}`, {
@@ -69,10 +40,7 @@ const stagedFiles = dir => {
 }
 
 module.exports = {
-    getStagedFilesAmount,
-    stashUnstagedChanges,
     stagedFiles,
     stageFiles,
     stageFile,
-    popStash,
 }
