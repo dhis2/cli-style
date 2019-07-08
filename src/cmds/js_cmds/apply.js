@@ -3,14 +3,10 @@ const path = require('path')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { selectFiles } = require('../../files.js')
-const {
-    popStash,
-    stageFiles,
-    stashUnstagedChanges,
-    getStagedFilesAmount,
-} = require('../../git-files.js')
+const { stageFiles } = require('../../git-files.js')
 
 const { runner } = require('../../tools/js')
+const { PRETTIER_CONFIG, ESLINT_CONFIG } = require('../../config.js')
 
 exports.command = 'apply [files..]'
 
@@ -25,21 +21,34 @@ exports.builder = {
     },
     stage: {
         describe:
-            'By default the changed files are staged automatically, use `--no-stage` to avoid staging files automatically.',
+            'By default the changed files are not staged automatically, use `--stage` to stage files automatically.',
         type: 'boolean',
-        default: 'true',
+        default: 'false',
+    },
+    eslintConfig: {
+        describe: 'Override the ESLint configuration.',
+        type: 'string',
+        default: ESLINT_CONFIG,
+    },
+    prettierConfig: {
+        describe: 'Override the Prettier configuration.',
+        type: 'string',
+        default: PRETTIER_CONFIG,
     },
 }
 
 exports.handler = argv => {
-    const { all, stage, files } = argv
+    const { all, stage, files, eslintConfig, prettierConfig } = argv
 
     const root = process.cwd()
     log.debug(`Root directory: ${root}`)
 
-    const stashFiles = !all && getStagedFilesAmount(root)
+    process.env = {
+        ...process.env,
+        CLI_STYLE_ESLINT_CONFIG: eslintConfig,
+        CLI_STYLE_PRETTIER_CONFIG: prettierConfig,
+    }
 
-    if (stashFiles) stashUnstagedChanges(root)
     const codeFiles = selectFiles(files, all, root)
     const report = runner(codeFiles, true)
 
@@ -57,6 +66,4 @@ exports.handler = argv => {
     if (stage && fixed.length > 0) {
         stageFiles(fixed, root)
     }
-
-    if (stashFiles) popStash(root)
 }

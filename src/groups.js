@@ -1,7 +1,18 @@
 const path = require('path')
 const fs = require('fs-extra')
 
-const tool = t => require(path.join(__dirname, 'tools', t)).runner
+const {
+    BROWSERSLIST_CONFIG,
+    COMMITLINT_CONFIG,
+    ESLINT_CONFIG,
+    PRETTIER_CONFIG,
+    STALE_CONFIG,
+    DEPENDABOT_CONFIG,
+    EDITORCONFIG_CONFIG,
+    SEMANTIC_PR_CONFIG,
+} = require('./config.js')
+
+const tool = t => `node ${path.join(__dirname, 'tools', 'cli.js')} ${t}`
 const tools = {
     js: tool('js'),
     //git: tool('git'),
@@ -14,44 +25,20 @@ const groups = {
     repo: {
         tools: [],
         configs: [
-            [
-                path.join(__dirname, '../config/editorconfig.config.rc'),
-                path.join('.editorconfig'),
-            ],
-            [
-                path.join(__dirname, '../config/github/dependabot.yml'),
-                path.join('.dependabot', 'config.yml'),
-            ],
-            [
-                path.join(__dirname, '../config/github/stale.yml'),
-                path.join('.github', 'stale.yml'),
-            ],
-            [
-                path.join(__dirname, '../config/github/semantic.yml'),
-                path.join('.github', 'semantic.yml'),
-            ],
+            [EDITORCONFIG_CONFIG, path.join('.editorconfig')],
+            [DEPENDABOT_CONFIG, path.join('.dependabot', 'config.yml')],
+            [STALE_CONFIG, path.join('.github', 'stale.yml')],
+            [SEMANTIC_PR_CONFIG, path.join('.github', 'semantic.yml')],
         ],
     },
 
     js: {
         tools: [tools.js],
         configs: [
-            [
-                path.join(__dirname, '../config/js/eslint.config.js'),
-                path.join('.eslintrc.js'),
-            ],
-            [
-                path.join(__dirname, '../config/js/prettier.config.js'),
-                path.join('.prettierrc.js'),
-            ],
-            [
-                path.join(__dirname, '../config/js/browserslist.config.rc'),
-                path.join('.browserslistrc'),
-            ],
-            [
-                path.join(__dirname, '../config/commitlint.config.js'),
-                path.join('.commitlintrc.js'),
-            ],
+            [ESLINT_CONFIG, path.join('.eslintrc.js')],
+            [PRETTIER_CONFIG, path.join('.prettierrc.js')],
+            [BROWSERSLIST_CONFIG, path.join('.browserslistrc')],
+            [COMMITLINT_CONFIG, path.join('.commitlintrc.js')],
         ],
     },
 

@@ -4,52 +4,24 @@ const fs = require('fs-extra')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { readFile, writeFile } = require('./files.js')
-const { groups, isValidGroup } = require('./groups.js')
 
-function wipeConfigProperties(repo) {
-    const pkgPath = path.join(repo, 'package.json')
+const CONSUMING_ROOT = path.join(process.cwd())
+const CONFIG_ROOT = path.join(__dirname, '..')
+const CONFIG_DIR = path.join(CONFIG_ROOT, 'config')
 
-    try {
-        const fd = fs.readFileSync(pkgPath)
-        const data = JSON.parse(fd.toString('utf8'))
-
-        delete data.prettier
-
-        const out = JSON.stringify(data, null, 2) + '\n'
-        try {
-            fs.writeFileSync(pkgPath, out)
-            log.debug(pkgPath + ' updated and saved')
-        } catch (err) {
-            log.error('failed to get package.json for repo: ' + repo)
-        }
-    } catch (e) {
-        log.error('failed to get package.json: ' + pkgPath)
-    }
-}
-
-function wipeConfigFiles(repo) {
-    const configs = [
-        '.prettierrc',
-        '.prettierrc.yaml',
-        '.prettierrc.yml',
-        '.prettierrc.json',
-        '.prettierrc.toml',
-        '.prettier.config.js',
-        'prettier.config.js',
-        '.prettierrc.js',
-        '.browserslistrc',
-        '.editorconfig',
-    ]
-
-    configs.map(cfg => {
-        try {
-            fs.unlinkSync(path.join(repo, cfg))
-            log.debug(cfg + ' removed from repo: ' + repo)
-        } catch (err) {
-            log.debug('no such file', err)
-        }
-    })
-}
+const ESLINT_CONFIG = path.join(CONFIG_DIR, 'js', 'eslint.config.js')
+const PRETTIER_CONFIG = path.join(CONFIG_DIR, 'js', 'prettier.config.js')
+const LINT_STAGED_CONFIG = path.join(CONFIG_DIR, 'lint-staged.config.js')
+const BROWSERSLIST_CONFIG = path.join(
+    CONFIG_DIR,
+    'js',
+    'browserslist.config.rc'
+)
+const COMMITLINT_CONFIG = path.join(CONFIG_DIR, 'commitlint.config.js')
+const EDITORCONFIG_CONFIG = path.join(CONFIG_DIR, 'editorconfig.config.rc')
+const DEPENDABOT_CONFIG = path.join(CONFIG_DIR, 'github', 'dependabot.yml')
+const STALE_CONFIG = path.join(CONFIG_DIR, 'github', 'stale.yml')
+const SEMANTIC_PR_CONFIG = path.join(CONFIG_DIR, 'github', 'semantic.yml')
 
 function copy(from, to, overwrite = true) {
     try {
@@ -75,26 +47,38 @@ function copy(from, to, overwrite = true) {
     }
 }
 
-module.exports = {
-    configure: function configure(repo, group = ['all'], overwrite) {
-        const validGroups = group.filter(isValidGroup)
+function configure(repo, group = ['all'], overwrite) {
+    const { groups, isValidGroup } = require('./groups.js')
+    const validGroups = group.filter(isValidGroup)
 
-        if (validGroups.length === 0) {
-            log.warn(
-                `No valid group selected, use one of: ${Object.keys(
-                    groups
-                ).join(', ')}`
-            )
-        } else {
-            log.info(`Running setup for group(s): ${validGroups.join(', ')}`)
-        }
-
-        return validGroups.map(g =>
-            groups[g].configs.map(c => copy(c[0], c[1], overwrite))
+    if (validGroups.length === 0) {
+        log.warn(
+            `No valid group selected, use one of: ${Object.keys(groups).join(
+                ', '
+            )}`
         )
-    },
-    cleanup: function cleanup(repo) {
-        wipeConfigProperties(repo)
-        wipeConfigFiles(repo)
-    },
+    } else {
+        log.info(`Running setup for group(s): ${validGroups.join(', ')}`)
+    }
+
+    return validGroups.map(g =>
+        groups[g].configs.map(c => copy(c[0], c[1], overwrite))
+    )
+}
+
+module.exports = {
+    CONSUMING_ROOT,
+    BROWSERSLIST_CONFIG,
+    COMMITLINT_CONFIG,
+    CONFIG_ROOT,
+    CONFIG_DIR,
+    DEPENDABOT_CONFIG,
+    EDITORCONFIG_CONFIG,
+    ESLINT_CONFIG,
+    LINT_STAGED_CONFIG,
+    PRETTIER_CONFIG,
+    SEMANTIC_PR_CONFIG,
+    STALE_CONFIG,
+
+    configure,
 }

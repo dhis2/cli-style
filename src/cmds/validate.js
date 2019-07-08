@@ -1,16 +1,18 @@
-const fs = require('fs-extra')
 const path = require('path')
 
+const lintStaged = require('lint-staged')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { selectFiles } = require('../files.js')
-const {
-    popStash,
-    stageFiles,
-    stashUnstagedChanges,
-    getStagedFilesAmount,
-} = require('../git-files.js')
 const { groups, isValidGroup } = require('../groups.js')
+
+const {
+    CONSUMING_ROOT,
+    PRETTIER_CONFIG,
+    ESLINT_CONFIG,
+    LINT_STAGED_CONFIG,
+} = require('../config.js')
+
+const { collectRejectedFiles, deleteFile } = require('../files.js')
 
 exports.command = 'validate [group..]'
 
@@ -20,7 +22,7 @@ exports.builder = {
     fix: {
         describe: 'Fix problems that can be fixed automatically',
         type: 'boolean',
-        default: 'false',
+        default: 'true',
     },
     stage: {
         describe:
@@ -28,74 +30,56 @@ exports.builder = {
         type: 'boolean',
         default: 'true',
     },
-    all: {
-        describe:
-            'Default behaviour is to only format files staged with Git, use this option to format all files.',
-        type: 'boolean',
-        default: 'false',
+    eslintConfig: {
+        describe: 'Override the ESLint configuration.',
+        type: 'string',
+        default: ESLINT_CONFIG,
+    },
+    prettierConfig: {
+        describe: 'Override the Prettier configuration.',
+        type: 'string',
+        default: PRETTIER_CONFIG,
     },
 }
 
 exports.handler = argv => {
-    const { fix, group, stage, all } = argv
-    const root = process.cwd()
+    const { fix, group = ['all'], stage, eslintConfig, prettierConfig } = argv
 
-    const files = selectFiles(null, all, root)
-
-    const reports = runners(files, group, fix)
-
-    const stashChanges = !all && getStagedFilesAmount(root)
-
-    let violations = 0
-    const fixedFiles = []
-
-    if (stashChanges) stashUnstagedChanges(root)
-
-    for (const report of reports) {
-        report.summarize()
-
-        if (report.hasViolations) {
-            violations += report.violations.length
-        }
-
-        if (fix) {
-            const fixed = report.fix()
-            fixedFiles.push(...fixed)
-        }
-    }
-
-    const hasViolations = violations > 0
-
-    if (hasViolations) {
-        log.error(`${violations} file(s) violate the code standard.`)
-    }
-
-    log.debug(`Fixed files count: ${fixedFiles.length}`)
-    if (!hasViolations && stage && fixedFiles.length > 0) {
-        stageFiles(fixedFiles, root)
-    }
-
-    if (stashChanges) popStash(root)
-
-    if (hasViolations) {
-        process.exit(1)
-    }
-}
-
-function runners(files, group = ['all'], fix = false) {
     const validGroups = group.filter(isValidGroup)
-
     if (validGroups.length === 0) {
         log.warn(
             `No valid group selected, use one of: ${Object.keys(groups).join(
                 ', '
             )}`
         )
+        process.exit(1)
     } else {
         log.info(`Running validations for group(s): ${validGroups.join(', ')}`)
     }
 
-    return validGroups
-        .map(g => groups[g].tools.map(fn => fn(files, fix)))
-        .reduce((a, b) => a.concat(b), [])
+    process.env = {
+        ...process.env,
+        CLI_STYLE_ESLINT_CONFIG: eslintConfig,
+        CLI_STYLE_PRETTIER_CONFIG: prettierConfig,
+        CLI_STYLE_FIX: `${fix}`,
+        CLI_STYLE_STAGE: `${stage}`,
+        CLI_STYLE_GROUPS: validGroups.join(','),
+    }
+
+    lintStaged({
+        configPath: LINT_STAGED_CONFIG,
+        quiet: true,
+        debug: false,
+    })
+        .then(s => {
+            collectRejectedFiles(CONSUMING_ROOT).map(deleteFile)
+            if (!s) {
+                process.exit(1)
+            }
+            process.exit(0)
+        })
+        .catch(e => {
+            log.error('Failed to parse lint-staged configuration', e)
+            process.exit(1)
+        })
 }
