@@ -17,13 +17,25 @@ const {
     LOCAL_ESLINT_CONFIG,
 } = require('./paths.js')
 
-const js = {
-    'js/eslint': {
+const linter = {
+    'linter/eslint': {
         configs: [[LOCAL_ESLINT_CONFIG, path.join('.eslintrc.js')]],
     },
+}
 
-    'js/prettier': {
+const formatter = {
+    'formatter/prettier': {
         configs: [[LOCAL_PRETTIER_CONFIG, path.join('.prettierrc.js')]],
+    },
+}
+
+const git = {
+    'git/husky': {
+        configs: [[HUSKY_CONFIG, path.join('.huskyrc.js')]],
+    },
+
+    'git/lint-staged': {
+        configs: [[LINT_STAGED_CONFIG, path.join('.lint-stagedrc.js')]],
     },
 }
 
@@ -40,47 +52,76 @@ const github = {
 }
 
 const base = {
-    ...github,
-
-    'base/husky': {
-        configs: [[HUSKY_CONFIG, path.join('.huskyrc.js')]],
+    'base/editorconfig': {
+        configs: [[EDITORCONFIG_CONFIG, path.join('.editorconfig')]],
     },
 
-    'base/editorconf': {
-        configs: [[EDITORCONFIG_CONFIG, path.join('.editorconfig')]],
+    'base/browserslist': {
+        configs: [[BROWSERSLIST_CONFIG, path.join('.browserslistrc')]],
     },
 }
 
 // setup the groups which can be targeted by `d2-style setup`
 const groups = {
-    ...js,
     ...base,
+    ...formatter,
+    ...git,
     ...github,
-
-    browserslist: {
-        configs: [[BROWSERSLIST_CONFIG, path.join('.browserslistrc')]],
-    },
-
-    'lint-staged': {
-        configs: [[LINT_STAGED_CONFIG, path.join('.lint-stagedrc.js')]],
-    },
+    ...linter,
 }
 
-groups.all = {
+groups['defaults/all'] = {
     configs: Object.values(groups)
         .map(t => t.configs)
         .reduce((a, b) => a.concat(b), []),
 }
 
-groups.js = {
+groups['defaults/js'] = {
     configs: Object.keys(groups)
-        .map(t => (Object.keys(js).includes(t) ? groups[t].configs : []))
+        .map(t =>
+            [
+                'base/editorconfig',
+                'base/browserslist',
+                'linter/eslint',
+                'formatter/prettier',
+                'git/husky',
+                'github/dependabot',
+                'github/probot-stale',
+                'github/probot-semantic-pull-requests',
+            ].includes(t)
+                ? groups[t].configs
+                : []
+        )
         .reduce((a, b) => a.concat(b), []),
 }
 
-groups.base = {
+groups['defaults/base'] = {
     configs: Object.keys(groups)
         .map(t => (Object.keys(base).includes(t) ? groups[t].configs : []))
+        .reduce((a, b) => a.concat(b), []),
+}
+
+groups['defaults/github'] = {
+    configs: Object.keys(groups)
+        .map(t => (Object.keys(github).includes(t) ? groups[t].configs : []))
+        .reduce((a, b) => a.concat(b), []),
+}
+
+groups['defaults/git'] = {
+    configs: Object.keys(groups)
+        .map(t => (Object.keys(git).includes(t) ? groups[t].configs : []))
+        .reduce((a, b) => a.concat(b), []),
+}
+
+groups['defaults/linters'] = {
+    configs: Object.keys(groups)
+        .map(t => (Object.keys(linter).includes(t) ? groups[t].configs : []))
+        .reduce((a, b) => a.concat(b), []),
+}
+
+groups['defaults/formatters'] = {
+    configs: Object.keys(groups)
+        .map(t => (Object.keys(formatter).includes(t) ? groups[t].configs : []))
         .reduce((a, b) => a.concat(b), []),
 }
 

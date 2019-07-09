@@ -27,7 +27,7 @@ module.exports = (file, text, apply = false) => {
 
     try {
         const options = prettier.resolveConfig.sync(file, {
-            editorconfig: false,
+            editorconfig: true,
             config: prettierConfig,
         })
 

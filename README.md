@@ -76,7 +76,14 @@ To regenerate and overwrite, pass the `--force` flag:
 npx d2-style setup base --force
 ```
 
-From here, everything should be fine and ready to go.
+For a JavaScript project you will very likely want to use the
+`defaults/js` group.
+
+```sh
+npx d2-style setup defaults/js
+```
+
+Which includes a formatter, linter, git hook manager, etc.
 
 ## How it works
 
