@@ -18,16 +18,45 @@ const {
     LOCAL_ESLINT_CONFIG,
 } = require('./paths.js')
 
-const groups = {
-    basic: {
-        configs: [
-            [LOCAL_HUSKY_CONFIG, path.join('.huskyrc.js')],
-            [EDITORCONFIG_CONFIG, path.join('.editorconfig')],
-            [DEPENDABOT_CONFIG, path.join('.dependabot', 'config.yml')],
-            [STALE_CONFIG, path.join('.github', 'stale.yml')],
-            [SEMANTIC_PR_CONFIG, path.join('.github', 'semantic.yml')],
-        ],
+const js = {
+    'js/eslint': {
+        configs: [[LOCAL_ESLINT_CONFIG, path.join('.eslintrc')]],
     },
+
+    'js/prettier': {
+        configs: [[LOCAL_PRETTIER_CONFIG, path.join('.prettierrc.js')]],
+    },
+}
+
+const github = {
+    'github/dependabot': {
+        configs: [[DEPENDABOT_CONFIG, path.join('.dependabot', 'config.yml')]],
+    },
+    'github/probot-stale': {
+        configs: [[STALE_CONFIG, path.join('.github', 'stale.yml')]],
+    },
+    'github/probot-semantic-pull-requests': {
+        configs: [[SEMANTIC_PR_CONFIG, path.join('.github', 'semantic.yml')]],
+    },
+}
+
+const base = {
+    ...github,
+
+    'base/husky': {
+        configs: [[LOCAL_HUSKY_CONFIG, path.join('.huskyrc.js')]],
+    },
+
+    'base/editorconf': {
+        configs: [[EDITORCONFIG_CONFIG, path.join('.editorconfig')]],
+    },
+}
+
+// setup the groups which can be targeted by `d2-style setup`
+const groups = {
+    ...js,
+    ...base,
+    ...github,
 
     browserslist: {
         configs: [[BROWSERSLIST_CONFIG, path.join('.browserslistrc')]],
@@ -35,14 +64,6 @@ const groups = {
 
     'lint-staged': {
         configs: [[LINT_STAGED_CONFIG, path.join('.lint-stagedrc.js')]],
-    },
-
-    eslint: {
-        configs: [[LOCAL_ESLINT_CONFIG, path.join('.eslintrc.js')]],
-    },
-
-    prettier: {
-        configs: [[LOCAL_PRETTIER_CONFIG, path.join('.prettierrc.js')]],
     },
 }
 
@@ -53,9 +74,14 @@ groups.all = {
 }
 
 groups.js = {
-    configs: Object.values(groups)
-        .filter(t => ['eslint', 'prettier'].includes(t))
-        .map(t => t.configs)
+    configs: Object.keys(groups)
+        .map(t => (Object.keys(js).includes(t) ? groups[t].configs : []))
+        .reduce((a, b) => a.concat(b), []),
+}
+
+groups.base = {
+    configs: Object.keys(groups)
+        .map(t => (Object.keys(base).includes(t) ? groups[t].configs : []))
         .reduce((a, b) => a.concat(b), []),
 }
 

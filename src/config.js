@@ -29,15 +29,15 @@ function copy(from, to, overwrite = true) {
     }
 }
 
-function configure(repo, group = ['all'], overwrite) {
+function configure(repo, group = [''], overwrite) {
     const { groups, isValidGroup } = require('./groups.js')
     const validGroups = group.filter(isValidGroup)
 
     if (validGroups.length === 0) {
         log.warn(
-            `No valid group selected, use one of: ${Object.keys(groups).join(
-                ', '
-            )}`
+            `No valid group selected, available groups:\n ${Object.keys(
+                groups
+            ).join('\n ')}`
         )
     } else {
         log.info(`Running setup for group(s): ${validGroups.join(', ')}`)
