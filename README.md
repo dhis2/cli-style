@@ -91,7 +91,7 @@ From here, everything should be fine and ready to go.
    executed.
 
 4. In the case of `pre-commit`, the command is `d2-style validate`,
-   which sets up `lint-staged` configuration.
+   which resolves the relevant `lint-staged` configuration.
 
 5. `lint-staged` is executed and passes all the _staged_ files matching a
    _glob_ in the lint-staged configuration to the designated command,
@@ -100,7 +100,7 @@ From here, everything should be fine and ready to go.
 
 6. If all goes well, `d2-style js apply --stage` exits with a exit code
    of `0`, which will let lint-staged to continue with matching more
-   _globs_ and running additional linters. Well everything is good,
+   _globs_ and running additional linters. When everything is good,
    `lint-staged` exits with code `0`.
 
 7. With the default Husky config, the commit message itself will be
@@ -109,6 +109,16 @@ From here, everything should be fine and ready to go.
 
 8. The commit is created. If at any point a tool exits with a non-zero
    exit code, then the process halts.
+
+## Command chain
+
+1. **Husky** runs `d2-style validate`.
+
+2. `validate` runs **lint-staged**.
+
+3. **lint-staged** runs **linters**.
+
+4. **Husky** runs commit message check: `d2-style commit check`.
 
 ## Overrides
 
@@ -129,6 +139,12 @@ module.exports = {
        'pre-commit': 'd2-style validate',
     },
 }
+```
+
+It can also be installed with:
+
+```sh
+npx d2-style setup base/husky
 ```
 
 From here, the commands for each hook and be customized and/or extended.
@@ -179,6 +195,10 @@ Now we have to tell Husky to tell `d2-style validate` to use our custom
 ```js
 'pre-commit': 'd2-style validate --lint-staged-config .lint-stagedrc.js',
 ```
+
+We do not automatically look for a configuration file in the current
+working directory as that can lead to unexpected results when using the
+`d2-style` command globally.
 
 ### ESLint
 
@@ -261,4 +281,40 @@ have one.
 
 ### Prettier
 
-_coming soon_
+#### N.B. Do not override the Prettier configuration for core apps and
+libraries!
+
+There should be little reason to modify the Prettier configuration,
+though there is an escape hatch if need be:
+
+```
+npx d2-style setup js/prettier
+```
+
+This generates a `.prettierrc.js` file for you with the contents:
+
+```js
+module.exports = {
+    ...require('@dhis2/cli-style/config/js/prettier.config.js'),
+}
+```
+
+From here, you can add your overrides under the base configuration:
+
+```js
+module.exports = {
+    ...require('@dhis2/cli-style/config/js/prettier.config.js'),
+    // overrides go below here
+    semi: true,
+}
+```
+
+Now you can update your `.huskyrc.js` line where you call `d2-style
+validate` to:
+
+```js
+'pre-commit': 'd2-style validate --prettier-config .prettierrc.js',
+```
+
+Your custom Prettier config will be used to format code when `validate`
+runs.
