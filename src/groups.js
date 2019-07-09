@@ -13,14 +13,13 @@ const {
     SEMANTIC_PR_CONFIG,
     LINT_STAGED_CONFIG,
 
-    LOCAL_HUSKY_CONFIG,
     LOCAL_PRETTIER_CONFIG,
     LOCAL_ESLINT_CONFIG,
 } = require('./paths.js')
 
 const js = {
     'js/eslint': {
-        configs: [[LOCAL_ESLINT_CONFIG, path.join('.eslintrc')]],
+        configs: [[LOCAL_ESLINT_CONFIG, path.join('.eslintrc.js')]],
     },
 
     'js/prettier': {
@@ -44,7 +43,7 @@ const base = {
     ...github,
 
     'base/husky': {
-        configs: [[LOCAL_HUSKY_CONFIG, path.join('.huskyrc.js')]],
+        configs: [[HUSKY_CONFIG, path.join('.huskyrc.js')]],
     },
 
     'base/editorconf': {

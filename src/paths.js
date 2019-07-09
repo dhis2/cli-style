@@ -22,9 +22,8 @@ const STALE_CONFIG = path.join(CONFIG_DIR, 'github', 'stale.yml')
 const SEMANTIC_PR_CONFIG = path.join(CONFIG_DIR, 'github', 'semantic.yml')
 
 // local configuration files for repositories
-const LOCAL_ESLINT_CONFIG = path.join(CONFIG_DIR, 'js', 'eslint.local.rc')
+const LOCAL_ESLINT_CONFIG = path.join(CONFIG_DIR, 'js', 'eslint.local.js')
 const LOCAL_PRETTIER_CONFIG = path.join(CONFIG_DIR, 'js', 'prettier.local.js')
-const LOCAL_HUSKY_CONFIG = path.join(CONFIG_DIR, 'husky.local.js')
 
 module.exports = {
     CONSUMING_ROOT,
@@ -36,7 +35,6 @@ module.exports = {
     EDITORCONFIG_CONFIG,
     ESLINT_CONFIG,
     LOCAL_ESLINT_CONFIG,
-    LOCAL_HUSKY_CONFIG,
     LOCAL_PRETTIER_CONFIG,
     LINT_STAGED_CONFIG,
     PRETTIER_CONFIG,
