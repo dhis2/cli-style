@@ -196,8 +196,69 @@ differences in the configuration format.
 
 As the other tools, `d2-style` by default uses the bundled ESLint
 configuration as its
-[`baseConfig`](https://eslint.org/docs/developer-guide/nodejs-api#cliengine), and allows 
+[`baseConfig`](https://eslint.org/docs/developer-guide/nodejs-api#cliengine),
+and allows a user to extend the configuration in two different ways.
 
+Let's start with the most common one, and install the local
+`.eslintrc.js` config file into our repo.
+
+```sh
+npx d2-style setup js/eslint
+```
+
+This gives us a very basic configuration file, which doesn't do much.
+
+```js
+module.exports = {
+    extends: [],
+}
+```
+
+From here, if you are using Babel to transpile your modern JavaScript,
+you will probably need to use `babel-eslint` with ESLint to parse and
+lint your code, so let's set that up.
+
+The errors I got looked like:
+
+```sh
+src/Tabs/ScrollBar.js
+Line 10: Parsing error: Unexpected token =
+```
+
+```sh
+# assuming you already use babel we only need babel-eslint
+
+yarn add --dev babel-eslint
+```
+
+Now update the `.eslintrc.js` file to use the new parser:
+
+```js
+module.exports = {
+    parser: 'babel-eslint',
+}
+```
+
+And run `d2-style` again:
+
+```sh
+npx d2-style js check --all
+119 javascript file(s) checked.
+```
+
+You can install plugins, extend presets, etc. and `d2-style` will do its
+best to resolve them to the repository's `node_modules/` directory. If
+it fails to parse your custom `.eslintrc.js` file, it will fall back to
+its internal configuration files.
+
+See [configuring ESLint](https://eslint.org/docs/user-guide/configuring)
+for more information on how to configure ESLint.
+
+Also, please note that if you already have a `.eslintrc.*` file,
+`d2-style` will pick that up according to the priority defined in
+ESLint, which might give you surprising results, so make sure you only
+have one.
 
 ### Prettier
 
+_coming soon_
