@@ -26,16 +26,8 @@
     "perfy": "^1.1.5",
     "prettier": "^1.18.2",
     "semver": "^6.2.0",
-    "yargs": "^13.2.4"
-  },
-  "devDependencies": {
+    "yargs": "^13.2.4",
     "husky": "^3.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "./bin/d2-style commit check",
-      "pre-commit": "./bin/d2-style validate --lint-staged-config .lint-stagedrc.js"
-    }
   },
   "publishConfig": {
     "access": "public"

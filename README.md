@@ -7,7 +7,7 @@
 [![dhis2-cli Compatible](https://img.shields.io/badge/dhis2-cli-ff69b4.svg)](https://github.com/dhis2/cli)
 [![@dhis2/cli-style on npm](https://img.shields.io/npm/v/@dhis2/cli-style.svg)](https://www.npmjs.com/package/@dhis2/cli-style)
 [![travis.com build](https://img.shields.io/travis/com/dhis2/cli-style.svg)](https://travis-ci.com/dhis2/cli-style)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org) [![Greenkeeper badge](https://badges.greenkeeper.io/dhis2/cli-style.svg)](https://greenkeeper.io/)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 This tool enforces DHIS2 configuration for:
 
@@ -42,58 +42,44 @@ npm install @dhis2/cli-style --save-dev
 ### Check out the help for the different commands
 
 ```
-d2-style --help
-d2-style js --help
-d2-style js check --help
-d2-style js apply --help
-d2-style js install --help
+npx d2-style --help
+
+npx d2-style validate --help
+npx d2-style setup --help
+
+npx d2-style js --help
+npx d2-style js check --help
+npx d2-style js apply --help
 ```
 
-## Setup for JavaScript project
+## Automated setup
 
-### Add a format `script` to apply styles at will
-
-Add this to `package.json` in the script part:
-
-```
-{
-    scripts: {
-        "format": "d2-style js apply"
-    }
-}
-```
-
-Run the `format` script to apply our common standards.
-
-### Add pre-commit hook for commit message linter
-
-Install [Husky](https://github.com/typicode/husky) or other hook handler:
+`d2-style` can automatically generate the configuration files into the
+repository for you, which gives you all of the relevant config files by
+default.
 
 ```sh
-npm install husky --save-dev
-
-# or
-
-yarn add husky --dev
+npx d2-style setup
 ```
 
-Add prop to `package.json`:
+The `setup` command also accepts one or more configuration groups,
+currently `all`, `js`, or `repo`. They can be combined as well:
 
-```json
-"husky": {
-    "hooks": {
-        "commit-msg": "d2-style commit check",
-        "pre-commit": "d2-style js apply"
-    }
-}
+```sh
+npx d2-style setup js
+npx d2-style setup repo js
+npx d2-style setup all
+npx d2-style setup
 ```
 
-## Migrating from custom configs
+If a config file already exists, the tool skips overwriting it, in case
+there are local modifications.
 
-Existing configuration in e.g. `.prettierrc`, et. al. can
-be removed as they will be overridden by the configuration bundled with
-`cli-style` anyway.
+To regenerate and overwrite, pass the `--force` flag:
 
-Any dependencies to Prettier can also be removed.
+```sh
+npx d2-style setup --force
+```
 
-Works with CRA (with or without ejecting).
+From here, everything should be fine and ready to go.
+
