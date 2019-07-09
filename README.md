@@ -281,8 +281,7 @@ have one.
 
 ### Prettier
 
-#### N.B. Do not override the Prettier configuration for core apps and
-libraries!
+#### N.B. Do not override the Prettier configuration for core apps and libraries!
 
 There should be little reason to modify the Prettier configuration,
 though there is an escape hatch if need be:
