@@ -64,7 +64,7 @@ The `setup` command works with the notion of groups. To install the
 "base" group, which contains the bare essentials you need:
 
 ```sh
-npx d2-style setup base
+npx d2-style setup defaults/base
 ```
 
 If a config file already exists, the tool skips overwriting it, in case
@@ -73,7 +73,7 @@ there are local modifications.
 To regenerate and overwrite, pass the `--force` flag:
 
 ```sh
-npx d2-style setup base --force
+npx d2-style setup defaults/base --force
 ```
 
 For a JavaScript project you will very likely want to use the
@@ -90,7 +90,7 @@ Which includes a formatter, linter, git hook manager, etc.
 1. When `d2-style` is installed, Husky installs itself as a Git hook,
    since it is a runtime dependency of `d2-style`.
 
-2. `d2-style setup base` installs the necessary configuration files in the
+2. `d2-style setup defaults/base` installs the necessary configuration files in the
    repo. 
 
 3. Now, when a hook is triggered (e.g. `pre-commit`), the `.huskyrc.js`
@@ -151,7 +151,7 @@ module.exports = {
 It can also be installed with:
 
 ```sh
-npx d2-style setup base/husky
+npx d2-style setup git/husky
 ```
 
 From here, the commands for each hook and be customized and/or extended.
@@ -164,10 +164,7 @@ configuration file for it in the repository. To override the config, we
 must first generate one in the repository:
 
 ```sh
-npx d2-style setup lint-staged
-Setting up configuration files...
-Running setup for group(s): lint-staged
-Installing configuration file: .lint-stagedrc.js
+npx d2-style setup git/lint-staged
 ```
 
 Now, in `.lint-stagedrc.js` you can modify the linters to be run and on
@@ -230,7 +227,7 @@ Let's start with the most common one, and install the local
 `.eslintrc.js` config file into our repo.
 
 ```sh
-npx d2-style setup js/eslint
+npx d2-style setup linter/eslint
 ```
 
 This gives us a very basic configuration file, which doesn't do much.
@@ -294,7 +291,7 @@ There should be little reason to modify the Prettier configuration,
 though there is an escape hatch if need be:
 
 ```
-npx d2-style setup js/prettier
+npx d2-style setup formatter/prettier
 ```
 
 This generates a `.prettierrc.js` file for you with the contents:
