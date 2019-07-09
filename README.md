@@ -90,7 +90,7 @@ Which includes a formatter, linter, git hook manager, etc.
 1. When `d2-style` is installed, Husky installs itself as a Git hook,
    since it is a runtime dependency of `d2-style`.
 
-2. `d2-style setup defaults/base` installs the necessary configuration files in the
+2. `d2-style setup defaults/js` installs the necessary configuration files in the
    repo. 
 
 3. Now, when a hook is triggered (e.g. `pre-commit`), the `.huskyrc.js`
