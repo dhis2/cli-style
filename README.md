@@ -275,6 +275,14 @@ best to resolve them to the repository's `node_modules/` directory. If
 it fails to parse your custom `.eslintrc.js` file, it will fall back to
 its internal configuration files.
 
+If that happens, run the command with the `--verbose` flag and you will
+see something like:
+
+```
+[DEBUG] Could not init ESLint with local configuration, falling back to
+built-in. Error from local cfg:
+```
+
 See [configuring ESLint](https://eslint.org/docs/user-guide/configuring)
 for more information on how to configure ESLint.
 
