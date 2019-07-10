@@ -1,5 +1,6 @@
 const path = require('path')
 const eslint = require('eslint')
+
 const linter = new eslint.Linter()
 
 const log = require('@dhis2/cli-helpers-engine').reporter
@@ -25,16 +26,19 @@ module.exports = (file, text, apply = false) => {
 
     const eslintConfig = process.env.CLI_STYLE_ESLINT_CONFIG || ESLINT_CONFIG
 
+    const engine = new eslint.CLIEngine({
+        baseConfig: require(eslintConfig),
+        useEslintrc: true,
+    })
+
+    const config = engine.getConfigForFile(file)
+
     try {
-        const { messages, fixed, output } = linter.verifyAndFix(
-            text,
-            require(eslintConfig),
-            {
-                filename: path.basename(file),
-                allowInlineConfig: true,
-                reportUnusedDisableDirectives: false,
-            }
-        )
+        const { messages, fixed, output } = linter.verifyAndFix(text, config, {
+            filename: path.basename(file),
+            allowInlineConfig: true,
+            reportUnusedDisableDirectives: false,
+        })
 
         response.fixed = fixed
         response.output = output

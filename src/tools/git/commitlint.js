@@ -2,9 +2,12 @@ const read = require('@commitlint/read')
 const load = require('@commitlint/load')
 const lint = require('@commitlint/lint')
 const { format } = require('@commitlint/format')
-const config = require('@commitlint/config-conventional')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
+
+const { COMMITLINT_CONFIG } = require('../../paths.js')
+
+const config = require(COMMITLINT_CONFIG)
 
 module.exports = async (msg = '') => {
     try {

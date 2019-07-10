@@ -19,8 +19,9 @@ const {
 } = require('./paths.js')
 
 const groups = {
-    repo: {
+    basic: {
         configs: [
+            [LOCAL_HUSKY_CONFIG, path.join('.huskyrc.js')],
             [EDITORCONFIG_CONFIG, path.join('.editorconfig')],
             [DEPENDABOT_CONFIG, path.join('.dependabot', 'config.yml')],
             [STALE_CONFIG, path.join('.github', 'stale.yml')],
@@ -28,20 +29,32 @@ const groups = {
         ],
     },
 
-    js: {
-        configs: [
-            [LOCAL_HUSKY_CONFIG, path.join('.huskyrc.js')],
-            [LOCAL_ESLINT_CONFIG, path.join('.eslintrc.js')],
-            [LOCAL_PRETTIER_CONFIG, path.join('.prettierrc.js')],
-            [BROWSERSLIST_CONFIG, path.join('.browserslistrc')],
-            [COMMITLINT_CONFIG, path.join('.commitlintrc.js')],
-            [LINT_STAGED_CONFIG, path.join('.lint-stagedrc.js')],
-        ],
+    browserslist: {
+        configs: [[BROWSERSLIST_CONFIG, path.join('.browserslistrc')]],
+    },
+
+    'lint-staged': {
+        configs: [[LINT_STAGED_CONFIG, path.join('.lint-stagedrc.js')]],
+    },
+
+    eslint: {
+        configs: [[LOCAL_ESLINT_CONFIG, path.join('.eslintrc.js')]],
+    },
+
+    prettier: {
+        configs: [[LOCAL_PRETTIER_CONFIG, path.join('.prettierrc.js')]],
     },
 }
 
 groups.all = {
     configs: Object.values(groups)
+        .map(t => t.configs)
+        .reduce((a, b) => a.concat(b), []),
+}
+
+groups.js = {
+    configs: Object.values(groups)
+        .filter(t => ['eslint', 'prettier'].includes(t))
         .map(t => t.configs)
         .reduce((a, b) => a.concat(b), []),
 }
