@@ -8,19 +8,9 @@ const { readFile, writeFile } = require('./files.js')
 function copy(from, to, overwrite = true) {
     try {
         if (fs.existsSync(to) && !overwrite) {
-            log.warn(
-                `Skip existing configuration file: ${path.relative(
-                    process.cwd(),
-                    to
-                )}`
-            )
+            log.print(`Skip existing: ${path.relative(process.cwd(), to)}`)
         } else {
-            log.info(
-                `Installing configuration file: ${path.relative(
-                    process.cwd(),
-                    to
-                )}`
-            )
+            log.print(`Installing: ${path.relative(process.cwd(), to)}`)
         }
         fs.ensureDirSync(path.dirname(to))
         fs.copySync(from, to, { overwrite })
@@ -30,22 +20,39 @@ function copy(from, to, overwrite = true) {
 }
 
 function configure(repo, group = [''], overwrite) {
-    const { groups, isValidGroup } = require('./groups.js')
-    const validGroups = group.filter(isValidGroup)
+    const {
+        isValidGroup,
+        isValidProject,
+        resolveProjectToGroups,
+        printGroups,
+        groupConfigs,
+        expandGroupAll,
+    } = require('./groups.js')
+
+    const validProjects = group.filter(isValidProject)
+
+    const projectGroups = validProjects
+        .map(resolveProjectToGroups)
+        .reduce((a, b) => a.concat(b), [])
+
+    const expandedGroups = [...projectGroups, ...group]
+        .map(expandGroupAll)
+        .reduce((a, b) => a.concat(b), [])
+
+    const groups = [...new Set(expandedGroups)]
+
+    const validGroups = groups.filter(isValidGroup)
 
     if (validGroups.length === 0) {
-        log.warn(
-            `No valid group selected, available groups:\n ${Object.keys(
-                groups
-            ).join('\n ')}`
-        )
+        log.warn(`No valid group selected...\n\n${printGroups()}`)
     } else {
-        log.info(`Running setup for group(s): ${validGroups.join(', ')}`)
+        log.info(`Running setup for group(s): ${validGroups.join('\n * ')}`)
     }
 
-    return validGroups.map(g =>
-        groups[g].configs.map(c => copy(c[0], c[1], overwrite))
-    )
+    return validGroups
+        .map(groupConfigs)
+        .reduce((a, b) => a.concat(b), [])
+        .map(c => copy(c[0], c[1], overwrite))
 }
 
 module.exports = {
