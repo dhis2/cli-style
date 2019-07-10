@@ -56,7 +56,12 @@ module.exports = (file, text, apply = false) => {
             })
         }
     } catch (error) {
-        log.error(`Prettier format failed with error:\n${error}`)
+        log.error(
+            `Prettier format failed on file ${path.relative(
+                process.cwd(),
+                file
+            )} with error:\n${error}`
+        )
         process.exit(1)
     }
 
