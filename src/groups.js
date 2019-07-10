@@ -17,7 +17,31 @@ const {
     LOCAL_ESLINT_CONFIG,
 } = require('./paths.js')
 
-// setup the groups which can be targeted by `d2-style setup`
+/**
+ * The group definitions for what configuration files can be installed
+ * with `d2-style` setup.
+ *
+ * The format of a selector is: 'identifier/specifier', e.g.
+ *
+ * git/husky
+ * git/lint-staged
+ *
+ * This is represented by a multi-dimensional array:
+ *
+ * [ identifier, [
+ *   [ specifier_one, configuration_files ],
+ *   [ specifier_two, configuration_files ],
+ * ]
+ *
+ * configuration_files is also expected to be an array with the format:
+ *
+ * [ bundled_config_file, target_config_file ]
+ *
+ * The first slot in the array describes the configuration file which is
+ * bundled, and the second slot to where the bundled configuration file
+ * should be installed.
+ *
+ */
 const groups = [
     ['linter', [['eslint', [LOCAL_ESLINT_CONFIG, path.join('.eslintrc.js')]]]],
     [
@@ -60,6 +84,14 @@ const groups = [
     ],
 ]
 
+/**
+ * Projects follow a simpler structure, where the selector is assumed to
+ * always be 'projects', so the 'identifier' is moved up to the same
+ * level as group in the `groups` definition.
+ *
+ * Another difference is that a project just defines the selectors it
+ * wants to bundle, acting as a short-hand.
+ */
 const projects = [
     [
         'js',
@@ -208,6 +240,7 @@ const groupConfigs = selector => {
 
 module.exports = {
     groups,
+    projects,
     expandGroupAll,
     isValidGroup,
     isValidProject,

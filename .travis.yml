@@ -3,6 +3,7 @@ node_js:
 - lts/*
 script:
 - "./bin/d2-style js check --all"
+- yarn test
 deploy:
 - provider: script
   skip_cleanup: true
