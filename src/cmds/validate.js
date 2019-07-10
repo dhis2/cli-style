@@ -20,7 +20,8 @@ exports.describe = 'Run validation pre-commit hook'
 
 exports.builder = {
     fix: {
-        describe: 'Fix problems that can be fixed automatically',
+        describe:
+            'Fix problems that can be fixed automatically, use `--no-fix` to check files without applying fixes.',
         type: 'boolean',
         default: 'true',
     },
