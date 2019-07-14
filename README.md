@@ -61,10 +61,10 @@ npx d2-style setup
 ```
 
 The `setup` command works with the notion of groups. To install the
-"base" group, which contains the bare essentials you need:
+"base/all" group, which contains the bare essentials you need:
 
 ```sh
-npx d2-style setup defaults/base
+npx d2-style setup base/all
 ```
 
 If a config file already exists, the tool skips overwriting it, in case
@@ -73,14 +73,14 @@ there are local modifications.
 To regenerate and overwrite, pass the `--force` flag:
 
 ```sh
-npx d2-style setup defaults/base --force
+npx d2-style setup base/all --force
 ```
 
 For a JavaScript project you will very likely want to use the
-`defaults/js` group.
+`project/js` group.
 
 ```sh
-npx d2-style setup defaults/js
+npx d2-style setup project/js
 ```
 
 Which includes a formatter, linter, git hook manager, etc.
@@ -90,7 +90,7 @@ Which includes a formatter, linter, git hook manager, etc.
 1. When `d2-style` is installed, Husky installs itself as a Git hook,
    since it is a runtime dependency of `d2-style`.
 
-2. `d2-style setup defaults/js` installs the necessary configuration files in the
+2. `d2-style setup project/js` installs the necessary configuration files in the
    repo. 
 
 3. Now, when a hook is triggered (e.g. `pre-commit`), the `.huskyrc.js`
