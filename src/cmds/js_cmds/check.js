@@ -2,6 +2,7 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { runner } = require('../../tools/js')
 const { selectFiles } = require('../../files.js')
+const { PRETTIER_CONFIG, ESLINT_CONFIG } = require('../../paths.js')
 
 exports.command = 'check [files..]'
 
@@ -28,7 +29,7 @@ exports.handler = argv => {
     report.summarize()
 
     if (report.hasViolations) {
-        log.error(
+        log.print(
             `${report.violations.length} file(s) violate the code standard.`
         )
         process.exit(1)

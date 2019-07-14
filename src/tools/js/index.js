@@ -81,7 +81,7 @@ function fix(fixable) {
         return f.file
     })
 
-    log.info(`Applied fixes for ${fixed.length} file(s).`)
+    log.print(`Applied fixes for ${fixed.length} file(s).`)
     return fixed
 }
 
@@ -89,15 +89,15 @@ function fix(fixable) {
  * Pretty print a report object
  */
 function print(report, violations) {
-    log.info(`${report.length} javascript file(s) checked.`)
+    log.print(`${report.length} javascript file(s) checked.`)
 
     if (violations.length > 0) {
         violations.forEach(f => {
             const p = path.relative(process.cwd(), f.file)
-            log.info('')
+            log.print('')
             log.print(`${p}`)
-            f.messages.map(m => log.info(`${m.message}`))
-            log.info('')
+            f.messages.map(m => log.print(`${m.message}`))
+            log.print('')
         })
     }
 }

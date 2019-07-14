@@ -1,16 +1,10 @@
 const path = require('path')
 const eslint = require('eslint')
-const linter = new eslint.Linter()
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { readFile, writeFile } = require('../../files.js')
-
-const eslintConfig = require(path.join(
-    __dirname,
-    '../../../config/js/eslint.config.js'
-))
-log.debug('ESLint configuration file', eslintConfig)
+const { CONFIG_ROOT, CONSUMING_ROOT, ESLINT_CONFIG } = require('../../paths.js')
 
 /**
  * This a checker used by {tools/js/index.js} and needs to follow a
@@ -28,16 +22,47 @@ module.exports = (file, text, apply = false) => {
         fixed: false,
     }
 
+    const eslintConfig = process.env.CLI_STYLE_ESLINT_CONFIG || ESLINT_CONFIG
+
+    let report
+    const options = {
+        baseConfig: require(eslintConfig),
+        fix: apply,
+        ignore: false,
+    }
     try {
-        const { messages, fixed, output } = linter.verifyAndFix(
-            text,
-            eslintConfig,
-            {
-                filename: path.basename(file),
-                allowInlineConfig: true,
-                reportUnusedDisableDirectives: false,
-            }
+        const engine = new eslint.CLIEngine({
+            ...options,
+            useEslintrc: true,
+        })
+
+        report = engine.executeOnFiles([file])
+        //log.debug(`Resolved configuration for ${path.basename(file)}`, engine.getConfigForFile(file))
+    } catch (err) {
+        log.debug(
+            'Could not init ESLint with local configuration, falling back to built-in. Error from local cfg:\n',
+            err
         )
+
+        const engine = new eslint.CLIEngine({
+            ...options,
+            useEslintrc: false,
+        })
+
+        report = engine.executeOnFiles([file])
+        //log.debug(`Resolved configuration for ${path.basename(file)}`, engine.getConfigForFile(file))
+    }
+
+    try {
+        const result = report.results[0]
+
+        if (!result) {
+            throw new Error('Report contained no result')
+        }
+
+        const fixed = result.hasOwnProperty('output')
+        const output = result.output || result.source || text
+        const messages = result.messages
 
         response.fixed = fixed
         response.output = output

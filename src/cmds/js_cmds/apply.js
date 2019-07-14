@@ -6,6 +6,7 @@ const { selectFiles } = require('../../files.js')
 const { stageFiles } = require('../../git-files.js')
 
 const { runner } = require('../../tools/js')
+const { PRETTIER_CONFIG, ESLINT_CONFIG } = require('../../paths.js')
 
 exports.command = 'apply [files..]'
 
@@ -20,9 +21,9 @@ exports.builder = {
     },
     stage: {
         describe:
-            'By default the changed files are staged automatically, use `--no-stage` to avoid staging files automatically.',
+            'By default the changed files are not staged automatically, use `--stage` to stage files automatically.',
         type: 'boolean',
-        default: 'true',
+        default: 'false',
     },
 }
 
@@ -38,7 +39,7 @@ exports.handler = argv => {
     report.summarize()
 
     if (report.hasViolations) {
-        log.error(
+        log.print(
             `${report.violations.length} file(s) violate the code standard.`
         )
         process.exit(1)

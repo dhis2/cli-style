@@ -4,12 +4,7 @@ const prettier = require('prettier')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { readFile, writeFile } = require('../../files.js')
-
-const prettierConfig = path.join(
-    __dirname,
-    '../../../config/js/prettier.config.js'
-)
-log.debug('Prettier configuration file', prettierConfig)
+const { PRETTIER_CONFIG } = require('../../paths.js')
 
 /**
  * This a checker used by {run-js} and needs to follow a specific
@@ -27,9 +22,12 @@ module.exports = (file, text, apply = false) => {
         fixed: false,
     }
 
+    const prettierConfig =
+        process.env.CLI_STYLE_PRETTIER_CONFIG || PRETTIER_CONFIG
+
     try {
         const options = prettier.resolveConfig.sync(file, {
-            editorconfig: false,
+            editorconfig: true,
             config: prettierConfig,
         })
 
@@ -58,7 +56,12 @@ module.exports = (file, text, apply = false) => {
             })
         }
     } catch (error) {
-        log.error(`Prettier format failed with error:\n${error}`)
+        log.error(
+            `Prettier format failed on file ${path.relative(
+                process.cwd(),
+                file
+            )} with error:\n${error}`
+        )
         process.exit(1)
     }
 
