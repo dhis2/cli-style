@@ -1,3 +1,33 @@
+# [4.0.0](https://github.com/dhis2/cli-style/compare/v3.3.4...v4.0.0) (2019-07-14)
+
+
+### Features
+
+* introduce custom configurations and lint-staged for stashing unstaged changes ([#72](https://github.com/dhis2/cli-style/issues/72)) ([9f467ab](https://github.com/dhis2/cli-style/commit/9f467ab))
+
+
+### BREAKING CHANGES
+
+* Changes multiple defaults for `d2-style`, removes the `install` command, adds extendable configs, only executes style checks on staged files by default, and more.
+
+ - `d2-style js apply` no longer stages files by default, use `--stage` to stage fixed files. The intended usage for this function is primarily to apply the js code standards to files in general, e.g. unstaged/staged files or an entire repo.
+
+- `d2-style validate` has changed to by default run `--fix`, and uses lint-staged to only apply code standards to staged files and/or hunks.
+
+- `d2-style validate --all` no longer exists, validate only operates on staged files and is intended to be used as a pre-commit check. Use `d2-style js check` or apply with `--all` instead.
+
+- `d2-style validate` output has changed. It no longer gives detailed information during a run. It only prints errors when it fails.
+
+- `d2-style js install` has been removed, and the clean-up functions have also been removed.
+
+- `d2-style setup` no longer installs `all` by default, instead prints available groups when command is run.
+
+- It is now possible to stage hunks (`git add -p`) and only style check those hunks.
+
+- It is now possible to extend configuration for lint-staged, eslint, etc.
+
+- Husky hooks included out of the box with `d2-style setup git/husky`
+
 ## [3.3.4](https://github.com/dhis2/cli-style/compare/v3.3.3...v3.3.4) (2019-06-14)
 
 
