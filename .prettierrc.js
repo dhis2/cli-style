@@ -1,5 +1,5 @@
 const { config } = require('./index.js')
 
 module.exports = {
-    ...config.prettier,
+    ...require(config.prettier),
 }
