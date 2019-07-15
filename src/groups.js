@@ -255,6 +255,13 @@ const bundledConfigPaths = () => {
             const sourceConfigPath = toolConfigs[0]
 
             switch (toolName) {
+                /* Some tools have two configs, e.g. `*.config.js` and `*.local.js`.
+                 * Usually we want the local configuration (see the
+                 * groups array) since that is what we install to the
+                 * local repo, but in this case we need the internal
+                 * configuration file path, so we need to override it
+                 * here.
+                 */
                 case 'prettier':
                     config.prettier = PRETTIER_CONFIG
                     break
