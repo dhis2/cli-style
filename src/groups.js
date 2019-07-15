@@ -238,24 +238,37 @@ const groupConfigs = selector => {
     return [...result]
 }
 
-const configObject = () => {
-    const groupObjs = groups
-        .reduce((a, b) => a.concat(b[1]), [])
-        .reduce((a, b) => {
-            a.push({
-                [b[0]]: b[1][0],
-            })
-            return a
-        }, [])
+/**
+ * Returns an object which contains the bundled configuration file for
+ * each tool in cli-style
+ */
+const bundledConfigPaths = () => {
+    const config = {}
 
-    const groupObj = {}
-    groupObjs.map(o => Object.assign(groupObj, o))
+    for (const selector of groups) {
+        const groupName = selector[0]
+        const tools = selector[1]
 
-    // overwrite the local configs with the internal ones
-    groupObj.eslint = ESLINT_CONFIG
-    groupObj.prettier = PRETTIER_CONFIG
+        for (const identifier of tools) {
+            const toolName = identifier[0]
+            const toolConfigs = identifier[1]
+            const sourceConfigPath = toolConfigs[0]
 
-    return groupObj
+            switch (toolName) {
+                case 'prettier':
+                    config.prettier = PRETTIER_CONFIG
+                    break
+                case 'eslint':
+                    config.eslint = ESLINT_CONFIG
+                    break
+                default:
+                    config[toolName] = sourceConfigPath
+                    break
+            }
+        }
+    }
+
+    return config
 }
 
 module.exports = {
@@ -267,5 +280,5 @@ module.exports = {
     resolveProjectToGroups,
     printGroups,
     groupConfigs,
-    configObject,
+    bundledConfigPaths,
 }

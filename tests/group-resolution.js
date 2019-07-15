@@ -8,7 +8,7 @@ const {
     resolveProjectToGroups,
     groupConfigs,
     expandGroupAll,
-    configObject,
+    bundledConfigPaths,
 } = require('../src/groups.js')
 
 const {
@@ -94,7 +94,7 @@ test('valid groups can be expanded', t => {
 test('convert to tool:config object', t => {
     t.plan(9)
 
-    const obj = configObject()
+    const obj = bundledConfigPaths()
 
     t.equals(obj.eslint, ESLINT_CONFIG)
     t.equals(obj.husky, HUSKY_CONFIG)
