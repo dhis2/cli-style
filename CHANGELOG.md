@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/dhis2/cli-style/compare/v4.0.0...v4.1.0) (2019-07-15)
+
+
+### Features
+
+* export configs from package ([#93](https://github.com/dhis2/cli-style/issues/93)) ([55fd0f9](https://github.com/dhis2/cli-style/commit/55fd0f9))
+
 # [4.0.0](https://github.com/dhis2/cli-style/compare/v3.3.4...v4.0.0) (2019-07-14)
 
 
