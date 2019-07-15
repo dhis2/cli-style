@@ -238,6 +238,26 @@ const groupConfigs = selector => {
     return [...result]
 }
 
+const configObject = () => {
+    const groupObjs = groups
+        .reduce((a, b) => a.concat(b[1]), [])
+        .reduce((a, b) => {
+            a.push({
+                [b[0]]: b[1][0],
+            })
+            return a
+        }, [])
+
+    const groupObj = {}
+    groupObjs.map(o => Object.assign(groupObj, o))
+
+    // overwrite the local configs with the internal ones
+    groupObj.eslint = ESLINT_CONFIG
+    groupObj.prettier = PRETTIER_CONFIG
+
+    return groupObj
+}
+
 module.exports = {
     groups,
     projects,
@@ -247,4 +267,5 @@ module.exports = {
     resolveProjectToGroups,
     printGroups,
     groupConfigs,
+    configObject,
 }
