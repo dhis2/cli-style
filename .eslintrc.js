@@ -1,3 +1,5 @@
+const { config } = require('./index.js')
+
 module.exports = {
-    extends: ['./config/js/eslint.config.js'],
+    extends: [config.eslint],
 }

@@ -238,6 +238,46 @@ const groupConfigs = selector => {
     return [...result]
 }
 
+/**
+ * Returns an object which contains the bundled configuration file for
+ * each tool in cli-style
+ */
+const bundledConfigPaths = () => {
+    const config = {}
+
+    for (const selector of groups) {
+        const groupName = selector[0]
+        const tools = selector[1]
+
+        for (const identifier of tools) {
+            const toolName = identifier[0]
+            const toolConfigs = identifier[1]
+            const sourceConfigPath = toolConfigs[0]
+
+            switch (toolName) {
+                /* Some tools have two configs, e.g. `*.config.js` and `*.local.js`.
+                 * Usually we want the local configuration (see the
+                 * groups array) since that is what we install to the
+                 * local repo, but in this case we need the internal
+                 * configuration file path, so we need to override it
+                 * here.
+                 */
+                case 'prettier':
+                    config.prettier = PRETTIER_CONFIG
+                    break
+                case 'eslint':
+                    config.eslint = ESLINT_CONFIG
+                    break
+                default:
+                    config[toolName] = sourceConfigPath
+                    break
+            }
+        }
+    }
+
+    return config
+}
+
 module.exports = {
     groups,
     projects,
@@ -247,4 +287,5 @@ module.exports = {
     resolveProjectToGroups,
     printGroups,
     groupConfigs,
+    bundledConfigPaths,
 }

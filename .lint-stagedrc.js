@@ -3,7 +3,6 @@ const stage = process.env.CLI_STYLE_STAGE === 'true'
 
 module.exports = {
     '*.{js,jsx,ts,tsx}': [
-        'yarn test',
         `./bin/d2-style js ${fix ? 'apply' : 'check'} ${
             fix && stage ? '--stage' : ''
         }`,

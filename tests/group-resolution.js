@@ -8,7 +8,21 @@ const {
     resolveProjectToGroups,
     groupConfigs,
     expandGroupAll,
+    bundledConfigPaths,
 } = require('../src/groups.js')
+
+const {
+    BROWSERSLIST_CONFIG,
+    COMMITLINT_CONFIG,
+    HUSKY_CONFIG,
+    STALE_CONFIG,
+    DEPENDABOT_CONFIG,
+    EDITORCONFIG_CONFIG,
+    SEMANTIC_PR_CONFIG,
+    LINT_STAGED_CONFIG,
+    PRETTIER_CONFIG,
+    ESLINT_CONFIG,
+} = require('../src/paths.js')
 
 function findGroup(identifier) {
     const res = []
@@ -75,4 +89,20 @@ test('valid groups can be expanded', t => {
         targetGroups,
         'a combo group should expand to the comboed groups'
     )
+})
+
+test('convert to tool:config object', t => {
+    t.plan(9)
+
+    const obj = bundledConfigPaths()
+
+    t.equals(obj.eslint, ESLINT_CONFIG)
+    t.equals(obj.husky, HUSKY_CONFIG)
+    t.equals(obj.prettier, PRETTIER_CONFIG)
+    t.equals(obj['lint-staged'], LINT_STAGED_CONFIG)
+    t.equals(obj.dependabot, DEPENDABOT_CONFIG)
+    t.equals(obj['probot-stale'], STALE_CONFIG)
+    t.equals(obj['probot-semantic-pull-requests'], SEMANTIC_PR_CONFIG)
+    t.equals(obj.editorconfig, EDITORCONFIG_CONFIG)
+    t.equals(obj.browserslist, BROWSERSLIST_CONFIG)
 })

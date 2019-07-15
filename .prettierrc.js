@@ -1,1 +1,5 @@
-module.exports = require('./config/js/prettier.config.js')
+const { config } = require('./index.js')
+
+module.exports = {
+    ...require(config.prettier),
+}
