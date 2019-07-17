@@ -29,6 +29,7 @@ module.exports = (file, text, apply = false) => {
         baseConfig: require(eslintConfig),
         fix: apply,
         ignore: true,
+        reportUnusedDisableDirectives: true,
     }
     try {
         const engine = new eslint.CLIEngine({
@@ -72,10 +73,16 @@ module.exports = (file, text, apply = false) => {
             if (message.ruleId) {
                 rule = `(${message.ruleId})`
             }
-            response.messages.push({
-                checker: 'eslint',
-                message: `Line ${message.line}: ${message.message} ${rule}`,
-            })
+            if (message.line) {
+                response.messages.push({
+                    checker: 'eslint',
+                    message: `Line ${message.line}: ${message.message} ${rule}`,
+                })
+            } else {
+                log.debug(
+                    `No line number, assuming general message: ${message.message}`
+                )
+            }
         }
     } catch (error) {
         log.error(`ESLint format failed with error:\n${error}`)
