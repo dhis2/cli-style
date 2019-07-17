@@ -1,3 +1,10 @@
+## [4.1.1](https://github.com/dhis2/cli-style/compare/v4.1.0...v4.1.1) (2019-07-17)
+
+
+### Bug Fixes
+
+* allow ignore files to be read ([#100](https://github.com/dhis2/cli-style/issues/100)) ([a89faab](https://github.com/dhis2/cli-style/commit/a89faab))
+
 # [4.1.0](https://github.com/dhis2/cli-style/compare/v4.0.0...v4.1.0) (2019-07-15)
 
 
