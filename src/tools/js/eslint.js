@@ -28,7 +28,7 @@ module.exports = (file, text, apply = false) => {
     const options = {
         baseConfig: require(eslintConfig),
         fix: apply,
-        ignore: false,
+        ignore: true,
     }
     try {
         const engine = new eslint.CLIEngine({
