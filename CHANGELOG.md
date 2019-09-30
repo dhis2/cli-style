@@ -1,3 +1,10 @@
+## [4.1.2](https://github.com/dhis2/cli-style/compare/v4.1.1...v4.1.2) (2019-09-30)
+
+
+### Bug Fixes
+
+* **dependabot:** remove java/docker/submodules from default config ([#133](https://github.com/dhis2/cli-style/issues/133)) ([b6d93cf](https://github.com/dhis2/cli-style/commit/b6d93cf))
+
 ## [4.1.1](https://github.com/dhis2/cli-style/compare/v4.1.0...v4.1.1) (2019-07-17)
 
 
