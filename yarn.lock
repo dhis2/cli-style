@@ -131,10 +131,10 @@
   dependencies:
     find-up "^4.0.0"
 
-"@dhis2/cli-helpers-engine@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/cli-helpers-engine/-/cli-helpers-engine-1.3.0.tgz#e12f7a1bfd6223054cf9254e675b2b660b0690a5"
-  integrity sha512-S8Bcl9MbEGadDcJ9kknrXf7WWd+aq7lp4v1mTBBLxgluZyq5tfdJyxsyNxYmk0y2uFWQ+xvnCA7gpl9fEugbsA==
+"@dhis2/cli-helpers-engine@1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@dhis2/cli-helpers-engine/-/cli-helpers-engine-1.4.2.tgz#91f8f928616a23e9f9cab10e7364ef3210565f05"
+  integrity sha512-mAdL/z5eo8DuO3CdtP6XNBEkGkP4bVCFvoHdmyCapV2sxbMUdlKvNUSzyOcVDVJD3imuo+BH80T8lToP88z9CA==
   dependencies:
     chalk "^2.4.2"
     fs-extra "^8.0.1"
