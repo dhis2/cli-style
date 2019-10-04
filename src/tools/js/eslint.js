@@ -6,6 +6,17 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 const { readFile, writeFile } = require('../../files.js')
 const { CONFIG_ROOT, CONSUMING_ROOT, ESLINT_CONFIG } = require('../../paths.js')
 
+let hasLogged = false
+function fallbackLog(err) {
+    if (!hasLogged) {
+        log.warn(
+            'Could not init ESLint with local config, falling back to built-in (run with --verbose for more info)'
+        )
+        log.debug('Error from local cfg:\n', err)
+        hasLogged = true
+    }
+}
+
 /**
  * This a checker used by {tools/js/index.js} and needs to follow a
  * specific format.
@@ -40,10 +51,7 @@ module.exports = (file, text, apply = false) => {
         report = engine.executeOnFiles([file])
         //log.debug(`Resolved configuration for ${path.basename(file)}`, engine.getConfigForFile(file))
     } catch (err) {
-        log.debug(
-            'Could not init ESLint with local configuration, falling back to built-in. Error from local cfg:\n',
-            err
-        )
+        fallbackLog(err)
 
         const engine = new eslint.CLIEngine({
             ...options,
