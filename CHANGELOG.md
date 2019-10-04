@@ -1,3 +1,10 @@
+## [4.1.3](https://github.com/dhis2/cli-style/compare/v4.1.2...v4.1.3) (2019-10-04)
+
+
+### Bug Fixes
+
+* **eslint:** print a warning when eslint falls back to the built-in ([#143](https://github.com/dhis2/cli-style/issues/143)) ([7afa944](https://github.com/dhis2/cli-style/commit/7afa944))
+
 ## [4.1.2](https://github.com/dhis2/cli-style/compare/v4.1.1...v4.1.2) (2019-09-30)
 
 
