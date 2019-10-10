@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/dhis2/cli-style/compare/v4.1.3...v4.2.0) (2019-10-10)
+
+
+### Features
+
+* **semantic:** enforce validation on commits and pr title ([7f8e21d](https://github.com/dhis2/cli-style/commit/7f8e21d762b7baf4b168debd8a2dbec61f19df92))
+
 ## [4.1.3](https://github.com/dhis2/cli-style/compare/v4.1.2...v4.1.3) (2019-10-04)
 
 
