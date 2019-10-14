@@ -1,4 +1,4 @@
-name: Release DHIS2 JavaScript Library
+name: Publish DHIS2 JavaScript Library
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
       - master
 
 jobs:
-  build:
-    name: Prepare
+  process:
+    name: library release process
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -20,7 +20,6 @@ jobs:
           yarn test
           ./bin/d2-style js check --all
       - name: publish to npm
-        if: github.ref == 'refs/head/master'
         run: npx @dhis2/cli-utils release --publish npm
         env:
           GIT_AUTHOR_NAME: "@dhis2-bot"
