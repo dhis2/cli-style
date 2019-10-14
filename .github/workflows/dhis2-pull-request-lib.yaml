@@ -1,3 +1,5 @@
+name: 'PR: DHIS2 JavaScript Library'
+
 on: pull_request
 
 jobs:

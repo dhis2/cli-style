@@ -1,4 +1,4 @@
-name: Publish DHIS2 JavaScript Library
+name: 'Release: DHIS2 JavaScript Library'
 
 on:
   push:
