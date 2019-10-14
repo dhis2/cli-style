@@ -26,13 +26,14 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/download-artifact@v1
-          name: archive
-          path: .
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 10.x
-      - run: yarn test
-      - run: ./bin/d2-style js check --all
+          with:
+            name: archive
+            path: .
+        - uses: actions/setup-node@v1
+          with:
+            node-version: 10.x
+        - run: yarn test
+        - run: ./bin/d2-style js check --all
 
   publish-npm:
     needs: test
@@ -42,8 +43,9 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: actions/download-artifact@v1
-        name: archive
-        path: .
+        with:
+          name: archive
+          path: .
       - uses: actions/setup-node@v1
         with:
           node-version: 10.x
