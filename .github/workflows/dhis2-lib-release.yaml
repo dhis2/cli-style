@@ -1,4 +1,4 @@
-name: 'Release: DHIS2 JavaScript Library'
+name: 'DHIS2: Release'
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   process:
-    name: library release process
+    name: Semantic release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
