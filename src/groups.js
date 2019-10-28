@@ -16,6 +16,7 @@ const {
 
     LOCAL_PRETTIER_CONFIG,
     LOCAL_ESLINT_CONFIG,
+    LOCAL_LEFTHOOK_CONFIG,
 } = require('./paths.js')
 
 /**
@@ -52,12 +53,7 @@ const groups = [
     [
         'git',
         [
-            ['husky', [HUSKY_CONFIG, path.join('.huskyrc.js')]],
-            [
-                'lint-staged',
-                [LINT_STAGED_CONFIG, path.join('.lint-stagedrc.js')],
-            ],
-            ['lefthook', [LEFTHOOK_CONFIG, path.join('lefthook.yml')]],
+            ['lefthook', [LOCAL_LEFTHOOK_CONFIG, path.join('lefthook.yml')]],
         ],
     ],
     [

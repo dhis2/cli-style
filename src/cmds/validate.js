@@ -4,6 +4,7 @@ const path = require('path')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { groups, isValidGroup } = require('../groups.js')
+const { run } = require('../run.js')
 
 const {
     CONSUMING_ROOT,
@@ -51,13 +52,24 @@ exports.builder = {
 exports.handler = argv => {
     const { fix, stage, eslintConfig, prettierConfig, lintStagedConfig } = argv
 
-    process.env = {
+    const env = {
         ...process.env,
         CLI_STYLE_ESLINT_CONFIG: path.resolve(CONSUMING_ROOT, eslintConfig),
         CLI_STYLE_PRETTIER_CONFIG: path.resolve(CONSUMING_ROOT, prettierConfig),
         CLI_STYLE_FIX: `${fix}`,
         CLI_STYLE_STAGE: `${stage}`,
     }
+
+    const cmd = 'npx'
+    const args = [
+        '--no-install',
+        'lefthook',
+        '--edit',
+    ]
+
+    run(cmd, args, {
+        env,
+    })
 
     /*
     lintStaged({

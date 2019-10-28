@@ -20,11 +20,12 @@ const DEPENDABOT_CONFIG = path.join(CONFIG_DIR, 'github', 'dependabot.yml')
 const HUSKY_CONFIG = path.join(CONFIG_DIR, 'husky.config.js')
 const STALE_CONFIG = path.join(CONFIG_DIR, 'github', 'stale.yml')
 const SEMANTIC_PR_CONFIG = path.join(CONFIG_DIR, 'github', 'semantic.yml')
-const LEFTHOOK_CONFIG = path.join(CONFIG_DIR, 'lefthook.config.js.yml')
+const LEFTHOOK_CONFIG = path.join(CONFIG_DIR, 'lefthook.config.yml')
 
 // local configuration files for repositories
 const LOCAL_ESLINT_CONFIG = path.join(CONFIG_DIR, 'js', 'eslint.local.js')
 const LOCAL_PRETTIER_CONFIG = path.join(CONFIG_DIR, 'js', 'prettier.local.js')
+const LOCAL_LEFTHOOK_CONFIG = path.join(CONFIG_DIR, 'lefthook.local.yml')
 
 module.exports = {
     CONSUMING_ROOT,
@@ -43,4 +44,5 @@ module.exports = {
     STALE_CONFIG,
     HUSKY_CONFIG,
     LEFTHOOK_CONFIG,
+    LOCAL_LEFTHOOK_CONFIG,
 }
