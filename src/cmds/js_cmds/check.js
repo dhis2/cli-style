@@ -1,39 +1,35 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { runner } = require('../../tools/js')
-const { selectFiles } = require('../../files.js')
 const { PRETTIER_CONFIG, ESLINT_CONFIG } = require('../../paths.js')
+const { run } = require('../../run.js')
 
 exports.command = 'check [files..]'
 
 exports.describe = 'Check JS format.'
 
 exports.builder = {
-    all: {
-        describe:
-            'Default behaviour is to only format files staged with Git, use this option to format all files.',
-        type: 'boolean',
-        default: 'false',
+    prettierConfig: {
+        describe: 'Prettier config file to use',
+        type: 'string',
+        default: PRETTIER_CONFIG,
+    },
+    eslintConfig: {
+        describe: 'ESLint config file to use',
+        type: 'string',
+        default: ESLINT_CONFIG,
     },
 }
 
 exports.handler = argv => {
-    const { files, all } = argv
+    const { files } = argv
 
-    console.log(files)
+    const cmd = 'npx'
+    const args = [
+        '--no-install',
+        'commitlint',
+        `--config=${COMMITLINT_CONFIG}`,
+        '--edit',
+    ]
 
-    const root = process.cwd()
-    log.debug(`Root directory: ${root}`)
-
-    const codeFiles = selectFiles(files, all, root)
-    const report = runner(codeFiles)
-
-    report.summarize()
-
-    if (report.hasViolations) {
-        log.print(
-            `${report.violations.length} file(s) violate the code standard.`
-        )
-        process.exit(1)
-    }
+    run(cmd, args)
 }
