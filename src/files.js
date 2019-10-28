@@ -104,4 +104,5 @@ module.exports = {
     writeFile,
     whitelisted,
     whitelists,
+    blacklist,
 }

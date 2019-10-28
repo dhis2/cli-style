@@ -3,6 +3,7 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 const fg = require('fast-glob')
 
 const { prettier, eslint } = require('../../tools/js/index.js')
+const { blacklist } = require('../../files.js')
 
 exports.command = 'check [files..]'
 
@@ -42,7 +43,7 @@ exports.handler = argv => {
     } else {
         const entries = fg.sync([pattern], {
             dot: false,
-            ignore: ['node_modules'],
+            ignore: blacklist,
         })
 
         prettierOpts.files = entries
