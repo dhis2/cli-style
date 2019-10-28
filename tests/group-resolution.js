@@ -6,23 +6,20 @@ const {
     isValidGroup,
     isValidProject,
     resolveProjectToGroups,
-    groupConfigs,
     expandGroupAll,
     bundledConfigPaths,
-} = require('../src/groups.js')
+} = require('../src/utils/groups.js')
 
 const {
     BROWSERSLIST_CONFIG,
-    COMMITLINT_CONFIG,
     HUSKY_CONFIG,
     STALE_CONFIG,
     DEPENDABOT_CONFIG,
     EDITORCONFIG_CONFIG,
     SEMANTIC_PR_CONFIG,
-    LINT_STAGED_CONFIG,
     PRETTIER_CONFIG,
     ESLINT_CONFIG,
-} = require('../src/paths.js')
+} = require('../src/utils/paths.js')
 
 function findGroup(identifier) {
     const res = []
@@ -67,7 +64,7 @@ test('an invalid group will be rejected', t => {
 test('a valid project can be resolved into groups', t => {
     t.plan(1)
     const project = 'project/js'
-    const projectGroups = projects[0][1]
+    const projectGroups = projects[1][1]
     const resolvedGroups = resolveProjectToGroups(project)
 
     t.deepEqual(
@@ -92,14 +89,13 @@ test('valid groups can be expanded', t => {
 })
 
 test('convert to tool:config object', t => {
-    t.plan(9)
+    t.plan(8)
 
     const obj = bundledConfigPaths()
 
     t.equals(obj.eslint, ESLINT_CONFIG)
     t.equals(obj.husky, HUSKY_CONFIG)
     t.equals(obj.prettier, PRETTIER_CONFIG)
-    t.equals(obj['lint-staged'], LINT_STAGED_CONFIG)
     t.equals(obj.dependabot, DEPENDABOT_CONFIG)
     t.equals(obj['probot-stale'], STALE_CONFIG)
     t.equals(obj['probot-semantic-pull-requests'], SEMANTIC_PR_CONFIG)

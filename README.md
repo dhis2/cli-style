@@ -3,7 +3,6 @@
 > This package is part of the [@dhis2/cli](https://github.com/dhis2/cli)
 > commandline interface.
 
-
 [![dhis2-cli Compatible](https://img.shields.io/badge/dhis2-cli-ff69b4.svg)](https://github.com/dhis2/cli)
 [![@dhis2/cli-style on npm](https://img.shields.io/npm/v/@dhis2/cli-style.svg)](https://www.npmjs.com/package/@dhis2/cli-style)
 [![travis.com build](https://img.shields.io/travis/com/dhis2/cli-style.svg)](https://travis-ci.com/dhis2/cli-style)
@@ -20,15 +19,14 @@ As a terminal user check out the full CLI. :rocket:
 This tool includes the following tools as runtime dependencies, so they
 are not necessary to explicitly install:
 
-- [Husky](https://github.com/typicode/husky)
-- [Commitlint](https://commitlint.js.org)
-- [ESLint](https://eslint.org/)
-- [Prettier](https://prettier.io)
-- [Lint Staged](https://github.com/okonet/lint-staged)
+-   [Husky](https://github.com/typicode/husky)
+-   [Commitlint](https://commitlint.js.org)
+-   [ESLint](https://eslint.org/)
+-   [Prettier](https://prettier.io)
 
 ## Usage
 
-### Install
+### First time install
 
 ```sh
 yarn add @dhis2/cli-style --dev
@@ -43,28 +41,43 @@ npm install @dhis2/cli-style --save-dev
 ```
 npx d2-style --help
 
-npx d2-style validate --help
-npx d2-style setup --help
+npx d2-style install --help
 
 npx d2-style js --help
 npx d2-style js check --help
 npx d2-style js apply --help
 ```
 
-## Automated setup
+### `package.json`
+
+It is recommended to use Git hooks to `check` for style inconsistencies,
+but applying the styles and then staging the changes manually. It is
+possible to automatically stage after formatting, but it is no longer
+provided as out-of-the-box functionality.
+
+Some examples follow:
+
+```
+"scripts": {
+    "lint:js": "d2-style js check",
+    "lint:text": "d2-style text check",
+    "lint:staged": "yarn lint:js --staged && yarn lint:text --staged",
+    "lint": "yarn lint:js && yarn lint:text",
+
+    "format:js": "d2-style js apply",
+    "format:text": "d2-style text apply",
+    "format:staged": "yarn format:js --staged && yarn format:text --staged",
+    "format": "yarn format:js && yarn format:text"
+},
+```
+
+## Automated install
 
 `d2-style` can automatically generate the configuration files into the
 repository for you. For a list of valid groups run:
 
 ```sh
-npx d2-style setup
-```
-
-The `setup` command works with the notion of groups. To install the
-"base/all" group, which contains the bare essentials you need:
-
-```sh
-npx d2-style setup base/all
+npx d2-style install --list-groups
 ```
 
 If a config file already exists, the tool skips overwriting it, in case
@@ -73,259 +86,55 @@ there are local modifications.
 To regenerate and overwrite, pass the `--force` flag:
 
 ```sh
-npx d2-style setup base/all --force
+npx d2-style install project/base --force
 ```
 
-For a JavaScript project you will very likely want to use the
-`project/js` group.
+## Pre-configured projects
 
-```sh
-npx d2-style setup project/js
-```
+### Base
 
-Which includes a formatter, linter, git hook manager, etc.
-
-## How it works
-
-1. When `d2-style` is installed, Husky installs itself as a Git hook,
-   since it is a runtime dependency of `d2-style`.
-
-2. `d2-style setup project/js` installs the necessary configuration files in the
-   repo. 
-
-3. Now, when a hook is triggered (e.g. `pre-commit`), the `.huskyrc.js`
-   configuration is read for that specific hook, and the command is
-   executed.
-
-4. In the case of `pre-commit`, the command is `d2-style validate`,
-   which resolves the relevant `lint-staged` configuration.
-
-5. `lint-staged` is executed and passes all the _staged_ files matching a
-   _glob_ in the lint-staged configuration to the designated command,
-   e.g. `d2-style js apply --stage` which will delint JS files and
-   automatically apply the fixes, and stage the result.
-
-6. If all goes well, `d2-style js apply --stage` exits with a exit code
-   of `0`, which will let lint-staged to continue with matching more
-   _globs_ and running additional linters. When everything is good,
-   `lint-staged` exits with code `0`.
-
-7. With the default Husky config, the commit message itself will be
-   checked using `d2-style commit check` which uses `commitlint`
-   internally. If the commit message is valid, it exits with `0`.
-
-8. The commit is created. If at any point a tool exits with a non-zero
-   exit code, then the process halts.
-
-## Command chain
-
-1. **Husky** runs `d2-style validate`.
-
-2. `validate` runs **lint-staged**.
-
-3. **lint-staged** runs **linters**.
-
-4. **Husky** runs commit message check: `d2-style commit check`.
-
-## Overrides
-
-There are opportunities to extend and change the behaviour of      
-`d2-style`, and because of how the different tools themselves work, the
-process varies slightly. Remember how the command chain work, and it is
-easier to reason about why.
-
-### Husky
-
-The `base` group installs `.huskyrc.js` in the repository, which looks
-like:
-
-```js
-module.exports = {
-    hooks: {
-       'commit-msg': 'd2-style commit check',
-       'pre-commit': 'd2-style validate',
-    },
-}
-```
-
-It can also be installed with:
-
-```sh
-npx d2-style setup git/husky
-```
-
-From here, the commands for each hook and be customized and/or extended.
-
-### Lint Staged
-
-By default, `d2-style` uses the bundled `lint-staged` configuration, so
-it is possible to just run `d2-style validate` without having a
-configuration file for it in the repository. To override the config, we
-must first generate one in the repository:
-
-```sh
-npx d2-style setup git/lint-staged
-```
-
-Now, in `.lint-stagedrc.js` you can modify the linters to be run and on
-which globs. Let's add CSS linting:
-
-```js
-const fix = process.env.CLI_STYLE_FIX === 'true'
-const stage = process.env.CLI_STYLE_STAGE === 'true'
-
-module.exports = {
-    '*.{js,jsx,ts,tsx}': [
-        `d2-style js ${fix ? 'apply' : 'check'} ${
-            fix && stage ? '--stage' : ''
-        }`,
-    ],
-    '*.css': [
-        'stylelint',
-        'git add',
-    ]
-}
-```
-
-The environment variables `CLI_STYLE_*` are set by the `validate`
-command, so they can be safely read in `.lint-stagedrc.js`. Note that
-you should always run `d2-style validate`, and not `lint-staged`
-directly.
-
-Now we have to tell Husky to tell `d2-style validate` to use our custom
-`lint-staged` configuration, so in `.huskyrc.js` we can update the
-`pre-commit` hook:
-
-```js
-'pre-commit': 'd2-style validate --lint-staged-config .lint-stagedrc.js',
-```
-
-We do not automatically look for a configuration file in the current
-working directory as that can lead to unexpected results when using the
-`d2-style` command globally.
-
-### ESLint
-
-`d2-style`'s ESLint configuration is barebones for a reason. JavaScript
-is used in many different environments and tool chains for the front-end
-and back-end which all require different linters.
-
-The scope of the base ESLint config is to include general JavaScript
-rules, which we have decided on, most often as a result of the [decision
-process](https://github.com/dhis2/notes/#discussion-board).
-
-It doesn't make sense to include `d2-style` _and_ ESlint in the same
-project, which can lead to strange dependency resolution issues, and
-differences in the configuration format.
-
-As the other tools, `d2-style` by default uses the bundled ESLint
-configuration as its
-[`baseConfig`](https://eslint.org/docs/developer-guide/nodejs-api#cliengine),
-and allows a user to extend the configuration in two different ways.
-
-Let's start with the most common one, and install the local
-`.eslintrc.js` config file into our repo.
-
-```sh
-npx d2-style setup linter/eslint
-```
-
-This gives us a very basic configuration file, which doesn't do much.
-
-```js
-module.exports = {
-    extends: [],
-}
-```
-
-From here, if you are using Babel to transpile your modern JavaScript,
-you will probably need to use `babel-eslint` with ESLint to parse and
-lint your code, so let's set that up.
-
-The errors I got looked like:
-
-```sh
-src/Tabs/ScrollBar.js
-Line 10: Parsing error: Unexpected token =
-```
-
-```sh
-# assuming you already use babel we only need babel-eslint
-
-yarn add --dev babel-eslint
-```
-
-Now update the `.eslintrc.js` file to use the new parser:
-
-```js
-module.exports = {
-    parser: 'babel-eslint',
-}
-```
-
-And run `d2-style` again:
-
-```sh
-npx d2-style js check --all
-119 javascript file(s) checked.
-```
-
-You can install plugins, extend presets, etc. and `d2-style` will do its
-best to resolve them to the repository's `node_modules/` directory. If
-it fails to parse your custom `.eslintrc.js` file, it will fall back to
-its internal configuration files.
-
-If that happens, run the command with the `--verbose` flag and you will
-see something like:
+At the very least you will want to comply with the [conventional
+commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
+specification and get the standard
+[EditorConfig](https://editorconfig.org/):
 
 ```
-[DEBUG] Could not init ESLint with local configuration, falling back to
-built-in. Error from local cfg:
+npx d2-style install project/base
+
+# * project/base (includes: tools/editorconfig, git/husky)
 ```
 
-See [configuring ESLint](https://eslint.org/docs/user-guide/configuring)
-for more information on how to configure ESLint.
+This gives you a starting point, and after that it is possible to extend
+the `.huskyrc.js` configuration with specific hooks, see
+[config/husky-frontend.local.js](config/husky-frontend.local.js) for an
+example on how to extend the configuration file for Husky.
 
-Also, please note that if you already have a `.eslintrc.*` file,
-`d2-style` will pick that up according to the priority defined in
-ESLint, which might give you surprising results, so make sure you only
-have one.
+For example, most repos has structured text in the form of YAML or
+Markdown, so adding a pre-commit hook to validate the format of that
+makes sense in most cases.
 
-### Prettier
+### JavaScript (e.g. NodeJS, Vanilla)
 
-#### N.B. Do not override the Prettier configuration for core apps and libraries!
-
-There should be little reason to modify the Prettier configuration,
-though there is an escape hatch if need be:
+The `project/js` is intended to be used in vanilla JS environments and
+contains our base ESLint configuration that works with our Prettier
+configuration. It does not use any framework specific rules and should
+be applicable to any JavaScript project.
 
 ```
-npx d2-style setup formatter/prettier
+npx d2-style install project/js
+
+# * project/js (includes: tools/all, github/all, linter/eslint,
+#   formatter/prettier, git/husky-frontend)
 ```
 
-This generates a `.prettierrc.js` file for you with the contents:
+### React
 
-```js
-module.exports = {
-    ...require('@dhis2/cli-style/config/js/prettier.config.js'),
-}
+The `project/react` should be a good starting point for a React project,
+as it adds `eslint-plugin-react`.
+
 ```
+npx d2-style install project/react
 
-From here, you can add your overrides under the base configuration:
-
-```js
-module.exports = {
-    ...require('@dhis2/cli-style/config/js/prettier.config.js'),
-    // overrides go below here
-    semi: true,
-}
+# * project/react (includes: base/all, github/all, linter/eslint-react,
+#   formatter/prettier, git/husky-frontend)
 ```
-
-Now you can update your `.huskyrc.js` line where you call `d2-style
-validate` to:
-
-```js
-'pre-commit': 'd2-style validate --prettier-config .prettierrc.js',
-```
-
-Your custom Prettier config will be used to format code when `validate`
-runs.
