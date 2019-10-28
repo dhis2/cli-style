@@ -1,15 +1,11 @@
-const { execSync } = require('child_process')
-
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const commitlint = require('./commitlint.js')
+const { run } = require('../../run.js')
+const { COMMITLINT_CONFIG } = require('../../paths.js')
 
-exports.runner = async function(msg) {
-    const { result, report } = await commitlint(msg)
+exports.commitlint = (config = COMMITLINT_CONFIG) => {
+    const cmd = 'npx'
+    const args = ['--no-install', 'commitlint', `--config=${config}`, '--edit']
 
-    return {
-        name: 'git',
-        summarize: () => log.print(result),
-        hasViolations: report.valid,
-    }
+    run(cmd, args)
 }

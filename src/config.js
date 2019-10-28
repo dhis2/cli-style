@@ -1,4 +1,5 @@
 const path = require('path')
+
 const fs = require('fs-extra')
 
 const log = require('@dhis2/cli-helpers-engine').reporter

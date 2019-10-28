@@ -1,53 +1,59 @@
-const path = require('path')
-
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { selectFiles } = require('../../files.js')
-const { stageFiles } = require('../../git-files.js')
+const fg = require('fast-glob')
 
-const { runner } = require('../../tools/js')
-const { PRETTIER_CONFIG, ESLINT_CONFIG } = require('../../paths.js')
+const { prettier, eslint } = require('../../tools/js/index.js')
 
 exports.command = 'apply [files..]'
 
 exports.describe = 'Apply JS format.'
 
 exports.builder = {
-    all: {
-        describe:
-            'Default behaviour is to only format files staged with Git, use this option to format all files.',
-        type: 'boolean',
-        default: 'false',
+    prettierConfig: {
+        describe: 'Prettier config file to use',
+        type: 'string',
     },
-    stage: {
+    eslintConfig: {
+        describe: 'ESLint config file to use',
+        type: 'string',
+    },
+    pattern: {
         describe:
-            'By default the changed files are not staged automatically, use `--stage` to stage files automatically.',
-        type: 'boolean',
-        default: 'false',
+            'Pattern to match for files, remember to enclose in double quotes!',
+        type: 'string',
+        default: '**/*.{js,jsx,ts,tsx}',
     },
 }
 
 exports.handler = argv => {
-    const { all, stage, files } = argv
+    const { files, pattern, eslintConfig, prettierConfig } = argv
 
-    const root = process.cwd()
-    log.debug(`Root directory: ${root}`)
-
-    const codeFiles = selectFiles(files, all, root)
-    const report = runner(codeFiles, true)
-
-    report.summarize()
-
-    if (report.hasViolations) {
-        log.print(
-            `${report.violations.length} file(s) violate the code standard.`
-        )
-        process.exit(1)
+    const prettierOpts = {
+        config: prettierConfig,
+        apply: true,
     }
 
-    const fixed = report.fix()
-
-    if (stage && fixed.length > 0) {
-        stageFiles(fixed, root)
+    const eslintOpts = {
+        config: eslintConfig,
+        apply: true,
     }
+
+    if (files) {
+        prettierOpts.files = files
+        eslintOpts.files = files
+    } else {
+        const entries = fg.sync([pattern], {
+            dot: true,
+            ignore: ['node_modules'],
+        })
+
+        prettierOpts.files = entries
+        eslintOpts.files = entries
+    }
+
+    log.info('Running ESLint...')
+    eslint(eslintOpts)
+
+    log.info('Running Prettier...')
+    prettier(prettierOpts)
 }
