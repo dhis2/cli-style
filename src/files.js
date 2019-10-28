@@ -3,8 +3,6 @@ const path = require('path')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { stagedFiles } = require('./git-files.js')
-
 const blacklist = ['node_modules', 'build', 'dist', 'target', '.git', 'vendor']
 
 const whitelists = {
@@ -61,19 +59,6 @@ function collectFiles(target) {
         .reduce((a, b) => a.concat(b), [])
 }
 
-function selectFiles(files, all, dir) {
-    let codeFiles
-    if (all) {
-        codeFiles = collectFiles(dir)
-    } else if (files) {
-        codeFiles = files
-    } else {
-        codeFiles = stagedFiles(dir)
-    }
-
-    return codeFiles
-}
-
 function readFile(fp) {
     try {
         const text = fs.readFileSync(fp, 'utf8')
@@ -111,7 +96,6 @@ module.exports = {
     collectJsFiles,
     collectRejectedFiles,
     deleteFile,
-    selectFiles,
     jsFiles,
     jsonFiles,
     readFile,
