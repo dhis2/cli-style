@@ -1,14 +1,15 @@
 # special path
 # extends: ./config/lefthook.config.yml
 
+
 commit-msg:
     commands:
-        commitlint:
+        commit-style:
             run: ./bin/d2-style commit check
 
 pre-commit:
     parallel: true
     commands:
-        javascript:
+        lint:
             glob: "*.{js,jsx}"
             run: ./bin/d2-style js apply {staged_files}
