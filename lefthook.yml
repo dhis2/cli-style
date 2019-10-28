@@ -1,2 +1,19 @@
 # special path
-extends: ./config/lefthook.config.yml
+# extends: ./config/lefthook.config.yml
+
+commit-msg:
+    commands:
+        commitlint:
+            run: npx commitlint
+
+pre-commit:
+    parallel: true
+
+	commands:
+        prettier:
+            glob: "*.{.js,jsx}"
+            run: npx prettier {staged_files}
+
+		eslint:
+			glob: "*.{js,jsx}"
+			run: npx eslint {staged_files}
