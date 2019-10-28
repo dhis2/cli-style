@@ -1,20 +1,20 @@
 const path = require('path')
-const fs = require('fs-extra')
 
 const {
     BROWSERSLIST_CONFIG,
-    COMMITLINT_CONFIG,
     ESLINT_CONFIG,
-    HUSKY_CONFIG,
+    LEFTHOOK_CONFIG,
     PRETTIER_CONFIG,
     STALE_CONFIG,
     DEPENDABOT_CONFIG,
     EDITORCONFIG_CONFIG,
     SEMANTIC_PR_CONFIG,
-    LINT_STAGED_CONFIG,
 
+    LOCAL_ESLINT_REACT_CONFIG,
     LOCAL_PRETTIER_CONFIG,
     LOCAL_ESLINT_CONFIG,
+    LOCAL_LEFTHOOK_FRONTEND_CONFIG,
+    LOCAL_LEFTHOOK_BACKEND_CONFIG,
 } = require('./paths.js')
 
 /**
@@ -43,7 +43,16 @@ const {
  *
  */
 const groups = [
-    ['linter', [['eslint', [LOCAL_ESLINT_CONFIG, path.join('.eslintrc.js')]]]],
+    [
+        'linter',
+        [
+            ['eslint', [LOCAL_ESLINT_CONFIG, path.join('.eslintrc.js')]],
+            [
+                'eslint-react',
+                [LOCAL_ESLINT_REACT_CONFIG, path.join('.eslintrc.js')],
+            ],
+        ],
+    ],
     [
         'formatter',
         [['prettier', [LOCAL_PRETTIER_CONFIG, path.join('.prettierrc.js')]]],
@@ -51,10 +60,14 @@ const groups = [
     [
         'git',
         [
-            ['husky', [HUSKY_CONFIG, path.join('.huskyrc.js')]],
+            ['hooks', [LEFTHOOK_CONFIG, path.join('lefthook.yml')]],
             [
-                'lint-staged',
-                [LINT_STAGED_CONFIG, path.join('.lint-stagedrc.js')],
+                'hooks-frontend',
+                [LOCAL_LEFTHOOK_FRONTEND_CONFIG, path.join('lefthook.yml')],
+            ],
+            [
+                'hooks-backend',
+                [LOCAL_LEFTHOOK_BACKEND_CONFIG, path.join('lefthook.yml')],
             ],
         ],
     ],
@@ -93,6 +106,7 @@ const groups = [
  * wants to bundle, acting as a short-hand.
  */
 const projects = [
+    ['java', []],
     [
         'js',
         [
@@ -100,7 +114,17 @@ const projects = [
             'github/all',
             'linter/eslint',
             'formatter/prettier',
-            'git/husky',
+            'git/hooks-frontend',
+        ],
+    ],
+    [
+        'react',
+        [
+            'base/all',
+            'github/all',
+            'linter/eslint-react',
+            'formatter/prettier',
+            'git/hooks-frontend',
         ],
     ],
 ]
@@ -145,7 +169,9 @@ const isValidProject = selector => {
 }
 
 const resolveProjectToGroups = projectName => {
+    // eslint-disable-next-line no-unused-vars
     const [specifier, identifier] = projectName.split('/')
+
     for (const project of projects) {
         if (project[0] === identifier) {
             return project[1]
@@ -246,6 +272,7 @@ const bundledConfigPaths = () => {
     const config = {}
 
     for (const selector of groups) {
+        // eslint-disable-next-line no-unused-vars
         const groupName = selector[0]
         const tools = selector[1]
 
@@ -288,4 +315,5 @@ module.exports = {
     printGroups,
     groupConfigs,
     bundledConfigPaths,
+    projectConfigs,
 }

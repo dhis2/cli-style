@@ -6,14 +6,12 @@ const {
     isValidGroup,
     isValidProject,
     resolveProjectToGroups,
-    groupConfigs,
     expandGroupAll,
     bundledConfigPaths,
-} = require('../src/groups.js')
+} = require('../src/utils/groups.js')
 
 const {
     BROWSERSLIST_CONFIG,
-    COMMITLINT_CONFIG,
     HUSKY_CONFIG,
     STALE_CONFIG,
     DEPENDABOT_CONFIG,
@@ -22,7 +20,7 @@ const {
     LINT_STAGED_CONFIG,
     PRETTIER_CONFIG,
     ESLINT_CONFIG,
-} = require('../src/paths.js')
+} = require('../src/utils/paths.js')
 
 function findGroup(identifier) {
     const res = []
@@ -67,7 +65,7 @@ test('an invalid group will be rejected', t => {
 test('a valid project can be resolved into groups', t => {
     t.plan(1)
     const project = 'project/js'
-    const projectGroups = projects[0][1]
+    const projectGroups = projects[1][1]
     const resolvedGroups = resolveProjectToGroups(project)
 
     t.deepEqual(

@@ -1,0 +1,4 @@
+commit-msg:
+    commands:
+        lint-commit-msg:
+            run: npx d2-style commit check

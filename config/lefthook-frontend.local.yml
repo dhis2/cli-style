@@ -1,0 +1,17 @@
+# supports extends in next version
+# extends: ./node_modules/@dhis2/cli-style/config/lefthook-frontend.config.yml
+commit-msg:
+    commands:
+        lint-commit-msg:
+            run: npx d2-style commit check
+
+pre-commit:
+    parallel: true
+    commands:
+        lint-javascript:
+            glob: '*.{js,jsx}'
+            run: npx d2-style js check {staged_files}
+
+        lint-structured-text:
+            glob: '*.{yaml,yml,md,markdown,json,html,htm}'
+            run: npx d2-style structured-text check {staged_files}

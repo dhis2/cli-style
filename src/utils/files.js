@@ -1,12 +1,14 @@
+const fg = require('fast-glob')
 const fs = require('fs')
 const path = require('path')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
+const { spawn } = require('./run.js')
 
-const { stagedFiles } = require('./git-files.js')
-
+// blacklists for files
 const blacklist = ['node_modules', 'build', 'dist', 'target', '.git', 'vendor']
 
+// whitelists for files
 const whitelists = {
     js: ['.js', '.jsx', '.ts'],
     json: ['.json'],
@@ -61,19 +63,6 @@ function collectFiles(target) {
         .reduce((a, b) => a.concat(b), [])
 }
 
-function selectFiles(files, all, dir) {
-    let codeFiles
-    if (all) {
-        codeFiles = collectFiles(dir)
-    } else if (files) {
-        codeFiles = files
-    } else {
-        codeFiles = stagedFiles(dir)
-    }
-
-    return codeFiles
-}
-
 function readFile(fp) {
     try {
         const text = fs.readFileSync(fp, 'utf8')
@@ -105,17 +94,73 @@ function deleteFile(fp) {
     }
 }
 
+function selectFiles(files, pattern, staged) {
+    let codeFiles
+
+    if (files) {
+        codeFiles = files
+    } else {
+        codeFiles = fg.sync([pattern], {
+            dot: true,
+            ignore: blacklist,
+            absolute: false,
+        })
+    }
+
+    if (staged) {
+        codeFiles = stagedFiles(codeFiles)
+        log.info('Linting staged files:', codeFiles.join(', '))
+    }
+
+    return codeFiles
+}
+
+const stagedFiles = (files = []) => {
+    const cmd = 'git'
+    const args = [
+        'diff',
+        '--cached',
+        '--name-only',
+        '--relative',
+        '--diff-filter=d',
+    ]
+
+    const result = spawn(cmd, args, {
+        encoding: 'utf8',
+        stdio: 'pipe',
+    })
+
+    const output = result.stdout.trim()
+
+    if (output) {
+        const staged = output.split('\n')
+
+        return files.filter(f => {
+            for (const s of staged) {
+                if (path.resolve(f) === path.resolve(s)) {
+                    return true
+                }
+            }
+            return false
+        })
+    }
+
+    return []
+}
+
 module.exports = {
     collectFiles,
     collectAllFiles,
     collectJsFiles,
     collectRejectedFiles,
     deleteFile,
-    selectFiles,
     jsFiles,
     jsonFiles,
     readFile,
+    selectFiles,
+    stagedFiles,
     writeFile,
     whitelisted,
     whitelists,
+    blacklist,
 }
