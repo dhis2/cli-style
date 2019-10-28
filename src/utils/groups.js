@@ -1,9 +1,7 @@
 const path = require('path')
-const fs = require('fs-extra')
 
 const {
     BROWSERSLIST_CONFIG,
-    COMMITLINT_CONFIG,
     ESLINT_CONFIG,
     HUSKY_CONFIG,
     PRETTIER_CONFIG,
@@ -11,10 +9,12 @@ const {
     DEPENDABOT_CONFIG,
     EDITORCONFIG_CONFIG,
     SEMANTIC_PR_CONFIG,
-    LINT_STAGED_CONFIG,
 
+    LOCAL_ESLINT_REACT_CONFIG,
     LOCAL_PRETTIER_CONFIG,
     LOCAL_ESLINT_CONFIG,
+    LOCAL_HUSKY_CONFIG,
+    LOCAL_HUSKY_FRONTEND_CONFIG,
 } = require('./paths.js')
 
 /**
@@ -24,7 +24,6 @@ const {
  * The format of a selector is: 'identifier/specifier', e.g.
  *
  * git/husky
- * git/lint-staged
  *
  * This is represented by a multi-dimensional array:
  *
@@ -43,7 +42,16 @@ const {
  *
  */
 const groups = [
-    ['linter', [['eslint', [LOCAL_ESLINT_CONFIG, path.join('.eslintrc.js')]]]],
+    [
+        'linter',
+        [
+            ['eslint', [LOCAL_ESLINT_CONFIG, path.join('.eslintrc.js')]],
+            [
+                'eslint-react',
+                [LOCAL_ESLINT_REACT_CONFIG, path.join('.eslintrc.js')],
+            ],
+        ],
+    ],
     [
         'formatter',
         [['prettier', [LOCAL_PRETTIER_CONFIG, path.join('.prettierrc.js')]]],
@@ -51,10 +59,10 @@ const groups = [
     [
         'git',
         [
-            ['husky', [HUSKY_CONFIG, path.join('.huskyrc.js')]],
+            ['husky', [LOCAL_HUSKY_CONFIG, path.join('.huskyrc.js')]],
             [
-                'lint-staged',
-                [LINT_STAGED_CONFIG, path.join('.lint-stagedrc.js')],
+                'husky-frontend',
+                [LOCAL_HUSKY_FRONTEND_CONFIG, path.join('.huskyrc.js')],
             ],
         ],
     ],
@@ -73,7 +81,7 @@ const groups = [
         ],
     ],
     [
-        'base',
+        'tools',
         [
             ['editorconfig', [EDITORCONFIG_CONFIG, path.join('.editorconfig')]],
             [
@@ -93,14 +101,25 @@ const groups = [
  * wants to bundle, acting as a short-hand.
  */
 const projects = [
+    ['base', ['tools/editorconfig', 'git/husky']],
     [
         'js',
         [
-            'base/all',
+            'tools/all',
             'github/all',
             'linter/eslint',
             'formatter/prettier',
-            'git/husky',
+            'git/husky-frontend',
+        ],
+    ],
+    [
+        'react',
+        [
+            'base/all',
+            'github/all',
+            'linter/eslint-react',
+            'formatter/prettier',
+            'git/husky-frontend',
         ],
     ],
 ]
@@ -145,7 +164,9 @@ const isValidProject = selector => {
 }
 
 const resolveProjectToGroups = projectName => {
+    // eslint-disable-next-line no-unused-vars
     const [specifier, identifier] = projectName.split('/')
+
     for (const project of projects) {
         if (project[0] === identifier) {
             return project[1]
@@ -246,6 +267,7 @@ const bundledConfigPaths = () => {
     const config = {}
 
     for (const selector of groups) {
+        // eslint-disable-next-line no-unused-vars
         const groupName = selector[0]
         const tools = selector[1]
 
@@ -268,6 +290,9 @@ const bundledConfigPaths = () => {
                 case 'eslint':
                     config.eslint = ESLINT_CONFIG
                     break
+                case 'husky':
+                    config.husky = HUSKY_CONFIG
+                    break
                 default:
                     config[toolName] = sourceConfigPath
                     break
@@ -288,4 +313,5 @@ module.exports = {
     printGroups,
     groupConfigs,
     bundledConfigPaths,
+    projectConfigs,
 }

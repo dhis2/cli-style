@@ -1,36 +1,46 @@
 {
-  "name": "@dhis2/cli-style",
-  "version": "4.2.1",
-  "description": "The code and commit style for DHIS2.",
-  "main": "index.js",
-  "bin": {
-    "d2-style": "bin/d2-style"
-  },
-  "scripts": {
-    "test": "tape tests/**/*.js",
-    "format": "./bin/d2-style js"
-  },
-  "author": "Viktor Varland",
-  "license": "BSD-3-Clause",
-  "dependencies": {
-    "@commitlint/config-conventional": "^8.2.0",
-    "@commitlint/format": "^8.2.0",
-    "@commitlint/lint": "^8.2.0",
-    "@commitlint/load": "^8.2.0",
-    "@commitlint/read": "^8.2.0",
-    "@dhis2/cli-helpers-engine": "^1.5.0",
-    "eslint": "^6.6.0",
-    "fs-extra": "^8.1.0",
-    "husky": "^3.0.9",
-    "lint-staged": "^9.4.2",
-    "perfy": "^1.1.5",
-    "prettier": "^1.18.2",
-    "semver": "^6.3.0"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "devDependencies": {
-    "tape": "^4.11.0"
-  }
+    "name": "@dhis2/cli-style",
+    "version": "5.0.1",
+    "description": "The code and commit style for DHIS2.",
+    "main": "index.js",
+    "bin": {
+        "d2-style": "bin/d2-style"
+    },
+    "scripts": {
+        "test": "tape tests/**/*.js",
+        "lint:js": "./bin/d2-style js check",
+        "lint:text": "./bin/d2-style text check",
+        "lint:staged": "yarn lint:js --staged && yarn lint:text --staged",
+        "lint": "yarn lint:js && yarn lint:text",
+        "format:js": "./bin/d2-style js apply",
+        "format:text": "./bin/d2-style text apply",
+        "format:staged": "yarn format:js --staged && yarn format:text --staged",
+        "format": "yarn format:js && yarn format:text"
+    },
+    "author": "Viktor Varland",
+    "license": "BSD-3-Clause",
+    "dependencies": {
+        "@commitlint/cli": "^8.3.3",
+        "@commitlint/config-conventional": "^8.3.3",
+        "@dhis2/cli-helpers-engine": "1.5.0",
+        "babel-eslint": "^10.0.3",
+        "chalk": "^2.4.2",
+        "cross-spawn": "^7.0.1",
+        "eslint": "^6.6.0",
+        "eslint-config-prettier": "^6.5.0",
+        "eslint-plugin-react": "^7.16.0",
+        "fast-glob": "^3.1.0",
+        "fs-extra": "^8.1.0",
+        "husky": "^3.0.9",
+        "perfy": "^1.1.5",
+        "prettier": "^1.18.2",
+        "semver": "^6.3.0",
+        "yargs": "^14.2.0"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "devDependencies": {
+        "tape": "^4.11.0"
+    }
 }
