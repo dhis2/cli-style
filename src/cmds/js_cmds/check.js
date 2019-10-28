@@ -41,7 +41,7 @@ exports.handler = argv => {
         eslintOpts.files = files
     } else {
         const entries = fg.sync([pattern], {
-            dot: true,
+            dot: false,
             ignore: ['node_modules'],
         })
 
