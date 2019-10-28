@@ -8,7 +8,7 @@ pre-commit:
 
 	commands:
         prettier:
-            glob: "*.{.js,jsx}"
+            glob: "*.{js,jsx}"
             run: npx prettier {staged_files}
 
 		eslint:

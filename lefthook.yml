@@ -4,16 +4,11 @@
 commit-msg:
     commands:
         commitlint:
-            run: npx commitlint
+            run: ./bin/d2-style commit check
 
 pre-commit:
     parallel: true
-
-	commands:
-        prettier:
-            glob: "*.{.js,jsx}"
-            run: npx prettier {staged_files}
-
-		eslint:
-			glob: "*.{js,jsx}"
-			run: npx eslint {staged_files}
+    commands:
+        javascript:
+            glob: "*.{js,jsx}"
+            run: ./bin/d2-style js apply {staged_files}

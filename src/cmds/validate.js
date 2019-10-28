@@ -64,29 +64,9 @@ exports.handler = argv => {
     const args = [
         '--no-install',
         'lefthook',
-        '--edit',
     ]
 
     run(cmd, args, {
         env,
     })
-
-    /*
-    lintStaged({
-        configPath: path.resolve(CONSUMING_ROOT, lintStagedConfig),
-        quiet: false,
-        debug: false,
-    })
-        .then(s => {
-            collectRejectedFiles(CONSUMING_ROOT).map(deleteFile)
-            if (!s) {
-                process.exit(1)
-            }
-            process.exit(0)
-        })
-        .catch(e => {
-            log.error('Failed to parse lint-staged configuration', e)
-            process.exit(1)
-        })
-    */
 }

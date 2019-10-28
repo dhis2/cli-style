@@ -20,6 +20,8 @@ exports.builder = {
 exports.handler = argv => {
     const { files, all } = argv
 
+    console.log(files)
+
     const root = process.cwd()
     log.debug(`Root directory: ${root}`)
 
