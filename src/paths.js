@@ -20,6 +20,7 @@ const DEPENDABOT_CONFIG = path.join(CONFIG_DIR, 'github', 'dependabot.yml')
 const HUSKY_CONFIG = path.join(CONFIG_DIR, 'husky.config.js')
 const STALE_CONFIG = path.join(CONFIG_DIR, 'github', 'stale.yml')
 const SEMANTIC_PR_CONFIG = path.join(CONFIG_DIR, 'github', 'semantic.yml')
+const LEFTHOOK_CONFIG = path.join(CONFIG_DIR, 'lefthook.config.js.yml')
 
 // local configuration files for repositories
 const LOCAL_ESLINT_CONFIG = path.join(CONFIG_DIR, 'js', 'eslint.local.js')
@@ -41,4 +42,5 @@ module.exports = {
     SEMANTIC_PR_CONFIG,
     STALE_CONFIG,
     HUSKY_CONFIG,
+    LEFTHOOK_CONFIG,
 }

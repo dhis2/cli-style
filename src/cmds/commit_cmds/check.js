@@ -1,24 +1,31 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
-const { runner } = require('../../tools/git')
 
-exports.command = 'check [msg]'
+const { run } = require('../../run.js')
+
+const {
+    COMMITLINT_CONFIG
+} = require('../../paths.js')
+
+exports.command = 'check'
 
 exports.describe = 'Checks commit messages according to standards.'
 
-exports.builder = {}
+exports.builder = {
+    commitlintConfig: {
+        describe: 'Commitlint config file to use',
+        type: 'string',
+        default: COMMITLINT_CONFIG,
+    },
+}
 
-exports.handler = async function(argv) {
-    const { msg } = argv
+exports.handler = function(argv) {
+    const cmd = 'npx'
+    const args = [
+        '--no-install',
+        'commitlint',
+        `--config=${COMMITLINT_CONFIG}`,
+        '--edit',
+    ]
 
-    const report = await runner(msg)
-
-    report.summarize()
-
-    if (report.hasViolations) {
-        log.debug('Commit message is valid')
-        process.exit(0)
-    } else {
-        log.debug('Commit message is invalid')
-        process.exit(1)
-    }
+    run(cmd, args)
 }

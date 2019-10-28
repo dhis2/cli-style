@@ -12,6 +12,7 @@ const {
     EDITORCONFIG_CONFIG,
     SEMANTIC_PR_CONFIG,
     LINT_STAGED_CONFIG,
+    LEFTHOOK_CONFIG,
 
     LOCAL_PRETTIER_CONFIG,
     LOCAL_ESLINT_CONFIG,
@@ -56,6 +57,7 @@ const groups = [
                 'lint-staged',
                 [LINT_STAGED_CONFIG, path.join('.lint-stagedrc.js')],
             ],
+            ['lefthook', [LEFTHOOK_CONFIG, path.join('lefthook.yml')]],
         ],
     ],
     [

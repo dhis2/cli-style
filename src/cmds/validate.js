@@ -1,6 +1,6 @@
 const path = require('path')
 
-const lintStaged = require('lint-staged')
+//const lintStaged = require('lint-staged')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { groups, isValidGroup } = require('../groups.js')
@@ -59,6 +59,7 @@ exports.handler = argv => {
         CLI_STYLE_STAGE: `${stage}`,
     }
 
+    /*
     lintStaged({
         configPath: path.resolve(CONSUMING_ROOT, lintStagedConfig),
         quiet: false,
@@ -75,4 +76,5 @@ exports.handler = argv => {
             log.error('Failed to parse lint-staged configuration', e)
             process.exit(1)
         })
+    */
 }
