@@ -3,8 +3,10 @@ const path = require('path')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
+// blacklists for files
 const blacklist = ['node_modules', 'build', 'dist', 'target', '.git', 'vendor']
 
+// whitelists for files
 const whitelists = {
     js: ['.js', '.jsx', '.ts'],
     json: ['.json'],
