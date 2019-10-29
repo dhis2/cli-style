@@ -11,4 +11,9 @@ pre-commit:
     commands:
         lint-javascript:
             glob: "*.{js,jsx}"
-            run: ./bin/d2-style js apply {staged_files}
+            run: ./bin/d2-style js check {staged_files}
+
+pre-push:
+    commands:
+        test:
+            run: yarn test

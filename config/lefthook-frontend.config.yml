@@ -1,16 +1,11 @@
 commit-msg:
     commands:
-        commitlint:
-            run: npx commitlint
+        lint-commit-msg:
+            run: npx d2-style commit check
 
 pre-commit:
     parallel: true
-
     commands:
-        prettier:
+        lint-javascript:
             glob: "*.{js,jsx}"
-            run: npx prettier {staged_files}
-
-        eslint:
-            glob: "*.{js,jsx}"
-            run: npx eslint {staged_files}
+            run: npx d2-style js check {staged_files}

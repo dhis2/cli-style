@@ -18,14 +18,26 @@ const EDITORCONFIG_CONFIG = path.join(CONFIG_DIR, 'editorconfig.config.rc')
 const DEPENDABOT_CONFIG = path.join(CONFIG_DIR, 'github', 'dependabot.yml')
 const STALE_CONFIG = path.join(CONFIG_DIR, 'github', 'stale.yml')
 const SEMANTIC_PR_CONFIG = path.join(CONFIG_DIR, 'github', 'semantic.yml')
-const LEFTHOOK_FRONTEND_CONFIG = path.join(CONFIG_DIR, 'lefthook-frontend.config.yml')
-const LEFTHOOK_BACKEND_CONFIG = path.join(CONFIG_DIR, 'lefthook-backend.config.yml')
+const LEFTHOOK_FRONTEND_CONFIG = path.join(
+    CONFIG_DIR,
+    'lefthook-frontend.config.yml'
+)
+const LEFTHOOK_BACKEND_CONFIG = path.join(
+    CONFIG_DIR,
+    'lefthook-backend.config.yml'
+)
 
 // local configuration files for repositories
 const LOCAL_ESLINT_CONFIG = path.join(CONFIG_DIR, 'js', 'eslint.local.js')
 const LOCAL_PRETTIER_CONFIG = path.join(CONFIG_DIR, 'js', 'prettier.local.js')
-const LOCAL_LEFTHOOK_FRONTEND_CONFIG = path.join(CONFIG_DIR, 'lefthook-frontend.local.yml')
-const LOCAL_LEFTHOOK_BACKEND_CONFIG = path.join(CONFIG_DIR, 'lefthook-backend.local.yml')
+const LOCAL_LEFTHOOK_FRONTEND_CONFIG = path.join(
+    CONFIG_DIR,
+    'lefthook-frontend.local.yml'
+)
+const LOCAL_LEFTHOOK_BACKEND_CONFIG = path.join(
+    CONFIG_DIR,
+    'lefthook-backend.local.yml'
+)
 
 module.exports = {
     CONSUMING_ROOT,

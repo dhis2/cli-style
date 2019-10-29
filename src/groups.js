@@ -50,10 +50,19 @@ const groups = [
         'formatter',
         [['prettier', [LOCAL_PRETTIER_CONFIG, path.join('.prettierrc.js')]]],
     ],
-    ['git', [
-        ['hooks-frontend', [LOCAL_LEFTHOOK_FRONTEND_CONFIG, path.join('lefthook.yml')]],
-        ['hooks-backend', [LOCAL_LEFTHOOK_BACKEND_CONFIG, path.join('lefthook.yml')]]
-    ]],
+    [
+        'git',
+        [
+            [
+                'hooks-frontend',
+                [LOCAL_LEFTHOOK_FRONTEND_CONFIG, path.join('lefthook.yml')],
+            ],
+            [
+                'hooks-backend',
+                [LOCAL_LEFTHOOK_BACKEND_CONFIG, path.join('lefthook.yml')],
+            ],
+        ],
+    ],
     [
         'github',
         [
