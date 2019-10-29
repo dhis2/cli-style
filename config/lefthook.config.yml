@@ -6,11 +6,11 @@ commit-msg:
 pre-commit:
     parallel: true
 
-	commands:
+    commands:
         prettier:
             glob: "*.{js,jsx}"
             run: npx prettier {staged_files}
 
-		eslint:
-			glob: "*.{js,jsx}"
-			run: npx eslint {staged_files}
+        eslint:
+            glob: "*.{js,jsx}"
+            run: npx eslint {staged_files}
