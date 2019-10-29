@@ -1,7 +1,7 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { run } = require('../../run.js')
-const { COMMITLINT_CONFIG } = require('../../paths.js')
+const { run } = require('../run.js')
+const { COMMITLINT_CONFIG } = require('../paths.js')
 
 exports.commitlint = (config = COMMITLINT_CONFIG) => {
     const cmd = 'npx'

@@ -2,7 +2,8 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 
 const fg = require('fast-glob')
 
-const { prettier, eslint } = require('../../tools/js/index.js')
+const { eslint } = require('../../tools/eslint.js')
+const { prettier } = require('../../tools/prettier.js')
 const { blacklist } = require('../../files.js')
 
 exports.command = 'apply [files..]'

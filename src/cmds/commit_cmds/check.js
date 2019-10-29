@@ -1,6 +1,6 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { commitlint } = require('../../tools/git/index.js')
+const { commitlint } = require('../../tools/commitlint.js')
 
 exports.command = 'check'
 

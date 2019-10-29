@@ -5,18 +5,18 @@ const {
     BROWSERSLIST_CONFIG,
     COMMITLINT_CONFIG,
     ESLINT_CONFIG,
-    HUSKY_CONFIG,
     PRETTIER_CONFIG,
     STALE_CONFIG,
     DEPENDABOT_CONFIG,
     EDITORCONFIG_CONFIG,
     SEMANTIC_PR_CONFIG,
-    LINT_STAGED_CONFIG,
-    LEFTHOOK_CONFIG,
+    LEFTHOOK_FRONTEND_CONFIG,
+    LEFTHOOK_BACKEND_CONFIG,
 
     LOCAL_PRETTIER_CONFIG,
     LOCAL_ESLINT_CONFIG,
-    LOCAL_LEFTHOOK_CONFIG,
+    LOCAL_LEFTHOOK_FRONTEND_CONFIG,
+    LOCAL_LEFTHOOK_BACKEND_CONFIG,
 } = require('./paths.js')
 
 /**
@@ -50,7 +50,10 @@ const groups = [
         'formatter',
         [['prettier', [LOCAL_PRETTIER_CONFIG, path.join('.prettierrc.js')]]],
     ],
-    ['git', [['lefthook', [LOCAL_LEFTHOOK_CONFIG, path.join('lefthook.yml')]]]],
+    ['git', [
+        ['hooks-frontend', [LOCAL_LEFTHOOK_FRONTEND_CONFIG, path.join('lefthook.yml')]],
+        ['hooks-backend', [LOCAL_LEFTHOOK_BACKEND_CONFIG, path.join('lefthook.yml')]]
+    ]],
     [
         'github',
         [
@@ -93,7 +96,7 @@ const projects = [
             'github/all',
             'linter/eslint',
             'formatter/prettier',
-            'git/husky',
+            'git/hooks-frontend',
         ],
     ],
 ]
