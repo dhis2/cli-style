@@ -4,7 +4,7 @@ const fg = require('fast-glob')
 
 const { eslint } = require('../../tools/eslint.js')
 const { prettier } = require('../../tools/prettier.js')
-const { blacklist } = require('../../files.js')
+const { blacklist, stagedFiles } = require('../../files.js')
 
 exports.command = 'check [files..]'
 
@@ -25,35 +25,46 @@ exports.builder = {
         type: 'string',
         default: '**/*.{js,jsx,ts,tsx}',
     },
+    staged: {
+        describe: 'Only check staged files in Git',
+        type: 'boolean',
+        default: 'false',
+    },
 }
 
 exports.handler = argv => {
-    const { files, pattern, eslintConfig, prettierConfig } = argv
+    const { files, pattern, eslintConfig, prettierConfig, staged } = argv
 
-    const prettierOpts = {
-        config: prettierConfig,
-    }
-
-    const eslintOpts = {
-        config: eslintConfig,
+    const opts = {
+        apply: false,
     }
 
     if (files) {
-        prettierOpts.files = files
-        eslintOpts.files = files
+        opts.files = files
     } else {
         const entries = fg.sync([pattern], {
             dot: false,
             ignore: blacklist,
+            absolute: false,
         })
 
-        prettierOpts.files = entries
-        eslintOpts.files = entries
+        opts.files = entries
+    }
+
+    if (staged) {
+        opts.files = stagedFiles(opts.files)
+        log.info('Linting staged files:', opts.files)
     }
 
     log.info('Running ESLint...')
-    eslint(eslintOpts)
+    eslint({
+        config: eslintConfig,
+        ...opts,
+    })
 
     log.info('Running Prettier...')
-    prettier(prettierOpts)
+    prettier({
+        config: prettierConfig,
+        ...opts,
+    })
 }

@@ -1,5 +1,11 @@
 const spawn = require('cross-spawn')
 
+exports.spawn = (cmd, args, opts) =>
+    spawn.sync(cmd, args, {
+        stdio: 'inherit',
+        ...opts,
+    })
+
 exports.run = (cmd, args, opts) =>
     handleRun(
         spawn.sync(cmd, args, {
