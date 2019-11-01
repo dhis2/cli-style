@@ -98,6 +98,7 @@ const groups = [
  * wants to bundle, acting as a short-hand.
  */
 const projects = [
+    ['java', []],
     [
         'js',
         [

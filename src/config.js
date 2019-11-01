@@ -25,7 +25,6 @@ function configure(repo, group = [''], overwrite) {
         isValidGroup,
         isValidProject,
         resolveProjectToGroups,
-        printGroups,
         groupConfigs,
         expandGroupAll,
     } = require('./groups.js')
@@ -44,9 +43,7 @@ function configure(repo, group = [''], overwrite) {
 
     const validGroups = groups.filter(isValidGroup)
 
-    if (validGroups.length === 0) {
-        log.warn(`No valid group selected...\n\n${printGroups()}`)
-    } else {
+    if (validGroups.length !== 0) {
         log.info(`Running setup for group(s): ${validGroups.join('\n * ')}`)
     }
 
