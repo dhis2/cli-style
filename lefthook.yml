@@ -15,3 +15,8 @@ pre-commit:
         lint-structured-text:
             glob: '*.{yaml,yml,md,markdown,json,html,htm}'
             run: ./bin/d2-style structured-text check {staged_files}
+
+pre-push:
+    commands:
+        glob: 'src/*'
+        run: yarn test
