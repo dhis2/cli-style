@@ -1,6 +1,5 @@
-# special path
-# extends: ./config/lefthook.config.yml
-
+# supports extends in next version
+# extends: ./node_modules/@dhis2/cli-style/config/lefthook-frontend.config.yml
 commit-msg:
     commands:
         lint-commit-msg:
@@ -10,10 +9,9 @@ pre-commit:
     parallel: true
     commands:
         lint-javascript:
-            glob: "*.{js,jsx}"
+            glob: '*.{js,jsx}'
             run: ./bin/d2-style js check {staged_files}
 
-pre-push:
-    commands:
-        test:
-            run: yarn test
+        lint-structured-text:
+            glob: '*.{yaml,yml,md,markdown,json,html,htm}'
+            run: ./bin/d2-style structured-text check {staged_files}

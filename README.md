@@ -3,7 +3,6 @@
 > This package is part of the [@dhis2/cli](https://github.com/dhis2/cli)
 > commandline interface.
 
-
 [![dhis2-cli Compatible](https://img.shields.io/badge/dhis2-cli-ff69b4.svg)](https://github.com/dhis2/cli)
 [![@dhis2/cli-style on npm](https://img.shields.io/npm/v/@dhis2/cli-style.svg)](https://www.npmjs.com/package/@dhis2/cli-style)
 [![travis.com build](https://img.shields.io/travis/com/dhis2/cli-style.svg)](https://travis-ci.com/dhis2/cli-style)
@@ -20,11 +19,11 @@ As a terminal user check out the full CLI. :rocket:
 This tool includes the following tools as runtime dependencies, so they
 are not necessary to explicitly install:
 
-- [Husky](https://github.com/typicode/husky)
-- [Commitlint](https://commitlint.js.org)
-- [ESLint](https://eslint.org/)
-- [Prettier](https://prettier.io)
-- [Lint Staged](https://github.com/okonet/lint-staged)
+-   [Husky](https://github.com/typicode/husky)
+-   [Commitlint](https://commitlint.js.org)
+-   [ESLint](https://eslint.org/)
+-   [Prettier](https://prettier.io)
+-   [Lint Staged](https://github.com/okonet/lint-staged)
 
 ## Usage
 
@@ -91,7 +90,7 @@ Which includes a formatter, linter, git hook manager, etc.
    since it is a runtime dependency of `d2-style`.
 
 2. `d2-style setup project/js` installs the necessary configuration files in the
-   repo. 
+   repo.
 
 3. Now, when a hook is triggered (e.g. `pre-commit`), the `.huskyrc.js`
    configuration is read for that specific hook, and the command is
@@ -129,7 +128,7 @@ Which includes a formatter, linter, git hook manager, etc.
 
 ## Overrides
 
-There are opportunities to extend and change the behaviour of      
+There are opportunities to extend and change the behaviour of  
 `d2-style`, and because of how the different tools themselves work, the
 process varies slightly. Remember how the command chain work, and it is
 easier to reason about why.
@@ -142,8 +141,8 @@ like:
 ```js
 module.exports = {
     hooks: {
-       'commit-msg': 'd2-style commit check',
-       'pre-commit': 'd2-style validate',
+        'commit-msg': 'd2-style commit check',
+        'pre-commit': 'd2-style validate',
     },
 }
 ```
@@ -180,10 +179,7 @@ module.exports = {
             fix && stage ? '--stage' : ''
         }`,
     ],
-    '*.css': [
-        'stylelint',
-        'git add',
-    ]
+    '*.css': ['stylelint', 'git add'],
 }
 ```
 
@@ -320,8 +316,7 @@ module.exports = {
 }
 ```
 
-Now you can update your `.huskyrc.js` line where you call `d2-style
-validate` to:
+Now you can update your `.huskyrc.js` line where you call `d2-style validate` to:
 
 ```js
 'pre-commit': 'd2-style validate --prettier-config .prettierrc.js',

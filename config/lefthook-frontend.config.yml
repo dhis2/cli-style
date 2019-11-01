@@ -7,5 +7,9 @@ pre-commit:
     parallel: true
     commands:
         lint-javascript:
-            glob: "*.{js,jsx}"
+            glob: '*.{js,jsx}'
             run: npx d2-style js check {staged_files}
+
+        lint-structured-text:
+            glob: '*.{yaml,yml,md,markdown,json,html,htm}'
+            run: npx d2-style structured-text check {staged_files}
