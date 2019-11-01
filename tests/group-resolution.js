@@ -67,7 +67,7 @@ test('an invalid group will be rejected', t => {
 test('a valid project can be resolved into groups', t => {
     t.plan(1)
     const project = 'project/js'
-    const projectGroups = projects[0][1]
+    const projectGroups = projects[1][1]
     const resolvedGroups = resolveProjectToGroups(project)
 
     t.deepEqual(
