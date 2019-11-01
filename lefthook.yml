@@ -18,5 +18,6 @@ pre-commit:
 
 pre-push:
     commands:
-        glob: 'src/*'
-        run: yarn test
+        test-javascript:
+            glob: 'src/*'
+            run: yarn test
