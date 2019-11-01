@@ -1,6 +1,6 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { run } = require('../run.js')
+const { run } = require('../utils/run.js')
 
 exports.prettier = ({ files = [], apply = false, config }) => {
     const cmd = 'npx'

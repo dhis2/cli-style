@@ -1,7 +1,7 @@
 const path = require('path')
 
 const CONSUMING_ROOT = path.join(process.cwd())
-const CONFIG_ROOT = path.join(__dirname, '..')
+const CONFIG_ROOT = path.join(__dirname, '..', '..')
 const CONFIG_DIR = path.join(CONFIG_ROOT, 'config')
 
 const ESLINT_CONFIG = path.join(CONFIG_DIR, 'js', 'eslint.config.js')

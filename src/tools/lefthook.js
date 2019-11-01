@@ -2,7 +2,7 @@ const path = require('path')
 const fs = require('fs-extra')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { run } = require('../run.js')
+const { run } = require('../utils/run.js')
 
 exports.lefthook = ({ command }) => {
     const cmd = 'npx'

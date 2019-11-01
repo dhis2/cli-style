@@ -4,7 +4,7 @@ const { namespace } = require('@dhis2/cli-helpers-engine')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { prettier } = require('../tools/prettier.js')
-const { blacklist, stagedFiles } = require('../files.js')
+const { blacklist, stagedFiles } = require('../utils/files.js')
 
 const options = yargs =>
     yargs

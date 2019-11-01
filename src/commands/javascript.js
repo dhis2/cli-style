@@ -5,7 +5,7 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { eslint } = require('../tools/eslint.js')
 const { prettier } = require('../tools/prettier.js')
-const { blacklist, stagedFiles } = require('../files.js')
+const { blacklist, stagedFiles } = require('../utils/files.js')
 
 const options = yargs =>
     yargs

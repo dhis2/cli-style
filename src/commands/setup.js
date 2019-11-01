@@ -1,7 +1,7 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { configure } = require('../config.js')
-const { printGroups } = require('../groups.js')
+const { configure } = require('../utils/config.js')
+const { printGroups } = require('../utils/groups.js')
 const { lefthook } = require('../tools/lefthook.js')
 
 exports.command = 'setup [group..]'
