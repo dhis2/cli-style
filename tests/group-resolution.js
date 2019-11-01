@@ -9,7 +9,7 @@ const {
     groupConfigs,
     expandGroupAll,
     bundledConfigPaths,
-} = require('../src/groups.js')
+} = require('../src/utils/groups.js')
 
 const {
     BROWSERSLIST_CONFIG,
@@ -22,7 +22,7 @@ const {
     LINT_STAGED_CONFIG,
     PRETTIER_CONFIG,
     ESLINT_CONFIG,
-} = require('../src/paths.js')
+} = require('../src/utils/paths.js')
 
 function findGroup(identifier) {
     const res = []
