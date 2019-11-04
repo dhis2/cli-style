@@ -1,6 +1,6 @@
 {
     "name": "@dhis2/cli-style",
-    "version": "5.0.0-beta",
+    "version": "5.0.1-beta.7",
     "description": "The code and commit style for DHIS2.",
     "main": "index.js",
     "bin": {
@@ -8,7 +8,7 @@
     },
     "scripts": {
         "test": "tape tests/**/*.js",
-        "format": "./bin/d2-style js"
+        "format": "./bin/d2-style js apply --staged"
     },
     "author": "Viktor Varland",
     "license": "BSD-3-Clause",
@@ -20,6 +20,7 @@
         "chalk": "^2.4.2",
         "cross-spawn": "^7.0.1",
         "eslint": "^6.6.0",
+        "eslint-plugin-react": "^7.16.0",
         "fast-glob": "^3.1.0",
         "fs-extra": "^8.1.0",
         "perfy": "^1.1.5",

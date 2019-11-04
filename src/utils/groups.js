@@ -13,6 +13,7 @@ const {
     LEFTHOOK_FRONTEND_CONFIG,
     LEFTHOOK_BACKEND_CONFIG,
 
+    LOCAL_ESLINT_REACT_CONFIG,
     LOCAL_PRETTIER_CONFIG,
     LOCAL_ESLINT_CONFIG,
     LOCAL_LEFTHOOK_FRONTEND_CONFIG,
@@ -45,7 +46,16 @@ const {
  *
  */
 const groups = [
-    ['linter', [['eslint', [LOCAL_ESLINT_CONFIG, path.join('.eslintrc.js')]]]],
+    [
+        'linter',
+        [
+            ['eslint', [LOCAL_ESLINT_CONFIG, path.join('.eslintrc.js')]],
+            [
+                'eslint-react',
+                [LOCAL_ESLINT_REACT_CONFIG, path.join('.eslintrc.js')],
+            ],
+        ],
+    ],
     [
         'formatter',
         [['prettier', [LOCAL_PRETTIER_CONFIG, path.join('.prettierrc.js')]]],
@@ -105,6 +115,16 @@ const projects = [
             'base/all',
             'github/all',
             'linter/eslint',
+            'formatter/prettier',
+            'git/hooks-frontend',
+        ],
+    ],
+    [
+        'react',
+        [
+            'base/all',
+            'github/all',
+            'linter/eslint-react',
             'formatter/prettier',
             'git/hooks-frontend',
         ],

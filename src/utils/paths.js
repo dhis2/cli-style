@@ -28,7 +28,9 @@ const LEFTHOOK_BACKEND_CONFIG = path.join(
 )
 
 // local configuration files for repositories
+const LOCAL_ESLINT_REACT_CONFIG = path.join(CONFIG_DIR, 'js', 'eslint.react.js')
 const LOCAL_ESLINT_CONFIG = path.join(CONFIG_DIR, 'js', 'eslint.local.js')
+
 const LOCAL_PRETTIER_CONFIG = path.join(CONFIG_DIR, 'js', 'prettier.local.js')
 const LOCAL_LEFTHOOK_FRONTEND_CONFIG = path.join(
     CONFIG_DIR,
@@ -49,6 +51,7 @@ module.exports = {
     EDITORCONFIG_CONFIG,
     ESLINT_CONFIG,
     LOCAL_ESLINT_CONFIG,
+    LOCAL_ESLINT_REACT_CONFIG,
     LOCAL_PRETTIER_CONFIG,
     PRETTIER_CONFIG,
     SEMANTIC_PR_CONFIG,

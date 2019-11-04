@@ -21,7 +21,7 @@ const options = yargs =>
         .option('staged', {
             describe: 'Only check staged files in Git',
             type: 'boolean',
-            default: 'false',
+            default: false,
         })
 
 const handler = (argv, apply) => {
@@ -58,14 +58,14 @@ const handler = (argv, apply) => {
 const textCmds = yargs => {
     return yargs
         .command(
-            'apply',
+            'apply [files..]',
             'Apply structured text format.',
             yargs => options(yargs),
             argv => handler(argv, true)
         )
 
         .command(
-            'check',
+            'check [files..]',
             'Check structured text format (do not attempt to fix)',
             yargs => options(yargs),
             argv => handler(argv, false)
