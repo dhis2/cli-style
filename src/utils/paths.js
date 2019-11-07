@@ -5,6 +5,11 @@ const CONFIG_ROOT = path.join(__dirname, '..', '..')
 const CONFIG_DIR = path.join(CONFIG_ROOT, 'config')
 
 const ESLINT_CONFIG = path.join(CONFIG_DIR, 'js', 'eslint.config.js')
+const ESLINT_REACT_CONFIG = path.join(
+    CONFIG_DIR,
+    'js',
+    'eslint-react.config.js'
+)
 const PRETTIER_CONFIG = path.join(CONFIG_DIR, 'js', 'prettier.config.js')
 
 const BROWSERSLIST_CONFIG = path.join(
@@ -27,7 +32,11 @@ const LOCAL_HUSKY_FRONTEND_CONFIG = path.join(
 const LOCAL_HUSKY_CONFIG = path.join(CONFIG_DIR, 'husky.local.js')
 
 // local configuration files for repositories
-const LOCAL_ESLINT_REACT_CONFIG = path.join(CONFIG_DIR, 'js', 'eslint.react.js')
+const LOCAL_ESLINT_REACT_CONFIG = path.join(
+    CONFIG_DIR,
+    'js',
+    'eslint-react.local.js'
+)
 const LOCAL_ESLINT_CONFIG = path.join(CONFIG_DIR, 'js', 'eslint.local.js')
 
 const LOCAL_PRETTIER_CONFIG = path.join(CONFIG_DIR, 'js', 'prettier.local.js')
@@ -41,6 +50,7 @@ module.exports = {
     DEPENDABOT_CONFIG,
     EDITORCONFIG_CONFIG,
     ESLINT_CONFIG,
+    ESLINT_REACT_CONFIG,
     LOCAL_ESLINT_CONFIG,
     LOCAL_ESLINT_REACT_CONFIG,
     LOCAL_PRETTIER_CONFIG,
