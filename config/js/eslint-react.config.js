@@ -1,9 +1,7 @@
-const { config } = require('@dhis2/cli-style')
-
 module.exports = {
     parser: 'babel-eslint',
 
-    extends: [config.eslint, 'plugin:react/recommended'],
+    extends: ['./eslint.config.js', 'plugin:react/recommended'],
 
     settings: {
         react: {
@@ -20,5 +18,6 @@ module.exports = {
                 callbacksLast: true,
             },
         ],
+        'react/no-unused-prop-types': 'error',
     },
 }

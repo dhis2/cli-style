@@ -3,6 +3,7 @@ const path = require('path')
 const {
     BROWSERSLIST_CONFIG,
     ESLINT_CONFIG,
+    ESLINT_REACT_CONFIG,
     HUSKY_CONFIG,
     PRETTIER_CONFIG,
     STALE_CONFIG,
@@ -289,6 +290,10 @@ const bundledConfigPaths = () => {
                     break
                 case 'eslint':
                     config.eslint = ESLINT_CONFIG
+                    break
+                case 'eslint-react':
+                    config.eslintReact = ESLINT_REACT_CONFIG
+                    config['eslint-react'] = ESLINT_REACT_CONFIG
                     break
                 case 'husky':
                     config.husky = HUSKY_CONFIG
