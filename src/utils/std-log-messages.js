@@ -1,5 +1,5 @@
 exports.sayFilesChecked = (type, count, apply) =>
-    `${apply ? 'Fixed' : 'Checked'} ${type} ${count} file(s)`
+    `${apply ? 'Fixed' : 'Checked'} ${count} ${type} file(s)`
 
 exports.sayNoFiles = (type, pattern, staged) =>
     `No matching ${
