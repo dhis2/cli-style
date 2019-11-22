@@ -6,17 +6,23 @@ exports.spawn = (cmd, args, opts) =>
         ...opts,
     })
 
-exports.run = (cmd, args, opts) =>
-    handleRun(
+exports.run = (cmd, { args, opts }, callback) => {
+    return handleRun(
         spawn.sync(cmd, args, {
             stdio: 'inherit',
             ...opts,
-        })
+        }),
+        callback
     )
+}
 
-function handleRun(result) {
+function handleRun(result, callback) {
     if (result.error) {
         throw result.error
+    }
+
+    if (callback) {
+        callback(result)
     }
 
     if (result.status !== 0) {
