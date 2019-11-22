@@ -16,6 +16,7 @@ const blacklist = [
     'vendor',
     'dest',
     '.d2',
+    'CHANGELOG.md',
 ]
 
 // whitelists for files
