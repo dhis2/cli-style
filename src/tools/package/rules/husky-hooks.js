@@ -1,5 +1,4 @@
-const log = require('@dhis2/cli-helpers-engine').reporter
-const chalk = require('chalk')
+const { chalk } = require('@dhis2/cli-helpers-engine')
 const path = require('path')
 const fs = require('fs')
 
