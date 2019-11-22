@@ -53,10 +53,11 @@ const handler = (argv, apply) => {
 
     prettier({
         config: prettierConfig,
+        type: 'js',
         ...opts,
     })
 
-    log.print(sayFilesChecked('javascript', opts.files.length))
+    log.print(sayFilesChecked('javascript', opts.files.length, apply))
 }
 
 const javascriptCmds = yargs => {

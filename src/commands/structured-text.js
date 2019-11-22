@@ -43,10 +43,11 @@ const handler = (argv, apply) => {
 
     prettier({
         config: prettierConfig,
+        type: 'text',
         ...opts,
     })
 
-    log.print(sayFilesChecked('text', opts.files.length))
+    log.print(sayFilesChecked('text', opts.files.length, apply))
 }
 
 const textCmds = yargs => {

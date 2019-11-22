@@ -5,5 +5,5 @@ exports.commitlint = (config = COMMITLINT_CONFIG) => {
     const cmd = 'npx'
     const args = ['--no-install', 'commitlint', `--config=${config}`, '--edit']
 
-    run(cmd, args)
+    run(cmd, { args })
 }

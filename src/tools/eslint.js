@@ -14,5 +14,5 @@ exports.eslint = ({ files = [], apply = false, config }) => {
         ...files,
     ]
 
-    run(cmd, args)
+    run(cmd, { args })
 }
