@@ -1,3 +1,10 @@
+## [4.2.1](https://github.com/dhis2/cli-style/compare/v4.2.0...v4.2.1) (2019-11-22)
+
+
+### Bug Fixes
+
+* ignore .d2 directory ([c4c384b](https://github.com/dhis2/cli-style/commit/c4c384bbffd24410445cec9dc852b4858967d7d4))
+
 # [4.2.0](https://github.com/dhis2/cli-style/compare/v4.1.3...v4.2.0) (2019-10-10)
 
 
