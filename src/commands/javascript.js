@@ -40,7 +40,7 @@ const handler = (argv, apply) => {
     opts.files = selectFiles(files, pattern, staged)
 
     if (opts.files.length === 0) {
-        log.print(sayNoFiles(pattern, staged))
+        log.print(sayNoFiles('javascript', pattern, staged))
         return
     }
 
