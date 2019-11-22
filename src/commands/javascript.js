@@ -4,6 +4,7 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 const { eslint } = require('../tools/eslint.js')
 const { prettier } = require('../tools/prettier.js')
 const { selectFiles } = require('../utils/files.js')
+const { sayFilesChecked, sayNoFiles } = require('../utils/std-log-messages.js')
 
 const options = yargs =>
     yargs
@@ -39,11 +40,7 @@ const handler = (argv, apply) => {
     opts.files = selectFiles(files, pattern, staged)
 
     if (opts.files.length === 0) {
-        log.warn(
-            `No matching ${
-                staged ? 'staged ' : ''
-            }files for pattern "${pattern}"`
-        )
+        log.print(sayNoFiles(pattern, staged))
         return
     }
 
@@ -59,7 +56,7 @@ const handler = (argv, apply) => {
         ...opts,
     })
 
-    log.info(`${opts.files.length} file(s) ${apply ? 'fixed' : 'checked'}`)
+    log.print(sayFilesChecked('javascript', opts.files.length, apply))
 }
 
 const javascriptCmds = yargs => {
