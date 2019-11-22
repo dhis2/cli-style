@@ -34,7 +34,11 @@ const handler = (argv, apply) => {
     opts.files = selectFiles(files, pattern, staged)
 
     if (opts.files.length === 0) {
-        log.debug('No files to work on...')
+        log.warn(
+            `No matching ${
+                staged ? 'staged ' : ''
+            }files for pattern "${pattern}"`
+        )
         return
     }
 
@@ -44,6 +48,8 @@ const handler = (argv, apply) => {
         config: prettierConfig,
         ...opts,
     })
+
+    log.info(`${opts.files.length} file(s) ${apply ? 'fixed' : 'checked'}`)
 }
 
 const textCmds = yargs => {
