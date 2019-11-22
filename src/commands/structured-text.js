@@ -46,7 +46,7 @@ const handler = (argv, apply) => {
         ...opts,
     })
 
-    log.print(sayFilesChecked('text', opts.files.length, apply))
+    log.print(sayFilesChecked('text', opts.files.length))
 }
 
 const textCmds = yargs => {

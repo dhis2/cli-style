@@ -56,7 +56,7 @@ const handler = (argv, apply) => {
         ...opts,
     })
 
-    log.print(sayFilesChecked('javascript', opts.files.length, apply))
+    log.print(sayFilesChecked('javascript', opts.files.length))
 }
 
 const javascriptCmds = yargs => {
