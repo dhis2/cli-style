@@ -1,3 +1,29 @@
+# [5.0.0](https://github.com/dhis2/cli-style/compare/v4.2.1...v5.0.0) (2019-11-22)
+
+
+### Bug Fixes
+
+* add CHANGELOG.md to blacklist ([4a59f25](https://github.com/dhis2/cli-style/commit/4a59f257914395d693e117a116a062d936d1f313))
+* improve logging for common situations ([0b435db](https://github.com/dhis2/cli-style/commit/0b435dbbbe4903620e4d63c5bfc91aa2a3cd42dc))
+* order of type and count ([bdf10a4](https://github.com/dhis2/cli-style/commit/bdf10a455a180981b22d336284838fad847f79ac))
+
+
+### Code Refactoring
+
+* rework internals and external api ([4d1a4eb](https://github.com/dhis2/cli-style/commit/4d1a4eb0b26b5047d64cc4340ff19120b22ef816))
+
+
+### Features
+
+* allow eslint-react config to be bundled ([ab63b9b](https://github.com/dhis2/cli-style/commit/ab63b9bd1b694fcdfd7a982365a4ed7b6917188c))
+
+
+### BREAKING CHANGES
+
+* Removes LintStaged, renames `setup` to `install`,
+removes `validate` command. Uses a different way to match files and
+filters out results instead.
+
 ## [4.2.1](https://github.com/dhis2/cli-style/compare/v4.2.0...v4.2.1) (2019-11-22)
 
 ### Bug Fixes
