@@ -55,7 +55,7 @@ but applying the styles and then staging the changes manually. It is
 possible to automatically stage after formatting, but it is no longer
 provided as out-of-the-box functionality.
 
-Some examples follow:
+Some example scripts follow:
 
 ```
 "scripts": {
