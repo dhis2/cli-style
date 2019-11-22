@@ -27,4 +27,4 @@ jobs:
           GIT_COMMITTER_NAME: "@dhis2-bot"
           GIT_COMMITTER_EMAIL: "apps@dhis2.org"
           NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
