@@ -1,5 +1,5 @@
 const semver = require('semver')
-const chalk = require('chalk')
+const { chalk } = require('@dhis2/cli-helpers-engine')
 
 function verify(dependency, version, category) {
     if (dependency.startsWith('@dhis2')) {

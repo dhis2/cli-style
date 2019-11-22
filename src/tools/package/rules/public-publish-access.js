@@ -1,8 +1,7 @@
 const path = require('path')
 const fs = require('fs-extra')
 
-const semver = require('semver')
-const chalk = require('chalk')
+const { chalk } = require('@dhis2/cli-helpers-engine')
 
 function isRootPackage(fp) {
     const dir = path.dirname(fp)
