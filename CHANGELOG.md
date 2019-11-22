@@ -1,3 +1,10 @@
+## [5.0.1](https://github.com/dhis2/cli-style/compare/v5.0.0...v5.0.1) (2019-11-22)
+
+
+### Bug Fixes
+
+* update README (and trigger release) ([b220402](https://github.com/dhis2/cli-style/commit/b220402d07360b7040d5b1999c787b62bafa96fc))
+
 # [5.0.0](https://github.com/dhis2/cli-style/compare/v4.2.1...v5.0.0) (2019-11-22)
 
 
