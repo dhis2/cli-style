@@ -1,7 +1,7 @@
 const { run } = require('../utils/run.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-exports.prettier = ({ files = [], apply = false, config, type }) => {
+exports.prettier = ({ files = [], apply = false, config }) => {
     const cmd = 'npx'
     const args = [
         '--no-install',
@@ -14,9 +14,7 @@ exports.prettier = ({ files = [], apply = false, config, type }) => {
 
     run(cmd, { args }, ({ status }) => {
         if (status === 1 && !apply) {
-            log.warn(
-                `Code style issues found in the above file(s). Run "d2-style ${type} apply" to fix.`
-            )
+            log.warn(`Code style issues found in the above file(s).`)
         }
 
         if (status === 2) {

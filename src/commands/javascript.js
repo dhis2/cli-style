@@ -53,7 +53,6 @@ const handler = (argv, apply) => {
 
     prettier({
         config: prettierConfig,
-        type: 'js',
         ...opts,
     })
 
