@@ -1,3 +1,10 @@
+## [5.0.2](https://github.com/dhis2/cli-style/compare/v5.0.1...v5.0.2) (2019-11-25)
+
+
+### Bug Fixes
+
+* add es6 env to eslint config ([c1d9092](https://github.com/dhis2/cli-style/commit/c1d909212d7443d7e620432a38f80fb09246258d))
+
 ## [5.0.1](https://github.com/dhis2/cli-style/compare/v5.0.0...v5.0.1) (2019-11-22)
 
 
