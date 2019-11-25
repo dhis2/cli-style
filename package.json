@@ -31,7 +31,7 @@
         "eslint-plugin-react": "^7.16.0",
         "fast-glob": "^3.1.0",
         "fs-extra": "^8.1.0",
-        "husky": "^3.0.9",
+        "husky": "^3.1.0",
         "perfy": "^1.1.5",
         "prettier": "^1.19.1",
         "semver": "^6.3.0",
