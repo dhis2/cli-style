@@ -1,3 +1,10 @@
+## [5.0.3](https://github.com/dhis2/cli-style/compare/v5.0.2...v5.0.3) (2019-12-02)
+
+
+### Bug Fixes
+
+* **husky:** load husky config before spreading ([f593085](https://github.com/dhis2/cli-style/commit/f5930859eaaf2f1b9501916f31cad3c3a57ebabe))
+
 ## [5.0.2](https://github.com/dhis2/cli-style/compare/v5.0.1...v5.0.2) (2019-11-25)
 
 
