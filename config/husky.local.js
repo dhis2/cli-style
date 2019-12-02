@@ -1,7 +1,8 @@
 const { config } = require('@dhis2/cli-style')
+const husky = require(config.husky)
 
 module.exports = {
     hooks: {
-        ...config.husky.hooks,
+        ...husky.hooks,
     },
 }
