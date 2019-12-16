@@ -2,6 +2,7 @@
     "name": "@dhis2/cli-style",
     "version": "5.0.3",
     "description": "The code and commit style for DHIS2.",
+    "repository": "git@github.com:dhis2/cli-style.git",
     "main": "index.js",
     "bin": {
         "d2-style": "bin/d2-style"
