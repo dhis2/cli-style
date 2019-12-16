@@ -152,13 +152,15 @@ const stagedFiles = (files = []) => {
     return []
 }
 
-const pickFirstExists = (files = [], root) => {
+const pickFirstExists = (files = [], customRoot) => {
     for (const file of files) {
-        const fp = root
-            ? path.join(root, file)
+        const fp = customRoot
+            ? path.join(customRoot, file)
             : path.join(CONSUMING_ROOT, file)
 
-        if (fs.existsSync(fp)) {
+        const exists = fs.existsSync(fp) && fs.statSync(fp).size !== 0
+
+        if (exists) {
             log.debug(`Using ${fp} as the common ignore file.`)
             return fp
         }
@@ -167,13 +169,8 @@ const pickFirstExists = (files = [], root) => {
     return null
 }
 
-const resolveIgnoreFile = () => {
-    return pickFirstExists([
-        '.d2styleignore',
-        '.eslintignore',
-        '.prettierignore',
-        '.gitignore',
-    ])
+const resolveIgnoreFile = (ignoreFile = []) => {
+    return pickFirstExists([...ignoreFile, '.d2styleignore', '.gitignore'])
 }
 
 module.exports = {

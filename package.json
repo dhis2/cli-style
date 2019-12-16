@@ -16,7 +16,9 @@
         "format:js": "./bin/d2-style js apply",
         "format:text": "./bin/d2-style text apply",
         "format:staged": "yarn format:js --staged && yarn format:text --staged",
-        "format": "yarn format:js && yarn format:text"
+        "format": "yarn format:js && yarn format:text",
+        "build:docs": "d2-utils-docsite build ./docs -o ./dist --jsdoc src/ --jsdocOutputFile api.md",
+        "start": "d2-utils-docsite serve ./docs -o ./dist --jsdoc src/ --jsdocOutputFile api.md"
     },
     "author": "Viktor Varland",
     "license": "BSD-3-Clause",
@@ -41,6 +43,7 @@
         "access": "public"
     },
     "devDependencies": {
+        "@dhis2/cli-utils-docsite": "^1.1.2",
         "tape": "^4.11.0"
     }
 }

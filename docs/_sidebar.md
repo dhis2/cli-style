@@ -1,0 +1,6 @@
+-   [**Getting Started**](getting-started)
+-   [**Configuration**](config)
+    -   [Ignore files](ignore-files)
+-   [**API Reference**](api)
+-   &nbsp;
+-   [Changelog](CHANGELOG)
