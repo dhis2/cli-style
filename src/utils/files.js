@@ -1,10 +1,11 @@
 const fg = require('fast-glob')
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
 
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { spawn } = require('./run.js')
+const { CONSUMING_ROOT } = require('./paths.js')
 
 // blacklists for files
 const blacklist = [
@@ -151,6 +152,30 @@ const stagedFiles = (files = []) => {
     return []
 }
 
+const pickFirstExists = (files = [], root) => {
+    for (const file of files) {
+        const fp = root
+            ? path.join(root, file)
+            : path.join(CONSUMING_ROOT, file)
+
+        if (fs.existsSync(fp)) {
+            log.debug(`Using ${fp} as the common ignore file.`)
+            return fp
+        }
+    }
+
+    return null
+}
+
+const resolveIgnoreFile = () => {
+    return pickFirstExists([
+        '.d2styleignore',
+        '.eslintignore',
+        '.prettierignore',
+        '.gitignore',
+    ])
+}
+
 module.exports = {
     collectFiles,
     collectAllFiles,
@@ -166,4 +191,6 @@ module.exports = {
     whitelisted,
     whitelists,
     blacklist,
+    pickFirstExists,
+    resolveIgnoreFile,
 }
