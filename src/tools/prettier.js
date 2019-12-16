@@ -1,13 +1,17 @@
-const { run } = require('../utils/run.js')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
+const { run } = require('../utils/run.js')
+const { resolveIgnoreFile } = require('../utils/files.js')
+
 exports.prettier = ({ files = [], apply = false, config }) => {
+    const ignoreFile = resolveIgnoreFile()
     const cmd = 'npx'
     const args = [
         '--no-install',
         'prettier',
         '--list-different',
         ...(config ? ['--config', config] : []),
+        ...(ignoreFile ? ['--ignore-path', ignoreFile] : []),
         ...(apply ? ['--write'] : []),
         ...files,
     ]

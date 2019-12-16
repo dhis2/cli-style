@@ -1,6 +1,8 @@
 const { run } = require('../utils/run.js')
+const { resolveIgnoreFile } = require('../utils/files.js')
 
 exports.eslint = ({ files = [], apply = false, config }) => {
+    const ignoreFile = resolveIgnoreFile()
     const cmd = 'npx'
     const args = [
         '--no-install',
@@ -8,6 +10,7 @@ exports.eslint = ({ files = [], apply = false, config }) => {
         '--no-color',
         '--report-unused-disable-directives',
         '--ignore',
+        ...(ignoreFile ? ['--ignore-path', ignoreFile] : []),
         ...(config ? ['--config', config] : []),
         ...(apply ? ['--fix'] : []),
         ...files,
