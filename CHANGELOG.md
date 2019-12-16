@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/dhis2/cli-style/compare/v5.0.4...v5.1.0) (2019-12-16)
+
+
+### Features
+
+* **ignorefiles:** add consistency to the ignorefiles that are respected ([fdba06e](https://github.com/dhis2/cli-style/commit/fdba06ed1bf34a36ba30549787d70fa4dd26e054))
+
 ## [5.0.4](https://github.com/dhis2/cli-style/compare/v5.0.3...v5.0.4) (2019-12-16)
 
 
