@@ -1,3 +1,10 @@
+## [5.0.4](https://github.com/dhis2/cli-style/compare/v5.0.3...v5.0.4) (2019-12-16)
+
+
+### Bug Fixes
+
+* **eslint:** do not add an unignore pattern to the cli command ([7f0e5da](https://github.com/dhis2/cli-style/commit/7f0e5da85b3a53562439348719e9af69f926ddf3))
+
 ## [5.0.3](https://github.com/dhis2/cli-style/compare/v5.0.2...v5.0.3) (2019-12-02)
 
 
