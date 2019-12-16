@@ -4,7 +4,7 @@ const { run } = require('../utils/run.js')
 const { resolveIgnoreFile } = require('../utils/files.js')
 
 exports.prettier = ({ files = [], apply = false, config }) => {
-    const ignoreFile = resolveIgnoreFile()
+    const ignoreFile = resolveIgnoreFile(['.prettierignore'])
     const cmd = 'npx'
     const args = [
         '--no-install',
