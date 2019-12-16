@@ -169,8 +169,8 @@ const pickFirstExists = (files = [], customRoot) => {
     return null
 }
 
-const resolveIgnoreFile = (ignoreFile = []) => {
-    return pickFirstExists([...ignoreFile, '.d2styleignore', '.gitignore'])
+const resolveIgnoreFile = (ignoreFiles = []) => {
+    return pickFirstExists([...ignoreFiles, '.d2styleignore', '.gitignore'])
 }
 
 module.exports = {
