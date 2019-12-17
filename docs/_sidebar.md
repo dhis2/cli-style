@@ -1,6 +1,8 @@
 -   [**Getting Started**](getting-started)
+    -   [Migration guide](migrate-guide)
 -   [**Configuration**](config)
     -   [Ignore files](ignore-files)
--   [**API Reference**](api)
+-   [**FAQ**](faq)
 -   &nbsp;
+-   [API Reference](api)
 -   [Changelog](CHANGELOG)
