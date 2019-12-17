@@ -8,7 +8,7 @@
 [![travis.com build](https://img.shields.io/travis/com/dhis2/cli-style.svg)](https://travis-ci.com/dhis2/cli-style)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
-Docs are available at [cli-style.dhis2.nu](cli-style.dhis2.nu).
+Docs are available at [cli-style.dhis2.nu](https://cli-style.dhis2.nu).
 
 ## Batteries included
 
