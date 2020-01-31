@@ -37,7 +37,7 @@
         "husky": "^4.2.1",
         "perfy": "^1.1.5",
         "prettier": "^1.19.1",
-        "semver": "^7.1.1",
+        "semver": "^7.1.2",
         "yargs": "^15.1.0"
     },
     "publishConfig": {
