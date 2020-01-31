@@ -7,10 +7,6 @@ const { sayFilesChecked, sayNoFiles } = require('../utils/std-log-messages.js')
 
 const options = yargs =>
     yargs
-        .option('prettierConfig', {
-            describe: 'Prettier config file to use',
-            type: 'string',
-        })
         .option('pattern', {
             describe:
                 'Pattern to match for files, remember to enclose in double quotes!',
@@ -24,7 +20,7 @@ const options = yargs =>
         })
 
 const handler = (argv, apply) => {
-    const { files, pattern, prettierConfig, staged } = argv
+    const { files, pattern, staged } = argv
 
     log.info('d2-style > structured-text')
 
@@ -42,7 +38,6 @@ const handler = (argv, apply) => {
     log.debug(`Linting files: ${opts.files.join(', ')}`)
 
     prettier({
-        config: prettierConfig,
         ...opts,
     })
 

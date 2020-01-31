@@ -2,20 +2,11 @@ const { namespace } = require('@dhis2/cli-helpers-engine')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { eslint } = require('../tools/eslint.js')
-const { prettier } = require('../tools/prettier.js')
 const { selectFiles } = require('../utils/files.js')
 const { sayFilesChecked, sayNoFiles } = require('../utils/std-log-messages.js')
 
 const options = yargs =>
     yargs
-        .option('prettierConfig', {
-            describe: 'Prettier config file to use',
-            type: 'string',
-        })
-        .option('eslintConfig', {
-            describe: 'ESLint config file to use',
-            type: 'string',
-        })
         .option('pattern', {
             describe:
                 'Pattern to match for files, remember to enclose in double quotes!',
@@ -29,7 +20,7 @@ const options = yargs =>
         })
 
 const handler = (argv, apply) => {
-    const { files, pattern, eslintConfig, prettierConfig, staged } = argv
+    const { files, pattern, staged } = argv
 
     log.info('d2-style > javascript')
 
@@ -47,12 +38,6 @@ const handler = (argv, apply) => {
     log.debug(`Linting files: ${opts.files.join(', ')}`)
 
     eslint({
-        config: eslintConfig,
-        ...opts,
-    })
-
-    prettier({
-        config: prettierConfig,
         ...opts,
     })
 

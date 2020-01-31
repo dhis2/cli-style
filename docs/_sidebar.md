@@ -2,6 +2,7 @@
     -   [Migration guide](migrate-guide)
 -   [**Configuration**](config)
     -   [Ignore files](ignore-files)
+    -   [Override config](overrides)
 -   [**FAQ**](faq)
 -   &nbsp;
 -   [API Reference](api)

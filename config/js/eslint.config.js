@@ -3,6 +3,8 @@ const SEVERITY = 2
 module.exports = {
     extends: ['eslint:recommended', 'prettier'],
 
+    plugins: ['prettier'],
+
     env: {
         browser: true,
         node: true,
@@ -34,5 +36,6 @@ module.exports = {
             },
         ],
         'no-mixed-spaces-and-tabs': [SEVERITY],
+        'prettier/prettier': [SEVERITY],
     },
 }

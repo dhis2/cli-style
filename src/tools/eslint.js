@@ -11,6 +11,7 @@ exports.eslint = ({ files = [], apply = false, config }) => {
         '--report-unused-disable-directives',
         '--ignore',
         '--quiet',
+        '--format=unix',
         ...(ignoreFile ? ['--ignore-path', ignoreFile] : []),
         ...(config ? ['--config', config] : []),
         ...(apply ? ['--fix'] : []),
