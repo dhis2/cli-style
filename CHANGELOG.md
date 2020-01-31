@@ -1,3 +1,10 @@
+# [5.2.0](https://github.com/dhis2/cli-style/compare/v5.1.1...v5.2.0) (2020-01-31)
+
+
+### Features
+
+* use eslint to run prettier ([183d671](https://github.com/dhis2/cli-style/commit/183d671d29d98b505032b7dce656322783826fac))
+
 ## [5.1.1](https://github.com/dhis2/cli-style/compare/v5.1.0...v5.1.1) (2020-01-31)
 
 
