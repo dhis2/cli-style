@@ -1,3 +1,17 @@
+# [6.0.0](https://github.com/dhis2/cli-style/compare/v5.2.0...v6.0.0) (2020-01-31)
+
+
+### Bug Fixes
+
+* **semantic-release:** trigger major version bump ([6fbf5f3](https://github.com/dhis2/cli-style/commit/6fbf5f39fce58607e20bbbb82d0c63e8bf1e390e))
+
+
+### BREAKING CHANGES
+
+* **semantic-release:** Deprecate configuration switches.
+Refer to the "Overrides" section in the documentation for information
+how to use custom rules.
+
 # [5.2.0](https://github.com/dhis2/cli-style/compare/v5.1.1...v5.2.0) (2020-01-31)
 
 
