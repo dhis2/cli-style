@@ -10,6 +10,7 @@ exports.eslint = ({ files = [], apply = false, config }) => {
         '--no-color',
         '--report-unused-disable-directives',
         '--ignore',
+        '--quiet',
         ...(ignoreFile ? ['--ignore-path', ignoreFile] : []),
         ...(config ? ['--config', config] : []),
         ...(apply ? ['--fix'] : []),
