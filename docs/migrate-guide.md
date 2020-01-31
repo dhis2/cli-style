@@ -43,7 +43,7 @@ it, only to install it fresh after.
     npx d2-style install project/js --force
 
     # assuming a react project
-    npx d2-style install project/project --force
+    npx d2-style install project/react --force
     ```
 
     (You did take a backup of modified configuration files earlier, right?)
