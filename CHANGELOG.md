@@ -1,3 +1,10 @@
+## [5.1.1](https://github.com/dhis2/cli-style/compare/v5.1.0...v5.1.1) (2020-01-31)
+
+
+### Bug Fixes
+
+* **eslint:** suppress warning logs ([a81dd68](https://github.com/dhis2/cli-style/commit/a81dd688ae10f0fb65c22d8c70528432bcdea430))
+
 # [5.1.0](https://github.com/dhis2/cli-style/compare/v5.0.4...v5.1.0) (2019-12-16)
 
 
