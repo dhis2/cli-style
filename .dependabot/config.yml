@@ -3,7 +3,7 @@ version: 1
 update_configs:
     - package_manager: 'javascript'
       directory: '/'
-      update_schedule: 'daily'
+      update_schedule: 'weekly'
       version_requirement_updates: 'increase_versions'
       target_branch: 'master'
       automerged_updates:
@@ -13,4 +13,4 @@ update_configs:
                 update_type: 'semver:minor'
           - match:
                 dependency_type: 'all'
-                update_type: 'security:patch'
+                update_type: 'semver:minor'
