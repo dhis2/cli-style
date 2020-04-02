@@ -1,3 +1,15 @@
+# [7.0.0](https://github.com/dhis2/cli-style/compare/v6.0.0...v7.0.0) (2020-04-02)
+
+
+### chore
+
+* update node engine to >= 10 ([ccb267a](https://github.com/dhis2/cli-style/commit/ccb267a2986ee1e7d20dd7400aa6e4fa148412f5))
+
+
+### BREAKING CHANGES
+
+* Require Node version 10 or above.
+
 # [6.0.0](https://github.com/dhis2/cli-style/compare/v5.2.0...v6.0.0) (2020-01-31)
 
 
