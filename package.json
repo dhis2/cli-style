@@ -7,6 +7,9 @@
     "bin": {
         "d2-style": "bin/d2-style"
     },
+    "engines": {
+        "node": ">=10"
+    },
     "scripts": {
         "test": "tape tests/**/*.js",
         "lint:js": "./bin/d2-style js check",
