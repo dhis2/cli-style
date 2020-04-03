@@ -29,11 +29,11 @@ are not necessary to explicitly install:
 ## Usage
 
 ```
-npx d2-style --help
+d2-style --help
 
-npx d2-style install --help
+d2-style install --help
 
-npx d2-style js --help
-npx d2-style js check --help
-npx d2-style js apply --help
+d2-style js --help
+d2-style js check --help
+d2-style js apply --help
 ```

@@ -41,7 +41,7 @@ repository for you. For a list of valid groups and what tools they will
 configure, use:
 
 ```bash
-npx d2-style install --list-groups
+d2-style install --list-groups
 ```
 
 If a config file already exists, the tool skips overwriting it, in case
@@ -62,7 +62,7 @@ specification and get the standard
 [EditorConfig](https://editorconfig.org/):
 
 ```
-npx d2-style install project/base
+d2-style install project/base
 
 # * project/base (includes: tools/editorconfig, git/husky)
 ```
@@ -84,7 +84,7 @@ configuration. It does not use any framework specific rules and should
 be applicable to any JavaScript project.
 
 ```
-npx d2-style install project/js
+d2-style install project/js
 
 # * project/js (includes: tools/all, github/all, linter/eslint,
 #   formatter/prettier, git/husky-frontend)
@@ -96,7 +96,7 @@ The `project/react` should be a good starting point for a React project,
 as it adds `eslint-plugin-react`.
 
 ```
-npx d2-style install project/react
+d2-style install project/react
 
 # * project/react (includes: base/all, github/all, linter/eslint-react,
 #   formatter/prettier, git/husky-frontend)
