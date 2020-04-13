@@ -26,7 +26,7 @@ it, only to install it fresh after.
 1.  Now, let us get down to business. Install `@dhis2/cli-style`:
 
     ```bash
-    yarn add @dhis2/cli-style
+    yarn add @dhis2/cli-style --dev
     ```
 
 1.  At this point the newest version of `d2-style` will be installed,
