@@ -1,3 +1,10 @@
+# [7.1.0-alpha.1](https://github.com/dhis2/cli-style/compare/v7.0.0...v7.1.0-alpha.1) (2020-04-28)
+
+
+### Features
+
+* **eslint:** add no-unused-modules rule ([2b5db3f](https://github.com/dhis2/cli-style/commit/2b5db3faf75fa75d18d2bc8c2297c52b8d02c644))
+
 # [7.0.0](https://github.com/dhis2/cli-style/compare/v6.0.0...v7.0.0) (2020-04-02)
 
 
