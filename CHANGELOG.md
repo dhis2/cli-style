@@ -1,3 +1,10 @@
+# [7.1.0-alpha.2](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.1...v7.1.0-alpha.2) (2020-04-29)
+
+
+### Bug Fixes
+
+* use the nearest bin folder to exec cmds ([761611f](https://github.com/dhis2/cli-style/commit/761611fa1e3a0a0aa35a3862474ac1354d8bf53f))
+
 # [7.1.0-alpha.1](https://github.com/dhis2/cli-style/compare/v7.0.0...v7.1.0-alpha.1) (2020-04-28)
 
 
