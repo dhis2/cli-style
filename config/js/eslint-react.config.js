@@ -27,7 +27,7 @@ module.exports = {
             'error',
             {
                 unusedExports: true,
-                missingExports: true,
+                missingExports: false,
             },
         ],
     },
