@@ -1,3 +1,10 @@
+# [7.1.0-alpha.4](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.3...v7.1.0-alpha.4) (2020-04-29)
+
+
+### Bug Fixes
+
+* resolve eslint plugins internally first ([75cbad0](https://github.com/dhis2/cli-style/commit/75cbad037791761c6dddf835ca72eeec135a64df))
+
 # [7.1.0-alpha.3](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.2...v7.1.0-alpha.3) (2020-04-29)
 
 
