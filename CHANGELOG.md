@@ -1,3 +1,10 @@
+# [7.1.0-alpha.7](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.6...v7.1.0-alpha.7) (2020-04-29)
+
+
+### Bug Fixes
+
+* disabled missingExports by default ([7bce47d](https://github.com/dhis2/cli-style/commit/7bce47d43c0e4f2d32c740013a7e85601f3e0812))
+
 # [7.1.0-alpha.6](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.5...v7.1.0-alpha.6) (2020-04-29)
 
 
