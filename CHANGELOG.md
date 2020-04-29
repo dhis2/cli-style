@@ -1,3 +1,10 @@
+# [7.1.0-alpha.5](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.4...v7.1.0-alpha.5) (2020-04-29)
+
+
+### Bug Fixes
+
+* declare import as a plugin ([f771a87](https://github.com/dhis2/cli-style/commit/f771a878e23ea270580cab7daa43b1d2fff540d6))
+
 # [7.1.0-alpha.4](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.3...v7.1.0-alpha.4) (2020-04-29)
 
 
