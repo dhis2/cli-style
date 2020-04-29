@@ -1,8 +1,8 @@
 const path = require('path')
 
 const CONSUMING_ROOT = path.join(process.cwd())
-const CONFIG_ROOT = path.join(__dirname, '..', '..')
-const CONFIG_DIR = path.join(CONFIG_ROOT, 'config')
+const PACKAGE_ROOT = path.join(__dirname, '..', '..')
+const CONFIG_DIR = path.join(PACKAGE_ROOT, 'config')
 
 const ESLINT_CONFIG = path.join(CONFIG_DIR, 'js', 'eslint.config.js')
 const ESLINT_REACT_CONFIG = path.join(
@@ -45,7 +45,7 @@ module.exports = {
     CONSUMING_ROOT,
     BROWSERSLIST_CONFIG,
     COMMITLINT_CONFIG,
-    CONFIG_ROOT,
+    PACKAGE_ROOT,
     CONFIG_DIR,
     DEPENDABOT_CONFIG,
     EDITORCONFIG_CONFIG,
