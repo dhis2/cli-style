@@ -31,7 +31,6 @@ exports.bin = (cmd, { args, opts }, callback) => {
     return handleRun(
         spawn.sync(binCmd, args, {
             stdio: 'inherit',
-            cwd: PACKAGE_ROOT,
             ...opts,
         }),
         callback
