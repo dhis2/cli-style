@@ -1,3 +1,10 @@
+# [7.1.0-alpha.3](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.2...v7.1.0-alpha.3) (2020-04-29)
+
+
+### Bug Fixes
+
+* run the command from inside node_modules ([fd620c5](https://github.com/dhis2/cli-style/commit/fd620c56ca8798ab0e84366d97cdbd0d0fdaba03))
+
 # [7.1.0-alpha.2](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.1...v7.1.0-alpha.2) (2020-04-29)
 
 
