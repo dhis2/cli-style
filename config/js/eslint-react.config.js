@@ -28,12 +28,6 @@ module.exports = {
             {
                 unusedExports: true,
                 missingExports: true,
-                ignoreExports: [
-                    '**/*.test.js',
-                    '**/__tests__/**',
-                    '**/*.stories.*',
-                    '**/setupTests.js',
-                ],
             },
         ],
     },
