@@ -1,3 +1,10 @@
+# [7.1.0-alpha.6](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.5...v7.1.0-alpha.6) (2020-04-29)
+
+
+### Bug Fixes
+
+* remove ignoreExports from no-unused-modules ([97f4f46](https://github.com/dhis2/cli-style/commit/97f4f46dfa490109672d4ce2bf5176f57a53fc4a)), closes [#248](https://github.com/dhis2/cli-style/issues/248)
+
 # [7.1.0-alpha.5](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.4...v7.1.0-alpha.5) (2020-04-29)
 
 
