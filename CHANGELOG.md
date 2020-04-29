@@ -1,3 +1,10 @@
+# [7.1.0-alpha.8](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.7...v7.1.0-alpha.8) (2020-04-29)
+
+
+### Bug Fixes
+
+* execute the tools in the current dir ([7e05f84](https://github.com/dhis2/cli-style/commit/7e05f84b7ffa9568e3fc404fb13d64e61ed2ce73))
+
 # [7.1.0-alpha.7](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.6...v7.1.0-alpha.7) (2020-04-29)
 
 
