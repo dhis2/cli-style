@@ -1,3 +1,10 @@
+# [7.1.0-alpha.9](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.8...v7.1.0-alpha.9) (2020-05-04)
+
+
+### Bug Fixes
+
+* **eslint-import:** switch to recommended import settings ([cb892d2](https://github.com/dhis2/cli-style/commit/cb892d21fe11014b67675fe89f58ae1179ffdb31))
+
 # [7.1.0-alpha.8](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.7...v7.1.0-alpha.8) (2020-04-29)
 
 
