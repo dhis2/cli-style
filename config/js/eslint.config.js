@@ -1,9 +1,14 @@
 const SEVERITY = 2
 
 module.exports = {
-    extends: ['eslint:recommended', 'prettier'],
+    extends: [
+        'eslint:recommended',
+        'prettier',
+        'plugin:import/errors',
+        'plugin:import/warnings',
+    ],
 
-    plugins: ['prettier', 'import'],
+    plugins: ['prettier'],
 
     env: {
         browser: true,

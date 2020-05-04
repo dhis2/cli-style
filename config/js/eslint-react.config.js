@@ -23,12 +23,5 @@ module.exports = {
             },
         ],
         'react/no-unused-prop-types': 'error',
-        'import/no-unused-modules': [
-            'error',
-            {
-                unusedExports: true,
-                missingExports: false,
-            },
-        ],
     },
 }
