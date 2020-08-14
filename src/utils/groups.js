@@ -72,7 +72,7 @@ const groups = [
         [
             [
                 'dependabot',
-                [DEPENDABOT_CONFIG, path.join('.dependabot', 'config.yml')],
+                [DEPENDABOT_CONFIG, path.join('.github', 'dependabot.yml')],
             ],
             ['probot-stale', [STALE_CONFIG, path.join('.github', 'stale.yml')]],
             [
