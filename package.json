@@ -43,7 +43,7 @@
         "husky": "^4.3.0",
         "inquirer": "^7.3.3",
         "perfy": "^1.1.5",
-        "prettier": "^1.19.1",
+        "prettier": "^2.1.2",
         "semver": "^7.3.2",
         "yargs": "^15.4.1"
     },
