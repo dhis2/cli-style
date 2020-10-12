@@ -1,7 +1,8 @@
+const inquirer = require('inquirer')
 const log = require('@dhis2/cli-helpers-engine').reporter
 
 const { configure } = require('../utils/config.js')
-const { printGroups } = require('../utils/groups.js')
+const { printGroups, projects } = require('../utils/groups.js')
 
 exports.command = 'install [group..]'
 
@@ -20,15 +21,34 @@ exports.builder = {
     },
 }
 
-exports.handler = argv => {
+exports.handler = async argv => {
     if (argv.listGroups) {
         log.print(printGroups())
         process.exit(0)
     }
 
+    const prompt = inquirer.createPromptModule()
+
     const { force, group } = argv
 
     const root = process.cwd()
 
-    configure(root, group, force)
+    let choice
+
+    if (!group) {
+        const res = await prompt([
+            {
+                name: 'project',
+                message: 'Choose the project template',
+                type: 'list',
+                choices: () => projects.map(a => a[0]),
+            },
+        ])
+
+        choice = [`project/${res.project}`]
+    } else {
+        choice = group
+    }
+
+    configure(root, choice, force)
 }
