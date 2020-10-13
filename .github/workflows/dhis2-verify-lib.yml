@@ -51,7 +51,7 @@ jobs:
             - name: Install
               run: yarn install --frozen-lockfile
 
-    check:
+    lint:
         runs-on: ubuntu-latest
         needs: install
         if: "!contains(github.event.head_commit.message, '[skip ci]')"
