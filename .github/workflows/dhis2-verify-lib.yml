@@ -81,7 +81,7 @@ jobs:
                   ./bin/d2-style js check
                   ./bin/d2-style text check
 
-    unit:
+    test:
         runs-on: ubuntu-latest
         needs: install
         if: "!contains(github.event.head_commit.message, '[skip ci]')"
