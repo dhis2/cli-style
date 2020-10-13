@@ -1,3 +1,10 @@
+# [7.1.0](https://github.com/dhis2/cli-style/compare/v7.0.0...v7.1.0) (2020-10-13)
+
+
+### Features
+
+* **install:** prompt to choose project from list ([99a3692](https://github.com/dhis2/cli-style/commit/99a3692827667f6ad9a914db5f183dc4f64ae450))
+
 # [7.0.0](https://github.com/dhis2/cli-style/compare/v6.0.0...v7.0.0) (2020-04-02)
 
 
