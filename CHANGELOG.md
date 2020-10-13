@@ -1,65 +1,9 @@
-# [7.1.0-alpha.9](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.8...v7.1.0-alpha.9) (2020-05-04)
-
-
-### Bug Fixes
-
-* **eslint-import:** switch to recommended import settings ([cb892d2](https://github.com/dhis2/cli-style/commit/cb892d21fe11014b67675fe89f58ae1179ffdb31))
-
-# [7.1.0-alpha.8](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.7...v7.1.0-alpha.8) (2020-04-29)
-
-
-### Bug Fixes
-
-* execute the tools in the current dir ([7e05f84](https://github.com/dhis2/cli-style/commit/7e05f84b7ffa9568e3fc404fb13d64e61ed2ce73))
-
-# [7.1.0-alpha.7](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.6...v7.1.0-alpha.7) (2020-04-29)
-
-
-### Bug Fixes
-
-* disabled missingExports by default ([7bce47d](https://github.com/dhis2/cli-style/commit/7bce47d43c0e4f2d32c740013a7e85601f3e0812))
-
-# [7.1.0-alpha.6](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.5...v7.1.0-alpha.6) (2020-04-29)
-
-
-### Bug Fixes
-
-* remove ignoreExports from no-unused-modules ([97f4f46](https://github.com/dhis2/cli-style/commit/97f4f46dfa490109672d4ce2bf5176f57a53fc4a)), closes [#248](https://github.com/dhis2/cli-style/issues/248)
-
-# [7.1.0-alpha.5](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.4...v7.1.0-alpha.5) (2020-04-29)
-
-
-### Bug Fixes
-
-* declare import as a plugin ([f771a87](https://github.com/dhis2/cli-style/commit/f771a878e23ea270580cab7daa43b1d2fff540d6))
-
-# [7.1.0-alpha.4](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.3...v7.1.0-alpha.4) (2020-04-29)
-
-
-### Bug Fixes
-
-* resolve eslint plugins internally first ([75cbad0](https://github.com/dhis2/cli-style/commit/75cbad037791761c6dddf835ca72eeec135a64df))
-
-# [7.1.0-alpha.3](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.2...v7.1.0-alpha.3) (2020-04-29)
-
-
-### Bug Fixes
-
-* run the command from inside node_modules ([fd620c5](https://github.com/dhis2/cli-style/commit/fd620c56ca8798ab0e84366d97cdbd0d0fdaba03))
-
-# [7.1.0-alpha.2](https://github.com/dhis2/cli-style/compare/v7.1.0-alpha.1...v7.1.0-alpha.2) (2020-04-29)
-
-
-### Bug Fixes
-
-* use the nearest bin folder to exec cmds ([761611f](https://github.com/dhis2/cli-style/commit/761611fa1e3a0a0aa35a3862474ac1354d8bf53f))
-
-# [7.1.0-alpha.1](https://github.com/dhis2/cli-style/compare/v7.0.0...v7.1.0-alpha.1) (2020-04-28)
+# [7.1.0](https://github.com/dhis2/cli-style/compare/v7.0.0...v7.1.0) (2020-10-13)
 
 
 ### Features
 
-* **eslint:** add no-unused-modules rule ([2b5db3f](https://github.com/dhis2/cli-style/commit/2b5db3faf75fa75d18d2bc8c2297c52b8d02c644))
+* **install:** prompt to choose project from list ([99a3692](https://github.com/dhis2/cli-style/commit/99a3692827667f6ad9a914db5f183dc4f64ae450))
 
 # [7.0.0](https://github.com/dhis2/cli-style/compare/v6.0.0...v7.0.0) (2020-04-02)
 

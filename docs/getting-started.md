@@ -44,6 +44,9 @@ configure, use:
 npx d2-style install --list-groups
 ```
 
+Run `install` without arguments to get an interactive mode where it is
+possible to choose the project template from a list.
+
 If a config file already exists, the tool skips overwriting it, in case
 there are local modifications.
 
