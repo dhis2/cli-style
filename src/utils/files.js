@@ -28,7 +28,7 @@ const whitelists = {
 }
 
 function whitelisted(whitelist) {
-    return function(file) {
+    return function (file) {
         return whitelist.includes(path.extname(file))
     }
 }
