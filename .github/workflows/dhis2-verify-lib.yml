@@ -43,7 +43,7 @@ jobs:
                   key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
             - name: Install
-              if: 'steps.yarn-cache.outputs.cache-hit != true'
+              if: steps.yarn-cache.outputs.cache-hit != 'true'
               run: yarn install --frozen-lockfile
 
     lint:
@@ -63,7 +63,7 @@ jobs:
                   key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
             - name: Install
-              if: 'steps.yarn-cache.outputs.cache-hit != true'
+              if: steps.yarn-cache.outputs.cache-hit != 'true'
               run: yarn install --frozen-lockfile
 
             - name: Lint
@@ -88,7 +88,7 @@ jobs:
                   key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
             - name: Install
-              if: 'steps.yarn-cache.outputs.cache-hit != true'
+              if: steps.yarn-cache.outputs.cache-hit != 'true'
               run: yarn install --frozen-lockfile
 
             - name: Test
@@ -113,7 +113,7 @@ jobs:
                   key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
             - name: Install
-              if: 'steps.yarn-cache.outputs.cache-hit != true'
+              if: steps.yarn-cache.outputs.cache-hit != 'true'
               run: yarn install --frozen-lockfile
 
             - name: Publish to NPM
