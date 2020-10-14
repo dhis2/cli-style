@@ -105,15 +105,5 @@ jobs:
               with:
                   node-version: 12.x
 
-            - uses: actions/cache@v2
-              id: yarn-cache
-              with:
-                  path: '**/node_modules'
-                  key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-
-            - name: Install
-              if: steps.yarn-cache.outputs.cache-hit != 'true'
-              run: yarn install --frozen-lockfile
-
             - name: Publish to NPM
               run: npx @dhis2/cli-utils release --publish npm
