@@ -113,7 +113,7 @@ function selectFiles(files, pattern, staged) {
         globstar: true,
         dot: true,
         ignore: blacklist.map(b => `**/${b}/**`),
-        absolute: false,
+        absolute: true,
     })
 
     if (files) {

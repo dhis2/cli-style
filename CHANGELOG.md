@@ -1,3 +1,22 @@
+# [7.2.0-alpha.1](https://github.com/dhis2/cli-style/compare/v7.1.0...v7.2.0-alpha.1) (2020-10-13)
+
+
+### Bug Fixes
+
+* **eslint-import:** switch to recommended import settings ([cb892d2](https://github.com/dhis2/cli-style/commit/cb892d21fe11014b67675fe89f58ae1179ffdb31))
+* declare import as a plugin ([f771a87](https://github.com/dhis2/cli-style/commit/f771a878e23ea270580cab7daa43b1d2fff540d6))
+* disabled missingExports by default ([7bce47d](https://github.com/dhis2/cli-style/commit/7bce47d43c0e4f2d32c740013a7e85601f3e0812))
+* execute the tools in the current dir ([7e05f84](https://github.com/dhis2/cli-style/commit/7e05f84b7ffa9568e3fc404fb13d64e61ed2ce73))
+* remove ignoreExports from no-unused-modules ([97f4f46](https://github.com/dhis2/cli-style/commit/97f4f46dfa490109672d4ce2bf5176f57a53fc4a)), closes [#248](https://github.com/dhis2/cli-style/issues/248)
+* resolve eslint plugins internally first ([75cbad0](https://github.com/dhis2/cli-style/commit/75cbad037791761c6dddf835ca72eeec135a64df))
+* run the command from inside node_modules ([fd620c5](https://github.com/dhis2/cli-style/commit/fd620c56ca8798ab0e84366d97cdbd0d0fdaba03))
+* use the nearest bin folder to exec cmds ([761611f](https://github.com/dhis2/cli-style/commit/761611fa1e3a0a0aa35a3862474ac1354d8bf53f))
+
+
+### Features
+
+* **eslint:** add no-unused-modules rule ([2b5db3f](https://github.com/dhis2/cli-style/commit/2b5db3faf75fa75d18d2bc8c2297c52b8d02c644))
+
 # [7.1.0](https://github.com/dhis2/cli-style/compare/v7.0.0...v7.1.0) (2020-10-13)
 
 

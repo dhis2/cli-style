@@ -1,22 +1,22 @@
-const { run } = require('../utils/run.js')
+const { bin } = require('../utils/run.js')
 const { resolveIgnoreFile } = require('../utils/files.js')
+const { PACKAGE_ROOT } = require('../utils/paths.js')
 
 exports.eslint = ({ files = [], apply = false, config }) => {
     const ignoreFile = resolveIgnoreFile(['.eslintignore'])
-    const cmd = 'npx'
+    const cmd = 'eslint'
     const args = [
-        '--no-install',
-        'eslint',
         '--no-color',
         '--report-unused-disable-directives',
         '--ignore',
         '--quiet',
         '--format=unix',
+        `--resolve-plugins-relative-to=${PACKAGE_ROOT}`,
         ...(ignoreFile ? ['--ignore-path', ignoreFile] : []),
         ...(config ? ['--config', config] : []),
         ...(apply ? ['--fix'] : []),
         ...files,
     ]
 
-    run(cmd, { args })
+    bin(cmd, { args })
 }
