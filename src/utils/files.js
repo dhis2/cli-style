@@ -1,11 +1,9 @@
+const path = require('path')
+const log = require('@dhis2/cli-helpers-engine').reporter
 const fg = require('fast-glob')
 const fs = require('fs-extra')
-const path = require('path')
-
-const log = require('@dhis2/cli-helpers-engine').reporter
-
-const { spawn } = require('./run.js')
 const { CONSUMING_ROOT } = require('./paths.js')
+const { spawn } = require('./run.js')
 
 // blacklists for files
 const blacklist = [

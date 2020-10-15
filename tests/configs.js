@@ -1,6 +1,5 @@
-const test = require('tape')
 const path = require('path')
-
+const test = require('tape')
 const { config } = require('../index.js')
 
 test('prettier config resolves to non-empty object', t => {

@@ -1,7 +1,6 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
-
-const { bin } = require('../utils/run.js')
 const { resolveIgnoreFile } = require('../utils/files.js')
+const { bin } = require('../utils/run.js')
 
 exports.prettier = ({ files = [], apply = false, config }) => {
     const ignoreFile = resolveIgnoreFile(['.prettierignore'])
