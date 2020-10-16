@@ -28,7 +28,7 @@ const whitelists = {
 }
 
 function whitelisted(whitelist) {
-    return function(file) {
+    return function (file) {
         return whitelist.includes(path.extname(file))
     }
 }
@@ -113,7 +113,7 @@ function selectFiles(files, pattern, staged) {
         globstar: true,
         dot: true,
         ignore: blacklist.map(b => `**/${b}/**`),
-        absolute: false,
+        absolute: true,
     })
 
     if (files) {

@@ -1,14 +1,12 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
 
-const { run } = require('../utils/run.js')
+const { bin } = require('../utils/run.js')
 const { resolveIgnoreFile } = require('../utils/files.js')
 
 exports.prettier = ({ files = [], apply = false, config }) => {
     const ignoreFile = resolveIgnoreFile(['.prettierignore'])
-    const cmd = 'npx'
+    const cmd = 'prettier'
     const args = [
-        '--no-install',
-        'prettier',
         '--list-different',
         ...(config ? ['--config', config] : []),
         ...(ignoreFile ? ['--ignore-path', ignoreFile] : []),
@@ -16,7 +14,7 @@ exports.prettier = ({ files = [], apply = false, config }) => {
         ...files,
     ]
 
-    run(cmd, { args }, ({ status }) => {
+    bin(cmd, { args }, ({ status }) => {
         if (status === 1 && !apply) {
             log.warn(`Code style issues found in the above file(s).`)
         }

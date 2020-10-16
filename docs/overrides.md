@@ -47,3 +47,24 @@ module.exports = {
     parser: '@typescript-eslint/parser',
 }
 ```
+
+Or, if you want to customize the rules, you can enable and disable rules in your local config as well:
+
+```js
+const { config } = require('./index.js')
+
+module.exports = {
+    extends: [config.eslint],
+
+    rules: {
+        // This enables the built-in no-await-in-loop-rule, notifying you with an eslint error
+        'no-await-in-loop': 'error',
+
+        // This enables the 'first' rule of the eslint import plugin, a plugin that ships with
+        // cli-style, notifying you with a warning on any imports that aren't at the top
+        'import/first': 'warning',
+    },
+}
+```
+
+For more information, see: https://eslint.org/docs/user-guide/configuring
