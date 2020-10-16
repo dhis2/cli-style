@@ -1,6 +1,6 @@
-const { bin } = require('../utils/run.js')
 const { resolveIgnoreFile } = require('../utils/files.js')
 const { PACKAGE_ROOT } = require('../utils/paths.js')
+const { bin } = require('../utils/run.js')
 
 exports.eslint = ({ files = [], apply = false, config }) => {
     const ignoreFile = resolveIgnoreFile(['.eslintignore'])
