@@ -47,7 +47,7 @@
         "perfy": "^1.1.5",
         "prettier": "^2.1.2",
         "semver": "^7.3.2",
-        "yargs": "^16.0.3"
+        "yargs": "^16.1.0"
     },
     "publishConfig": {
         "access": "public"
