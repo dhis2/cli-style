@@ -1,5 +1,6 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
 const inquirer = require('inquirer')
+
 const { configure } = require('../utils/config.js')
 const { printGroups, projects } = require('../utils/groups.js')
 

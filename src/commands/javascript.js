@@ -1,5 +1,6 @@
 const { namespace } = require('@dhis2/cli-helpers-engine')
 const log = require('@dhis2/cli-helpers-engine').reporter
+
 const { eslint } = require('../tools/eslint.js')
 const { selectFiles } = require('../utils/files.js')
 const { sayFilesChecked, sayNoFiles } = require('../utils/std-log-messages.js')

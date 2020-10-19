@@ -1,6 +1,7 @@
-const path = require('path')
 const spawn = require('cross-spawn')
 const findup = require('find-up')
+const path = require('path')
+
 const { PACKAGE_ROOT } = require('./paths.js')
 
 exports.spawn = (cmd, args, opts) =>

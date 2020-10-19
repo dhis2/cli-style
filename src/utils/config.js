@@ -1,6 +1,6 @@
-const path = require('path')
 const log = require('@dhis2/cli-helpers-engine').reporter
 const fs = require('fs-extra')
+const path = require('path')
 
 function copy(from, to, overwrite = true) {
     try {
