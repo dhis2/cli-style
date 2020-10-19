@@ -43,7 +43,7 @@ module.exports = {
         'no-mixed-spaces-and-tabs': [SEVERITY],
         'prettier/prettier': [SEVERITY],
         'import/order': [
-            'error',
+            SEVERITY,
             {
                 groups: [
                     ['external', 'builtin'],
