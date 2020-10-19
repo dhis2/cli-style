@@ -62,10 +62,6 @@ jobs:
                   path: '**/node_modules'
                   key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
-            - name: Install
-              if: steps.yarn-cache.outputs.cache-hit != 'true'
-              run: yarn install --frozen-lockfile
-
             - name: Lint
               run: |
                   ./bin/d2-style js check
@@ -85,10 +81,6 @@ jobs:
               with:
                   path: '**/node_modules'
                   key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-
-            - name: Install
-              if: steps.yarn-cache.outputs.cache-hit != 'true'
-              run: yarn install --frozen-lockfile
 
             - name: Test
               run: yarn test
