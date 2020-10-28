@@ -1,6 +1,8 @@
 name: 'dhis2: verify (node)'
 
-on: push
+on:
+    push:
+        branches:
 
 env:
     GIT_AUTHOR_NAME: '@dhis2-bot'
