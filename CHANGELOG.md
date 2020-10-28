@@ -1,3 +1,10 @@
+## [7.2.1](https://github.com/dhis2/cli-style/compare/v7.2.0...v7.2.1) (2020-10-28)
+
+
+### Bug Fixes
+
+* resolve relative paths to staged files ([db142b6](https://github.com/dhis2/cli-style/commit/db142b668b9aca327a5c8ac98c80834445d2ccda))
+
 # [7.2.0](https://github.com/dhis2/cli-style/compare/v7.1.0...v7.2.0) (2020-10-14)
 
 
