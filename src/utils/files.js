@@ -145,7 +145,10 @@ const stagedFiles = (files = []) => {
     const output = result.stdout.trim()
 
     if (output) {
-        const staged = output.split('\n')
+        const staged = output
+            .split('\n')
+            .map(f => path.resolve(CONSUMING_ROOT, f))
+
         return files.filter(f => staged.includes(f))
     }
 
