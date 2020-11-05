@@ -32,6 +32,7 @@
         "@commitlint/cli": "^11.0.0",
         "@commitlint/config-conventional": "^11.0.0",
         "@dhis2/cli-helpers-engine": "2.1.1",
+        "@dhis2/cli-app-scripts": "^5.4.1",
         "babel-eslint": "^10.1.0",
         "cross-spawn": "^7.0.3",
         "eslint": "^7.18.0",

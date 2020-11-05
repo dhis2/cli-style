@@ -9,6 +9,7 @@ module.exports = {
         'pre-commit': tasks([
             'd2-style js check --staged',
             'd2-style text check --staged',
+            'd2-app-scripts i18n',
         ]),
     },
 }
