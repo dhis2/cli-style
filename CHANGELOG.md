@@ -1,3 +1,10 @@
+## [7.2.2](https://github.com/dhis2/cli-style/compare/v7.2.1...v7.2.2) (2020-11-06)
+
+
+### Bug Fixes
+
+* cut release to finalize jira migration ([51bde26](https://github.com/dhis2/cli-style/commit/51bde268ce1b9cf3eea6ac0744c2c7f5ad26ea65))
+
 ## [7.2.1](https://github.com/dhis2/cli-style/compare/v7.2.0...v7.2.1) (2020-10-28)
 
 
