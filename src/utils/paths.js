@@ -29,6 +29,7 @@ const LOCAL_HUSKY_FRONTEND_CONFIG = path.join(
     CONFIG_DIR,
     'husky-frontend.local.js'
 )
+const LOCAL_HUSKY_APP_CONFIG = path.join(CONFIG_DIR, 'husky-app.local.js')
 const LOCAL_HUSKY_CONFIG = path.join(CONFIG_DIR, 'husky.local.js')
 
 // local configuration files for repositories
@@ -60,4 +61,5 @@ module.exports = {
     HUSKY_CONFIG,
     LOCAL_HUSKY_CONFIG,
     LOCAL_HUSKY_FRONTEND_CONFIG,
+    LOCAL_HUSKY_APP_CONFIG,
 }

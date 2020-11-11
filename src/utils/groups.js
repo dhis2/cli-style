@@ -14,6 +14,7 @@ const {
     LOCAL_ESLINT_CONFIG,
     LOCAL_HUSKY_CONFIG,
     LOCAL_HUSKY_FRONTEND_CONFIG,
+    LOCAL_HUSKY_APP_CONFIG,
 } = require('./paths.js')
 
 /**
@@ -63,6 +64,7 @@ const groups = [
                 'husky-frontend',
                 [LOCAL_HUSKY_FRONTEND_CONFIG, path.join('.huskyrc.js')],
             ],
+            ['husky-app', [LOCAL_HUSKY_APP_CONFIG, path.join('.huskyrc.js')]],
         ],
     ],
     [
@@ -119,6 +121,16 @@ const projects = [
             'linter/eslint-react',
             'formatter/prettier',
             'git/husky-frontend',
+        ],
+    ],
+    [
+        'app',
+        [
+            'base/all',
+            'github/all',
+            'linter/eslint-react',
+            'formatter/prettier',
+            'git/husky-app',
         ],
     ],
 ]
