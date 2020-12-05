@@ -1,7 +1,6 @@
 const path = require('path')
+const fs = require('fs')
 const spawn = require('cross-spawn')
-const findup = require('find-up')
-const { PACKAGE_ROOT } = require('./paths.js')
 
 exports.spawn = (cmd, args, opts) =>
     spawn.sync(cmd, args, {
@@ -19,22 +18,52 @@ exports.run = (cmd, { args, opts }, callback) => {
     )
 }
 
-exports.bin = (cmd, { args, opts }, callback) => {
-    const nodemodules = findup.sync('node_modules', {
-        cwd: PACKAGE_ROOT,
-        type: 'directory',
-        allowSymlinks: true,
-    })
-
-    const binCmd = path.join(nodemodules, '.bin', cmd)
+exports.bin = (packageName, { bin, args, opts }, callback) => {
+    const binFile = findBin(packageName, bin)
+    const yarnArgs = ['node', binFile, ...args]
 
     return handleRun(
-        spawn.sync(binCmd, args, {
+        spawn.sync('yarn', yarnArgs, {
             stdio: 'inherit',
             ...opts,
         }),
         callback
     )
+}
+
+function findBin(packageName, bin) {
+    let pkg
+    try {
+        pkg = require(`${packageName}/package.json`)
+    } catch (e) {
+        throw new Error(`Cannot resolve package ${packageName}`)
+    }
+    const pkgRoot = path.dirname(require.resolve(`${packageName}/package.json`))
+
+    const binName = bin || packageName
+    let binFile
+    if (typeof pkg.bin === 'string') {
+        if (binName === packageName) {
+            binFile = pkg.bin
+        }
+    } else {
+        binFile = pkg.bin[binName]
+    }
+
+    if (!binFile) {
+        throw new Error(
+            `No bin entry for ${binName} found in package ${packageName}`
+        )
+    }
+
+    binFile = path.join(pkgRoot, binFile)
+    if (!fs.existsSync(binFile)) {
+        throw new Error(
+            `Bin entry ${binName} in package ${packageName} points to a file which does not exist (${binFile})`
+        )
+    }
+
+    return binFile
 }
 
 function handleRun(result, callback) {
