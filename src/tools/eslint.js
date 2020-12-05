@@ -4,7 +4,7 @@ const { PACKAGE_ROOT } = require('../utils/paths.js')
 
 exports.eslint = ({ files = [], apply = false, config }) => {
     const ignoreFile = resolveIgnoreFile(['.eslintignore'])
-    const cmd = 'eslint'
+    const package = 'eslint'
     const args = [
         '--no-color',
         '--report-unused-disable-directives',
@@ -18,5 +18,5 @@ exports.eslint = ({ files = [], apply = false, config }) => {
         ...files,
     ]
 
-    bin(cmd, { args })
+    bin(package, { args })
 }
