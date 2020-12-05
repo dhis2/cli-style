@@ -2,8 +2,9 @@ const { bin } = require('../utils/run.js')
 const { COMMITLINT_CONFIG } = require('../utils/paths.js')
 
 exports.commitlint = (config = COMMITLINT_CONFIG) => {
-    const cmd = 'commitlint'
+    const package = '@commitlint/cli'
+    const bin = 'commitlint'
     const args = ['commitlint', `--config=${config}`, '--edit']
 
-    bin(cmd, { args })
+    bin(package, { bin, args })
 }
