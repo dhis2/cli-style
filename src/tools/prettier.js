@@ -5,7 +5,7 @@ const { resolveIgnoreFile } = require('../utils/files.js')
 
 exports.prettier = ({ files = [], apply = false, config }) => {
     const ignoreFile = resolveIgnoreFile(['.prettierignore'])
-    const cmd = 'prettier'
+    const package = 'prettier'
     const args = [
         '--list-different',
         ...(config ? ['--config', config] : []),
@@ -14,7 +14,7 @@ exports.prettier = ({ files = [], apply = false, config }) => {
         ...files,
     ]
 
-    bin(cmd, { args }, ({ status }) => {
+    bin(package, { args }, ({ status }) => {
         if (status === 1 && !apply) {
             log.warn(`Code style issues found in the above file(s).`)
         }
