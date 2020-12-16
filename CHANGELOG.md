@@ -1,3 +1,10 @@
+# [8.0.0-alpha.3](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.2...v8.0.0-alpha.3) (2020-12-16)
+
+
+### Features
+
+* **eslint:** add import order rule ([#334](https://github.com/dhis2/cli-style/issues/334)) ([c7b9991](https://github.com/dhis2/cli-style/commit/c7b99917e39b2ed16165d0a115f0e0c3ebe775e1))
+
 # [8.0.0-alpha.2](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.1...v8.0.0-alpha.2) (2020-12-16)
 
 
