@@ -6,11 +6,13 @@ Some wisdom from Go:
 
 # I'm getting husky errors
 
-This library depends on husky, which requires node >= 10 and git >= 2.13.0. If you're getting errors like this:
+This library as of version 8.0.0 no longer depends on husky, so if you
+are getting errors like:
 
 ```
 Can't find Husky, skipping pre-commit hook
 You can reinstall it using 'npm install husky --save-dev' or delete this hook
 ```
 
-Ensure that your node and git versions satisfy the above requirements. You can check this by running `git --version` and `node --version` from your terminal.
+You can remove the husky hooks from `.git/hooks` and opt in to use the
+hooks provided here with e.g. `d2-style install git-hooks/all`.
