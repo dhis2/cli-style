@@ -1,10 +1,10 @@
-const log = require('@dhis2/cli-helpers-engine').reporter
-const inquirer = require('inquirer')
+const { reporter, prompt } = require('@dhis2/cli-helpers-engine')
+
 const { configure } = require('../utils/config.js')
 const { printGroups, projects } = require('../utils/groups.js')
 
 const promptForProject = async () => {
-    const res = await inquirer.prompt([
+    const res = await prompt([
         {
             name: 'project',
             message: 'Choose the project template',
@@ -34,7 +34,7 @@ exports.builder = {
 
 exports.handler = async argv => {
     if (argv.listGroups) {
-        log.print(printGroups())
+        reporter.print(printGroups())
         process.exit(0)
     }
 

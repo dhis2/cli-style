@@ -1,6 +1,6 @@
 {
     "name": "@dhis2/cli-style",
-    "version": "7.2.0",
+    "version": "7.2.3",
     "description": "The code and commit style for DHIS2.",
     "repository": {
         "type": "git",
@@ -31,23 +31,22 @@
     "dependencies": {
         "@commitlint/cli": "^11.0.0",
         "@commitlint/config-conventional": "^11.0.0",
-        "@dhis2/cli-helpers-engine": "2.0.1",
+        "@dhis2/cli-helpers-engine": "2.1.1",
         "babel-eslint": "^10.1.0",
         "cross-spawn": "^7.0.3",
-        "eslint": "^7.11.0",
-        "eslint-config-prettier": "^6.11.0",
+        "eslint": "^7.12.1",
+        "eslint-config-prettier": "^6.15.0",
         "eslint-plugin-import": "^2.22.1",
         "eslint-plugin-prettier": "^3.1.4",
-        "eslint-plugin-react": "^7.20.6",
+        "eslint-plugin-react": "^7.21.5",
         "fast-glob": "^3.2.4",
-        "find-up": "^4.1.0",
+        "find-up": "^5.0.0",
         "fs-extra": "^9.0.1",
         "husky": "^4.3.0",
-        "inquirer": "^7.3.3",
         "perfy": "^1.1.5",
         "prettier": "^2.1.2",
         "semver": "^7.3.2",
-        "yargs": "^16.0.3"
+        "yargs": "^16.1.0"
     },
     "publishConfig": {
         "access": "public"

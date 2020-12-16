@@ -4,7 +4,7 @@ const { commitlint } = require('../tools/commitlint.js')
 
 const commitCmd = yargs => {
     return yargs.command(
-        'check',
+        'check [file]',
         'Checks commit messages according to standards.',
         function builder(yargs) {
             return yargs.option('commitlintConfig', {
@@ -14,7 +14,10 @@ const commitCmd = yargs => {
         },
         function handler(argv) {
             log.info('d2-style > commit')
-            commitlint(argv.commitlintConfig)
+            commitlint({
+                config: argv.commitlintConfig,
+                file: argv.file,
+            })
         }
     )
 }
