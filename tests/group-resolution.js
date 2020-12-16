@@ -76,8 +76,8 @@ test('a valid project can be resolved into groups', t => {
 test('valid groups can be expanded', t => {
     t.plan(1)
 
-    const comboGroup = 'git/all'
-    const targetGroups = findGroup('git')
+    const comboGroup = 'git-hooks/all'
+    const targetGroups = findGroup('git-hooks')
     const expandedGroups = expandGroupAll(comboGroup)
 
     t.deepEqual(
@@ -88,7 +88,7 @@ test('valid groups can be expanded', t => {
 })
 
 test('convert to tool:config object', t => {
-    t.plan(8)
+    t.plan(7)
 
     const obj = bundledConfigPaths()
 
