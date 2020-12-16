@@ -1,0 +1,2 @@
+#!/bin/sh
+yarn node bin/d2-style commit check "$1"
