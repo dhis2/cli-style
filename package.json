@@ -42,7 +42,7 @@
         "fast-glob": "^3.2.4",
         "find-up": "^5.0.0",
         "fs-extra": "^9.0.1",
-        "husky": "^4.3.0",
+        "husky": "^4.3.6",
         "perfy": "^1.1.5",
         "prettier": "^2.1.2",
         "semver": "^7.3.2",
