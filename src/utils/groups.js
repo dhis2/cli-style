@@ -58,7 +58,10 @@ const groups = [
     [
         'git-hooks',
         [
-            ['commit-msg', [COMMIT_MSG_HOOK, path.join('.git', 'hooks', 'commit-msg')]],
+            [
+                'commit-msg',
+                [COMMIT_MSG_HOOK, path.join('.git', 'hooks', 'commit-msg')],
+            ],
         ],
     ],
     [
