@@ -5,6 +5,12 @@
 
 * **eslint:** add import order rule ([#334](https://github.com/dhis2/cli-style/issues/334)) ([c7b9991](https://github.com/dhis2/cli-style/commit/c7b99917e39b2ed16165d0a115f0e0c3ebe775e1))
 
+# [8.0.0-alpha.2](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.1...v8.0.0-alpha.2) (2020-12-16)
+
+### Features
+
+* opt-in git hooks ([#333](https://github.com/dhis2/cli-style/issues/333)) ([a3bc415](https://github.com/dhis2/cli-style/commit/a3bc415d3971756e2ef53ab59dbbc4fb48046b07))
+
 # [8.0.0-alpha.1](https://github.com/dhis2/cli-style/compare/v7.2.3...v8.0.0-alpha.1) (2020-12-16)
 
 
