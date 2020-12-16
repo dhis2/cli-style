@@ -42,5 +42,15 @@ module.exports = {
         ],
         'no-mixed-spaces-and-tabs': [SEVERITY],
         'prettier/prettier': [SEVERITY],
+        'import/order': [
+            SEVERITY,
+            {
+                'newlines-between': 'never',
+                alphabetize: {
+                    order: 'asc',
+                    caseInsensitive: true,
+                },
+            },
+        ],
     },
 }

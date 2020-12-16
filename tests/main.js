@@ -1,5 +1,4 @@
 const test = require('tape')
-
 const { command, config } = require('../index.js')
 
 test('base exports are objects', t => {
