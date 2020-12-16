@@ -232,13 +232,14 @@
   resolved "https://registry.yarnpkg.com/@commitlint/types/-/types-11.0.0.tgz#719cf05fcc1abb6533610a2e0f5dd1e61eac14fe"
   integrity sha512-VoNqai1vR5anRF5Tuh/+SWDFk7xi7oMwHrHrbm1BprYXjB2RJsWLhUrStMssDxEl5lW/z3EUdg8RvH/IUBccSQ==
 
-"@dhis2/cli-helpers-engine@2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@dhis2/cli-helpers-engine/-/cli-helpers-engine-2.0.1.tgz#04ecea312ced7d6a84927aa47c5cdb5e57a561ae"
-  integrity sha512-eEjDLC1Uc4MpFJxw3RUbC99CGiU9J26aPe5GZCdNJ2ny0so1QKtefxscQxcZOKZPM4svxBabiK2QJ7624dA2Vg==
+"@dhis2/cli-helpers-engine@2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/cli-helpers-engine/-/cli-helpers-engine-2.1.1.tgz#34a15866b1bc16ae5c4997d79256ee787b40c11a"
+  integrity sha512-7HrpYwenDzPFUMRsIuStQRu7SzwVRq6NCy4k8CbZ4/VTFaWnpkncTAz+C8ztkEQQSYTW7mDLLenJ9qpkhXgoTA==
   dependencies:
     chalk "^3.0.0"
     fs-extra "^8.0.1"
+    inquirer "^7.3.3"
     request "^2.88.0"
     tar "^4.4.8"
     update-notifier "^3.0.0"

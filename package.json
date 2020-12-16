@@ -31,7 +31,7 @@
     "dependencies": {
         "@commitlint/cli": "^11.0.0",
         "@commitlint/config-conventional": "^11.0.0",
-        "@dhis2/cli-helpers-engine": "2.0.1",
+        "@dhis2/cli-helpers-engine": "2.1.1",
         "babel-eslint": "^10.1.0",
         "cross-spawn": "^7.0.3",
         "eslint": "^7.12.1",
@@ -43,7 +43,6 @@
         "find-up": "^5.0.0",
         "fs-extra": "^9.0.1",
         "husky": "^4.3.0",
-        "inquirer": "^7.3.3",
         "perfy": "^1.1.5",
         "prettier": "^2.1.2",
         "semver": "^7.3.2",

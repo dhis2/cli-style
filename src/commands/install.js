@@ -1,11 +1,12 @@
-const inquirer = require('inquirer')
-const log = require('@dhis2/cli-helpers-engine').reporter
+const { reporter, prompt } = require('@dhis2/cli-helpers-engine')
+
+const { log } = reporter
 
 const { configure } = require('../utils/config.js')
 const { printGroups, projects } = require('../utils/groups.js')
 
 const promptForProject = async () => {
-    const res = await inquirer.prompt([
+    const res = await prompt([
         {
             name: 'project',
             message: 'Choose the project template',
