@@ -1,5 +1,8 @@
-# [7.3.0](https://github.com/dhis2/cli-style/compare/v7.2.3...v7.3.0) (2020-12-16)
+# [8.0.0-alpha.3](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.2...v8.0.0-alpha.3) (2020-12-16)
 
+# [8.0.0-alpha.2](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.1...v8.0.0-alpha.2) (2020-12-16)
+
+# [7.3.0](https://github.com/dhis2/cli-style/compare/v7.2.3...v7.3.0) (2020-12-16)
 
 ### Features
 
