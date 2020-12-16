@@ -1,7 +1,5 @@
 const { reporter, prompt } = require('@dhis2/cli-helpers-engine')
 
-const { log } = reporter
-
 const { configure } = require('../utils/config.js')
 const { printGroups, projects } = require('../utils/groups.js')
 
@@ -36,7 +34,7 @@ exports.builder = {
 
 exports.handler = async argv => {
     if (argv.listGroups) {
-        log.print(printGroups())
+        reporter.print(printGroups())
         process.exit(0)
     }
 

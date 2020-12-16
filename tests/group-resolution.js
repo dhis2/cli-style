@@ -12,7 +12,6 @@ const {
 
 const {
     BROWSERSLIST_CONFIG,
-    HUSKY_CONFIG,
     STALE_CONFIG,
     DEPENDABOT_CONFIG,
     EDITORCONFIG_CONFIG,
@@ -94,7 +93,6 @@ test('convert to tool:config object', t => {
     const obj = bundledConfigPaths()
 
     t.equals(obj.eslint, ESLINT_CONFIG)
-    t.equals(obj.husky, HUSKY_CONFIG)
     t.equals(obj.prettier, PRETTIER_CONFIG)
     t.equals(obj.dependabot, DEPENDABOT_CONFIG)
     t.equals(obj['probot-stale'], STALE_CONFIG)
