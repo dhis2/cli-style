@@ -1,6 +1,5 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
 const { namespace } = require('@dhis2/cli-helpers-engine')
-
 const { commitlint } = require('../tools/commitlint.js')
 
 const commitCmd = yargs => {

@@ -1,5 +1,4 @@
 const test = require('tape')
-
 const {
     groups,
     projects,
@@ -9,7 +8,6 @@ const {
     expandGroupAll,
     bundledConfigPaths,
 } = require('../src/utils/groups.js')
-
 const {
     BROWSERSLIST_CONFIG,
     STALE_CONFIG,

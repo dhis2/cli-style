@@ -1,5 +1,4 @@
 const { reporter, prompt } = require('@dhis2/cli-helpers-engine')
-
 const { configure } = require('../utils/config.js')
 const { printGroups, projects } = require('../utils/groups.js')
 
