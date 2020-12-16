@@ -1,3 +1,11 @@
+## [7.2.3](https://github.com/dhis2/cli-style/compare/v7.2.2...v7.2.3) (2020-12-16)
+
+
+### Bug Fixes
+
+* allow optional commit-msg file to lint ([83b06db](https://github.com/dhis2/cli-style/commit/83b06db75ef4707f77044eea4fbb20af996fa46f))
+* use prompt from cli-helpers-engine ([9b7a12a](https://github.com/dhis2/cli-style/commit/9b7a12a379de06c3924ce87472eb2d45ea343ce5))
+
 ## [7.2.2](https://github.com/dhis2/cli-style/compare/v7.2.1...v7.2.2) (2020-11-06)
 
 
