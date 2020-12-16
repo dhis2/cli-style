@@ -2,9 +2,9 @@ const path = require('path')
 
 const {
     BROWSERSLIST_CONFIG,
+    COMMIT_MSG_HOOK,
     ESLINT_CONFIG,
     ESLINT_REACT_CONFIG,
-    HUSKY_CONFIG,
     PRETTIER_CONFIG,
     STALE_CONFIG,
     DEPENDABOT_CONFIG,
@@ -14,8 +14,6 @@ const {
     LOCAL_ESLINT_REACT_CONFIG,
     LOCAL_PRETTIER_CONFIG,
     LOCAL_ESLINT_CONFIG,
-    LOCAL_HUSKY_CONFIG,
-    LOCAL_HUSKY_FRONTEND_CONFIG,
 } = require('./paths.js')
 
 /**
@@ -24,7 +22,7 @@ const {
  *
  * The format of a selector is: 'identifier/specifier', e.g.
  *
- * git/husky
+ * git/hooks
  *
  * This is represented by a multi-dimensional array:
  *
@@ -58,12 +56,11 @@ const groups = [
         [['prettier', [LOCAL_PRETTIER_CONFIG, path.join('.prettierrc.js')]]],
     ],
     [
-        'git',
+        'git-hooks',
         [
-            ['husky', [LOCAL_HUSKY_CONFIG, path.join('.huskyrc.js')]],
             [
-                'husky-frontend',
-                [LOCAL_HUSKY_FRONTEND_CONFIG, path.join('.huskyrc.js')],
+                'commit-msg',
+                [COMMIT_MSG_HOOK, path.join('.git', 'hooks', 'commit-msg')],
             ],
         ],
     ],
@@ -102,7 +99,7 @@ const groups = [
  * wants to bundle, acting as a short-hand.
  */
 const projects = [
-    ['base', ['tools/editorconfig', 'git/husky']],
+    ['base', ['tools/editorconfig', 'git-hooks/commit-msg']],
     [
         'js',
         [
@@ -110,7 +107,7 @@ const projects = [
             'github/all',
             'linter/eslint',
             'formatter/prettier',
-            'git/husky-frontend',
+            'git-hooks/commit-msg',
         ],
     ],
     [
@@ -120,7 +117,7 @@ const projects = [
             'github/all',
             'linter/eslint-react',
             'formatter/prettier',
-            'git/husky-frontend',
+            'git-hooks/commit-msg',
         ],
     ],
 ]
@@ -294,9 +291,6 @@ const bundledConfigPaths = () => {
                 case 'eslint-react':
                     config.eslintReact = ESLINT_REACT_CONFIG
                     config['eslint-react'] = ESLINT_REACT_CONFIG
-                    break
-                case 'husky':
-                    config.husky = HUSKY_CONFIG
                     break
                 default:
                     config[toolName] = sourceConfigPath

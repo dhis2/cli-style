@@ -29,13 +29,13 @@ are not necessary to explicitly install:
 ## Usage
 
 ```
-npx d2-style --help
+yarn d2-style --help
 
-npx d2-style install --help
+yarn d2-style install --help
 
-npx d2-style js --help
-npx d2-style js check --help
-npx d2-style js apply --help
+yarn d2-style js --help
+yarn d2-style js check --help
+yarn d2-style js apply --help
 ```
 
 ## Report an issue

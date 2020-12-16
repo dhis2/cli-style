@@ -12,7 +12,6 @@ const {
 
 const {
     BROWSERSLIST_CONFIG,
-    HUSKY_CONFIG,
     STALE_CONFIG,
     DEPENDABOT_CONFIG,
     EDITORCONFIG_CONFIG,
@@ -77,8 +76,8 @@ test('a valid project can be resolved into groups', t => {
 test('valid groups can be expanded', t => {
     t.plan(1)
 
-    const comboGroup = 'git/all'
-    const targetGroups = findGroup('git')
+    const comboGroup = 'git-hooks/all'
+    const targetGroups = findGroup('git-hooks')
     const expandedGroups = expandGroupAll(comboGroup)
 
     t.deepEqual(
@@ -89,12 +88,11 @@ test('valid groups can be expanded', t => {
 })
 
 test('convert to tool:config object', t => {
-    t.plan(8)
+    t.plan(7)
 
     const obj = bundledConfigPaths()
 
     t.equals(obj.eslint, ESLINT_CONFIG)
-    t.equals(obj.husky, HUSKY_CONFIG)
     t.equals(obj.prettier, PRETTIER_CONFIG)
     t.equals(obj.dependabot, DEPENDABOT_CONFIG)
     t.equals(obj['probot-stale'], STALE_CONFIG)

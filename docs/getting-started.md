@@ -41,7 +41,7 @@ repository for you. For a list of valid groups and what tools they will
 configure, use:
 
 ```bash
-npx d2-style install --list-groups
+yarn d2-style install --list-groups
 ```
 
 Run `install` without arguments to get an interactive mode where it is
@@ -65,15 +65,10 @@ specification and get the standard
 [EditorConfig](https://editorconfig.org/):
 
 ```
-npx d2-style install project/base
+yarn d2-style install project/base
 
-# * project/base (includes: tools/editorconfig, git/husky)
+# * project/base (includes: tools/editorconfig, git-hooks/commit-msg)
 ```
-
-This gives you a starting point, and after that it is possible to extend
-the `.huskyrc.js` configuration with specific hooks, see
-[config/husky-frontend.local.js](config/husky-frontend.local.js) for an
-example on how to extend the configuration file for Husky.
 
 For example, most repos has structured text in the form of YAML or
 Markdown, so adding a pre-commit hook to validate the format of that
@@ -87,10 +82,10 @@ configuration. It does not use any framework specific rules and should
 be applicable to any JavaScript project.
 
 ```
-npx d2-style install project/js
+yarn d2-style install project/js
 
 # * project/js (includes: tools/all, github/all, linter/eslint,
-#   formatter/prettier, git/husky-frontend)
+#   formatter/prettier, git/commit-msg)
 ```
 
 ### React
@@ -99,8 +94,8 @@ The `project/react` should be a good starting point for a React project,
 as it adds `eslint-plugin-react`.
 
 ```
-npx d2-style install project/react
+yarn d2-style install project/react
 
 # * project/react (includes: base/all, github/all, linter/eslint-react,
-#   formatter/prettier, git/husky-frontend)
+#   formatter/prettier, git/commit-msg)
 ```
