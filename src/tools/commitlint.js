@@ -6,8 +6,7 @@ exports.commitlint = ({ config = COMMITLINT_CONFIG, file }) => {
     const args = [
         'commitlint',
         `--config=${config}`,
-        '--edit',
-        ...(file ? [file] : []),
+        ...(file ? ['--edit', file] : []),
     ]
 
     bin(cmd, { args })

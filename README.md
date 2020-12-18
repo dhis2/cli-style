@@ -21,7 +21,6 @@ As a terminal user check out the full CLI. :rocket:
 This tool includes the following tools as runtime dependencies, so they
 are not necessary to explicitly install:
 
--   [Husky](https://github.com/typicode/husky)
 -   [Commitlint](https://commitlint.js.org)
 -   [ESLint](https://eslint.org/)
 -   [Prettier](https://prettier.io)
