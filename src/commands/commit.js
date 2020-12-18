@@ -23,6 +23,6 @@ const commitCmd = yargs => {
 }
 
 module.exports = namespace('commit', {
-    describe: 'Format commit messages according to standards.',
+    describe: 'Check commit messages according to standards.',
     builder: yargs => commitCmd(yargs),
 })
