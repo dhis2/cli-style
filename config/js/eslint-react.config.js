@@ -18,7 +18,7 @@ module.exports = {
     rules: {
         'i18next/no-literal-string': [
             'warn',
-            { markupOnly: true, onlyAttribute: [''] },
+            { markupOnly: true, onlyAttribute: ['label'] },
         ],
         'react/sort-prop-types': [
             'error',
