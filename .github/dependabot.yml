@@ -9,4 +9,3 @@ updates:
       versioning-strategy: increase
       labels:
           - 'dependencies'
-          - 'automerge'

@@ -34,24 +34,24 @@
         "@dhis2/cli-helpers-engine": "2.1.1",
         "babel-eslint": "^10.1.0",
         "cross-spawn": "^7.0.3",
-        "eslint": "^7.12.1",
-        "eslint-config-prettier": "^6.15.0",
+        "eslint": "^7.18.0",
+        "eslint-config-prettier": "^7.2.0",
         "eslint-plugin-import": "^2.22.1",
-        "eslint-plugin-prettier": "^3.1.4",
-        "eslint-plugin-react": "^7.21.5",
-        "fast-glob": "^3.2.4",
+        "eslint-plugin-prettier": "^3.3.1",
+        "eslint-plugin-react": "^7.22.0",
+        "fast-glob": "^3.2.5",
         "find-up": "^5.0.0",
         "fs-extra": "^9.0.1",
         "perfy": "^1.1.5",
-        "prettier": "^2.1.2",
-        "semver": "^7.3.2",
-        "yargs": "^16.1.0"
+        "prettier": "^2.2.1",
+        "semver": "^7.3.4",
+        "yargs": "^16.2.0"
     },
     "publishConfig": {
         "access": "public"
     },
     "devDependencies": {
-        "@dhis2/cli-utils-docsite": "^2.0.2",
-        "tape": "^5.0.1"
+        "@dhis2/cli-utils-docsite": "^2.0.3",
+        "tape": "^5.1.1"
     }
 }
