@@ -1,3 +1,11 @@
+# [8.0.0-alpha.4](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.3...v8.0.0-alpha.4) (2021-03-15)
+
+
+### Features
+
+* commit check can read from a custom file ([366be0c](https://github.com/dhis2/cli-style/commit/366be0c693f39d2cc18bb546e845f68948ce4b9e))
+* show eslint warnings ([#368](https://github.com/dhis2/cli-style/issues/368)) ([abe4668](https://github.com/dhis2/cli-style/commit/abe466895e561aeeffd4b2c2f07a20eec5c73f72))
+
 # [8.0.0-alpha.2](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.1...v8.0.0-alpha.2) (2020-12-16)
 
 ### Features
