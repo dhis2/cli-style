@@ -43,7 +43,7 @@ function handleRun(result, callback) {
     }
 
     if (callback) {
-        callback(result)
+        return callback(result)
     }
 
     if (result.status !== 0) {
