@@ -1,2 +1,2 @@
 #!/bin/sh
-yarn d2-style commit check "$1"
+yarn d2-style check commit "$1"

@@ -5,7 +5,7 @@ exports.prettier = ({ files = [], apply = false, config, callback }) => {
     const ignoreFile = resolveIgnoreFile(['.prettierignore'])
     const cmd = 'prettier'
     const args = [
-        '--list-different',
+        '--check',
         ...(config ? ['--config', config] : []),
         ...(ignoreFile ? ['--ignore-path', ignoreFile] : []),
         ...(apply ? ['--write'] : []),

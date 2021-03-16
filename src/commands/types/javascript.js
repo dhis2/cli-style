@@ -2,11 +2,12 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 const { eslint } = require('../../tools/eslint.js')
 const { prettier } = require('../../tools/prettier.js')
 const { selectFiles } = require('../../utils/files.js')
+const { callback: runCb, exit } = require('../../utils/run.js')
 const {
     sayFilesChecked,
     sayNoFiles,
+    sayStatusCode,
 } = require('../../utils/std-log-messages.js')
-const { callback: runCb, exit } = require('../../utils/run.js')
 
 exports.command = 'js [files..]'
 
@@ -21,8 +22,10 @@ exports.builder = yargs =>
     })
 
 exports.handler = (argv, callback) => {
-    if (!argv.patterns || argv.patterns && !argv.patterns.js) {
-        log.warn('No javascript patterns defined, please check the configuration file')
+    if (!argv.patterns || (argv.patterns && !argv.patterns.js)) {
+        log.warn(
+            'No javascript patterns defined, please check the configuration file'
+        )
         process.exit(1)
     }
 
@@ -44,23 +47,24 @@ exports.handler = (argv, callback) => {
 
     log.debug(`Linting files: ${jsFiles.join(', ')}`)
 
-    log.info('> javascript: eslint')
+    log.info('javascript > eslint')
     eslint({
         apply,
         files: jsFiles,
         callback: finalStatus,
     })
 
-    log.info('> javascript: prettier')
+    log.info('javascript > prettier')
     prettier({
         apply,
         files: jsFiles,
         callback: finalStatus,
     })
 
-    log.print(sayFilesChecked('javascript', jsFiles.length, apply))
-
     if (!callback) {
+        log.info(sayFilesChecked('javascript', jsFiles.length, apply))
         exit(finalStatus())
     }
+
+    return jsFiles.length
 }

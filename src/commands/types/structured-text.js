@@ -2,11 +2,12 @@ const { namespace } = require('@dhis2/cli-helpers-engine')
 const log = require('@dhis2/cli-helpers-engine').reporter
 const { prettier } = require('../../tools/prettier.js')
 const { selectFiles } = require('../../utils/files.js')
+const { callback: runCb, exit } = require('../../utils/run.js')
 const {
     sayFilesChecked,
     sayNoFiles,
+    sayStatusCode,
 } = require('../../utils/std-log-messages.js')
-const { callback: runCb, exit } = require('../../utils/run.js')
 
 exports.command = 'text [files..]'
 exports.aliases = ['structured-text']
@@ -18,8 +19,10 @@ exports.builder = yargs =>
     })
 
 exports.handler = (argv, callback) => {
-    if (!argv.patterns || argv.patterns && !argv.patterns.text) {
-        log.warn('No text patterns defined, please check the configuration file')
+    if (!argv.patterns || (argv.patterns && !argv.patterns.text)) {
+        log.warn(
+            'No text patterns defined, please check the configuration file'
+        )
         process.exit(1)
     }
 
@@ -40,18 +43,17 @@ exports.handler = (argv, callback) => {
 
     log.debug(`Linting files: ${textFiles.join(', ')}`)
 
-    log.info('')
-    log.info('> structured-text: prettier')
-
+    log.info('structured-text > prettier')
     prettier({
         apply,
         files: textFiles,
         callback: finalStatus,
     })
 
-    log.print(sayFilesChecked('text', textFiles.length, apply))
-
     if (!callback) {
+        log.info(sayFilesChecked('text', textFiles.length, apply))
         exit(finalStatus())
     }
+
+    return textFiles.length
 }

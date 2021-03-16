@@ -39,7 +39,7 @@ exports.bin = (cmd, { args, opts }, callback) => {
 
 exports.callback = () => {
     let status = 0
-    return (result) => {
+    return result => {
         if (!result) return status
 
         if (result.status > status) {
@@ -48,7 +48,8 @@ exports.callback = () => {
     }
 }
 
-exports.exit = (code) => {
+exports.exit = code => {
+    console.log('')
     process.exit(code)
 }
 

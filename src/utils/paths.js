@@ -24,6 +24,8 @@ const DEPENDABOT_CONFIG = path.join(CONFIG_DIR, 'github', 'dependabot.yml')
 const STALE_CONFIG = path.join(CONFIG_DIR, 'github', 'stale.yml')
 const SEMANTIC_PR_CONFIG = path.join(CONFIG_DIR, 'github', 'semantic.yml')
 const COMMIT_MSG_HOOK = path.join(CONFIG_DIR, 'git', 'hooks', 'commit-msg')
+const PRE_COMMIT_HOOK = path.join(CONFIG_DIR, 'git', 'hooks', 'pre-commit')
+const PRE_PUSH_HOOK = path.join(CONFIG_DIR, 'git', 'hooks', 'pre-push')
 
 // local configuration files for repositories
 const LOCAL_ESLINT_REACT_CONFIG = path.join(
@@ -38,6 +40,8 @@ const LOCAL_PRETTIER_CONFIG = path.join(CONFIG_DIR, 'js', 'prettier.local.js')
 module.exports = {
     CONSUMING_ROOT,
     COMMIT_MSG_HOOK,
+    PRE_COMMIT_HOOK,
+    PRE_PUSH_HOOK,
     BROWSERSLIST_CONFIG,
     COMMITLINT_CONFIG,
     PACKAGE_ROOT,

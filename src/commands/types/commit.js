@@ -2,6 +2,9 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 const { namespace } = require('@dhis2/cli-helpers-engine')
 const { commitlint } = require('../../tools/commitlint.js')
 const { CONSUMING_ROOT } = require('../../utils/paths.js')
+const { callback, exit } = require('../../utils/run.js')
+
+const statusCode = callback()
 
 exports.command = 'commit [file]'
 
@@ -20,9 +23,12 @@ exports.builder = yargs =>
         })
 
 exports.handler = argv => {
-    log.info('> commit-msg')
     commitlint({
         config: argv.commitlintConfig,
         file: argv.file,
+        callback: statusCode,
     })
+    log.info(`> commit-msg: commitlint (${statusCode()})`)
+
+    exit(statusCode())
 }

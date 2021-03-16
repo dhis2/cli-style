@@ -1,0 +1,2 @@
+#!/bin/sh
+yarn d2-style check

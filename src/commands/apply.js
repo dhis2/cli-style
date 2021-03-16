@@ -1,11 +1,17 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
+const { callback, exit } = require('../utils/run.js')
+const { jscmd } = require('./check.js')
+const { handler: jsHandler } = require('./types/javascript.js')
+const { handler: textHandler } = require('./types/structured-text.js')
 
-exports.command = 'apply [type]'
+const statusCode = callback()
+
+exports.command = 'apply'
 
 exports.describe = 'Automatically run the appropriate checks on files'
 
 exports.builder = yargs =>
-    yargs
+    jscmd(yargs)
         .commandDir('types')
         .option('staged', {
             describe: 'Only check staged files in Git',
@@ -15,5 +21,3 @@ exports.builder = yargs =>
         .config({
             apply: true,
         })
-
-exports.handler = argv => {}
