@@ -49,7 +49,7 @@ exports.handler = (argv, callback) => {
     })
 
     if (!callback) {
-        log.info(sayFilesChecked('text', textFiles.length, apply))
+        log.debug(sayFilesChecked('text', textFiles.length, apply))
         exit(finalStatus())
     }
 

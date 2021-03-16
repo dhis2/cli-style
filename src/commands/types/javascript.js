@@ -53,6 +53,11 @@ exports.handler = (argv, callback) => {
         callback: finalStatus,
     })
 
+    if (finalStatus() === 0) {
+        log.print('All matched files pass the lint rules.')
+        log.print('')
+    }
+
     log.info('javascript > prettier')
     prettier({
         apply,
@@ -61,7 +66,7 @@ exports.handler = (argv, callback) => {
     })
 
     if (!callback) {
-        log.info(sayFilesChecked('javascript', jsFiles.length, apply))
+        log.debug(sayFilesChecked('javascript', jsFiles.length, apply))
         exit(finalStatus())
     }
 

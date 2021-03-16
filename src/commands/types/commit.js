@@ -28,5 +28,8 @@ exports.handler = argv => {
         file: argv.file,
         callback: statusCode,
     })
+    if (statusCode() === 0) {
+        log.print('The commit message is conventional.')
+    }
     exit(statusCode())
 }
