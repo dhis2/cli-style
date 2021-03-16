@@ -1,67 +1,46 @@
 const { namespace } = require('@dhis2/cli-helpers-engine')
 const log = require('@dhis2/cli-helpers-engine').reporter
-const { prettier } = require('../tools/prettier.js')
-const { selectFiles } = require('../utils/files.js')
-const { sayFilesChecked, sayNoFiles } = require('../utils/std-log-messages.js')
+const { prettier } = require('../../tools/prettier.js')
+const { selectFiles } = require('../../utils/files.js')
+const {
+    sayFilesChecked,
+    sayNoFiles,
+} = require('../../utils/std-log-messages.js')
+const { textHandler } = require('../helpers.js')
 
-const options = yargs =>
-    yargs
-        .option('pattern', {
-            describe:
-                'Pattern to match for files, remember to enclose in double quotes!',
-            type: 'string',
-            default: '**/*.{md,json,yml,html}',
-        })
-        .option('staged', {
-            describe: 'Only check staged files in Git',
-            type: 'boolean',
-            default: false,
-        })
+exports.command = 'text [files..]'
+exports.aliases = ['structured-text']
+exports.desc = 'Structured text style'
+exports.builder = yargs =>
+    yargs.positional('files', {
+        describe: '',
+        type: 'string',
+    })
 
-const handler = (argv, apply) => {
-    const { files, pattern, staged } = argv
-
-    log.info('d2-style > structured-text')
-
-    const opts = {
-        apply,
+exports.handler = argv => {
+    if (!argv.patterns || argv.patterns && !argv.patterns.text) {
+        log.warn('No text patterns defined, please check your configuration file')
+        process.exit(1)
     }
 
-    opts.files = selectFiles(files, pattern, staged)
+    const {
+        patterns: { text: textPattern },
+        files,
+        staged,
+        apply,
+    } = argv
 
-    if (opts.files.length === 0) {
-        log.print(sayNoFiles('text', pattern, staged))
+    const textFiles = selectFiles(files, textPattern, staged)
+    if (textFiles.length === 0) {
+        log.warn(sayNoFiles('structured text', textPattern, staged))
         return
     }
 
-    log.debug(`Linting files: ${opts.files.join(', ')}`)
-
-    prettier({
-        ...opts,
+    log.info('')
+    textHandler({
+        apply,
+        files: textFiles,
+        staged,
+        pattern: textPattern,
     })
-
-    log.print(sayFilesChecked('text', opts.files.length, apply))
 }
-
-const textCmds = yargs => {
-    return yargs
-        .command(
-            'apply [files..]',
-            'Apply structured text format.',
-            yargs => options(yargs),
-            argv => handler(argv, true)
-        )
-
-        .command(
-            'check [files..]',
-            'Check structured text format (do not attempt to fix)',
-            yargs => options(yargs),
-            argv => handler(argv, false)
-        )
-}
-
-module.exports = namespace('structured-text', {
-    aliases: ['text'],
-    describe: 'Format structured text according to standards',
-    builder: yargs => textCmds(yargs),
-})

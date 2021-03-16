@@ -115,7 +115,7 @@ function selectFiles(files, pattern, staged) {
         cwd: PACKAGE_ROOT,
     })
 
-    if (files) {
+    if (files.length > 0) {
         codeFiles = files
             .filter(f => codeFiles.includes(path.resolve(f)))
             .map(f => path.resolve(f))

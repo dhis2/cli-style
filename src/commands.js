@@ -15,6 +15,7 @@ module.exports = yargs =>
                 js: '**/*.{js,jsx,ts,tsx}',
                 text: '**/*.{md,json,yml,html}',
             },
+            files: [],
             ...config,
         })
         .commandDir('commands')

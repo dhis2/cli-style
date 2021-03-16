@@ -23,50 +23,31 @@ const finalMsg = status => {
     process.exit(status)
 }
 
-exports.jsLintHandler = ({ files, pattern, staged, apply, callback }) => {
-    const opts = {
-        apply,
-    }
-
-    opts.files = selectFiles(files, pattern, staged)
-
-    if (opts.files.length === 0) {
-        log.debug(sayNoFiles('javascript', pattern, staged))
-        return
-    }
-
-    log.debug(`Linting files: ${opts.files.join(', ')}`)
+exports.jsLintHandler = ({ files, staged, apply, callback }) => {
+    log.debug(`Linting files: ${files.join(', ')}`)
 
     log.info('> javascript: eslint')
     eslint({
-        ...opts,
+        apply,
+        files,
         callback,
     })
-
-    log.print(sayFilesChecked('javascript', opts.files.length, apply))
 }
 
-exports.jsFormatHandler = ({ files, pattern, staged, apply, callback }) => {
-    const opts = {
-        apply,
-    }
-
-    opts.files = selectFiles(files, pattern, staged)
-
-    if (opts.files.length === 0) {
+exports.jsFormatHandler = ({ files, staged, apply, callback }) => {
+    if (files.length === 0) {
         log.debug(sayNoFiles('javascript', pattern, staged))
         return
     }
 
-    log.debug(`Linting files: ${opts.files.join(', ')}`)
+    log.debug(`Linting files: ${files.join(', ')}`)
 
     log.info('> javascript: prettier')
     prettier({
-        ...opts,
+        apply,
+        files,
         callback,
     })
-
-    log.print(sayFilesChecked('javascript', opts.files.length, apply))
 }
 
 exports.textHandler = ({ files, pattern, staged, apply, callback }) => {
@@ -130,7 +111,7 @@ exports.handler = (argv, apply) => {
             })
         } else {
             log.warn(
-                'No pattern configured for javascript, check your d2-style.config.js file'
+                'No pattern configured for javascript, check the d2-style.config.js file'
             )
         }
     }
@@ -148,7 +129,7 @@ exports.handler = (argv, apply) => {
             })
         } else {
             log.warn(
-                'No pattern configured for structured text, check your d2-style.config.js file'
+                'No pattern configured for structured text, check the d2-style.config.js file'
             )
         }
     }

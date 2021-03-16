@@ -1,67 +1,61 @@
-const { namespace } = require('@dhis2/cli-helpers-engine')
 const log = require('@dhis2/cli-helpers-engine').reporter
-const { eslint } = require('../tools/eslint.js')
-const { selectFiles } = require('../utils/files.js')
-const { sayFilesChecked, sayNoFiles } = require('../utils/std-log-messages.js')
+const { eslint } = require('../../tools/eslint.js')
+const { prettier } = require('../../tools/prettier.js')
+const { selectFiles } = require('../../utils/files.js')
+const {
+    sayFilesChecked,
+    sayNoFiles,
+} = require('../../utils/std-log-messages.js')
+const { jsLintHandler, jsFormatHandler } = require('../helpers.js')
 
-const options = yargs =>
-    yargs
-        .option('pattern', {
-            describe:
-                'Pattern to match for files, remember to enclose in double quotes!',
-            type: 'string',
-            default: '**/*.{js,jsx,ts,tsx}',
-        })
-        .option('staged', {
-            describe: 'Only check staged files in Git',
-            type: 'boolean',
-            default: false,
-        })
+exports.command = 'js [files..]'
 
-const handler = (argv, apply) => {
-    const { files, pattern, staged } = argv
+exports.aliases = ['javascript']
 
-    log.info('d2-style > javascript')
+exports.desc = 'JavaScript code style'
 
-    const opts = {
-        apply,
+exports.builder = yargs =>
+    yargs.positional('files', {
+        describe: '',
+        type: 'string',
+    })
+
+exports.handler = argv => {
+    if (!argv.patterns || argv.patterns && !argv.patterns.js) {
+        log.warn('No javascript patterns defined, please check the configuration file')
+        process.exit(1)
     }
 
-    opts.files = selectFiles(files, pattern, staged)
+    const {
+        patterns: { js: jsPattern },
+        files,
+        staged,
+        apply,
+    } = argv
 
-    if (opts.files.length === 0) {
-        log.print(sayNoFiles('javascript', pattern, staged))
+    const jsFiles = selectFiles(files, jsPattern, staged)
+
+    if (jsFiles.length === 0) {
+        log.warn(sayNoFiles('javascript', jsPattern, staged))
         return
     }
 
-    log.debug(`Linting files: ${opts.files.join(', ')}`)
+    log.debug(`Linting files: ${files.join(', ')}`)
 
+    log.info('> javascript: eslint')
     eslint({
-        ...opts,
+        apply,
+        files: jsFiles,
     })
 
-    log.print(sayFilesChecked('javascript', opts.files.length, apply))
+    log.debug(`Linting files: ${files.join(', ')}`)
+
+    log.info('> javascript: prettier')
+    prettier({
+        apply,
+        files,
+    })
+    log.info('')
+
+    log.print(sayFilesChecked('javascript', jsFiles.length, apply))
 }
-
-const javascriptCmds = yargs => {
-    return yargs
-        .command(
-            'apply [files..]',
-            'Apply JS format.',
-            yargs => options(yargs),
-            argv => handler(argv, true)
-        )
-
-        .command(
-            'check [files..]',
-            'Check JS format (do not attempt to fix)',
-            yargs => options(yargs),
-            argv => handler(argv, false)
-        )
-}
-
-module.exports = namespace('javascript', {
-    aliases: ['js'],
-    describe: 'Format javascript according to standards',
-    builder: yargs => javascriptCmds(yargs),
-})

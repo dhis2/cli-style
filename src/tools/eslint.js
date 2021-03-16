@@ -9,7 +9,7 @@ exports.eslint = ({ files = [], apply = false, config, callback }) => {
         '--no-color',
         '--report-unused-disable-directives',
         '--ignore',
-        '--format=unix',
+        '--format=stylish',
         `--resolve-plugins-relative-to=${PACKAGE_ROOT}`,
         ...(ignoreFile ? ['--ignore-path', ignoreFile] : []),
         ...(config ? ['--config', config] : []),
