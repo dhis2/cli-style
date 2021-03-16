@@ -22,12 +22,11 @@ exports.builder = yargs =>
         })
 
 exports.handler = argv => {
+    log.info(`commit-msg > commitlint`)
     commitlint({
         config: argv.commitlintConfig,
         file: argv.file,
         callback: statusCode,
     })
-    log.info(`> commit-msg: commitlint (${statusCode()})`)
-
     exit(statusCode())
 }
