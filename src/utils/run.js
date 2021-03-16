@@ -37,6 +37,21 @@ exports.bin = (cmd, { args, opts }, callback) => {
     )
 }
 
+exports.callback = () => {
+    let status = 0
+    return (result) => {
+        if (!result) return status
+
+        if (result.status > status) {
+            status = result.status
+        }
+    }
+}
+
+exports.exit = (code) => {
+    process.exit(code)
+}
+
 function handleRun(result, callback) {
     if (result.error) {
         throw result.error

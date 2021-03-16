@@ -6,7 +6,7 @@ const {
     sayFilesChecked,
     sayNoFiles,
 } = require('../../utils/std-log-messages.js')
-const { textHandler } = require('../helpers.js')
+const { callback: runCb, exit } = require('../../utils/run.js')
 
 exports.command = 'text [files..]'
 exports.aliases = ['structured-text']
@@ -17,11 +17,13 @@ exports.builder = yargs =>
         type: 'string',
     })
 
-exports.handler = argv => {
+exports.handler = (argv, callback) => {
     if (!argv.patterns || argv.patterns && !argv.patterns.text) {
-        log.warn('No text patterns defined, please check your configuration file')
+        log.warn('No text patterns defined, please check the configuration file')
         process.exit(1)
     }
+
+    const finalStatus = callback || runCb()
 
     const {
         patterns: { text: textPattern },
@@ -36,11 +38,20 @@ exports.handler = argv => {
         return
     }
 
+    log.debug(`Linting files: ${textFiles.join(', ')}`)
+
     log.info('')
-    textHandler({
+    log.info('> structured-text: prettier')
+
+    prettier({
         apply,
         files: textFiles,
-        staged,
-        pattern: textPattern,
+        callback: finalStatus,
     })
+
+    log.print(sayFilesChecked('text', textFiles.length, apply))
+
+    if (!callback) {
+        exit(finalStatus())
+    }
 }

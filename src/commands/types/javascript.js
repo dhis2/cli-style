@@ -6,7 +6,7 @@ const {
     sayFilesChecked,
     sayNoFiles,
 } = require('../../utils/std-log-messages.js')
-const { jsLintHandler, jsFormatHandler } = require('../helpers.js')
+const { callback: runCb, exit } = require('../../utils/run.js')
 
 exports.command = 'js [files..]'
 
@@ -20,11 +20,13 @@ exports.builder = yargs =>
         type: 'string',
     })
 
-exports.handler = argv => {
+exports.handler = (argv, callback) => {
     if (!argv.patterns || argv.patterns && !argv.patterns.js) {
         log.warn('No javascript patterns defined, please check the configuration file')
         process.exit(1)
     }
+
+    const finalStatus = callback || runCb()
 
     const {
         patterns: { js: jsPattern },
@@ -40,22 +42,25 @@ exports.handler = argv => {
         return
     }
 
-    log.debug(`Linting files: ${files.join(', ')}`)
+    log.debug(`Linting files: ${jsFiles.join(', ')}`)
 
     log.info('> javascript: eslint')
     eslint({
         apply,
         files: jsFiles,
+        callback: finalStatus,
     })
-
-    log.debug(`Linting files: ${files.join(', ')}`)
 
     log.info('> javascript: prettier')
     prettier({
         apply,
-        files,
+        files: jsFiles,
+        callback: finalStatus,
     })
-    log.info('')
 
     log.print(sayFilesChecked('javascript', jsFiles.length, apply))
+
+    if (!callback) {
+        exit(finalStatus())
+    }
 }

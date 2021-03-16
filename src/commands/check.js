@@ -1,7 +1,11 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
 
+const { callback, exit } = require('../utils/run.js')
+
 const { handler: jsHandler } = require('./types/javascript.js')
 const { handler: textHandler } = require('./types/structured-text.js')
+
+const statusCode = callback()
 
 exports.command = 'check'
 
@@ -21,12 +25,14 @@ exports.builder = yargs =>
                 }
 
                 if (argv.patterns.js) {
-                    jsHandler(argv)
+                    jsHandler(argv, statusCode)
                 }
 
                 if (argv.patterns.text) {
-                    textHandler(argv)
+                    textHandler(argv, statusCode)
                 }
+
+                exit(statusCode())
             }
         )
         .commandDir('types')
