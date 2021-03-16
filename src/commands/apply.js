@@ -1,10 +1,4 @@
-const log = require('@dhis2/cli-helpers-engine').reporter
-const { callback, exit } = require('../utils/run.js')
 const { jscmd } = require('./check.js')
-const { handler: jsHandler } = require('./types/javascript.js')
-const { handler: textHandler } = require('./types/structured-text.js')
-
-const statusCode = callback()
 
 exports.command = 'apply'
 
