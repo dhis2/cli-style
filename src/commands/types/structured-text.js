@@ -1,4 +1,3 @@
-const { namespace } = require('@dhis2/cli-helpers-engine')
 const log = require('@dhis2/cli-helpers-engine').reporter
 const { prettier } = require('../../tools/prettier.js')
 const { selectFiles } = require('../../utils/files.js')
@@ -6,7 +5,6 @@ const { callback: runCb, exit } = require('../../utils/run.js')
 const {
     sayFilesChecked,
     sayNoFiles,
-    sayStatusCode,
 } = require('../../utils/std-log-messages.js')
 
 exports.command = 'text [files..]'

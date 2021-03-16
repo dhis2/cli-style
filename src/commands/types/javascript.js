@@ -6,7 +6,6 @@ const { callback: runCb, exit } = require('../../utils/run.js')
 const {
     sayFilesChecked,
     sayNoFiles,
-    sayStatusCode,
 } = require('../../utils/std-log-messages.js')
 
 exports.command = 'js [files..]'

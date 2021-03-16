@@ -1,5 +1,4 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
-const { namespace } = require('@dhis2/cli-helpers-engine')
 const { commitlint } = require('../../tools/commitlint.js')
 const { CONSUMING_ROOT } = require('../../utils/paths.js')
 const { callback, exit } = require('../../utils/run.js')
