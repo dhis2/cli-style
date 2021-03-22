@@ -1,9 +1,6 @@
 const path = require('path')
 const {
     BROWSERSLIST_CONFIG,
-    COMMIT_MSG_HOOK,
-    PRE_COMMIT_HOOK,
-    PRE_PUSH_HOOK,
     ESLINT_CONFIG,
     ESLINT_REACT_CONFIG,
     PRETTIER_CONFIG,
@@ -54,23 +51,6 @@ const groups = [
     [
         'formatter',
         [['prettier', [LOCAL_PRETTIER_CONFIG, path.join('.prettierrc.js')]]],
-    ],
-    [
-        'git-hooks',
-        [
-            [
-                'commit-msg',
-                [COMMIT_MSG_HOOK, path.join('.git', 'hooks', 'commit-msg')],
-            ],
-            [
-                'pre-commit',
-                [PRE_COMMIT_HOOK, path.join('.git', 'hooks', 'pre-commit')],
-            ],
-            [
-                'pre-push',
-                [PRE_PUSH_HOOK, path.join('.git', 'hooks', 'pre-push')],
-            ],
-        ],
     ],
     [
         'github',
