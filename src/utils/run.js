@@ -1,7 +1,7 @@
 const path = require('path')
+const log = require('@dhis2/cli-helpers-engine').reporter
 const spawn = require('cross-spawn')
 const findup = require('find-up')
-const log = require('@dhis2/cli-helpers-engine').reporter
 const { PACKAGE_ROOT } = require('./paths.js')
 
 exports.spawn = (cmd, args, opts) => {
@@ -51,8 +51,11 @@ exports.callback = () => {
     }
 }
 
-exports.exit = code => {
+exports.exit = (code, msg) => {
     console.log('')
+    if (msg && code > 0) {
+        log.error(msg)
+    }
     process.exit(code)
 }
 

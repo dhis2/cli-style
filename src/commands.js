@@ -1,7 +1,7 @@
 const findup = require('find-up')
-const { PACKAGE_ROOT } = require('./utils/paths.js')
+const { PACKAGE_ROOT, STYLE_CONFIG_FILES } = require('./utils/paths.js')
 
-const configFile = findup.sync(['d2-style.config.js', 'd2-style.js'], {
+const configFile = findup.sync(STYLE_CONFIG_FILES, {
     cwd: PACKAGE_ROOT,
     type: 'file',
     allowSymlinks: true,

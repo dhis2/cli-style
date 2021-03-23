@@ -162,7 +162,7 @@ const pickFirstExists = (files = [], customRoot) => {
             ? path.join(customRoot, file)
             : path.join(CONSUMING_ROOT, file)
 
-        const exists = fs.existsSync(fp) && fs.statSync(fp).size !== 0
+        const exists = fileExists(fp)
 
         if (exists) {
             log.debug(`Using ${fp} as the common ignore file.`)
@@ -172,6 +172,8 @@ const pickFirstExists = (files = [], customRoot) => {
 
     return null
 }
+
+const fileExists = fp => fs.existsSync(fp) && fs.statSync(fp).size !== 0
 
 const resolveIgnoreFile = (ignoreFiles = []) => {
     return pickFirstExists([...ignoreFiles, '.d2styleignore', '.gitignore'])
@@ -194,4 +196,5 @@ module.exports = {
     blacklist,
     pickFirstExists,
     resolveIgnoreFile,
+    fileExists,
 }

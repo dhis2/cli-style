@@ -1,46 +1,25 @@
-const { reporter, prompt } = require('@dhis2/cli-helpers-engine')
-const { configure } = require('../utils/config.js')
-const { printGroups, projects } = require('../utils/groups.js')
-
-const promptForProject = async () => {
-    const res = await prompt([
-        {
-            name: 'project',
-            message: 'Choose the project template',
-            type: 'list',
-            choices: () => projects.map(a => a[0]),
-        },
-    ])
-    return [`project/${res.project}`]
-}
+const log = require('@dhis2/cli-helpers-engine').reporter
+const { husky } = require('../tools/husky.js')
 
 exports.command = 'install [group..]'
 
-exports.describe = 'Install DHIS2 configurations for a/all group(s)'
+exports.describe = 'Install DHIS2 configurations'
 
-exports.builder = {
-    force: {
-        describe: 'Overwrites existing configuration',
-        type: 'boolean',
-        default: 'false',
-    },
-    listGroups: {
-        describe: 'List available groups',
-        type: 'boolean',
-        default: 'false',
-    },
-}
+exports.builder = yargs =>
+    yargs.positional('group', {
+        describe: '',
+        type: 'string',
+    })
 
 exports.handler = async argv => {
-    if (argv.listGroups) {
-        reporter.print(printGroups())
-        process.exit(0)
+    const { group } = argv
+
+    if (group.length === 0) {
+        log.info('git-hooks > husky')
+        husky({
+            command: 'install',
+        })
+    } else {
+        log.warn('yowza')
     }
-
-    const force = argv.force
-    const group = argv.group || (await promptForProject())
-
-    const root = process.cwd()
-
-    configure(root, group, force)
 }
