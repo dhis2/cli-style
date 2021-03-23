@@ -41,7 +41,9 @@ exports.describe = 'Automatically run the appropriate checks on files'
 
 exports.builder = yargs =>
     this.jscmd(yargs)
-        .commandDir('types')
+        .command(require('./types/javascript.js'))
+        .command(require('./types/structured-text.js'))
+        .command(require('./types/commit.js'))
         .option('staged', {
             describe: 'Only check staged files in Git',
             type: 'boolean',

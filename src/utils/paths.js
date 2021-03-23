@@ -1,6 +1,7 @@
 const path = require('path')
 
 const CONSUMING_ROOT = path.join(process.cwd())
+
 const PACKAGE_ROOT = path.join(__dirname, '..', '..')
 const CONFIG_DIR = path.join(PACKAGE_ROOT, 'config')
 

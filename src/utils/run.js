@@ -1,17 +1,20 @@
 const path = require('path')
 const spawn = require('cross-spawn')
 const findup = require('find-up')
+const log = require('@dhis2/cli-helpers-engine').reporter
 const { PACKAGE_ROOT } = require('./paths.js')
 
-exports.spawn = (cmd, args, opts) =>
-    spawn.sync(cmd, args, {
+exports.spawn = (cmd, args, opts) => {
+    log.debug(cmd, args, opts)
+    return spawn.sync(cmd, args, {
         stdio: 'inherit',
         ...opts,
     })
+}
 
 exports.run = (cmd, { args, opts }, callback) => {
     return handleRun(
-        spawn.sync(cmd, args, {
+        this.spawn(cmd, args, {
             stdio: 'inherit',
             ...opts,
         }),
@@ -29,7 +32,7 @@ exports.bin = (cmd, { args, opts }, callback) => {
     const binCmd = path.join(nodemodules, '.bin', cmd)
 
     return handleRun(
-        spawn.sync(binCmd, args, {
+        this.spawn(binCmd, args, {
             stdio: 'inherit',
             ...opts,
         }),
