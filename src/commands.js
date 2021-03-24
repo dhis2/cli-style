@@ -1,5 +1,9 @@
 const findup = require('find-up')
-const { PACKAGE_ROOT, STYLE_CONFIG_FILES } = require('./utils/paths.js')
+const {
+    PACKAGE_ROOT,
+    D2_STYLE_CONFIG,
+    STYLE_CONFIG_FILES,
+} = require('./utils/paths.js')
 
 const configFile = findup.sync(STYLE_CONFIG_FILES, {
     cwd: PACKAGE_ROOT,
@@ -11,11 +15,10 @@ const config = configFile ? require(configFile) : {}
 module.exports = yargs =>
     yargs
         .config({
-            patterns: {
-                js: '**/*.{js,jsx,ts,tsx}',
-                text: '**/*.{md,json,yml,html}',
+            config: {
+                ...require(D2_STYLE_CONFIG),
+                ...config,
             },
             files: [],
-            ...config,
         })
         .commandDir('commands')

@@ -17,7 +17,10 @@ exports.builder = yargs =>
     })
 
 exports.handler = (argv, callback) => {
-    if (!argv.patterns || (argv.patterns && !argv.patterns.text)) {
+    if (
+        !argv.config.patterns ||
+        (argv.config.patterns && !argv.config.patterns.text)
+    ) {
         log.warn(
             'No text patterns defined, please check the configuration file'
         )
@@ -27,7 +30,9 @@ exports.handler = (argv, callback) => {
     const finalStatus = callback || runCb()
 
     const {
-        patterns: { text: textPattern },
+        config: {
+            patterns: { text: textPattern },
+        },
         files,
         staged,
         apply,

@@ -15,19 +15,19 @@ exports.jscmd = yargs =>
                 type: 'string',
             }),
         argv => {
-            if (!argv.patterns) {
+            if (!argv.config.patterns) {
                 log.warn(
                     'No patterns defined, please check the configuration file'
                 )
                 process.exit(1)
             }
 
-            if (argv.patterns.js) {
+            if (argv.config.patterns.js) {
                 jsHandler(argv, statusCode)
                 log.print('')
             }
 
-            if (argv.patterns.text) {
+            if (argv.config.patterns.text) {
                 textHandler(argv, statusCode)
             }
 

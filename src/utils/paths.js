@@ -5,6 +5,8 @@ const CONSUMING_ROOT = path.join(process.cwd())
 const PACKAGE_ROOT = path.join(__dirname, '..', '..')
 const CONFIG_DIR = path.join(PACKAGE_ROOT, 'config')
 
+const D2_STYLE_CONFIG = path.join(CONFIG_DIR, 'd2-style.config.js')
+
 const ESLINT_CONFIG = path.join(CONFIG_DIR, 'js', 'eslint.config.js')
 const ESLINT_REACT_CONFIG = path.join(
     CONFIG_DIR,
@@ -46,6 +48,7 @@ const STYLE_CONFIG_FILES = [
 
 module.exports = {
     CONSUMING_ROOT,
+    D2_STYLE_CONFIG,
     BROWSERSLIST_CONFIG,
     COMMITLINT_CONFIG,
     PACKAGE_ROOT,

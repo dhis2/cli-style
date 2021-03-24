@@ -34,8 +34,10 @@ const supportedHooks = [
     'post-index-change',
 ]
 
+exports.isSupportedHook = hook => supportedHooks.includes(hook)
+
 exports.husky = ({ command, hookType, hookCmd, callback }) => {
-    if (!supportedHooks.includes(hookType)) {
+    if (hookType && !this.isSupportedHook(hookType)) {
         exit(1, 'Unsupported hook')
     }
 

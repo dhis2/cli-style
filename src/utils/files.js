@@ -96,7 +96,7 @@ function writeFile(fp, content) {
 function deleteFile(fp) {
     try {
         log.debug(`Deleting file: ${fp}`)
-        fs.unlinkSync(fp)
+        fs.removeSync(fp)
         return true
     } catch (error) {
         log.error('File deletion failed', fp, error)
