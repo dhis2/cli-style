@@ -93,6 +93,44 @@ function writeFile(fp, content) {
     }
 }
 
+function copy(from, to, { overwrite = false, backup = false }) {
+    try {
+        const exists = fs.existsSync(to)
+        const empty = exists ? fs.statSync(to).size === 0 : false
+
+        const replace = empty ? true : overwrite
+
+        fs.ensureDirSync(path.dirname(to))
+
+        if (exists) {
+            if (backup) {
+                const toNew = to.concat('.new')
+                log.print(
+                    `Existing config, installing as: ${path.relative(
+                        CONSUMING_ROOT,
+                        toNew
+                    )}`
+                )
+                fs.copySync(from, toNew, { overwrite: true })
+                return
+            }
+
+            if (replace) {
+                log.print(`Installing: ${path.relative(CONSUMING_ROOT, to)}`)
+                fs.copySync(from, to, { overwrite: true })
+                return
+            } else {
+                log.print(`Skip existing: ${path.relative(CONSUMING_ROOT, to)}`)
+                return
+            }
+        } else {
+            fs.copySync(from, to, { overwrite: replace })
+        }
+    } catch (err) {
+        log.error(`Failed to install configuration file: ${to}`, err)
+    }
+}
+
 function deleteFile(fp) {
     try {
         log.debug(`Deleting file: ${fp}`)
@@ -180,6 +218,7 @@ const resolveIgnoreFile = (ignoreFiles = []) => {
 }
 
 module.exports = {
+    copy,
     collectFiles,
     collectAllFiles,
     collectJsFiles,

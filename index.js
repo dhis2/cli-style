@@ -1,5 +1,5 @@
 const command = require('./src/index.js')
-const { bundledConfigPaths } = require('./src/utils/groups.js')
+const { packageConfigs } = require('./src/utils/config.js')
 
-exports.config = bundledConfigPaths()
+exports.config = packageConfigs
 exports.command = command

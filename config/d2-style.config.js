@@ -4,6 +4,13 @@ module.exports = {
         'pre-commit': ['yarn d2-style check'],
         'pre-push': ['yarn test'],
     },
+    tools: {
+        eslint: ['react'],
+        prettier: [],
+        github: ['dependabot', 'semantic-pr', 'stale'],
+        editorconfig: [],
+        commitlint: [],
+    },
     patterns: {
         js: '**/*.{js,jsx,ts,tsx}',
         text: '**/*.{md,json,yml,html}',

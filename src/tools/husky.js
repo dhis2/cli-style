@@ -1,5 +1,5 @@
 const { join } = require('path')
-const { LOCAL_HOOKS_DIR } = require('../utils/paths.js')
+const { PROJECT_HOOKS_DIR } = require('../utils/paths.js')
 const { bin, exit } = require('../utils/run.js')
 
 // https://git-scm.com/docs/githooks
@@ -44,9 +44,9 @@ exports.husky = ({ command, hookType, hookCmd, callback }) => {
     const cmd = 'husky'
     const args = [
         command,
-        ...(command === 'install' ? [LOCAL_HOOKS_DIR] : []),
+        ...(command === 'install' ? [PROJECT_HOOKS_DIR] : []),
         ...(['set', 'add'].includes(command)
-            ? [join(LOCAL_HOOKS_DIR, hookType)]
+            ? [join(PROJECT_HOOKS_DIR, hookType)]
             : []),
         ...(hookCmd ? [hookCmd] : []),
     ]

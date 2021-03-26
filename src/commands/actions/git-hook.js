@@ -1,29 +1,14 @@
 const path = require('path')
 const log = require('@dhis2/cli-helpers-engine').reporter
 const { husky } = require('../../tools/husky.js')
-const { deleteFile, fileExists } = require('../../utils/files.js')
-const { LOCAL_HOOKS_DIR } = require('../../utils/paths.js')
+const { remove } = require('../../utils/config.js')
+const { CONSUMING_ROOT, PROJECT_HOOKS_DIR } = require('../../utils/paths.js')
 
-const addHook = ({ type, command, overwrite }) => {
-    const cmd = overwrite ? 'set' : 'add'
-
-    husky({
-        command: cmd,
-        hookType: type,
-        hookCmd: command,
-    })
-}
-const removeHook = ({ type }) => {
-    const hookFile = path.join(LOCAL_HOOKS_DIR, type)
-    if (fileExists(hookFile)) {
-        const result = deleteFile(hookFile)
-        result
-            ? log.print(`Removed Git hook: ${type}`)
-            : log.error(`Failed to remove Git hook: ${type}`)
-    } else {
-        log.warn(`No such hook exists: ${type}`)
-    }
-}
+const defaultCommand = type =>
+    `echo "To customize this hook, edit ${type} in ${path.relative(
+        CONSUMING_ROOT,
+        PROJECT_HOOKS_DIR
+    )}"\nexit 1`
 
 exports.command = 'git-hook <type> [command]'
 
@@ -45,13 +30,20 @@ exports.builder = yargs =>
         })
 
 exports.handler = argv => {
-    log.info(`git-hook > husky`)
+    const { add, type, command, overwrite } = argv
 
-    const { add } = argv
+    log.info(`git-hook > ${add ? 'add' : 'remove'}`)
 
     if (add) {
-        addHook(argv)
+        const cmd = overwrite ? 'set' : 'add'
+
+        husky({
+            command: cmd,
+            hookType: type,
+            hookCmd: command ? command : defaultCommand(type),
+        })
     } else {
-        removeHook(argv)
+        const hookFile = path.join(PROJECT_HOOKS_DIR, type)
+        remove({ path: hookFile })
     }
 }

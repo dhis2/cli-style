@@ -2,7 +2,7 @@ const path = require('path')
 const log = require('@dhis2/cli-helpers-engine').reporter
 const { husky, isSupportedHook } = require('../tools/husky.js')
 const { fileExists, deleteFile } = require('../utils/files.js')
-const { LOCAL_HOOKS_DIR } = require('../utils/paths.js')
+const { PROJECT_HOOKS_DIR } = require('../utils/paths.js')
 const { callback, exit } = require('../utils/run.js')
 
 const statusCode = callback()
@@ -26,9 +26,9 @@ exports.installcmd = yargs =>
         argv => {
             const { config, clean } = argv
 
-            if (clean && fileExists(LOCAL_HOOKS_DIR)) {
-                const result = deleteFile(LOCAL_HOOKS_DIR)
-                log.debug(`Deleted ${LOCAL_HOOKS_DIR}: ${result}`)
+            if (clean && fileExists(PROJECT_HOOKS_DIR)) {
+                const result = deleteFile(PROJECT_HOOKS_DIR)
+                log.debug(`Deleted ${PROJECT_HOOKS_DIR}: ${result}`)
             }
 
             if (config.hooks) {
@@ -44,7 +44,7 @@ exports.installcmd = yargs =>
                  */
 
                 for (const hookType in config.hooks) {
-                    const hookPath = path.join(LOCAL_HOOKS_DIR, hookType)
+                    const hookPath = path.join(PROJECT_HOOKS_DIR, hookType)
                     if (isSupportedHook(hookType) && !fileExists(hookPath)) {
                         const hookCmds = config.hooks[hookType]
 
