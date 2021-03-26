@@ -9,10 +9,9 @@ const statusCode = callback()
 
 exports.command = 'install'
 
-exports.describe = 'Install DHIS2 configurations'
+exports.describe = 'Install the project configuration into the local project.'
 
 exports.builder = yargs => this.installcmd(yargs)
-//.command(require('./types/javascript.js'))
 
 exports.installcmd = yargs =>
     yargs.command(

@@ -15,6 +15,7 @@ exports.builder = yargs =>
             describe: '',
             type: 'boolean',
         })
+        .example('$0', 'Adds the standard ESLint configuration to .eslintrc.js')
 
 exports.handler = argv => {
     const { add, type, overwrite } = argv

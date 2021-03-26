@@ -52,3 +52,15 @@ exports.builder = yargs =>
         .config({
             apply: false,
         })
+        .example(
+            '$0 check',
+            'Finds and checks code for formatting and lint issues, for all supported, or configured, file formats.'
+        )
+        .example(
+            '$0 check js',
+            'Checks code format and lint issues to JavaScript files.'
+        )
+        .example(
+            '$0 check text --staged',
+            'Only match files that are staged in Git.'
+        )

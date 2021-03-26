@@ -217,6 +217,8 @@ const resolveIgnoreFile = (ignoreFiles = []) => {
     return pickFirstExists([...ignoreFiles, '.d2styleignore', '.gitignore'])
 }
 
+const relativePath = fp => path.relative(CONSUMING_ROOT, fp)
+
 module.exports = {
     copy,
     collectFiles,
@@ -236,4 +238,5 @@ module.exports = {
     pickFirstExists,
     resolveIgnoreFile,
     fileExists,
+    relativePath,
 }
