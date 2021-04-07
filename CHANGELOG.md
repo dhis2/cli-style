@@ -1,3 +1,22 @@
+# [8.0.0-alpha.5](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.4...v8.0.0-alpha.5) (2021-04-07)
+
+
+### Features
+
+* new and improved d2-style ([#378](https://github.com/dhis2/cli-style/issues/378)) ([f8279e5](https://github.com/dhis2/cli-style/commit/f8279e51b7d75033fa3c801721caa4ab1bad18d2))
+
+
+### BREAKING CHANGES
+
+* The verb (check/apply) is now moved to the top-level.  E.g.
+"d2-style js check" becomes "d2-style check js". This is to allow all checkers
+to run with a single command: "d2-style check"
+* "d2-style install" is no longer used to set up linters.  As of
+husky@5 the tool is vastly simplified and much faster. Hooks can be installed
+manually with "d2-style install", but is also run as a "post-install" script
+that we control for consistency. Configuration is added to the project with the
+"d2-style add" command.
+
 # [8.0.0-alpha.4](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.3...v8.0.0-alpha.4) (2021-03-15)
 
 
