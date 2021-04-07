@@ -9,8 +9,6 @@ module.exports = {
     // unignore implicit rules about what types of files can be linted
     ignorePatterns: ['!.*'],
 
-    plugins: ['prettier'],
-
     env: {
         browser: true,
         node: true,
@@ -42,7 +40,6 @@ module.exports = {
             },
         ],
         'no-mixed-spaces-and-tabs': ['error'],
-        'prettier/prettier': ['error'],
         'import/order': [
             'error',
             {
