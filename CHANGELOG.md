@@ -1,3 +1,10 @@
+# [8.0.0-alpha.6](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.5...v8.0.0-alpha.6) (2021-04-07)
+
+
+### Bug Fixes
+
+* match files from project root ([b77ef35](https://github.com/dhis2/cli-style/commit/b77ef35678000f9f597b12825b836c035158bc06))
+
 # [8.0.0-alpha.5](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.4...v8.0.0-alpha.5) (2021-04-07)
 
 
