@@ -1,3 +1,10 @@
+# [8.0.0-alpha.7](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.6...v8.0.0-alpha.7) (2021-04-07)
+
+
+### Features
+
+* delete deprecated configuration files ([c961647](https://github.com/dhis2/cli-style/commit/c9616479b053d313ccb177688d0bb410d7eef3e2))
+
 # [8.0.0-alpha.6](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.5...v8.0.0-alpha.6) (2021-04-07)
 
 
