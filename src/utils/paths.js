@@ -30,6 +30,8 @@ const STYLE_CONFIG_FILES = [
     'd2-style.js',
 ]
 
+const DEPRECATED_CONFIGS = [path.join(PROJECT_ROOT, '.huskyrc.js')]
+
 module.exports = {
     CONSUMING_ROOT,
     PACKAGE_ROOT,
@@ -39,4 +41,5 @@ module.exports = {
     PROJECT_HOOKS_DIR,
     PROJECT_ROOT,
     TEMPLATE_DIR,
+    DEPRECATED_CONFIGS,
 }

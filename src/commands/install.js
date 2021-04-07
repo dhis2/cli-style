@@ -2,7 +2,7 @@ const path = require('path')
 const log = require('@dhis2/cli-helpers-engine').reporter
 const { husky, isSupportedHook } = require('../tools/husky.js')
 const { fileExists, deleteFile } = require('../utils/files.js')
-const { PROJECT_HOOKS_DIR } = require('../utils/paths.js')
+const { PROJECT_HOOKS_DIR, DEPRECATED_CONFIGS } = require('../utils/paths.js')
 const { callback, exit } = require('../utils/run.js')
 
 const statusCode = callback()
@@ -28,6 +28,17 @@ exports.installcmd = yargs =>
             if (clean && fileExists(PROJECT_HOOKS_DIR)) {
                 const result = deleteFile(PROJECT_HOOKS_DIR)
                 log.debug(`Deleted ${PROJECT_HOOKS_DIR}: ${result}`)
+            }
+
+            /*
+             * Clean up deprecated configuration files that shouldn't
+             * exist any longer.
+             */
+            for (const deprecated of DEPRECATED_CONFIGS) {
+                if (fileExists(deprecated)) {
+                    const result = deleteFile(deprecated)
+                    log.debug(`Deleted ${deprecated}: ${result}`)
+                }
             }
 
             if (config.hooks) {
