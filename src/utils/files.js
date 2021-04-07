@@ -2,7 +2,7 @@ const path = require('path')
 const log = require('@dhis2/cli-helpers-engine').reporter
 const fg = require('fast-glob')
 const fs = require('fs-extra')
-const { CONSUMING_ROOT, PACKAGE_ROOT } = require('./paths.js')
+const { CONSUMING_ROOT, PROJECT_ROOT } = require('./paths.js')
 const { spawn } = require('./run.js')
 
 // blacklists for files
@@ -150,8 +150,11 @@ function selectFiles(files, pattern, staged) {
         dot: true,
         ignore: blacklist.map(b => `**/${b}/**`),
         absolute: true,
-        cwd: PACKAGE_ROOT,
+        cwd: PROJECT_ROOT,
     })
+
+    log.debug(`Using pattern: ${pattern}`)
+    log.debug(`Matched files: ${codeFiles.join(', ')}`)
 
     if (files.length > 0) {
         codeFiles = files
