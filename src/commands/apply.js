@@ -1,3 +1,7 @@
+/*
+ * To avoid duplicating the handler, we re-use the check handler in the
+ * apply command.
+ */
 const { jscmd } = require('./check.js')
 
 exports.command = 'apply'
@@ -7,8 +11,12 @@ exports.describe =
 
 exports.builder = yargs =>
     jscmd(yargs)
+        /*
+         * Only list the types that can be automatically fixed here.
+         */
         .command(require('./types/javascript.js'))
         .command(require('./types/structured-text.js'))
+
         .option('staged', {
             describe: 'Only check staged files in Git',
             type: 'boolean',

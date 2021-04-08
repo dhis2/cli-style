@@ -7,7 +7,7 @@ const statusCode = callback()
 
 exports.command = 'commit [file]'
 
-exports.desc = ''
+exports.desc = 'Commit message validations.'
 
 exports.builder = yargs =>
     yargs

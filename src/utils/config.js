@@ -38,6 +38,7 @@ const projectConfigs = {
         semantic: path.join(PROJECT_ROOT, '.github', 'semantic.yml'),
         stale: path.join(PROJECT_ROOT, '.github', 'stale.yml'),
     },
+    lslint: path.join(PROJECT_ROOT, '.ls-lint.yml'),
 }
 
 /**
@@ -64,6 +65,9 @@ const templateConfigs = {
         dependabot: path.join(TEMPLATE_DIR, 'github-dependabot.yml'),
         semantic: path.join(TEMPLATE_DIR, 'github-semantic.yml'),
         stale: path.join(TEMPLATE_DIR, 'github-stale.yml'),
+    },
+    lslint: {
+        base: path.join(TEMPLATE_DIR, 'ls-lint-base.yml'),
     },
 }
 
@@ -106,6 +110,8 @@ const projectConfig = (tool, template) =>
 const templateConfig = (tool, template) =>
     template ? templateConfigs[tool][template] : templateConfigs[tool]
 
+const configured = (tool, template) => fileExists(projectConfig(tool, template))
+
 const resolvedStyleConfig = findup.sync(STYLE_CONFIG_FILES, {
     cwd: PACKAGE_ROOT,
     type: 'file',
@@ -114,6 +120,7 @@ const resolvedStyleConfig = findup.sync(STYLE_CONFIG_FILES, {
 const styleConfig = resolvedStyleConfig ? require(resolvedStyleConfig) : {}
 
 module.exports = {
+    configured,
     remove,
     add,
     projectConfig,
