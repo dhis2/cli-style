@@ -1,3 +1,10 @@
+# [8.0.0-alpha.8](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.7...v8.0.0-alpha.8) (2021-04-08)
+
+
+### Features
+
+* lint file system for consistent names ([#379](https://github.com/dhis2/cli-style/issues/379)) ([2bfb5ef](https://github.com/dhis2/cli-style/commit/2bfb5ef5ee2b26ff7e27594fe36cef9eb12b2360))
+
 # [8.0.0-alpha.7](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.6...v8.0.0-alpha.7) (2021-04-07)
 
 
