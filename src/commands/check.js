@@ -1,5 +1,7 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
+const { configured } = require('../utils/config.js')
 const { callback, exit } = require('../utils/run.js')
+const { handler: fsHandler } = require('./types/file-system.js')
 const { handler: jsHandler } = require('./types/javascript.js')
 const { handler: textHandler } = require('./types/structured-text.js')
 
@@ -29,6 +31,11 @@ exports.jscmd = yargs =>
 
             if (argv.config.patterns.text) {
                 textHandler(argv, statusCode)
+                log.print('')
+            }
+
+            if (!argv.apply && configured('lslint')) {
+                fsHandler(argv, statusCode)
             }
 
             exit(statusCode())
@@ -37,13 +44,18 @@ exports.jscmd = yargs =>
 
 exports.command = 'check'
 
-exports.describe = 'Automatically run the appropriate checks on files'
+exports.describe = 'Run all the configured checks for format and lint.'
 
 exports.builder = yargs =>
     this.jscmd(yargs)
+        /*
+         * Only list the types that can be checked here.
+         */
+        .command(require('./types/commit.js'))
+        .command(require('./types/file-system.js'))
         .command(require('./types/javascript.js'))
         .command(require('./types/structured-text.js'))
-        .command(require('./types/commit.js'))
+
         .option('staged', {
             describe: 'Only check staged files in Git',
             type: 'boolean',

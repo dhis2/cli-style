@@ -52,8 +52,8 @@ exports.callback = () => {
 }
 
 exports.exit = (code, msg) => {
-    console.log('')
     if (msg && code > 0) {
+        console.log('')
         log.error(msg)
     }
     process.exit(code)
