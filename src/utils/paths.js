@@ -24,8 +24,6 @@ const PROJECT_CONFIG_DIR = path.join(CONSUMING_ROOT, '.d2')
 const PROJECT_HOOKS_DIR = path.join(PROJECT_CONFIG_DIR, 'hooks')
 
 const STYLE_CONFIG_FILES = [
-    path.join('.d2', 'style.config.js'),
-    path.join('.d2', 'style.js'),
     'd2-style.config.js',
     'd2-style.js',
 ]
