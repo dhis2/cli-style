@@ -19,20 +19,13 @@ Some example scripts follow:
 
 ```json
 "scripts": {
-    "lint:js": "d2-style js check",
-    "lint:text": "d2-style text check",
-    "lint:staged": "yarn lint:js --staged && yarn lint:text --staged",
-    "lint": "yarn lint:js && yarn lint:text",
+    "lint": "yarn d2-style check",
+    "lint:staged": "yarn lint --staged",
 
-    "format:js": "d2-style js apply",
-    "format:text": "d2-style text apply",
-    "format:staged": "yarn format:js --staged && yarn format:text --staged",
-    "format": "yarn format:js && yarn format:text"
+    "format": "yarn d2-style apply"
+    "format:staged": "yarn format --staged",
 },
 ```
-
-In a project where you have JavaScript and Text sources that need to be
-formatted, this would cover a complete workflow.
 
 # Install DHIS2 configuration files
 
@@ -41,61 +34,39 @@ repository for you. For a list of valid groups and what tools they will
 configure, use:
 
 ```bash
-yarn d2-style install --list-groups
+yarn d2-style add --help
 ```
 
-Run `install` without arguments to get an interactive mode where it is
-possible to choose the project template from a list.
+If a config file already exists, it may have local modifications, so the
+new config file is created with a `.new` suffix so that they can be
+manually merged.
 
-If a config file already exists, the tool skips overwriting it, in case
-there are local modifications.
+To regenerate and overwrite, pass the `--overwrite` flag.
 
-To regenerate and overwrite, pass the `--force` flag.
+## Configuration templates for tools
 
-## Pre-configured projects
+`d2-style` comes with templates for projects of different types that can
+be added to the project using the `add` command.
 
-`d2-style` comes with code style for a range of projects. These are some
-common ones.
+The structure is: `d2-style add {tool} {template}`
 
-### Base
+```sh
+# to add the default eslint configuration
+yarn d2-style add eslint
 
-At the very least you will want to comply with the [conventional
-commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
-specification and get the standard
-[EditorConfig](https://editorconfig.org/):
-
-```
-yarn d2-style install project/base
-
-# * project/base (includes: tools/editorconfig, git-hooks/commit-msg)
+# to add the react eslint configuration
+yarn d2-style add eslint react
 ```
 
-For example, most repos has structured text in the form of YAML or
-Markdown, so adding a pre-commit hook to validate the format of that
-makes sense in most cases.
+To add Git hooks, the format is:
 
-### JavaScript (e.g. NodeJS, Vanilla)
-
-The `project/js` is intended to be used in vanilla JS environments and
-contains our base ESLint configuration that works with our Prettier
-configuration. It does not use any framework specific rules and should
-be applicable to any JavaScript project.
-
-```
-yarn d2-style install project/js
-
-# * project/js (includes: tools/all, github/all, linter/eslint,
-#   formatter/prettier, git/commit-msg)
+```sh
+yarn d2-style add git-hooks {hook} {command}
 ```
 
-### React
+Examples:
 
-The `project/react` should be a good starting point for a React project,
-as it adds `eslint-plugin-react`.
-
-```
-yarn d2-style install project/react
-
-# * project/react (includes: base/all, github/all, linter/eslint-react,
-#   formatter/prettier, git/commit-msg)
+```sh
+yarn d2-style add git-hooks pre-commit "yarn d2-style apply && git add -u"
+yarn d2-style add git-hooks pre-push "yarn test"
 ```
