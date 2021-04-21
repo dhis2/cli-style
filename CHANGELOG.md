@@ -1,3 +1,10 @@
+# [8.0.0-alpha.9](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.8...v8.0.0-alpha.9) (2021-04-21)
+
+
+### Bug Fixes
+
+* allow eslint to print colors ([#384](https://github.com/dhis2/cli-style/issues/384)) ([c95a184](https://github.com/dhis2/cli-style/commit/c95a1846c4ee3136cdc9005bd65296bbc1ab2bab))
+
 # [8.0.0-alpha.8](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.7...v8.0.0-alpha.8) (2021-04-08)
 
 
