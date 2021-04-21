@@ -6,7 +6,6 @@ exports.eslint = ({ files = [], apply = false, config, callback }) => {
     const ignoreFile = resolveIgnoreFile(['.eslintignore'])
     const cmd = 'eslint'
     const args = [
-        '--no-color',
         '--report-unused-disable-directives',
         '--ignore',
         '--format=stylish',
