@@ -1,3 +1,11 @@
+# [8.0.0-alpha.10](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.9...v8.0.0-alpha.10) (2021-04-22)
+
+
+### Bug Fixes
+
+* ignore .d2 directory ([#386](https://github.com/dhis2/cli-style/issues/386)) ([6a473f2](https://github.com/dhis2/cli-style/commit/6a473f262503f2816e334d7a2042ea3fba7a2a4c))
+* wrong hooks where installed by default ([#385](https://github.com/dhis2/cli-style/issues/385)) ([3ac82f4](https://github.com/dhis2/cli-style/commit/3ac82f4d57031d911ff6c59419f3528e1a66ee40))
+
 # [8.0.0-alpha.9](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.8...v8.0.0-alpha.9) (2021-04-21)
 
 
