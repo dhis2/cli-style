@@ -3,7 +3,6 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 const findup = require('find-up')
 const { copy, fileExists, deleteFile } = require('./files.js')
 const {
-    PACKAGE_ROOT,
     PROJECT_ROOT,
     CONFIG_DIR,
     TEMPLATE_DIR,
@@ -113,7 +112,7 @@ const templateConfig = (tool, template) =>
 const configured = (tool, template) => fileExists(projectConfig(tool, template))
 
 const resolvedStyleConfig = findup.sync(STYLE_CONFIG_FILES, {
-    cwd: PACKAGE_ROOT,
+    cwd: PROJECT_ROOT,
     type: 'file',
     allowSymlinks: true,
 })
