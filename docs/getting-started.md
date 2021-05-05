@@ -1,3 +1,20 @@
+# After cloning a repository
+
+The first time you check out a repo, you need to enable the Git hooks
+manually. Husky used to do this by default, but both NPM and Yarn are
+moving away from `postinstall` scripts.
+
+This introduces a manual step. So a standard clone and install
+operations looks like:
+
+```bash
+git clone /path/to/repo && cd repo
+
+yarn install
+
+yarn d2-style install # this enables the hooks in .hooks
+```
+
 # Fresh install
 
 First up you will need to add `d2-style` as a development dependency. We
@@ -19,20 +36,13 @@ Some example scripts follow:
 
 ```json
 "scripts": {
-    "lint:js": "d2-style js check",
-    "lint:text": "d2-style text check",
-    "lint:staged": "yarn lint:js --staged && yarn lint:text --staged",
-    "lint": "yarn lint:js && yarn lint:text",
+    "lint": "yarn d2-style check",
+    "lint:staged": "yarn lint --staged",
 
-    "format:js": "d2-style js apply",
-    "format:text": "d2-style text apply",
-    "format:staged": "yarn format:js --staged && yarn format:text --staged",
-    "format": "yarn format:js && yarn format:text"
+    "format": "yarn d2-style apply"
+    "format:staged": "yarn format --staged",
 },
 ```
-
-In a project where you have JavaScript and Text sources that need to be
-formatted, this would cover a complete workflow.
 
 # Install DHIS2 configuration files
 
@@ -41,66 +51,39 @@ repository for you. For a list of valid groups and what tools they will
 configure, use:
 
 ```bash
-npx d2-style install --list-groups
+yarn d2-style add --help
 ```
 
-Run `install` without arguments to get an interactive mode where it is
-possible to choose the project template from a list.
+If a config file already exists, it may have local modifications, so the
+new config file is created with a `.new` suffix so that they can be
+manually merged.
 
-If a config file already exists, the tool skips overwriting it, in case
-there are local modifications.
+To regenerate and overwrite, pass the `--overwrite` flag.
 
-To regenerate and overwrite, pass the `--force` flag.
+## Configuration templates for tools
 
-## Pre-configured projects
+`d2-style` comes with templates for projects of different types that can
+be added to the project using the `add` command.
 
-`d2-style` comes with code style for a range of projects. These are some
-common ones.
+The structure is: `d2-style add {tool} {template}`
 
-### Base
+```sh
+# to add the default eslint configuration
+yarn d2-style add eslint
 
-At the very least you will want to comply with the [conventional
-commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)
-specification and get the standard
-[EditorConfig](https://editorconfig.org/):
-
-```
-npx d2-style install project/base
-
-# * project/base (includes: tools/editorconfig, git/husky)
+# to add the react eslint configuration
+yarn d2-style add eslint react
 ```
 
-This gives you a starting point, and after that it is possible to extend
-the `.huskyrc.js` configuration with specific hooks, see
-[config/husky-frontend.local.js](config/husky-frontend.local.js) for an
-example on how to extend the configuration file for Husky.
+To add Git hooks, the format is:
 
-For example, most repos has structured text in the form of YAML or
-Markdown, so adding a pre-commit hook to validate the format of that
-makes sense in most cases.
-
-### JavaScript (e.g. NodeJS, Vanilla)
-
-The `project/js` is intended to be used in vanilla JS environments and
-contains our base ESLint configuration that works with our Prettier
-configuration. It does not use any framework specific rules and should
-be applicable to any JavaScript project.
-
-```
-npx d2-style install project/js
-
-# * project/js (includes: tools/all, github/all, linter/eslint,
-#   formatter/prettier, git/husky-frontend)
+```sh
+yarn d2-style add git-hooks {hook} {command}
 ```
 
-### React
+Examples:
 
-The `project/react` should be a good starting point for a React project,
-as it adds `eslint-plugin-react`.
-
-```
-npx d2-style install project/react
-
-# * project/react (includes: base/all, github/all, linter/eslint-react,
-#   formatter/prettier, git/husky-frontend)
+```sh
+yarn d2-style add git-hooks pre-commit "yarn d2-style apply && git add -u"
+yarn d2-style add git-hooks pre-push "yarn test"
 ```

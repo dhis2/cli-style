@@ -2,7 +2,7 @@ const path = require('path')
 const log = require('@dhis2/cli-helpers-engine').reporter
 const fg = require('fast-glob')
 const fs = require('fs-extra')
-const { CONSUMING_ROOT } = require('./paths.js')
+const { CONSUMING_ROOT, PROJECT_ROOT } = require('./paths.js')
 const { spawn } = require('./run.js')
 
 // blacklists for files
@@ -93,10 +93,48 @@ function writeFile(fp, content) {
     }
 }
 
+function copy(from, to, { overwrite = false, backup = false }) {
+    try {
+        const exists = fs.existsSync(to)
+        const empty = exists ? fs.statSync(to).size === 0 : false
+
+        const replace = empty ? true : overwrite
+
+        fs.ensureDirSync(path.dirname(to))
+
+        if (exists) {
+            if (backup) {
+                const toNew = to.concat('.new')
+                log.print(
+                    `Existing config, installing as: ${path.relative(
+                        CONSUMING_ROOT,
+                        toNew
+                    )}`
+                )
+                fs.copySync(from, toNew, { overwrite: true })
+                return
+            }
+
+            if (replace) {
+                log.print(`Installing: ${path.relative(CONSUMING_ROOT, to)}`)
+                fs.copySync(from, to, { overwrite: true })
+                return
+            } else {
+                log.print(`Skip existing: ${path.relative(CONSUMING_ROOT, to)}`)
+                return
+            }
+        } else {
+            fs.copySync(from, to, { overwrite: replace })
+        }
+    } catch (err) {
+        log.error(`Failed to install configuration file: ${to}`, err)
+    }
+}
+
 function deleteFile(fp) {
     try {
         log.debug(`Deleting file: ${fp}`)
-        fs.unlinkSync(fp)
+        fs.removeSync(fp)
         return true
     } catch (error) {
         log.error('File deletion failed', fp, error)
@@ -112,10 +150,16 @@ function selectFiles(files, pattern, staged) {
         dot: true,
         ignore: blacklist.map(b => `**/${b}/**`),
         absolute: true,
+        cwd: PROJECT_ROOT,
     })
 
-    if (files) {
-        codeFiles = codeFiles.filter(f => files.includes(f))
+    log.debug(`Using pattern: ${pattern}`)
+    log.debug(`Matched files: ${codeFiles.join(', ')}`)
+
+    if (files.length > 0) {
+        codeFiles = files
+            .filter(f => codeFiles.includes(path.resolve(f)))
+            .map(f => path.resolve(f))
     }
 
     if (staged) {
@@ -159,7 +203,7 @@ const pickFirstExists = (files = [], customRoot) => {
             ? path.join(customRoot, file)
             : path.join(CONSUMING_ROOT, file)
 
-        const exists = fs.existsSync(fp) && fs.statSync(fp).size !== 0
+        const exists = fileExists(fp)
 
         if (exists) {
             log.debug(`Using ${fp} as the common ignore file.`)
@@ -170,11 +214,16 @@ const pickFirstExists = (files = [], customRoot) => {
     return null
 }
 
+const fileExists = fp => fs.existsSync(fp) && fs.statSync(fp).size !== 0
+
 const resolveIgnoreFile = (ignoreFiles = []) => {
     return pickFirstExists([...ignoreFiles, '.d2styleignore', '.gitignore'])
 }
 
+const relativePath = fp => path.relative(CONSUMING_ROOT, fp)
+
 module.exports = {
+    copy,
     collectFiles,
     collectAllFiles,
     collectJsFiles,
@@ -191,4 +240,6 @@ module.exports = {
     blacklist,
     pickFirstExists,
     resolveIgnoreFile,
+    fileExists,
+    relativePath,
 }

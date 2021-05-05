@@ -1,5 +1,3 @@
-const SEVERITY = 2
-
 module.exports = {
     extends: [
         'eslint:recommended',
@@ -8,7 +6,8 @@ module.exports = {
         'plugin:import/warnings',
     ],
 
-    plugins: ['prettier'],
+    // unignore implicit rules about what types of files can be linted
+    ignorePatterns: ['!.*'],
 
     env: {
         browser: true,
@@ -28,22 +27,21 @@ module.exports = {
 
     rules: {
         'max-params': [
-            SEVERITY,
+            'error',
             {
                 max: 3,
             },
         ],
         'prefer-const': [
-            SEVERITY,
+            'error',
             {
                 destructuring: 'any',
                 ignoreReadBeforeAssign: false,
             },
         ],
-        'no-mixed-spaces-and-tabs': [SEVERITY],
-        'prettier/prettier': [SEVERITY],
+        'no-mixed-spaces-and-tabs': ['error'],
         'import/order': [
-            SEVERITY,
+            'error',
             {
                 'newlines-between': 'never',
                 alphabetize: {

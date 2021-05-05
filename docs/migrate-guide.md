@@ -37,13 +37,13 @@ it, only to install it fresh after.
 
     ```bash
     # no assumption about the project
-    npx d2-style install project/base --force
+    yarn d2-style install project/base --force
 
     # assuming a javascript project
-    npx d2-style install project/js --force
+    yarn d2-style install project/js --force
 
     # assuming a react project
-    npx d2-style install project/react --force
+    yarn d2-style install project/react --force
     ```
 
     (You did take a backup of modified configuration files earlier, right?)

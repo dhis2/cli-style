@@ -1,63 +1,37 @@
 const path = require('path')
+const findup = require('find-up')
 
 const CONSUMING_ROOT = path.join(process.cwd())
+
 const PACKAGE_ROOT = path.join(__dirname, '..', '..')
 const CONFIG_DIR = path.join(PACKAGE_ROOT, 'config')
+const TEMPLATE_DIR = path.join(PACKAGE_ROOT, 'templates')
 
-const ESLINT_CONFIG = path.join(CONFIG_DIR, 'js', 'eslint.config.js')
-const ESLINT_REACT_CONFIG = path.join(
-    CONFIG_DIR,
-    'js',
-    'eslint-react.config.js'
+const PROJECT_ROOT = findup.sync(
+    directory => {
+        const amiroot = ['.git', '.github', '.d2'].map(i =>
+            findup.sync.exists(path.join(directory, i))
+        )
+        return amiroot.includes(true) && directory
+    },
+    {
+        cwd: CONSUMING_ROOT,
+        type: 'directory',
+    }
 )
-const PRETTIER_CONFIG = path.join(CONFIG_DIR, 'js', 'prettier.config.js')
+const PROJECT_HOOKS_DIR = path.join(PROJECT_ROOT, '.hooks')
 
-const BROWSERSLIST_CONFIG = path.join(
-    CONFIG_DIR,
-    'js',
-    'browserslist.config.rc'
-)
+const STYLE_CONFIG_FILES = ['d2-style.config.js', 'd2-style.js']
 
-const COMMITLINT_CONFIG = path.join(CONFIG_DIR, 'commitlint.config.js')
-const EDITORCONFIG_CONFIG = path.join(CONFIG_DIR, 'editorconfig.config.rc')
-const DEPENDABOT_CONFIG = path.join(CONFIG_DIR, 'github', 'dependabot.yml')
-const STALE_CONFIG = path.join(CONFIG_DIR, 'github', 'stale.yml')
-const SEMANTIC_PR_CONFIG = path.join(CONFIG_DIR, 'github', 'semantic.yml')
-
-const HUSKY_CONFIG = path.join(CONFIG_DIR, 'husky.config.js')
-const LOCAL_HUSKY_FRONTEND_CONFIG = path.join(
-    CONFIG_DIR,
-    'husky-frontend.local.js'
-)
-const LOCAL_HUSKY_CONFIG = path.join(CONFIG_DIR, 'husky.local.js')
-
-// local configuration files for repositories
-const LOCAL_ESLINT_REACT_CONFIG = path.join(
-    CONFIG_DIR,
-    'js',
-    'eslint-react.local.js'
-)
-const LOCAL_ESLINT_CONFIG = path.join(CONFIG_DIR, 'js', 'eslint.local.js')
-
-const LOCAL_PRETTIER_CONFIG = path.join(CONFIG_DIR, 'js', 'prettier.local.js')
+const DEPRECATED_CONFIGS = [path.join(PROJECT_ROOT, '.huskyrc.js')]
 
 module.exports = {
     CONSUMING_ROOT,
-    BROWSERSLIST_CONFIG,
-    COMMITLINT_CONFIG,
     PACKAGE_ROOT,
     CONFIG_DIR,
-    DEPENDABOT_CONFIG,
-    EDITORCONFIG_CONFIG,
-    ESLINT_CONFIG,
-    ESLINT_REACT_CONFIG,
-    LOCAL_ESLINT_CONFIG,
-    LOCAL_ESLINT_REACT_CONFIG,
-    LOCAL_PRETTIER_CONFIG,
-    PRETTIER_CONFIG,
-    SEMANTIC_PR_CONFIG,
-    STALE_CONFIG,
-    HUSKY_CONFIG,
-    LOCAL_HUSKY_CONFIG,
-    LOCAL_HUSKY_FRONTEND_CONFIG,
+    STYLE_CONFIG_FILES,
+    PROJECT_HOOKS_DIR,
+    PROJECT_ROOT,
+    TEMPLATE_DIR,
+    DEPRECATED_CONFIGS,
 }

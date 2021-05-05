@@ -1,46 +1,79 @@
-const { reporter, prompt } = require('@dhis2/cli-helpers-engine')
-const { configure } = require('../utils/config.js')
-const { printGroups, projects } = require('../utils/groups.js')
+const path = require('path')
+const log = require('@dhis2/cli-helpers-engine').reporter
+const { husky, isSupportedHook } = require('../tools/husky.js')
+const { fileExists, deleteFile } = require('../utils/files.js')
+const { PROJECT_HOOKS_DIR, DEPRECATED_CONFIGS } = require('../utils/paths.js')
+const { callback, exit } = require('../utils/run.js')
 
-const promptForProject = async () => {
-    const res = await prompt([
-        {
-            name: 'project',
-            message: 'Choose the project template',
-            type: 'list',
-            choices: () => projects.map(a => a[0]),
-        },
-    ])
-    return [`project/${res.project}`]
-}
+const statusCode = callback()
 
-exports.command = 'install [group..]'
+exports.command = 'install'
 
-exports.describe = 'Install DHIS2 configurations for a/all group(s)'
+exports.describe = 'Install the project configuration into the local project.'
 
-exports.builder = {
-    force: {
-        describe: 'Overwrites existing configuration',
-        type: 'boolean',
-        default: 'false',
-    },
-    listGroups: {
-        describe: 'List available groups',
-        type: 'boolean',
-        default: 'false',
-    },
-}
+exports.builder = yargs => this.installcmd(yargs)
 
-exports.handler = async argv => {
-    if (argv.listGroups) {
-        reporter.print(printGroups())
-        process.exit(0)
-    }
+exports.installcmd = yargs =>
+    yargs.command(
+        '$0',
+        'default',
+        yargs =>
+            yargs.option('clean', {
+                describe: '',
+                type: 'boolean',
+            }),
+        argv => {
+            const { config, clean } = argv
 
-    const force = argv.force
-    const group = argv.group || (await promptForProject())
+            if (clean && fileExists(PROJECT_HOOKS_DIR)) {
+                const result = deleteFile(PROJECT_HOOKS_DIR)
+                log.debug(`Deleted ${PROJECT_HOOKS_DIR}: ${result}`)
+            }
 
-    const root = process.cwd()
+            /*
+             * Clean up deprecated configuration files that shouldn't
+             * exist any longer.
+             */
+            for (const deprecated of DEPRECATED_CONFIGS) {
+                if (fileExists(deprecated)) {
+                    const result = deleteFile(deprecated)
+                    log.debug(`Deleted ${deprecated}: ${result}`)
+                }
+            }
 
-    configure(root, group, force)
-}
+            if (config.hooks) {
+                log.info('git-hooks > husky')
+                husky({
+                    command: 'install',
+                    callback: statusCode,
+                })
+
+                /*
+                 * If there are no hooks locally, but we have hooks defined
+                 * in the configuration, we will install those in the repo.
+                 */
+
+                for (const hookType in config.hooks) {
+                    const hookPath = path.join(PROJECT_HOOKS_DIR, hookType)
+                    if (isSupportedHook(hookType) && !fileExists(hookPath)) {
+                        const hookCmds = config.hooks[hookType]
+
+                        hookCmds.map(hookCmd =>
+                            husky({
+                                command: 'add',
+                                hookType,
+                                hookCmd,
+                                callback: statusCode,
+                            })
+                        )
+                    }
+                }
+
+                if (statusCode() === 0) {
+                    log.print('Install completed successfully')
+                }
+            }
+
+            exit(statusCode())
+        }
+    )

@@ -1,4 +1,5 @@
 dist/
+.d2/
 
 # Logs
 logs
