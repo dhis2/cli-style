@@ -1,3 +1,42 @@
+# [8.0.0](https://github.com/dhis2/cli-style/compare/v7.3.0...v8.0.0) (2021-05-05)
+
+
+### Bug Fixes
+
+* allow eslint to print colors ([#384](https://github.com/dhis2/cli-style/issues/384)) ([c95a184](https://github.com/dhis2/cli-style/commit/c95a1846c4ee3136cdc9005bd65296bbc1ab2bab))
+* ignore .d2 directory ([#386](https://github.com/dhis2/cli-style/issues/386)) ([6a473f2](https://github.com/dhis2/cli-style/commit/6a473f262503f2816e334d7a2042ea3fba7a2a4c))
+* match files from project root ([b77ef35](https://github.com/dhis2/cli-style/commit/b77ef35678000f9f597b12825b836c035158bc06))
+* wrong hooks where installed by default ([#385](https://github.com/dhis2/cli-style/issues/385)) ([3ac82f4](https://github.com/dhis2/cli-style/commit/3ac82f4d57031d911ff6c59419f3528e1a66ee40))
+
+
+### Code Refactoring
+
+* remove husky ([752b944](https://github.com/dhis2/cli-style/commit/752b94409a3a9735d324d05aefdd296f0d6bfb44))
+
+
+### Features
+
+* commit check can read from a custom file ([366be0c](https://github.com/dhis2/cli-style/commit/366be0c693f39d2cc18bb546e845f68948ce4b9e))
+* delete deprecated configuration files ([c961647](https://github.com/dhis2/cli-style/commit/c9616479b053d313ccb177688d0bb410d7eef3e2))
+* lint file system for consistent names ([#379](https://github.com/dhis2/cli-style/issues/379)) ([2bfb5ef](https://github.com/dhis2/cli-style/commit/2bfb5ef5ee2b26ff7e27594fe36cef9eb12b2360))
+* new and improved d2-style ([#378](https://github.com/dhis2/cli-style/issues/378)) ([f8279e5](https://github.com/dhis2/cli-style/commit/f8279e51b7d75033fa3c801721caa4ab1bad18d2))
+* opt-in git hooks ([#333](https://github.com/dhis2/cli-style/issues/333)) ([a3bc415](https://github.com/dhis2/cli-style/commit/a3bc415d3971756e2ef53ab59dbbc4fb48046b07))
+* show eslint warnings ([#368](https://github.com/dhis2/cli-style/issues/368)) ([abe4668](https://github.com/dhis2/cli-style/commit/abe466895e561aeeffd4b2c2f07a20eec5c73f72))
+
+
+### BREAKING CHANGES
+
+* The verb (check/apply) is now moved to the top-level.  E.g.
+"d2-style js check" becomes "d2-style check js". This is to allow all checkers
+to run with a single command: "d2-style check"
+* "d2-style install" is no longer used to set up linters.  As of
+husky@5 the tool is vastly simplified and much faster. Hooks can be installed
+manually with "d2-style install", but is also run as a "post-install" script
+that we control for consistency. Configuration is added to the project with the
+"d2-style add" command.
+* Husky has been removed from cli-style. You will need to
+remove hooks that reference husky.sh in .git/hooks.
+
 # [8.0.0-alpha.10](https://github.com/dhis2/cli-style/compare/v8.0.0-alpha.9...v8.0.0-alpha.10) (2021-04-22)
 
 
