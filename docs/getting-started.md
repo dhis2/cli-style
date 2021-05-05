@@ -1,3 +1,20 @@
+# After cloning a repository
+
+The first time you check out a repo, you need to enable the Git hooks
+manually. Husky used to do this by default, but both NPM and Yarn are
+moving away from `postinstall` scripts.
+
+This introduces a manual step. So a standard clone and install
+operations looks like:
+
+```bash
+git clone /path/to/repo && cd repo
+
+yarn install
+
+yarn d2-style install # this enables the hooks in .hooks
+```
+
 # Fresh install
 
 First up you will need to add `d2-style` as a development dependency. We
