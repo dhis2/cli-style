@@ -31,8 +31,7 @@
 to run with a single command: "d2-style check"
 * "d2-style install" is no longer used to set up linters.  As of
 husky@5 the tool is vastly simplified and much faster. Hooks can be installed
-manually with "d2-style install", but is also run as a "post-install" script
-that we control for consistency. Configuration is added to the project with the
+manually with "d2-style install". Configuration is added to the project with the
 "d2-style add" command.
 * Husky has been removed from cli-style. You will need to
 remove hooks that reference husky.sh in .git/hooks.
