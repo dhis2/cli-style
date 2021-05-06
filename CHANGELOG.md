@@ -1,3 +1,10 @@
+## [8.0.1](https://github.com/dhis2/cli-style/compare/v8.0.0...v8.0.1) (2021-05-06)
+
+
+### Bug Fixes
+
+* ignore .yarn directory ([#392](https://github.com/dhis2/cli-style/issues/392)) ([7481cfa](https://github.com/dhis2/cli-style/commit/7481cfaad15210009946ef477bca337a6196e741))
+
 # [8.0.0](https://github.com/dhis2/cli-style/compare/v7.3.0...v8.0.0) (2021-05-05)
 
 
