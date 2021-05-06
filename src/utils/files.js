@@ -7,14 +7,15 @@ const { spawn } = require('./run.js')
 
 // blacklists for files
 const blacklist = [
+    '.git',
+    '.d2',
+    '.yarn',
     'node_modules',
     'build',
     'dist',
     'target',
-    '.git',
     'vendor',
     'dest',
-    '.d2',
     'CHANGELOG.md',
 ]
 
