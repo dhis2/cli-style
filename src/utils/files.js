@@ -2,6 +2,7 @@ const path = require('path')
 const log = require('@dhis2/cli-helpers-engine').reporter
 const fg = require('fast-glob')
 const fs = require('fs-extra')
+const mm = require('micromatch')
 const { CONSUMING_ROOT, PROJECT_ROOT } = require('./paths.js')
 const { spawn } = require('./run.js')
 
@@ -40,38 +41,6 @@ function jsFiles(arr) {
 function jsonFiles(arr) {
     const whitelist = whitelisted(whitelists.json)
     return arr.filter(whitelist)
-}
-
-function collectJsFiles(target) {
-    const whitelist = whitelisted(whitelists.js)
-    return collectFiles(target).filter(whitelist)
-}
-
-function collectAllFiles(target) {
-    const whitelist = whitelisted(whitelists.all)
-    return collectFiles(target).filter(whitelist)
-}
-
-function collectRejectedFiles(target) {
-    const whitelist = whitelisted(['.rej'])
-    return collectFiles(target).filter(whitelist)
-}
-
-function collectFiles(target) {
-    const files = fs.readdirSync(target)
-
-    return files
-        .map(file => {
-            const fullPath = path.join(target, file)
-            const stat = fs.statSync(fullPath)
-
-            if (stat.isDirectory() && !blacklist.includes(file)) {
-                return collectFiles(fullPath)
-            } else {
-                return fullPath
-            }
-        })
-        .reduce((a, b) => a.concat(b), [])
 }
 
 function readFile(fp) {
@@ -147,10 +116,12 @@ function selectFiles(files, pattern, staged) {
     let codeFiles = []
 
     codeFiles = fg.sync([pattern], {
-        globstar: true,
-        dot: true,
-        ignore: blacklist.map(b => `**/${b}/**`),
         absolute: true,
+        baseNameMatch: true,
+        dot: true,
+        globstar: true,
+        onlyFiles: true,
+        ignore: blacklist.map(b => `**/${b}/**`),
         cwd: PROJECT_ROOT,
     })
 
@@ -158,8 +129,8 @@ function selectFiles(files, pattern, staged) {
     log.debug(`Matched files: ${codeFiles.join(', ')}`)
 
     if (files.length > 0) {
-        codeFiles = files
-            .filter(f => codeFiles.includes(path.resolve(f)))
+        codeFiles = codeFiles
+            .filter(f => mm.contains(f, files))
             .map(f => path.resolve(f))
     }
 
@@ -225,10 +196,6 @@ const relativePath = fp => path.relative(CONSUMING_ROOT, fp)
 
 module.exports = {
     copy,
-    collectFiles,
-    collectAllFiles,
-    collectJsFiles,
-    collectRejectedFiles,
     deleteFile,
     jsFiles,
     jsonFiles,

@@ -45,11 +45,9 @@ exports.handler = (argv, callback) => {
     const jsFiles = selectFiles(files, jsPattern, staged)
 
     if (jsFiles.length === 0) {
-        log.warn(sayNoFiles('javascript', jsPattern, staged))
+        log.debug(sayNoFiles('javascript', jsPattern, staged))
         return
     }
-
-    log.debug(`Linting files: ${jsFiles.join(', ')}`)
 
     log.info('javascript > eslint')
     eslint({
