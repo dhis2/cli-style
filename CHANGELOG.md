@@ -1,3 +1,10 @@
+# [8.1.0](https://github.com/dhis2/cli-style/compare/v8.0.1...v8.1.0) (2021-05-07)
+
+
+### Features
+
+* improve file name matching ([#395](https://github.com/dhis2/cli-style/issues/395)) ([77ff9ef](https://github.com/dhis2/cli-style/commit/77ff9efe8b7dcc04760681b506f45642538d0c28))
+
 ## [8.0.1](https://github.com/dhis2/cli-style/compare/v8.0.0...v8.0.1) (2021-05-06)
 
 
