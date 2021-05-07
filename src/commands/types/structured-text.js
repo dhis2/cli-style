@@ -40,7 +40,7 @@ exports.handler = (argv, callback) => {
 
     const textFiles = selectFiles(files, textPattern, staged)
     if (textFiles.length === 0) {
-        log.warn(sayNoFiles('structured text', textPattern, staged))
+        log.debug(sayNoFiles('structured text', textPattern, staged))
         return
     }
 

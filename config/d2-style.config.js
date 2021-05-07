@@ -11,7 +11,7 @@ module.exports = {
         commitlint: [],
     },
     patterns: {
-        js: '**/*.{js,jsx,ts,tsx}',
-        text: '**/*.{md,json,yml,html}',
+        js: '*.{js,jsx,ts,tsx}',
+        text: '*.{md,json,yml,html}',
     },
 }
