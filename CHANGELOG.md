@@ -1,3 +1,10 @@
+# [8.2.0](https://github.com/dhis2/cli-style/compare/v8.1.1...v8.2.0) (2021-05-10)
+
+
+### Features
+
+* support multiple patterns ([054881c](https://github.com/dhis2/cli-style/commit/054881cca897b19593cd2866759e319840eb4414))
+
 ## [8.1.1](https://github.com/dhis2/cli-style/compare/v8.1.0...v8.1.1) (2021-05-10)
 
 
