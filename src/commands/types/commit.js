@@ -1,5 +1,6 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
 const { commitlint } = require('../../tools/commitlint.js')
+const { gitEnabled } = require('../../utils/git.js')
 const { CONSUMING_ROOT } = require('../../utils/paths.js')
 const { callback, exit } = require('../../utils/run.js')
 
@@ -23,6 +24,12 @@ exports.builder = yargs =>
 
 exports.handler = argv => {
     log.info(`commit-msg > commitlint`)
+
+    if (!gitEnabled()) {
+        log.print('Not a Git repository, skipping commit validation.')
+        return
+    }
+
     commitlint({
         config: argv.commitlintConfig,
         file: argv.file,

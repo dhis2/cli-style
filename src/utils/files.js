@@ -188,6 +188,8 @@ const pickFirstExists = (files = [], customRoot) => {
 
 const fileExists = fp => fs.existsSync(fp) && fs.statSync(fp).size !== 0
 
+const dirExists = fp => fs.existsSync(fp) && fs.statSync(fp).isDirectory()
+
 const resolveIgnoreFile = (ignoreFiles = []) => {
     return pickFirstExists([...ignoreFiles, '.d2styleignore', '.gitignore'])
 }
@@ -209,5 +211,6 @@ module.exports = {
     pickFirstExists,
     resolveIgnoreFile,
     fileExists,
+    dirExists,
     relativePath,
 }
