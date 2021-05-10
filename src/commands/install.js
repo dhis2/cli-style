@@ -2,6 +2,7 @@ const path = require('path')
 const log = require('@dhis2/cli-helpers-engine').reporter
 const { husky, isSupportedHook } = require('../tools/husky.js')
 const { fileExists, deleteFile } = require('../utils/files.js')
+const { gitEnabled } = require('../utils/git.js')
 const { PROJECT_HOOKS_DIR, DEPRECATED_CONFIGS } = require('../utils/paths.js')
 const { callback, exit } = require('../utils/run.js')
 
@@ -41,7 +42,7 @@ exports.installcmd = yargs =>
                 }
             }
 
-            if (config.hooks) {
+            if (gitEnabled() && config.hooks) {
                 log.info('git-hooks > husky')
                 husky({
                     command: 'install',

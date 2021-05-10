@@ -9,9 +9,12 @@ const TEMPLATE_DIR = path.join(PACKAGE_ROOT, 'templates')
 
 const PROJECT_ROOT = findup.sync(
     directory => {
-        const amiroot = ['.git', '.github', '.d2'].map(i =>
-            findup.sync.exists(path.join(directory, i))
-        )
+        const amiroot = [
+            '.git',
+            '.github',
+            'yarn.lock',
+            'package-lock.json',
+        ].map(i => findup.sync.exists(path.join(directory, i)))
         return amiroot.includes(true) && directory
     },
     {
@@ -19,6 +22,8 @@ const PROJECT_ROOT = findup.sync(
         type: 'directory',
     }
 )
+
+const GIT_DIR = path.join(PROJECT_ROOT, '.git')
 const PROJECT_HOOKS_DIR = path.join(PROJECT_ROOT, '.hooks')
 
 const STYLE_CONFIG_FILES = ['d2-style.config.js', 'd2-style.js']
@@ -34,4 +39,5 @@ module.exports = {
     PROJECT_ROOT,
     TEMPLATE_DIR,
     DEPRECATED_CONFIGS,
+    GIT_DIR,
 }
