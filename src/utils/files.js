@@ -115,7 +115,7 @@ function deleteFile(fp) {
 function selectFiles(files, pattern, staged) {
     let codeFiles = []
 
-    codeFiles = fg.sync([pattern], {
+    codeFiles = fg.sync(pattern, {
         absolute: true,
         baseNameMatch: true,
         dot: true,
