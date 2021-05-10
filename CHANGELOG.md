@@ -1,3 +1,11 @@
+## [8.1.1](https://github.com/dhis2/cli-style/compare/v8.1.0...v8.1.1) (2021-05-10)
+
+
+### Bug Fixes
+
+* **cli-43:** skip git ops when not a git repo ([0617519](https://github.com/dhis2/cli-style/commit/06175197e41bff48e76b26fea5a7e056fdc94ca3))
+* **cli-43:** skip git ops when not a git repo ([#398](https://github.com/dhis2/cli-style/issues/398)) ([6488144](https://github.com/dhis2/cli-style/commit/6488144e7f1ac909d92a36a9bef0bd4563c74a7c))
+
 # [8.1.0](https://github.com/dhis2/cli-style/compare/v8.0.1...v8.1.0) (2021-05-07)
 
 
