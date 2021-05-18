@@ -1,6 +1,7 @@
 const { join } = require('path')
-const { PROJECT_HOOKS_DIR } = require('../utils/paths.js')
-const { bin, exit } = require('../utils/run.js')
+const { bin } = require('@dhis2/cli-helpers-engine').exec
+const { exit } = require('@dhis2/cli-helpers-engine')
+const { PACKAGE_ROOT, PROJECT_HOOKS_DIR } = require('../utils/paths.js')
 
 // https://git-scm.com/docs/githooks
 const supportedHooks = [
@@ -42,6 +43,7 @@ exports.husky = ({ command, hookType, hookCmd, callback }) => {
     }
 
     const cmd = 'husky'
+    const cwd = PACKAGE_ROOT
     const args = [
         command,
         ...(command === 'install' ? [PROJECT_HOOKS_DIR] : []),
@@ -51,5 +53,5 @@ exports.husky = ({ command, hookType, hookCmd, callback }) => {
         ...(hookCmd ? [hookCmd] : []),
     ]
 
-    bin(cmd, { args }, callback)
+    bin(cmd, { args, cwd }, callback)
 }

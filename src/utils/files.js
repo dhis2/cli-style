@@ -1,10 +1,10 @@
 const path = require('path')
 const log = require('@dhis2/cli-helpers-engine').reporter
+const { spawn } = require('@dhis2/cli-helpers-engine').exec
 const fg = require('fast-glob')
 const fs = require('fs-extra')
 const mm = require('micromatch')
 const { CONSUMING_ROOT, PROJECT_ROOT } = require('./paths.js')
-const { spawn } = require('./run.js')
 
 // blacklists for files
 const blacklist = [

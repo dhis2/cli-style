@@ -1,9 +1,11 @@
+const { bin } = require('@dhis2/cli-helpers-engine').exec
 const { resolveIgnoreFile } = require('../utils/files.js')
-const { bin } = require('../utils/run.js')
+const { PACKAGE_ROOT } = require('../utils/paths.js')
 
 exports.prettier = ({ files = [], apply = false, config, callback }) => {
     const ignoreFile = resolveIgnoreFile(['.prettierignore'])
     const cmd = 'prettier'
+    const cwd = PACKAGE_ROOT
     const args = [
         '--check',
         ...(config ? ['--config', config] : []),
@@ -12,5 +14,5 @@ exports.prettier = ({ files = [], apply = false, config, callback }) => {
         ...files,
     ]
 
-    bin(cmd, { args }, callback)
+    bin(cmd, { args, cwd }, callback)
 }

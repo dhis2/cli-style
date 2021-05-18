@@ -1,10 +1,11 @@
+const { bin } = require('@dhis2/cli-helpers-engine').exec
 const { resolveIgnoreFile } = require('../utils/files.js')
 const { PACKAGE_ROOT } = require('../utils/paths.js')
-const { bin } = require('../utils/run.js')
 
 exports.eslint = ({ files = [], apply = false, config, callback }) => {
     const ignoreFile = resolveIgnoreFile(['.eslintignore'])
     const cmd = 'eslint'
+    const cwd = PACKAGE_ROOT
     const args = [
         '--report-unused-disable-directives',
         '--ignore',
@@ -16,5 +17,5 @@ exports.eslint = ({ files = [], apply = false, config, callback }) => {
         ...files,
     ]
 
-    bin(cmd, { args }, callback)
+    bin(cmd, { args, cwd }, callback)
 }
