@@ -1,6 +1,7 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
+const { callback: runCb } = require('@dhis2/cli-helpers-engine').exec
+const { exit } = require('@dhis2/cli-helpers-engine')
 const { lslint } = require('../../tools/ls-lint.js')
-const { callback: runCb, exit } = require('../../utils/run.js')
 
 exports.command = 'fs'
 exports.aliases = ['file-system']

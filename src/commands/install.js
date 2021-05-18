@@ -1,10 +1,11 @@
 const path = require('path')
 const log = require('@dhis2/cli-helpers-engine').reporter
+const { callback } = require('@dhis2/cli-helpers-engine').exec
+const { exit } = require('@dhis2/cli-helpers-engine')
 const { husky, isSupportedHook } = require('../tools/husky.js')
 const { fileExists, deleteFile } = require('../utils/files.js')
 const { gitEnabled } = require('../utils/git.js')
 const { PROJECT_HOOKS_DIR, DEPRECATED_CONFIGS } = require('../utils/paths.js')
-const { callback, exit } = require('../utils/run.js')
 
 const statusCode = callback()
 

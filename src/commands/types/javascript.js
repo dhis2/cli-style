@@ -1,8 +1,9 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
+const { callback: runCb } = require('@dhis2/cli-helpers-engine').exec
+const { exit } = require('@dhis2/cli-helpers-engine')
 const { eslint } = require('../../tools/eslint.js')
 const { prettier } = require('../../tools/prettier.js')
 const { selectFiles } = require('../../utils/files.js')
-const { callback: runCb, exit } = require('../../utils/run.js')
 const {
     sayFilesChecked,
     sayNoFiles,
@@ -28,7 +29,7 @@ exports.handler = (argv, callback) => {
         log.warn(
             'No javascript patterns defined, please check the configuration file'
         )
-        process.exit(1)
+        exit(1)
     }
 
     const finalStatus = callback || runCb()

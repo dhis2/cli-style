@@ -1,6 +1,7 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
+const { callback } = require('@dhis2/cli-helpers-engine').exec
+const { exit } = require('@dhis2/cli-helpers-engine')
 const { configured } = require('../utils/config.js')
-const { callback, exit } = require('../utils/run.js')
 const { handler: fsHandler } = require('./types/file-system.js')
 const { handler: jsHandler } = require('./types/javascript.js')
 const { handler: textHandler } = require('./types/structured-text.js')
@@ -21,7 +22,7 @@ exports.jscmd = yargs =>
                 log.warn(
                     'No patterns defined, please check the configuration file'
                 )
-                process.exit(1)
+                exit(1)
             }
 
             if (argv.config.patterns.js) {
