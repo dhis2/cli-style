@@ -1,5 +1,7 @@
 const path = require('path')
+const url = require('url')
 const log = require('@dhis2/cli-helpers-engine').reporter
+const { exit } = require('@dhis2/cli-helpers-engine')
 const findup = require('find-up')
 const { copy, fileExists, deleteFile } = require('./files.js')
 const {
@@ -36,6 +38,24 @@ const projectConfigs = {
         dependabot: path.join(PROJECT_ROOT, '.github', 'dependabot.yml'),
         semantic: path.join(PROJECT_ROOT, '.github', 'semantic.yml'),
         stale: path.join(PROJECT_ROOT, '.github', 'stale.yml'),
+        'workflow-node': path.join(
+            PROJECT_ROOT,
+            '.github',
+            'workflows',
+            'dhis2-verify-node.yml'
+        ),
+        'workflow-app': path.join(
+            PROJECT_ROOT,
+            '.github',
+            'workflows',
+            'dhis2-verify-app.yml'
+        ),
+        'workflow-lib': path.join(
+            PROJECT_ROOT,
+            '.github',
+            'workflows',
+            'dhis2-verify-lib.yml'
+        ),
     },
     lslint: path.join(PROJECT_ROOT, '.ls-lint.yml'),
 }
@@ -48,26 +68,39 @@ const projectConfigs = {
  * automatically propagate to the projectConfig, so we use these
  * templates to refer to the packageConfigs, which can then be
  * customized in the project.
+ *
+ * The "base" property to specify a default template to use is special,
+ * and used to make it easier for a user, so instead of requiring they
+ * write "d2-style add eslint base" we automatically use the base
+ * template if they write "d2-style add eslint".
+ *
+ * See the templateConfig() function for details.
  */
 const templateConfigs = {
-    editorconfig: {
-        base: path.join(TEMPLATE_DIR, 'editorconfig-base.rc'),
-    },
+    editorconfig: path.join(TEMPLATE_DIR, 'editorconfig-base.rc'),
     eslint: {
         base: path.join(TEMPLATE_DIR, 'eslint-base.js'),
         react: path.join(TEMPLATE_DIR, 'eslint-react.js'),
     },
-    prettier: {
-        base: path.join(TEMPLATE_DIR, 'prettier-base.js'),
-    },
+    prettier: path.join(TEMPLATE_DIR, 'prettier-base.js'),
     github: {
         dependabot: path.join(TEMPLATE_DIR, 'github-dependabot.yml'),
         semantic: path.join(TEMPLATE_DIR, 'github-semantic.yml'),
         stale: path.join(TEMPLATE_DIR, 'github-stale.yml'),
+        'workflow-node': url.parse(
+            'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-verify-node.yml'
+        ),
+        'workflow-app': url.parse(
+            'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-verify-app.yml'
+        ),
+        'workflow-lib': url.parse(
+            'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-verify-lib.yml'
+        ),
+        'workflow-artifacts': url.parse(
+            'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-artifacts.yml'
+        ),
     },
-    lslint: {
-        base: path.join(TEMPLATE_DIR, 'ls-lint-base.yml'),
-    },
+    lslint: path.join(TEMPLATE_DIR, 'ls-lint-base.yml'),
 }
 
 /**
@@ -78,11 +111,29 @@ const templateConfigs = {
  * This allows users to diff old vs. new and see if there are any
  * customizations that need to be brought over.
  */
-function add({ tool, template, overwrite = false }) {
-    const toolConfig = projectConfig(tool)
-    const toolTemplate = templateConfig(tool, template)
+async function add({ cache, tool, type, overwrite }) {
+    const toolConfig = projectConfig(tool, type)
+    const toolTemplate = templateConfig(tool, type)
 
-    copy(toolTemplate, toolConfig, { overwrite, backup: true })
+    log.debug('Resolved configuration to add', toolConfig, toolTemplate)
+
+    let template
+    if (cache && toolTemplate.href) {
+        const cachePath = path.join('workflows', `${tool}-${type}`)
+        await cache.get(toolTemplate.href, cachePath, { force: true })
+        const exists = await cache.exists(cachePath)
+        if (!exists) {
+            exit(
+                1,
+                `Failed to download the ${type} config for ${tool}, and no cached versions exists`
+            )
+        }
+        template = cache.getCacheLocation(cachePath)
+    } else {
+        template = toolTemplate
+    }
+
+    copy(template, toolConfig, { overwrite, backup: true })
 }
 
 /**
@@ -92,6 +143,8 @@ function add({ tool, template, overwrite = false }) {
  */
 function remove({ tool, type, path }) {
     const config = !path ? projectConfig(tool, type) : path
+
+    log.debug('Resolved configuration to remove', config)
 
     if (fileExists(config)) {
         const result = deleteFile(config)
@@ -104,10 +157,10 @@ function remove({ tool, type, path }) {
 }
 
 const projectConfig = (tool, template) =>
-    template ? projectConfigs[tool][template] : projectConfigs[tool]
+    projectConfigs[tool][template] || projectConfigs[tool]
 
 const templateConfig = (tool, template) =>
-    template ? templateConfigs[tool][template] : templateConfigs[tool]
+    templateConfigs[tool][template] || templateConfigs[tool]
 
 const configured = (tool, template) => fileExists(projectConfig(tool, template))
 

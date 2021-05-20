@@ -1,35 +1,38 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
 const cfg = require('../../utils/config.js')
 
-exports.command = 'eslint [type]'
+exports.command = 'editorconfig [type]'
 
-exports.desc = 'Add ESLint configuration to the project.'
+exports.desc = 'Add the editorconfig configuration to the project.'
 
 exports.builder = yargs =>
     yargs
         .positional('type', {
-            describe: 'Configuration template for ESLint.',
+            describe: 'Template to use for EditorConfig',
             type: 'string',
-            choices: Object.keys(cfg.templateConfigs.eslint),
             default: 'base',
         })
         .option('overwrite', {
             describe: 'Overwrite the existing configuration.',
             type: 'boolean',
         })
+        .example(
+            '$0 add editorconfig',
+            'Adds the standard configuration to .editorconfig'
+        )
 
 exports.handler = argv => {
     const { add, type, overwrite } = argv
 
-    log.info(`eslint > ${add ? 'add' : 'remove'}`)
+    log.info(`editorconfig > ${add ? 'add' : 'remove'}`)
 
     if (add) {
         cfg.add({
-            tool: 'eslint',
-            type,
+            tool: 'editorconfig',
+            type: type ? type : 'base',
             overwrite,
         })
     } else {
-        cfg.remove({ tool: 'eslint', type })
+        cfg.remove({ tool: 'editorconfig', type: type ? type : 'base' })
     }
 }

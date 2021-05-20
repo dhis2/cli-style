@@ -73,27 +73,33 @@ function copy(from, to, { overwrite = false, backup = false }) {
         fs.ensureDirSync(path.dirname(to))
 
         if (exists) {
-            if (backup) {
+            if (backup && !replace) {
                 const toNew = to.concat('.new')
-                log.print(
-                    `Existing config, installing as: ${path.relative(
-                        CONSUMING_ROOT,
-                        toNew
-                    )}`
+                log.debug(
+                    'Existing config found, use --overwrite or manually merge with:'
                 )
+                log.print(`${path.relative(CONSUMING_ROOT, toNew)}`)
                 fs.copySync(from, toNew, { overwrite: true })
                 return
             }
 
             if (replace) {
-                log.print(`Installing: ${path.relative(CONSUMING_ROOT, to)}`)
+                log.debug('Overwriting existing configuration:')
+                log.print(`${path.relative(CONSUMING_ROOT, to)}`)
                 fs.copySync(from, to, { overwrite: true })
                 return
             } else {
-                log.print(`Skip existing: ${path.relative(CONSUMING_ROOT, to)}`)
+                log.print(
+                    `Skip existing config file: ${path.relative(
+                        CONSUMING_ROOT,
+                        to
+                    )}`
+                )
                 return
             }
         } else {
+            log.debug('Configuration file added:')
+            log.print(`${path.relative(CONSUMING_ROOT, to)}`)
             fs.copySync(from, to, { overwrite: replace })
         }
     } catch (err) {
