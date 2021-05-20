@@ -1,3 +1,10 @@
+## [8.2.1](https://github.com/dhis2/cli-style/compare/v8.2.0...v8.2.1) (2021-05-20)
+
+
+### Bug Fixes
+
+* **dependabot:** change defaults to 5 open prs ([430c6fa](https://github.com/dhis2/cli-style/commit/430c6fa2abfa03f56fcfe47eab263cdf9a1edf98))
+
 # [8.2.0](https://github.com/dhis2/cli-style/compare/v8.1.1...v8.2.0) (2021-05-10)
 
 
