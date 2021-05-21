@@ -8,14 +8,18 @@ exports.desc = 'Lint file and directory names.'
 exports.builder = yargs =>
     yargs
         .positional('type', {
-            describe: '',
+            describe: 'Configuration template to use for ls-lint',
             type: 'string',
+            default: 'base',
         })
         .option('overwrite', {
-            describe: '',
+            describe: 'Overwrite the existing configuration.',
             type: 'boolean',
         })
-        .example('$0', 'Adds the standard configuration to .ls-lint.yml')
+        .example(
+            '$0 add ls-lint',
+            'Adds the standard configuration to .ls-lint.yml'
+        )
 
 exports.handler = argv => {
     const { add, type, overwrite } = argv
@@ -23,13 +27,12 @@ exports.handler = argv => {
     log.info(`ls-lint > ${add ? 'add' : 'remove'}`)
 
     if (add) {
-        const template = type ? type : 'base'
         cfg.add({
             tool: 'lslint',
-            template,
+            type: type ? type : 'base',
             overwrite,
         })
     } else {
-        cfg.remove({ tool: 'lslint', type })
+        cfg.remove({ tool: 'lslint', type: type ? type : 'base' })
     }
 }
