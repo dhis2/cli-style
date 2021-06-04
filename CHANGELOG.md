@@ -1,3 +1,10 @@
+# [8.4.0](https://github.com/dhis2/cli-style/compare/v8.3.0...v8.4.0) (2021-06-04)
+
+
+### Features
+
+* **preview-pr:** add workflow to preview PR on Netlify ([f0b2aed](https://github.com/dhis2/cli-style/commit/f0b2aed8d3daa78cc9eb9a168dc6636be22dce23))
+
 # [8.3.0](https://github.com/dhis2/cli-style/compare/v8.2.1...v8.3.0) (2021-05-21)
 
 
