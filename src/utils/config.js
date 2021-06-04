@@ -56,6 +56,12 @@ const projectConfigs = {
             'workflows',
             'dhis2-verify-lib.yml'
         ),
+        'workflow-preview-pr': path.join(
+            PROJECT_ROOT,
+            '.github',
+            'workflows',
+            'dhis2-preview-pr.yml'
+        ),
     },
     lslint: path.join(PROJECT_ROOT, '.ls-lint.yml'),
 }
@@ -98,6 +104,9 @@ const templateConfigs = {
         ),
         'workflow-artifacts': url.parse(
             'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-artifacts.yml'
+        ),
+        'workflow-preview-pr': url.parse(
+            'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-preview-pr.yml'
         ),
     },
     lslint: path.join(TEMPLATE_DIR, 'ls-lint-base.yml'),
