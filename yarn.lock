@@ -248,10 +248,10 @@
     update-notifier "^3.0.0"
     yargs "^13.1.0"
 
-"@dhis2/cli-helpers-engine@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@dhis2/cli-helpers-engine/-/cli-helpers-engine-2.2.0.tgz#7202150890a46a04e3bfced02e40031fdd574542"
-  integrity sha512-MbvqEbiBBqagO7sSxfGQ/YsIsHB/mh7ns8haXO7eh/WtzERbDEz2uPNcR/prBg6+StenGizgZdKJXKgVVaoVVg==
+"@dhis2/cli-helpers-engine@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@dhis2/cli-helpers-engine/-/cli-helpers-engine-2.4.0.tgz#1609d358088f0616fb400aa9f90fc8bb57d4b196"
+  integrity sha512-SRcN3s/sQTkd5VUbWAs2+UeYtJ0zLdj4F/RkrL8x2/RX/79vIxvryqBom4FFw/meY0c2GDpXgrpKNQcST/OHBQ==
   dependencies:
     chalk "^3.0.0"
     cross-spawn "^7.0.3"
