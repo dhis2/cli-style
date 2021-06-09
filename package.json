@@ -11,7 +11,7 @@
         "d2-style": "bin/d2-style"
     },
     "engines": {
-        "node": ">=10"
+        "node": ">=12"
     },
     "scripts": {
         "test": "tape tests/**/*.js",
