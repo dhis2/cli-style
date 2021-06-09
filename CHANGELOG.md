@@ -1,3 +1,10 @@
+## [8.4.1](https://github.com/dhis2/cli-style/compare/v8.4.0...v8.4.1) (2021-06-08)
+
+
+### Bug Fixes
+
+* **deps:** release log levels updates from helpers-engine ([2ebf5bd](https://github.com/dhis2/cli-style/commit/2ebf5bdb47821732205969546f4cb891e88d59e8))
+
 # [8.4.0](https://github.com/dhis2/cli-style/compare/v8.3.0...v8.4.0) (2021-06-04)
 
 
