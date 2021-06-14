@@ -1,3 +1,15 @@
+# [9.0.0](https://github.com/dhis2/cli-style/compare/v8.4.1...v9.0.0) (2021-06-14)
+
+
+### chore
+
+* remove node 10 support ([a4d9c8c](https://github.com/dhis2/cli-style/commit/a4d9c8cddcaa29888cb4191aef6105e1294672eb))
+
+
+### BREAKING CHANGES
+
+* New minimum version for NodeJS is 12.x.
+
 ## [8.4.1](https://github.com/dhis2/cli-style/compare/v8.4.0...v8.4.1) (2021-06-08)
 
 
