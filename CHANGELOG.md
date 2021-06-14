@@ -1,3 +1,10 @@
+## [9.0.1](https://github.com/dhis2/cli-style/compare/v9.0.0...v9.0.1) (2021-06-14)
+
+
+### Bug Fixes
+
+* **paths:** if no project root is found, use consuming root ([c27bceb](https://github.com/dhis2/cli-style/commit/c27bceb7ea0f8ca80beaededa9af1556282de1fc))
+
 # [9.0.0](https://github.com/dhis2/cli-style/compare/v8.4.1...v9.0.0) (2021-06-14)
 
 
