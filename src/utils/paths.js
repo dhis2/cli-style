@@ -7,21 +7,22 @@ const PACKAGE_ROOT = path.join(__dirname, '..', '..')
 const CONFIG_DIR = path.join(PACKAGE_ROOT, 'config')
 const TEMPLATE_DIR = path.join(PACKAGE_ROOT, 'templates')
 
-const PROJECT_ROOT = findup.sync(
-    directory => {
-        const amiroot = [
-            '.git',
-            '.github',
-            'yarn.lock',
-            'package-lock.json',
-        ].map(i => findup.sync.exists(path.join(directory, i)))
-        return amiroot.includes(true) && directory
-    },
-    {
-        cwd: CONSUMING_ROOT,
-        type: 'directory',
-    }
-)
+const PROJECT_ROOT =
+    findup.sync(
+        directory => {
+            const amiroot = [
+                '.git',
+                '.github',
+                'yarn.lock',
+                'package-lock.json',
+            ].map(i => findup.sync.exists(path.join(directory, i)))
+            return amiroot.includes(true) && directory
+        },
+        {
+            cwd: CONSUMING_ROOT,
+            type: 'directory',
+        }
+    ) || CONSUMING_ROOT
 
 const GIT_DIR = path.join(PROJECT_ROOT, '.git')
 const PROJECT_HOOKS_DIR = path.join(PROJECT_ROOT, '.hooks')
