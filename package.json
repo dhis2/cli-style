@@ -27,7 +27,7 @@
     "dependencies": {
         "@commitlint/cli": "^11.0.0",
         "@commitlint/config-conventional": "^11.0.0",
-        "@dhis2/cli-helpers-engine": "^2.4.0",
+        "@dhis2/cli-helpers-engine": "^3.0.0",
         "@ls-lint/ls-lint": "^1.9.2",
         "babel-eslint": "^10.1.0",
         "eslint": "^7.18.0",
@@ -48,7 +48,7 @@
         "access": "public"
     },
     "devDependencies": {
-        "@dhis2/cli-utils-docsite": "^2.0.3",
+        "@dhis2/cli-utils-docsite": "^3.0.0",
         "tape": "^5.1.1"
     }
 }
