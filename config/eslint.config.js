@@ -51,5 +51,6 @@ module.exports = {
             },
         ],
         curly: ['error'],
+        'import/extensions': ['error', 'ignorePackages'],
     },
 }
