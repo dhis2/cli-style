@@ -1,3 +1,10 @@
+# [9.1.0](https://github.com/dhis2/cli-style/compare/v9.0.1...v9.1.0) (2021-07-21)
+
+
+### Features
+
+* add 'curly' eslint rule to enforce braces around single-line blocks ([6090466](https://github.com/dhis2/cli-style/commit/60904668014e1abb4f819f006f3f35be6256f554))
+
 ## [9.0.1](https://github.com/dhis2/cli-style/compare/v9.0.0...v9.0.1) (2021-06-14)
 
 
