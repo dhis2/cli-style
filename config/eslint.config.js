@@ -50,5 +50,6 @@ module.exports = {
                 },
             },
         ],
+        curly: ['error'],
     },
 }
