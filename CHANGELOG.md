@@ -1,3 +1,10 @@
+# [9.2.0](https://github.com/dhis2/cli-style/compare/v9.1.0...v9.2.0) (2021-08-11)
+
+
+### Features
+
+* **publish-metadata:** add workflow to publish Metadata to S3 ([5c77e88](https://github.com/dhis2/cli-style/commit/5c77e88af96cc7eabcdce7c09e4cd6ac77cf2e6d))
+
 # [9.1.0](https://github.com/dhis2/cli-style/compare/v9.0.1...v9.1.0) (2021-07-21)
 
 
