@@ -7,7 +7,7 @@ exports.command = 'fs'
 exports.aliases = ['file-system']
 exports.desc = 'Lint file and directory names.'
 
-exports.builder = yargs => yargs
+exports.builder = (yargs) => yargs
 
 exports.handler = (argv, callback) => {
     const finalStatus = callback || runCb()

@@ -1,6 +1,6 @@
 const { packageConfigs, styleConfig } = require('./utils/config.js')
 
-module.exports = yargs =>
+module.exports = (yargs) =>
     yargs
         .config({
             config: {

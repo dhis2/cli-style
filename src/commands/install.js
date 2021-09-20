@@ -13,18 +13,18 @@ exports.command = 'install'
 
 exports.describe = 'Install the project configuration into the local project.'
 
-exports.builder = yargs => this.installcmd(yargs)
+exports.builder = (yargs) => this.installcmd(yargs)
 
-exports.installcmd = yargs =>
+exports.installcmd = (yargs) =>
     yargs.command(
         '$0',
         'default',
-        yargs =>
+        (yargs) =>
             yargs.option('clean', {
                 describe: '',
                 type: 'boolean',
             }),
-        argv => {
+        (argv) => {
             const { config, clean } = argv
 
             if (clean && fileExists(PROJECT_HOOKS_DIR)) {
@@ -60,7 +60,7 @@ exports.installcmd = yargs =>
                     if (isSupportedHook(hookType) && !fileExists(hookPath)) {
                         const hookCmds = config.hooks[hookType]
 
-                        hookCmds.map(hookCmd =>
+                        hookCmds.map((hookCmd) =>
                             husky({
                                 command: 'add',
                                 hookType,

@@ -5,7 +5,7 @@ exports.command = 'prettier [type]'
 
 exports.desc = 'Add the Prettier configuration to the project.'
 
-exports.builder = yargs =>
+exports.builder = (yargs) =>
     yargs
         .positional('type', {
             describe: 'Configuration template to use for Prettier',
@@ -21,7 +21,7 @@ exports.builder = yargs =>
             'Adds the standard configuration to .prettierrc.js'
         )
 
-exports.handler = argv => {
+exports.handler = (argv) => {
     const { add, type, overwrite } = argv
 
     log.info(`prettier > ${add ? 'add' : 'remove'}`)

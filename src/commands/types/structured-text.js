@@ -11,7 +11,7 @@ const {
 exports.command = 'text [files..]'
 exports.aliases = ['structured-text']
 exports.desc = 'Structured text style'
-exports.builder = yargs =>
+exports.builder = (yargs) =>
     yargs.positional('files', {
         describe: '',
         type: 'string',

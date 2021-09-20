@@ -5,7 +5,7 @@ exports.command = 'github <type>'
 
 exports.desc = 'Add configuration files for GitHub'
 
-exports.builder = yargs =>
+exports.builder = (yargs) =>
     yargs
         .positional('type', {
             describe: 'Template to use for GitHub configuration',
@@ -25,7 +25,7 @@ exports.builder = yargs =>
             'Adds the configuration file for Dependabot with DHIS2 defaults'
         )
 
-exports.handler = argv => {
+exports.handler = (argv) => {
     const { add, type, overwrite, getCache } = argv
 
     log.info(`github > ${add ? 'add' : 'remove'}`)
