@@ -1,3 +1,11 @@
+## [9.2.2](https://github.com/dhis2/cli-style/compare/v9.2.1...v9.2.2) (2021-09-20)
+
+
+### Bug Fixes
+
+* **ls-lint:** improve configuration template to fit most projects ([bd7ced7](https://github.com/dhis2/cli-style/commit/bd7ced78b78d004b1cf31b3d83ffdfe48668f378))
+* **ls-lint:** improve ls-lint.yml so it works for normal and mono-repos ([d31e854](https://github.com/dhis2/cli-style/commit/d31e854d6aa22da74dd630e68d4698dc0251d8be))
+
 ## [9.2.1](https://github.com/dhis2/cli-style/compare/v9.2.0...v9.2.1) (2021-09-20)
 
 
