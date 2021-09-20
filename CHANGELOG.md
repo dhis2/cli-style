@@ -1,3 +1,43 @@
+## [9.2.1](https://github.com/dhis2/cli-style/compare/v9.2.0...v9.2.1) (2021-09-20)
+
+
+### Bug Fixes
+
+* print summary error message ([59618b7](https://github.com/dhis2/cli-style/commit/59618b708fc0f06a2075e52f4229904e63ce6d75))
+
+# [9.2.0](https://github.com/dhis2/cli-style/compare/v9.1.0...v9.2.0) (2021-08-11)
+
+
+### Features
+
+* **publish-metadata:** add workflow to publish Metadata to S3 ([5c77e88](https://github.com/dhis2/cli-style/commit/5c77e88af96cc7eabcdce7c09e4cd6ac77cf2e6d))
+
+# [9.1.0](https://github.com/dhis2/cli-style/compare/v9.0.1...v9.1.0) (2021-07-21)
+
+
+### Features
+
+* add 'curly' eslint rule to enforce braces around single-line blocks ([6090466](https://github.com/dhis2/cli-style/commit/60904668014e1abb4f819f006f3f35be6256f554))
+
+## [9.0.1](https://github.com/dhis2/cli-style/compare/v9.0.0...v9.0.1) (2021-06-14)
+
+
+### Bug Fixes
+
+* **paths:** if no project root is found, use consuming root ([c27bceb](https://github.com/dhis2/cli-style/commit/c27bceb7ea0f8ca80beaededa9af1556282de1fc))
+
+# [9.0.0](https://github.com/dhis2/cli-style/compare/v8.4.1...v9.0.0) (2021-06-14)
+
+
+### chore
+
+* remove node 10 support ([a4d9c8c](https://github.com/dhis2/cli-style/commit/a4d9c8cddcaa29888cb4191aef6105e1294672eb))
+
+
+### BREAKING CHANGES
+
+* New minimum version for NodeJS is 12.x.
+
 ## [8.4.1](https://github.com/dhis2/cli-style/compare/v8.4.0...v8.4.1) (2021-06-08)
 
 

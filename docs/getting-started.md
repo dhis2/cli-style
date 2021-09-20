@@ -78,12 +78,12 @@ yarn d2-style add eslint react
 To add Git hooks, the format is:
 
 ```sh
-yarn d2-style add git-hooks {hook} {command}
+yarn d2-style add git-hook {hook} {command}
 ```
 
 Examples:
 
 ```sh
-yarn d2-style add git-hooks pre-commit "yarn d2-style apply && git add -u"
-yarn d2-style add git-hooks pre-push "yarn test"
+yarn d2-style add git-hook pre-commit "yarn d2-style apply && git add -u"
+yarn d2-style add git-hook pre-push "yarn test"
 ```
