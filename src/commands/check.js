@@ -39,7 +39,12 @@ exports.jscmd = yargs =>
                 fsHandler(argv, statusCode)
             }
 
-            exit(statusCode())
+            exit(
+                statusCode(),
+                `Failed to ${
+                    argv.apply ? 'apply' : 'verify'
+                } code style, see above output for details.`
+            )
         }
     )
 
