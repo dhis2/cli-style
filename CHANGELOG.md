@@ -1,3 +1,10 @@
+## [9.2.1](https://github.com/dhis2/cli-style/compare/v9.2.0...v9.2.1) (2021-09-20)
+
+
+### Bug Fixes
+
+* print summary error message ([59618b7](https://github.com/dhis2/cli-style/commit/59618b708fc0f06a2075e52f4229904e63ce6d75))
+
 # [9.2.0](https://github.com/dhis2/cli-style/compare/v9.1.0...v9.2.0) (2021-08-11)
 
 
