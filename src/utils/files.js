@@ -127,7 +127,7 @@ function selectFiles(files, pattern, staged) {
         dot: true,
         globstar: true,
         onlyFiles: true,
-        ignore: blacklist.map(b => `**/${b}/**`),
+        ignore: blacklist.map((b) => `**/${b}/**`),
         cwd: PROJECT_ROOT,
     })
 
@@ -136,8 +136,8 @@ function selectFiles(files, pattern, staged) {
 
     if (files.length > 0) {
         codeFiles = codeFiles
-            .filter(f => mm.contains(f, files))
-            .map(f => path.resolve(f))
+            .filter((f) => mm.contains(f, files))
+            .map((f) => path.resolve(f))
     }
 
     if (staged) {
@@ -167,9 +167,9 @@ const stagedFiles = (files = []) => {
     if (output) {
         const staged = output
             .split('\n')
-            .map(f => path.resolve(CONSUMING_ROOT, f))
+            .map((f) => path.resolve(CONSUMING_ROOT, f))
 
-        return files.filter(f => staged.includes(f))
+        return files.filter((f) => staged.includes(f))
     }
 
     return []
@@ -192,15 +192,15 @@ const pickFirstExists = (files = [], customRoot) => {
     return null
 }
 
-const fileExists = fp => fs.existsSync(fp) && fs.statSync(fp).size !== 0
+const fileExists = (fp) => fs.existsSync(fp) && fs.statSync(fp).size !== 0
 
-const dirExists = fp => fs.existsSync(fp) && fs.statSync(fp).isDirectory()
+const dirExists = (fp) => fs.existsSync(fp) && fs.statSync(fp).isDirectory()
 
 const resolveIgnoreFile = (ignoreFiles = []) => {
     return pickFirstExists([...ignoreFiles, '.d2styleignore', '.gitignore'])
 }
 
-const relativePath = fp => path.relative(CONSUMING_ROOT, fp)
+const relativePath = (fp) => path.relative(CONSUMING_ROOT, fp)
 
 module.exports = {
     copy,

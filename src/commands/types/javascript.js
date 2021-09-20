@@ -15,7 +15,7 @@ exports.aliases = ['javascript']
 
 exports.desc = 'JavaScript code style'
 
-exports.builder = yargs =>
+exports.builder = (yargs) =>
     yargs.positional('files', {
         describe: '',
         type: 'string',

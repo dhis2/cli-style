@@ -5,7 +5,7 @@ exports.command = 'eslint [type]'
 
 exports.desc = 'Add ESLint configuration to the project.'
 
-exports.builder = yargs =>
+exports.builder = (yargs) =>
     yargs
         .positional('type', {
             describe: 'Configuration template for ESLint.',
@@ -18,7 +18,7 @@ exports.builder = yargs =>
             type: 'boolean',
         })
 
-exports.handler = argv => {
+exports.handler = (argv) => {
     const { add, type, overwrite } = argv
 
     log.info(`eslint > ${add ? 'add' : 'remove'}`)

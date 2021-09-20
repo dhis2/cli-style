@@ -9,7 +9,7 @@ exports.command = 'apply'
 exports.describe =
     'Apply code format and fix all lint issues that can be resolved automatically.'
 
-exports.builder = yargs =>
+exports.builder = (yargs) =>
     jscmd(yargs)
         /*
          * Only list the types that can be automatically fixed here.

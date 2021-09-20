@@ -2,7 +2,7 @@ exports.command = 'remove'
 
 exports.describe = 'Removes specified tool configuration files.'
 
-exports.builder = yargs =>
+exports.builder = (yargs) =>
     yargs
         .commandDir('actions')
         .config({

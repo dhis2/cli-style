@@ -11,7 +11,7 @@ exports.command = 'commit [file]'
 
 exports.desc = 'Commit message validations.'
 
-exports.builder = yargs =>
+exports.builder = (yargs) =>
     yargs
         .positional('file', {
             describe: 'File that contains the commit message',
@@ -23,7 +23,7 @@ exports.builder = yargs =>
             type: 'string',
         })
 
-exports.handler = argv => {
+exports.handler = (argv) => {
     log.info(`commit-msg > commitlint`)
 
     if (!gitEnabled()) {

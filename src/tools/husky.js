@@ -14,7 +14,7 @@ exports.supportedHooks = [
     'post-update',
 ]
 
-exports.isSupportedHook = hook => this.supportedHooks.includes(hook)
+exports.isSupportedHook = (hook) => this.supportedHooks.includes(hook)
 
 exports.husky = ({ command, hookType, hookCmd, callback }) => {
     const cmd = 'husky'
