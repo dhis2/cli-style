@@ -1,3 +1,21 @@
+# [10.0.0](https://github.com/dhis2/cli-style/compare/v9.2.1...v10.0.0) (2021-09-20)
+
+
+### Bug Fixes
+
+* **prettier:** update configuration to latest ([b40f6e7](https://github.com/dhis2/cli-style/commit/b40f6e7922f5cdfd895af4950a56bbab9f51694d))
+
+
+### Features
+
+* **eslint:** enforce file extensions within the import path ([8f38ad1](https://github.com/dhis2/cli-style/commit/8f38ad1361f03863a4de089bd55f2e3edcdccd7e))
+
+
+### BREAKING CHANGES
+
+* **eslint:** import statements must specify the extension and will
+now throw an error. The only exception is package imports.
+
 ## [9.2.1](https://github.com/dhis2/cli-style/compare/v9.2.0...v9.2.1) (2021-09-20)
 
 
