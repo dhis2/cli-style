@@ -267,7 +267,7 @@
     handlebars "^4.7.3"
     isbinaryfile "^4.0.4"
 
-"@dhis2/cli-utils-docsite@^3.0.0":
+"@dhis2/cli-utils-docsite@3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@dhis2/cli-utils-docsite/-/cli-utils-docsite-3.0.0.tgz#e98f70d895ca2cbc622efa66ad4fefa64c55b575"
   integrity sha512-c+CVEXoLwnDb9zKNn+7rGgXTyAjK269OD11f4+13rO6Wb8Lx4SBy+shklLGWRHB/LatKc4246EHXOrcKDwYlSg==
