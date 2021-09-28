@@ -1,3 +1,10 @@
+# [9.3.0](https://github.com/dhis2/cli-style/compare/v9.2.2...v9.3.0) (2021-09-28)
+
+
+### Features
+
+* **renovate:** add renovate configuration setup ([89c9cc9](https://github.com/dhis2/cli-style/commit/89c9cc9178e2b98c949b016ee67c63b7e23393ce))
+
 ## [9.2.2](https://github.com/dhis2/cli-style/compare/v9.2.1...v9.2.2) (2021-09-20)
 
 
