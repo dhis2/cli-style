@@ -57,6 +57,12 @@ const projectConfigs = {
             'workflows',
             'dhis2-verify-lib.yml'
         ),
+        'workflow-artifacts': path.join(
+            PROJECT_ROOT,
+            '.github',
+            'workflows',
+            'dhis2-artifacts.yml'
+        ),
         'workflow-preview-pr': path.join(
             PROJECT_ROOT,
             '.github',
