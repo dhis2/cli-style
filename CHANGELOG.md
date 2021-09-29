@@ -1,3 +1,10 @@
+## [9.3.1](https://github.com/dhis2/cli-style/compare/v9.3.0...v9.3.1) (2021-09-29)
+
+
+### Bug Fixes
+
+* **add:** add project config for dhis2-artifacts workflow ([469c542](https://github.com/dhis2/cli-style/commit/469c5425d6a5ac9edffdd20020dbd4178e6c40c4))
+
 # [9.3.0](https://github.com/dhis2/cli-style/compare/v9.2.2...v9.3.0) (2021-09-28)
 
 
