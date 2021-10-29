@@ -4,7 +4,7 @@ const { husky, supportedHooks } = require('../../tools/husky.js')
 const { remove } = require('../../utils/config.js')
 const { CONSUMING_ROOT, PROJECT_HOOKS_DIR } = require('../../utils/paths.js')
 
-const defaultCommand = type =>
+const defaultCommand = (type) =>
     `echo "To customize this hook, edit ${type} in ${path.relative(
         CONSUMING_ROOT,
         PROJECT_HOOKS_DIR
@@ -14,7 +14,7 @@ exports.command = 'git-hook <type> [command]'
 
 exports.desc = 'Add Git Hooks to the project.'
 
-exports.builder = yargs =>
+exports.builder = (yargs) =>
     yargs
         .positional('type', {
             describe: 'Git Hook to register a command against.',
@@ -39,7 +39,7 @@ exports.builder = yargs =>
             'Applies code style to staged files before committing.'
         )
 
-exports.handler = argv => {
+exports.handler = (argv) => {
     const { add, type, command, overwrite } = argv
 
     log.info(`git-hook > ${add ? 'add' : 'remove'}`)

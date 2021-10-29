@@ -9,13 +9,13 @@ const TEMPLATE_DIR = path.join(PACKAGE_ROOT, 'templates')
 
 const PROJECT_ROOT =
     findup.sync(
-        directory => {
+        (directory) => {
             const amiroot = [
                 '.git',
                 '.github',
                 'yarn.lock',
                 'package-lock.json',
-            ].map(i => findup.sync.exists(path.join(directory, i)))
+            ].map((i) => findup.sync.exists(path.join(directory, i)))
             return amiroot.includes(true) && directory
         },
         {

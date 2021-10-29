@@ -5,7 +5,7 @@ exports.command = 'renovate [type]'
 
 exports.desc = 'Lint file and directory names.'
 
-exports.builder = yargs =>
+exports.builder = (yargs) =>
     yargs
         .positional('type', {
             describe: 'Configuration template to use for Renovate',
@@ -21,7 +21,7 @@ exports.builder = yargs =>
             'Adds the standard configuration to renovate.json'
         )
 
-exports.handler = argv => {
+exports.handler = (argv) => {
     const { add, type, overwrite } = argv
 
     log.info(`renovate > ${add ? 'add' : 'remove'}`)

@@ -5,7 +5,7 @@ exports.command = 'ls-lint [type]'
 
 exports.desc = 'Lint file and directory names.'
 
-exports.builder = yargs =>
+exports.builder = (yargs) =>
     yargs
         .positional('type', {
             describe: 'Configuration template to use for ls-lint',
@@ -21,7 +21,7 @@ exports.builder = yargs =>
             'Adds the standard configuration to .ls-lint.yml'
         )
 
-exports.handler = argv => {
+exports.handler = (argv) => {
     const { add, type, overwrite } = argv
 
     log.info(`ls-lint > ${add ? 'add' : 'remove'}`)

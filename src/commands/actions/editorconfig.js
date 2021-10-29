@@ -5,7 +5,7 @@ exports.command = 'editorconfig [type]'
 
 exports.desc = 'Add the editorconfig configuration to the project.'
 
-exports.builder = yargs =>
+exports.builder = (yargs) =>
     yargs
         .positional('type', {
             describe: 'Template to use for EditorConfig',
@@ -21,7 +21,7 @@ exports.builder = yargs =>
             'Adds the standard configuration to .editorconfig'
         )
 
-exports.handler = argv => {
+exports.handler = (argv) => {
     const { add, type, overwrite } = argv
 
     log.info(`editorconfig > ${add ? 'add' : 'remove'}`)

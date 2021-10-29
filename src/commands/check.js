@@ -8,16 +8,16 @@ const { handler: textHandler } = require('./types/structured-text.js')
 
 const statusCode = callback()
 
-exports.jscmd = yargs =>
+exports.jscmd = (yargs) =>
     yargs.command(
         '$0 [files..]',
         'default',
-        yargs =>
+        (yargs) =>
             yargs.positional('files', {
                 describe: '',
                 type: 'string',
             }),
-        argv => {
+        (argv) => {
             if (!argv.config.patterns) {
                 log.warn(
                     'No patterns defined, please check the configuration file'
@@ -52,7 +52,7 @@ exports.command = 'check'
 
 exports.describe = 'Run all the configured checks for format and lint.'
 
-exports.builder = yargs =>
+exports.builder = (yargs) =>
     this.jscmd(yargs)
         /*
          * Only list the types that can be checked here.

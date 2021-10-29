@@ -1,4 +1,36 @@
+# [10.1.0](https://github.com/dhis2/cli-style/compare/v10.0.0...v10.1.0) (2021-10-29)
+
+
+### Bug Fixes
+
+* **add:** add project config for dhis2-artifacts workflow ([469c542](https://github.com/dhis2/cli-style/commit/469c5425d6a5ac9edffdd20020dbd4178e6c40c4))
+* **ls-lint:** improve configuration template to fit most projects ([bd7ced7](https://github.com/dhis2/cli-style/commit/bd7ced78b78d004b1cf31b3d83ffdfe48668f378))
+* **ls-lint:** improve ls-lint.yml so it works for normal and mono-repos ([d31e854](https://github.com/dhis2/cli-style/commit/d31e854d6aa22da74dd630e68d4698dc0251d8be))
+
+
+### Features
+
+* **renovate:** add renovate configuration setup ([89c9cc9](https://github.com/dhis2/cli-style/commit/89c9cc9178e2b98c949b016ee67c63b7e23393ce))
+
+# [10.0.0](https://github.com/dhis2/cli-style/compare/v9.2.1...v10.0.0) (2021-09-20)
+
+
+### Bug Fixes
+
+* **prettier:** update configuration to latest ([b40f6e7](https://github.com/dhis2/cli-style/commit/b40f6e7922f5cdfd895af4950a56bbab9f51694d))
+
+### Features
+
+* **eslint:** enforce file extensions within the import path ([8f38ad1](https://github.com/dhis2/cli-style/commit/8f38ad1361f03863a4de089bd55f2e3edcdccd7e))
+
+
+### BREAKING CHANGES
+
+* **eslint:** import statements must specify the extension and will
+now throw an error. The only exception is package imports.
+
 ## [9.3.1](https://github.com/dhis2/cli-style/compare/v9.3.0...v9.3.1) (2021-09-29)
+
 
 
 ### Bug Fixes

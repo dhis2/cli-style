@@ -2,7 +2,7 @@ exports.command = 'add'
 
 exports.describe = 'Add a configuration file for a tool to the project.'
 
-exports.builder = yargs =>
+exports.builder = (yargs) =>
     yargs
         .commandDir('actions')
         .config({
