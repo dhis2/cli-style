@@ -34,6 +34,7 @@ const projectConfigs = {
     editorconfig: path.join(PROJECT_ROOT, '.editorconfig'),
     eslint: path.join(PROJECT_ROOT, '.eslintrc.js'),
     prettier: path.join(PROJECT_ROOT, '.prettierrc.js'),
+    renovate: path.join(PROJECT_ROOT, 'renovate.json'),
     github: {
         dependabot: path.join(PROJECT_ROOT, '.github', 'dependabot.yml'),
         semantic: path.join(PROJECT_ROOT, '.github', 'semantic.yml'),
@@ -55,6 +56,12 @@ const projectConfigs = {
             '.github',
             'workflows',
             'dhis2-verify-lib.yml'
+        ),
+        'workflow-artifacts': path.join(
+            PROJECT_ROOT,
+            '.github',
+            'workflows',
+            'dhis2-artifacts.yml'
         ),
         'workflow-preview-pr': path.join(
             PROJECT_ROOT,
@@ -95,6 +102,7 @@ const templateConfigs = {
         react: path.join(TEMPLATE_DIR, 'eslint-react.js'),
     },
     prettier: path.join(TEMPLATE_DIR, 'prettier-base.js'),
+    renovate: path.join(TEMPLATE_DIR, 'renovate-base.json'),
     github: {
         dependabot: path.join(TEMPLATE_DIR, 'github-dependabot.yml'),
         semantic: path.join(TEMPLATE_DIR, 'github-semantic.yml'),

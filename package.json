@@ -25,30 +25,30 @@
     "author": "Viktor Varland",
     "license": "BSD-3-Clause",
     "dependencies": {
-        "@commitlint/cli": "^11.0.0",
-        "@commitlint/config-conventional": "^11.0.0",
+        "@commitlint/cli": "^12.1.4",
+        "@commitlint/config-conventional": "^13.1.0",
         "@dhis2/cli-helpers-engine": "^3.0.0",
         "@ls-lint/ls-lint": "^1.9.2",
         "babel-eslint": "^10.1.0",
-        "eslint": "^7.18.0",
-        "eslint-config-prettier": "^7.2.0",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-import": "^2.22.1",
-        "eslint-plugin-react": "^7.22.0",
+        "eslint-plugin-react": "^7.26.0",
         "fast-glob": "^3.2.5",
         "find-up": "^5.0.0",
-        "fs-extra": "^9.1.0",
-        "husky": "^5.2.0",
+        "fs-extra": "^10.0.0",
+        "husky": "^7.0.2",
         "micromatch": "^4.0.4",
         "perfy": "^1.1.5",
         "prettier": "^2.4.1",
-        "semver": "^7.3.4",
+        "semver": "^7.3.5",
         "yargs": "^16.2.0"
     },
     "publishConfig": {
         "access": "public"
     },
     "devDependencies": {
-        "@dhis2/cli-utils-docsite": "^3.0.0",
-        "tape": "^5.1.1"
+        "@dhis2/cli-utils-docsite": "3.1.2",
+        "tape": "5.3.1"
     }
 }

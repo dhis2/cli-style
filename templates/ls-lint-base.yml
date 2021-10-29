@@ -1,12 +1,11 @@
 ls:
-    src/:
+    ./**/{src,cypress,lib}:
         .dir: kebab-case
 
-    .js: kebab-case
-    .ts: kebab-case
-    .css: kebab-case
-    .d.ts: kebab-case
+    ./**/node_modules:
+        .dir: regex:.*
 
 ignore:
     - node_modules
     - .d2
+    - build
