@@ -25,7 +25,7 @@ exports.handler = (argv, callback) => {
             log.print('')
         }
     } else {
-        log.debug('No ls-lint configuration found')
+        log.log('No ls-lint configuration found')
     }
 
     if (!callback) {

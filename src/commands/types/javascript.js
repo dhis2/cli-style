@@ -64,7 +64,7 @@ exports.handler = (argv, callback) => {
             log.print('')
         }
     } else {
-        log.debug('No ESLint configuration found')
+        log.log('No ESLint configuration found')
     }
 
     if (configured('prettier')) {
@@ -75,7 +75,7 @@ exports.handler = (argv, callback) => {
             callback: finalStatus,
         })
     } else {
-        log.debug('No Prettier configuration found')
+        log.log('No Prettier configuration found')
     }
 
     if (!callback) {

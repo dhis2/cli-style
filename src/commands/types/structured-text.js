@@ -56,7 +56,7 @@ exports.handler = (argv, callback) => {
             callback: finalStatus,
         })
     } else {
-        log.debug('No Prettier configuration found')
+        log.log('No Prettier configuration found')
     }
 
     if (!callback) {
