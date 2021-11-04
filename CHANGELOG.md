@@ -1,3 +1,10 @@
+## [10.1.1](https://github.com/dhis2/cli-style/compare/v10.1.0...v10.1.1) (2021-11-04)
+
+
+### Bug Fixes
+
+* do not run tools without configs ([7d62a7d](https://github.com/dhis2/cli-style/commit/7d62a7df2563647a0e38d2b99343c3f8252a3a9a))
+
 # [10.1.0](https://github.com/dhis2/cli-style/compare/v10.0.0...v10.1.0) (2021-10-29)
 
 
