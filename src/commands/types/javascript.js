@@ -3,6 +3,7 @@ const { callback: runCb } = require('@dhis2/cli-helpers-engine').exec
 const { exit } = require('@dhis2/cli-helpers-engine')
 const { eslint } = require('../../tools/eslint.js')
 const { prettier } = require('../../tools/prettier.js')
+const { configured } = require('../../utils/config.js')
 const { selectFiles } = require('../../utils/files.js')
 const {
     sayFilesChecked,
@@ -50,24 +51,32 @@ exports.handler = (argv, callback) => {
         return
     }
 
-    log.info('javascript > eslint')
-    eslint({
-        apply,
-        files: jsFiles,
-        callback: finalStatus,
-    })
+    if (configured('eslint')) {
+        log.info('javascript > eslint')
+        eslint({
+            apply,
+            files: jsFiles,
+            callback: finalStatus,
+        })
 
-    if (finalStatus() === 0) {
-        log.print('All matched files pass the lint rules.')
-        log.print('')
+        if (finalStatus() === 0) {
+            log.print('All matched files pass the lint rules.')
+            log.print('')
+        }
+    } else {
+        log.log('No ESLint configuration found')
     }
 
-    log.info('javascript > prettier')
-    prettier({
-        apply,
-        files: jsFiles,
-        callback: finalStatus,
-    })
+    if (configured('prettier')) {
+        log.info('javascript > prettier')
+        prettier({
+            apply,
+            files: jsFiles,
+            callback: finalStatus,
+        })
+    } else {
+        log.log('No Prettier configuration found')
+    }
 
     if (!callback) {
         log.debug(sayFilesChecked('javascript', jsFiles.length, apply))

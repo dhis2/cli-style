@@ -1,7 +1,6 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
 const { callback } = require('@dhis2/cli-helpers-engine').exec
 const { exit } = require('@dhis2/cli-helpers-engine')
-const { configured } = require('../utils/config.js')
 const { handler: fsHandler } = require('./types/file-system.js')
 const { handler: jsHandler } = require('./types/javascript.js')
 const { handler: textHandler } = require('./types/structured-text.js')
@@ -35,7 +34,7 @@ exports.jscmd = (yargs) =>
                 log.print('')
             }
 
-            if (!argv.apply && configured('lslint')) {
+            if (!argv.apply) {
                 fsHandler(argv, statusCode)
             }
 

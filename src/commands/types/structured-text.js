@@ -2,6 +2,7 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 const { callback: runCb } = require('@dhis2/cli-helpers-engine').exec
 const { exit } = require('@dhis2/cli-helpers-engine')
 const { prettier } = require('../../tools/prettier.js')
+const { configured } = require('../../utils/config.js')
 const { selectFiles } = require('../../utils/files.js')
 const {
     sayFilesChecked,
@@ -47,12 +48,16 @@ exports.handler = (argv, callback) => {
 
     log.debug(`Linting files: ${textFiles.join(', ')}`)
 
-    log.info('structured-text > prettier')
-    prettier({
-        apply,
-        files: textFiles,
-        callback: finalStatus,
-    })
+    if (configured('prettier')) {
+        log.info('structured-text > prettier')
+        prettier({
+            apply,
+            files: textFiles,
+            callback: finalStatus,
+        })
+    } else {
+        log.log('No Prettier configuration found')
+    }
 
     if (!callback) {
         log.debug(sayFilesChecked('text', textFiles.length, apply))
