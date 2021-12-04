@@ -28,7 +28,7 @@
         "@commitlint/cli": "^12.1.4",
         "@commitlint/config-conventional": "^13.1.0",
         "@dhis2/cli-helpers-engine": "^3.0.0",
-        "@ls-lint/ls-lint": "^1.9.2",
+        "@ls-lint/ls-lint": "^1.10.0",
         "babel-eslint": "^10.1.0",
         "eslint": "^7.32.0",
         "eslint-config-prettier": "^8.3.0",
