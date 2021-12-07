@@ -1,3 +1,11 @@
+## [10.1.2](https://github.com/dhis2/cli-style/compare/v10.1.1...v10.1.2) (2021-12-07)
+
+
+### Bug Fixes
+
+* bump ls-lint ([cb7a7b8](https://github.com/dhis2/cli-style/commit/cb7a7b8b485ba366b1600eedc95246dffe717b63))
+* bump ls-lint  [#441](https://github.com/dhis2/cli-style/issues/441) ([74e74be](https://github.com/dhis2/cli-style/commit/74e74bee6c75cb15ca6cd855a6b14b59cce2d793))
+
 ## [10.1.1](https://github.com/dhis2/cli-style/compare/v10.1.0...v10.1.1) (2021-11-04)
 
 
