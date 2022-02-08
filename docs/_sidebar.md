@@ -1,6 +1,6 @@
 -   [**Getting Started**](getting-started)
     -   [Migration guide](migrate-guide)
--   [**Configuration**](config)
+-   **Configuration**
     -   [Ignore files](ignore-files)
     -   [Override config](overrides)
 -   [**FAQ**](faq)
