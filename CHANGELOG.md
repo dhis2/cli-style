@@ -1,3 +1,10 @@
+# [10.2.0](https://github.com/dhis2/cli-style/compare/v10.1.2...v10.2.0) (2022-03-15)
+
+
+### Features
+
+* **eslint:** add react hooks plugin configuration ([be0616e](https://github.com/dhis2/cli-style/commit/be0616e2bcfe3be88ff8fd8ab22bd505c6890720))
+
 ## [10.1.2](https://github.com/dhis2/cli-style/compare/v10.1.1...v10.1.2) (2021-12-07)
 
 
