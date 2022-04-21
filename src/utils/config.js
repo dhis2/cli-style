@@ -120,6 +120,9 @@ const templateConfigs = {
         'workflow-preview-pr': url.parse(
             'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-preview-pr.yml'
         ),
+        'workflow-verify-pr-title': url.parse(
+            'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-verify-pr-title.yml'
+        ),
         'workflow-publish-metadata': url.parse(
             'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2metadata-publish.yml'
         ),
