@@ -37,7 +37,6 @@ const projectConfigs = {
     renovate: path.join(PROJECT_ROOT, 'renovate.json'),
     github: {
         dependabot: path.join(PROJECT_ROOT, '.github', 'dependabot.yml'),
-        semantic: path.join(PROJECT_ROOT, '.github', 'semantic.yml'),
         stale: path.join(PROJECT_ROOT, '.github', 'stale.yml'),
         'workflow-node': path.join(
             PROJECT_ROOT,
@@ -105,7 +104,6 @@ const templateConfigs = {
     renovate: path.join(TEMPLATE_DIR, 'renovate-base.json'),
     github: {
         dependabot: path.join(TEMPLATE_DIR, 'github-dependabot.yml'),
-        semantic: path.join(TEMPLATE_DIR, 'github-semantic.yml'),
         stale: path.join(TEMPLATE_DIR, 'github-stale.yml'),
         'workflow-node': url.parse(
             'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-verify-node.yml'
