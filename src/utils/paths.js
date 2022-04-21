@@ -29,7 +29,10 @@ const PROJECT_HOOKS_DIR = path.join(PROJECT_ROOT, '.hooks')
 
 const STYLE_CONFIG_FILES = ['d2-style.config.js', 'd2-style.js']
 
-const DEPRECATED_CONFIGS = [path.join(PROJECT_ROOT, '.huskyrc.js')]
+const DEPRECATED_CONFIGS = [
+    path.join(PROJECT_ROOT, '.huskyrc.js'),
+    path.join(PROJECT_ROOT, '.github', 'semantic.yml')
+]
 
 module.exports = {
     CONSUMING_ROOT,

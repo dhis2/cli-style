@@ -6,7 +6,7 @@ module.exports = {
     tools: {
         eslint: ['react'],
         prettier: [],
-        github: ['dependabot', 'semantic-pr', 'stale'],
+        github: ['dependabot', 'stale'],
         editorconfig: [],
         commitlint: [],
     },
