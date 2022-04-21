@@ -1,3 +1,15 @@
+# [10.3.0](https://github.com/dhis2/cli-style/compare/v10.2.0...v10.3.0) (2022-04-21)
+
+
+### Bug Fixes
+
+* deprecate semantic pr check ([812896f](https://github.com/dhis2/cli-style/commit/812896fe02a72c5f4fe23867370d1ddea9b01579))
+
+
+### Features
+
+* add workflow for checking pr title ([b5255a1](https://github.com/dhis2/cli-style/commit/b5255a1beefec1711f66250645add2ed85455aa6))
+
 # [10.2.0](https://github.com/dhis2/cli-style/compare/v10.1.2...v10.2.0) (2022-03-15)
 
 
