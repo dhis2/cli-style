@@ -1,6 +1,6 @@
 {
     "name": "@dhis2/cli-style",
-    "version": "10.3.0",
+    "version": "10.4.0",
     "description": "The code and commit style for DHIS2.",
     "repository": {
         "type": "git",

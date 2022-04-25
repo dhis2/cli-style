@@ -1,3 +1,10 @@
+# [10.4.0](https://github.com/dhis2/cli-style/compare/v10.3.0...v10.4.0) (2022-04-25)
+
+
+### Features
+
+* add project config for checking pr title ([054ca54](https://github.com/dhis2/cli-style/commit/054ca548ff882a6c9d27319e12e43ffe3472c599))
+
 # [10.3.0](https://github.com/dhis2/cli-style/compare/v10.2.0...v10.3.0) (2022-04-21)
 
 
