@@ -68,6 +68,12 @@ const projectConfigs = {
             'workflows',
             'dhis2-preview-pr.yml'
         ),
+        'workflow-verify-pr-title': path.join(
+            PROJECT_ROOT,
+            '.github',
+            'workflows',
+            'dhis2-verify-pr-title.yml'
+        ),
         'workflow-publish-metadata': path.join(
             PROJECT_ROOT,
             '.github',
