@@ -1,3 +1,10 @@
+## [10.4.1](https://github.com/dhis2/cli-style/compare/v10.4.0...v10.4.1) (2022-04-27)
+
+
+### Bug Fixes
+
+* move commit linting to separate workflow ([cafd53c](https://github.com/dhis2/cli-style/commit/cafd53c449facbd4f222dda0f32a1cc89babcb6c))
+
 # [10.4.0](https://github.com/dhis2/cli-style/compare/v10.3.0...v10.4.0) (2022-04-25)
 
 
