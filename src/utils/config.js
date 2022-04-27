@@ -68,11 +68,11 @@ const projectConfigs = {
             'workflows',
             'dhis2-preview-pr.yml'
         ),
-        'workflow-verify-pr-title': path.join(
+        'workflow-verify-commits': path.join(
             PROJECT_ROOT,
             '.github',
             'workflows',
-            'dhis2-verify-pr-title.yml'
+            'dhis2-verify-commits.yml'
         ),
         'workflow-publish-metadata': path.join(
             PROJECT_ROOT,
@@ -126,8 +126,8 @@ const templateConfigs = {
         'workflow-preview-pr': url.parse(
             'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-preview-pr.yml'
         ),
-        'workflow-verify-pr-title': url.parse(
-            'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-verify-pr-title.yml'
+        'workflow-verify-commits': url.parse(
+            'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-verify-commits.yml'
         ),
         'workflow-publish-metadata': url.parse(
             'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2metadata-publish.yml'
