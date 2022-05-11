@@ -378,6 +378,30 @@
     handlebars "^4.7.3"
     isbinaryfile "^4.0.4"
 
+"@dhis2/cli-style@^10.4.1":
+  version "10.4.1"
+  resolved "https://registry.yarnpkg.com/@dhis2/cli-style/-/cli-style-10.4.1.tgz#1186d79f4b4ef2802832a116562041ae50c596dc"
+  integrity sha512-4INZ2T67kZXkykUuNr9TqL0B88HYRYvtc2ctDV0IemK5bSNiwoQrgM6lqMIFHE5T48DEaFTQ3rvrd0nLjsW6Ng==
+  dependencies:
+    "@commitlint/cli" "^12.1.4"
+    "@commitlint/config-conventional" "^13.1.0"
+    "@dhis2/cli-helpers-engine" "^3.0.0"
+    "@ls-lint/ls-lint" "^1.10.0"
+    babel-eslint "^10.1.0"
+    eslint "^7.32.0"
+    eslint-config-prettier "^8.3.0"
+    eslint-plugin-import "^2.22.1"
+    eslint-plugin-react "^7.26.0"
+    fast-glob "^3.2.5"
+    find-up "^5.0.0"
+    fs-extra "^10.0.0"
+    husky "^7.0.2"
+    micromatch "^4.0.4"
+    perfy "^1.1.5"
+    prettier "^2.4.1"
+    semver "^7.3.5"
+    yargs "^16.2.0"
+
 "@dhis2/cli-utils-docsite@3.1.2":
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/@dhis2/cli-utils-docsite/-/cli-utils-docsite-3.1.2.tgz#ee67683b1611ae684cd6ab2f29a61b5fd1f2d31a"
