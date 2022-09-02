@@ -30,7 +30,7 @@
         "@dhis2/cli-helpers-engine": "^3.0.0",
         "@ls-lint/ls-lint": "^1.10.0",
         "babel-eslint": "^10.1.0",
-        "eslint": "^7.32.0",
+        "eslint": "^8.0.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-import": "^2.22.1",
         "eslint-plugin-react": "^7.26.0",
