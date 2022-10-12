@@ -1,3 +1,10 @@
+## [10.4.2](https://github.com/dhis2/cli-style/compare/v10.4.1...v10.4.2) (2022-10-12)
+
+
+### Bug Fixes
+
+* ignore skip release commits for commitlint ([3d277df](https://github.com/dhis2/cli-style/commit/3d277df447345ebdaedefdfdcfac9e81ba9c74f8))
+
 ## [10.4.1](https://github.com/dhis2/cli-style/compare/v10.4.0...v10.4.1) (2022-04-27)
 
 
