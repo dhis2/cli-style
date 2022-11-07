@@ -1,3 +1,10 @@
+## [10.4.3](https://github.com/dhis2/cli-style/compare/v10.4.2...v10.4.3) (2022-11-07)
+
+
+### Bug Fixes
+
+* **deps:** bump eslint react plugin ([#450](https://github.com/dhis2/cli-style/issues/450)) ([dda6efc](https://github.com/dhis2/cli-style/commit/dda6efcde40e43ceca4d26c7a76e5b33dab270e3))
+
 ## [10.4.2](https://github.com/dhis2/cli-style/compare/v10.4.1...v10.4.2) (2022-10-12)
 
 
