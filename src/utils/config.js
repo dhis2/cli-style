@@ -123,8 +123,14 @@ const templateConfigs = {
         'workflow-artifacts': url.parse(
             'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-artifacts.yml'
         ),
-        'workflow-preview-pr': url.parse(
-            'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-preview-pr.yml'
+        'workflow-deploy-pr': url.parse(
+            'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-netlify-deploy-pr.yml'
+        ),
+        'workflow-deploy-branch': url.parse(
+            'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-netlify-deploy-branch.yml'
+        ),
+        'workflow-deploy-production': url.parse(
+            'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-netlify-deploy-production.yml'
         ),
         'workflow-verify-commits': url.parse(
             'https://raw.githubusercontent.com/dhis2/workflows/master/ci/dhis2-verify-commits.yml'
