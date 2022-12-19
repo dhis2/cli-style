@@ -80,6 +80,24 @@ const projectConfigs = {
             'workflows',
             'dhis2metadata-publish.yml'
         ),
+        'workflow-deploy-pr': path.join(
+            PROJECT_ROOT,
+            '.github',
+            'workflows',
+            'dhis2-netlify-deploy-pr.yml'
+        ),
+        'workflow-deploy-branch': path.join(
+            PROJECT_ROOT,
+            '.github',
+            'workflows',
+            'dhis2-netlify-deploy-branch.yml'
+        ),
+        'workflow-deploy-production': path.join(
+            PROJECT_ROOT,
+            '.github',
+            'workflows',
+            'dhis2-netlify-deploy-production.yml'
+        ),
     },
     lslint: path.join(PROJECT_ROOT, '.ls-lint.yml'),
 }
