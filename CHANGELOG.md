@@ -1,3 +1,10 @@
+# [10.5.0](https://github.com/dhis2/cli-style/compare/v10.4.3...v10.5.0) (2022-12-19)
+
+
+### Features
+
+* **netlify:** add new netlify deploy workflows ([7d6d0d4](https://github.com/dhis2/cli-style/commit/7d6d0d4f829a00cbec61a32572ca101f64daeac5))
+
 ## [10.4.3](https://github.com/dhis2/cli-style/compare/v10.4.2...v10.4.3) (2022-11-07)
 
 
