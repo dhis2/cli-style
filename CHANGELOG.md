@@ -1,3 +1,10 @@
+## [10.5.1](https://github.com/dhis2/cli-style/compare/v10.5.0...v10.5.1) (2022-12-20)
+
+
+### Bug Fixes
+
+* **netlify:** add installation paths for new workflows ([437cda9](https://github.com/dhis2/cli-style/commit/437cda9a0d9f947a2b55dbf556f4c795925e2314))
+
 # [10.5.0](https://github.com/dhis2/cli-style/compare/v10.4.3...v10.5.0) (2022-12-19)
 
 
