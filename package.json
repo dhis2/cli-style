@@ -25,8 +25,8 @@
     "author": "Viktor Varland",
     "license": "BSD-3-Clause",
     "dependencies": {
-        "@commitlint/cli": "^12.1.4",
-        "@commitlint/config-conventional": "^13.1.0",
+        "@commitlint/cli": "^16.0.0",
+        "@commitlint/config-conventional": "^16.0.0",
         "@dhis2/cli-helpers-engine": "^3.0.0",
         "@ls-lint/ls-lint": "^1.10.0",
         "babel-eslint": "^10.1.0",
