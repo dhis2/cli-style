@@ -1,4 +1,4 @@
-name: 'dhis2: deploy (netlify)'
+name: "dhis2: deploy (netlify)"
 
 # Requirements:
 #
@@ -35,14 +35,14 @@ jobs:
 
             - uses: nwtgck/actions-netlify@v1.2
               with:
-                  production-branch: 'master'
+                  production-branch: "master"
                   production-deploy: true
                   github-token: ${{ secrets.DHIS2_BOT_GITHUB_TOKEN }}
-                  deploy-message: 'Deploy documentation site from GitHub Actions'
+                  deploy-message: "Deploy documentation site from GitHub Actions"
                   enable-pull-request-comment: false
                   enable-commit-comment: false
                   enable-commit-status: false
-                  publish-dir: 'dist'
+                  publish-dir: "dist"
               env:
                   NETLIFY_AUTH_TOKEN: ${{ secrets.DHIS2_BOT_NETLIFY_TOKEN }}
                   NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
