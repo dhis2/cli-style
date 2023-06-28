@@ -18,4 +18,12 @@ module.exports = {
     htmlWhitespaceSensitivity: 'css',
     endOfLine: 'lf',
     embeddedLanguageFormatting: 'auto',
+    overrides: [
+        {
+            files: '**/*.yml',
+            options: {
+                singleQuote: false,
+            },
+        },
+    ],
 }
