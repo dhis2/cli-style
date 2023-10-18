@@ -1,4 +1,6 @@
-# After cloning a repository
+# Getting started
+
+## After cloning a repository
 
 The first time you check out a repo, you need to enable the Git hooks
 manually. Husky used to do this by default, but both NPM and Yarn are
@@ -15,7 +17,7 @@ yarn install
 yarn d2-style install # this enables the hooks in .hooks
 ```
 
-# Fresh install
+## Fresh install
 
 First up you will need to add `d2-style` as a development dependency. We
 recommend using Yarn as it is what we use by default, but NPM will work
@@ -25,7 +27,7 @@ just fine.
 yarn add @dhis2/cli-style --dev
 ```
 
-# Setup scripts
+## Setup scripts
 
 It is recommended to use Git hooks to `check` for style inconsistencies,
 and then `apply`ing the styles and staging the changes manually. It is
@@ -44,7 +46,7 @@ Some example scripts follow:
 },
 ```
 
-# Install DHIS2 configuration files
+## Install DHIS2 configuration files
 
 `d2-style` can automatically generate the configuration files into the
 repository for you. For a list of valid groups and what tools they will
@@ -60,7 +62,7 @@ manually merged.
 
 To regenerate and overwrite, pass the `--overwrite` flag.
 
-## Configuration templates for tools
+### Configuration templates for tools
 
 `d2-style` comes with templates for projects of different types that can
 be added to the project using the `add` command.
