@@ -19,7 +19,8 @@
         "lint": "./bin/d2-style check",
         "format:staged": "yarn format --staged",
         "format": "./bin/d2-style apply",
-        "build:docs": "d2-utils-docsite build ./docs -o ./dist --jsdoc src/ --jsdocOutputFile api.md",
+        "build:docs": "mkdir -p dist && cp docs/index.html dist/",
+        "build:jsdoc": "d2-utils-docsite build ./docs -o ./dist --jsdoc src/ --jsdocOutputFile api.md",
         "start": "d2-utils-docsite serve ./docs -o ./dist --jsdoc src/ --jsdocOutputFile api.md"
     },
     "author": "Viktor Varland",
