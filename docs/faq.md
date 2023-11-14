@@ -1,10 +1,12 @@
-# Why use the rule X? I prefer Y.
+# Frequently Asked Questions
+
+## Why use the rule X? I prefer Y.
 
 Some wisdom from Go:
 
 > `gofmt`'s style is no one's favorite, yet `gofmt` is everyone's favorite.
 
-# I'm getting husky errors
+## I'm getting husky errors
 
 This library as of version 8.0.0 no longer depends on husky, so if you
 are getting errors like:
@@ -21,7 +23,7 @@ Ensure that your node and git versions satisfy the above requirements.
 You can check this by running `git --version` and `node --version` from
 your terminal.
 
-# What does an Error and Warnings mean?
+## What does an Error and Warnings mean?
 
 `d2-style` is strict by default, as it tries to guard against known lint
 from entering the codebase. If the lint is denied early, it is easier,
