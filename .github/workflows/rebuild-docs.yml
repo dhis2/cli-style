@@ -6,6 +6,8 @@ on:
             - master
         paths:
             - 'docs/**'
+            - 'src/**.js'
+            - 'CHANGELOG.md'
 
 concurrency:
     group: ${{ github.workflow}}-${{ github.ref }}
