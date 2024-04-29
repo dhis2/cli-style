@@ -101,6 +101,7 @@ const projectConfigs = {
         ),
     },
     lslint: path.join(PROJECT_ROOT, '.ls-lint.yml'),
+    stylelint: path.join(PROJECT_ROOT, '.stylelintrc.js'),
 }
 
 /**
@@ -159,6 +160,7 @@ const templateConfigs = {
         ),
     },
     lslint: path.join(TEMPLATE_DIR, 'ls-lint-base.yml'),
+    stylelint: path.join(TEMPLATE_DIR, 'stylelint-base.js'),
 }
 
 /**
