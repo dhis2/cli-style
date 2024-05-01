@@ -10,7 +10,6 @@ exports.builder = (yargs) =>
         .positional('type', {
             describe: 'Configuration template for Stylelint.',
             type: 'string',
-            choices: Object.keys(cfg.templateConfigs.stylelint),
             default: 'base',
         })
         .option('overwrite', {
@@ -26,10 +25,10 @@ exports.handler = (argv) => {
     if (add) {
         cfg.add({
             tool: 'stylelint',
-            type,
+            type: type ? type : 'base',
             overwrite,
         })
     } else {
-        cfg.remove({ tool: 'stylelint', type })
+        cfg.remove({ tool: 'stylelint', type: type ? type : 'base' })
     }
 }
