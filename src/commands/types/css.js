@@ -23,7 +23,6 @@ exports.builder = (yargs) =>
     })
 
 exports.handler = (argv, callback) => {
-    console.log(argv)
     if (
         !argv.config.patterns ||
         (argv.config.patterns && !argv.config.patterns.css)
