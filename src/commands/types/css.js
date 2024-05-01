@@ -1,8 +1,8 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
 const { callback: runCb } = require('@dhis2/cli-helpers-engine').exec
 const { exit } = require('@dhis2/cli-helpers-engine')
-const { eslint } = require('../../tools/eslint.js')
 const { prettier } = require('../../tools/prettier.js')
+const { eslint } = require('../../tools/stylelint.js')
 const { configured } = require('../../utils/config.js')
 const { selectFiles } = require('../../utils/files.js')
 const {
@@ -10,11 +10,11 @@ const {
     sayNoFiles,
 } = require('../../utils/std-log-messages.js')
 
-exports.command = 'js [files..]'
+exports.command = 'css [files..]'
 
-exports.aliases = ['javascript']
+exports.aliases = ['css']
 
-exports.desc = 'JavaScript code style'
+exports.desc = 'CSS code style'
 
 exports.builder = (yargs) =>
     yargs.positional('files', {
@@ -27,9 +27,7 @@ exports.handler = (argv, callback) => {
         !argv.config.patterns ||
         (argv.config.patterns && !argv.config.patterns.js)
     ) {
-        log.warn(
-            'No javascript patterns defined, please check the configuration file'
-        )
+        log.warn('No css patterns defined, please check the configuration file')
         exit(1)
     }
 
@@ -37,25 +35,25 @@ exports.handler = (argv, callback) => {
 
     const {
         config: {
-            patterns: { js: jsPattern },
+            patterns: { css: cssPattern },
         },
         files,
         staged,
         apply,
     } = argv
 
-    const jsFiles = selectFiles(files, jsPattern, staged)
+    const cssFiles = selectFiles(files, cssPattern, staged)
 
-    if (jsFiles.length === 0) {
-        log.debug(sayNoFiles('javascript', jsPattern, staged))
+    if (cssFiles.length === 0) {
+        log.debug(sayNoFiles('css', cssPattern, staged))
         return
     }
 
-    if (configured('eslint')) {
-        log.info('javascript > eslint')
+    if (configured('stylelint')) {
+        log.info('css > stylelint')
         eslint({
             apply,
-            files: jsFiles,
+            files: cssFiles,
             callback: finalStatus,
         })
 
@@ -64,14 +62,14 @@ exports.handler = (argv, callback) => {
             log.print('')
         }
     } else {
-        log.log('No ESLint configuration found')
+        log.log('No Stylelint configuration found')
     }
 
     if (configured('prettier')) {
-        log.info('javascript > prettier')
+        log.info('css > prettier')
         prettier({
             apply,
-            files: jsFiles,
+            files: cssFiles,
             callback: finalStatus,
         })
     } else {
@@ -79,9 +77,9 @@ exports.handler = (argv, callback) => {
     }
 
     if (!callback) {
-        log.debug(sayFilesChecked('javascript', jsFiles.length, apply))
+        log.debug(sayFilesChecked('css', cssFiles.length, apply))
         exit(finalStatus())
     }
 
-    return jsFiles.length
+    return cssFiles.length
 }
