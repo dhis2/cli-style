@@ -2,7 +2,7 @@ const log = require('@dhis2/cli-helpers-engine').reporter
 const { callback: runCb } = require('@dhis2/cli-helpers-engine').exec
 const { exit } = require('@dhis2/cli-helpers-engine')
 const { prettier } = require('../../tools/prettier.js')
-const { eslint } = require('../../tools/stylelint.js')
+const { stylelint } = require('../../tools/stylelint.js')
 const { configured } = require('../../utils/config.js')
 const { selectFiles } = require('../../utils/files.js')
 const {
@@ -23,9 +23,10 @@ exports.builder = (yargs) =>
     })
 
 exports.handler = (argv, callback) => {
+    console.log(argv)
     if (
         !argv.config.patterns ||
-        (argv.config.patterns && !argv.config.patterns.js)
+        (argv.config.patterns && !argv.config.patterns.css)
     ) {
         log.warn('No css patterns defined, please check the configuration file')
         exit(1)
@@ -51,7 +52,7 @@ exports.handler = (argv, callback) => {
 
     if (configured('stylelint')) {
         log.info('css > stylelint')
-        eslint({
+        stylelint({
             apply,
             files: cssFiles,
             callback: finalStatus,
