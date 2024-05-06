@@ -1,3 +1,10 @@
+## [10.5.2](https://github.com/dhis2/cli-style/compare/v10.5.1...v10.5.2) (2024-05-06)
+
+
+### Bug Fixes
+
+* add missing dep for eslint-plugin-react-hooks ([#465](https://github.com/dhis2/cli-style/issues/465)) ([8eb105e](https://github.com/dhis2/cli-style/commit/8eb105e14b3bedbd5fc41887a1e36bc6e6d208cc))
+
 ## [10.5.1](https://github.com/dhis2/cli-style/compare/v10.5.0...v10.5.1) (2022-12-20)
 
 
