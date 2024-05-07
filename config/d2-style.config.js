@@ -12,6 +12,7 @@ module.exports = {
     },
     patterns: {
         js: '*.{js,jsx,ts,tsx}',
+        css: '*.css',
         text: '*.{md,json,yml,html}',
     },
 }
