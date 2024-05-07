@@ -14,6 +14,7 @@ exports.builder = (yargs) =>
         /*
          * Only list the types that can be automatically fixed here.
          */
+        .command(require('./types/css.js'))
         .command(require('./types/javascript.js'))
         .command(require('./types/structured-text.js'))
 
