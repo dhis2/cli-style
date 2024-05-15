@@ -1,3 +1,10 @@
+# [10.6.0](https://github.com/dhis2/cli-style/compare/v10.5.2...v10.6.0) (2024-05-15)
+
+
+### Features
+
+* add stylelint ([#464](https://github.com/dhis2/cli-style/issues/464)) ([4a8c70b](https://github.com/dhis2/cli-style/commit/4a8c70b39990680251fbaf69bd1d45c255eb88f9))
+
 ## [10.5.2](https://github.com/dhis2/cli-style/compare/v10.5.1...v10.5.2) (2024-05-06)
 
 
