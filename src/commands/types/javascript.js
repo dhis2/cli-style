@@ -87,7 +87,7 @@ exports.handler = (argv, callback) => {
             callback: finalStatus,
         })
     } else {
-        log.log('No Prettier configuration found')
+        log.log('No Stylelint configuration found')
     }
 
     if (!callback) {
