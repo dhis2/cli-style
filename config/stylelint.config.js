@@ -1,5 +1,7 @@
 module.exports = {
-    customSyntax: 'postcss-styled-jsx',
+    overrides: [
+        { files: '**/*.{js,jsx,ts,tsx}', customSyntax: 'postcss-styled-jsx' },
+    ],
     plugins: ['stylelint-use-logical'],
     rules: {
         'csstools/use-logical': [
