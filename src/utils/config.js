@@ -19,11 +19,12 @@ const {
  * referenced from a template config file when installed in a project.
  */
 const packageConfigs = {
-    eslint: path.join(CONFIG_DIR, 'eslint.config.js'),
-    eslintReact: path.join(CONFIG_DIR, 'eslint-react.config.js'),
     commitlint: path.join(CONFIG_DIR, 'commitlint.config.js'),
     d2Style: path.join(CONFIG_DIR, 'd2-style.config.js'),
+    eslint: path.join(CONFIG_DIR, 'eslint.config.js'),
+    eslintReact: path.join(CONFIG_DIR, 'eslint-react.config.js'),
     prettier: path.join(CONFIG_DIR, 'prettier.config.js'),
+    stylelint: path.join(CONFIG_DIR, 'stylelint.config.js'),
 }
 
 /**
@@ -100,6 +101,7 @@ const projectConfigs = {
         ),
     },
     lslint: path.join(PROJECT_ROOT, '.ls-lint.yml'),
+    stylelint: path.join(PROJECT_ROOT, '.stylelintrc.js'),
 }
 
 /**
@@ -158,6 +160,7 @@ const templateConfigs = {
         ),
     },
     lslint: path.join(TEMPLATE_DIR, 'ls-lint-base.yml'),
+    stylelint: path.join(TEMPLATE_DIR, 'stylelint-base.js'),
 }
 
 /**

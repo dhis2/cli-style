@@ -1,6 +1,7 @@
 const log = require('@dhis2/cli-helpers-engine').reporter
 const { callback } = require('@dhis2/cli-helpers-engine').exec
 const { exit } = require('@dhis2/cli-helpers-engine')
+const { handler: cssHandler } = require('./types/css.js')
 const { handler: fsHandler } = require('./types/file-system.js')
 const { handler: jsHandler } = require('./types/javascript.js')
 const { handler: textHandler } = require('./types/structured-text.js')
@@ -26,6 +27,11 @@ exports.jscmd = (yargs) =>
 
             if (argv.config.patterns.js) {
                 jsHandler(argv, statusCode)
+                log.print('')
+            }
+
+            if (argv.config.patterns.css) {
+                cssHandler(argv, statusCode)
                 log.print('')
             }
 
@@ -56,6 +62,7 @@ exports.builder = (yargs) =>
         /*
          * Only list the types that can be checked here.
          */
+        .command(require('./types/css.js'))
         .command(require('./types/commit.js'))
         .command(require('./types/file-system.js'))
         .command(require('./types/javascript.js'))

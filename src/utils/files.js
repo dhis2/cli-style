@@ -22,6 +22,7 @@ const blacklist = [
 
 // whitelists for files
 const whitelists = {
+    css: ['.css'],
     js: ['.js', '.jsx', '.ts'],
     json: ['.json'],
     all: ['.js', '.json', '.css', '.scss', '.md', '.jsx', '.ts'],
@@ -31,6 +32,11 @@ function whitelisted(whitelist) {
     return function (file) {
         return whitelist.includes(path.extname(file))
     }
+}
+
+function cssFiles(arr) {
+    const whitelist = whitelisted(whitelists.css)
+    return arr.filter(whitelist)
 }
 
 function jsFiles(arr) {
@@ -204,6 +210,7 @@ const relativePath = (fp) => path.relative(CONSUMING_ROOT, fp)
 
 module.exports = {
     copy,
+    cssFiles,
     deleteFile,
     jsFiles,
     jsonFiles,

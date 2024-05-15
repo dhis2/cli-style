@@ -22,8 +22,9 @@ are not necessary to explicitly install:
 
 -   [Commitlint](https://commitlint.js.org)
 -   [ESLint](https://eslint.org/)
--   [Prettier](https://prettier.io)
 -   [Husky](https://github.com/typicode/husky)
+-   [Prettier](https://prettier.io)
+-   [Stylelint](https://stylelint.io/)
 -   [ls-lint](https://ls-lint.org/)
 
 ## Usage
