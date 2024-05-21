@@ -1,17 +1,17 @@
 # Ignore files
 
 Tools have different ways to ignore files, Git uses `.gitignore`, and
-[ESLint](https://eslint.org/docs/user-guide/configuring#eslintignore) and
+[ESLint](https://eslint.org/docs/user-guide/configuring#eslintignore), [Stylelint](https://stylelint.io/user-guide/ignore-code/#files-entirely) and
 [Prettier](https://prettier.io/docs/en/ignore.html#ignoring-files) have their
 own counterparts.
 
-Thankfully, ESLint and Prettier have adopted the [`.gitignore`
+Thankfully, ESLint, Stylelint and Prettier have adopted the [`.gitignore`
 format](https://git-scm.com/docs/gitignore#_pattern_format), so across these
 tools, the ignore files are compatible.
 
 When using `d2-style` you may want to:
 
--   Have different ignores for Prettier and ESLint
+-   Have different ignores for Prettier, Stylelint and ESLint
 -   Have different ignores for `d2-style` and Git
 -   Share ignores across all supported tools
 
@@ -34,6 +34,7 @@ a corresponding ignore file.
 The following files are supported, in prioritised order:
 
 -   `.eslintignore` _(ESLint only)_
+-   `.stylelintignore` _(Stylelint only)_
 -   `.prettierignore` _(Prettier only)_
 -   `.d2styleignore` _(All excluding Git)_
 -   `.gitignore` _(All including Git)_
