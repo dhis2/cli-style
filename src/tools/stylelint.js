@@ -4,7 +4,11 @@ const { PACKAGE_ROOT } = require('../utils/paths.js')
 exports.stylelint = ({ files = [], apply = false, callback }) => {
     const cmd = 'stylelint'
     const cwd = PACKAGE_ROOT
-    const args = [...(apply ? ['--fix'] : []), ...files]
+    const args = [
+        '--report-needless-disables',
+        ...(apply ? ['--fix'] : []),
+        ...files,
+    ]
 
     bin(cmd, { args, cwd }, callback)
 }
