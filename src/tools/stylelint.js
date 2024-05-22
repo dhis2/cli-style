@@ -6,6 +6,7 @@ exports.stylelint = ({ files = [], apply = false, callback }) => {
     const cwd = PACKAGE_ROOT
     const args = [
         '--report-needless-disables',
+        `--config-basedir=${PACKAGE_ROOT}`,
         ...(apply ? ['--fix'] : []),
         ...files,
     ]
