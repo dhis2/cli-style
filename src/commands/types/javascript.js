@@ -3,6 +3,7 @@ const { callback: runCb } = require('@dhis2/cli-helpers-engine').exec
 const { exit } = require('@dhis2/cli-helpers-engine')
 const { eslint } = require('../../tools/eslint.js')
 const { prettier } = require('../../tools/prettier.js')
+const { stylelint } = require('../../tools/stylelint.js')
 const { configured } = require('../../utils/config.js')
 const { selectFiles } = require('../../utils/files.js')
 const {
@@ -76,6 +77,17 @@ exports.handler = (argv, callback) => {
         })
     } else {
         log.log('No Prettier configuration found')
+    }
+
+    if (configured('stylelint')) {
+        log.info('javascript > stylelint')
+        stylelint({
+            apply,
+            files: jsFiles,
+            callback: finalStatus,
+        })
+    } else {
+        log.log('No Stylelint configuration found')
     }
 
     if (!callback) {
