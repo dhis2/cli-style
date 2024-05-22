@@ -1,3 +1,10 @@
+# [10.7.0](https://github.com/dhis2/cli-style/compare/v10.6.0...v10.7.0) (2024-05-22)
+
+
+### Features
+
+* add styled-jsx syntax parsing to stylelint ([#466](https://github.com/dhis2/cli-style/issues/466)) ([7da0346](https://github.com/dhis2/cli-style/commit/7da0346f23b0e07e7f0aeee45175d3245c89388f))
+
 # [10.6.0](https://github.com/dhis2/cli-style/compare/v10.5.2...v10.6.0) (2024-05-15)
 
 
