@@ -1,3 +1,10 @@
+## [10.7.1](https://github.com/dhis2/cli-style/compare/v10.7.0...v10.7.1) (2024-05-22)
+
+
+### Bug Fixes
+
+* document ignorefile for stylelint ([#468](https://github.com/dhis2/cli-style/issues/468)) ([bb133b2](https://github.com/dhis2/cli-style/commit/bb133b26759ffac73b2e01922f3a707cf6fb1e22))
+
 # [10.7.0](https://github.com/dhis2/cli-style/compare/v10.6.0...v10.7.0) (2024-05-22)
 
 
