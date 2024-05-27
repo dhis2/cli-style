@@ -1,3 +1,10 @@
+## [10.7.2](https://github.com/dhis2/cli-style/compare/v10.7.1...v10.7.2) (2024-05-27)
+
+
+### Bug Fixes
+
+* set basedir for plugin resolution ([83e8d43](https://github.com/dhis2/cli-style/commit/83e8d43dc6e314a642594e2e2193086e4c87d52b))
+
 ## [10.7.1](https://github.com/dhis2/cli-style/compare/v10.7.0...v10.7.1) (2024-05-22)
 
 
