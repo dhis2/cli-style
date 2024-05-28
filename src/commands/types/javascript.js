@@ -68,17 +68,6 @@ exports.handler = (argv, callback) => {
         log.log('No ESLint configuration found')
     }
 
-    if (configured('prettier')) {
-        log.info('javascript > prettier')
-        prettier({
-            apply,
-            files: jsFiles,
-            callback: finalStatus,
-        })
-    } else {
-        log.log('No Prettier configuration found')
-    }
-
     if (configured('stylelint')) {
         log.info('javascript > stylelint')
         stylelint({
@@ -88,6 +77,17 @@ exports.handler = (argv, callback) => {
         })
     } else {
         log.log('No Stylelint configuration found')
+    }
+
+    if (configured('prettier')) {
+        log.info('javascript > prettier')
+        prettier({
+            apply,
+            files: jsFiles,
+            callback: finalStatus,
+        })
+    } else {
+        log.log('No Prettier configuration found')
     }
 
     if (!callback) {
