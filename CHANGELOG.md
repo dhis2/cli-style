@@ -1,3 +1,10 @@
+## [10.7.3](https://github.com/dhis2/cli-style/compare/v10.7.2...v10.7.3) (2024-05-28)
+
+
+### Bug Fixes
+
+* run stylelint before prettier ([f098adf](https://github.com/dhis2/cli-style/commit/f098adf378fc6e67bf6cc291c55ed540cd3fda00))
+
 ## [10.7.2](https://github.com/dhis2/cli-style/compare/v10.7.1...v10.7.2) (2024-05-27)
 
 
