@@ -69,12 +69,16 @@ be added to the project using the `add` command.
 
 The structure is: `d2-style add {tool} {template}`
 
-```sh
-# to add the default eslint configuration
-yarn d2-style add eslint
+To add the default react eslint configuration:
 
-# to add the react eslint configuration
+```sh
 yarn d2-style add eslint react
+```
+
+To add prettier configuration:
+
+```sh
+yarn d2-style add prettier
 ```
 
 To add Git hooks, the format is:
