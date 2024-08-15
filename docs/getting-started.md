@@ -81,6 +81,12 @@ To add prettier configuration:
 yarn d2-style add prettier
 ```
 
+To add stylelint configuration:
+
+```sh
+yarn d2-style add stylelint
+```
+
 To add Git hooks, the format is:
 
 ```sh
