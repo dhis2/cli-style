@@ -1,3 +1,10 @@
+## [10.7.4](https://github.com/dhis2/cli-style/compare/v10.7.3...v10.7.4) (2024-09-18)
+
+
+### Bug Fixes
+
+* warn user for unfixable properties ([2c4134c](https://github.com/dhis2/cli-style/commit/2c4134cfe6ee34a5e5e83b50a338f6ed67272bd2))
+
 ## [10.7.3](https://github.com/dhis2/cli-style/compare/v10.7.2...v10.7.3) (2024-05-28)
 
 
