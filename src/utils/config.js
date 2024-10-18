@@ -32,6 +32,7 @@ const packageConfigs = {
  * project.
  */
 const projectConfigs = {
+    typescript: path.join(PROJECT_ROOT, 'tsconfig.json'),
     editorconfig: path.join(PROJECT_ROOT, '.editorconfig'),
     eslint: path.join(PROJECT_ROOT, '.eslintrc.js'),
     prettier: path.join(PROJECT_ROOT, '.prettierrc.js'),

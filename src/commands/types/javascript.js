@@ -4,6 +4,7 @@ const { exit } = require('@dhis2/cli-helpers-engine')
 const { eslint } = require('../../tools/eslint.js')
 const { prettier } = require('../../tools/prettier.js')
 const { stylelint } = require('../../tools/stylelint.js')
+const { typescriptCheck } = require('../../tools/typescript-check.js')
 const { configured } = require('../../utils/config.js')
 const { selectFiles } = require('../../utils/files.js')
 const {
@@ -52,8 +53,22 @@ exports.handler = (argv, callback) => {
         return
     }
 
+    const isTypescriptProject = configured('typescript')
+
+    if (isTypescriptProject) {
+        log.info('typescript > tsc --noEmit')
+        typescriptCheck({ callback: finalStatus })
+
+        if (finalStatus() === 0) {
+            log.print('Typescript check completed successfully.')
+            log.print('')
+        }
+    }
+
     if (configured('eslint')) {
-        log.info('javascript > eslint')
+        log.info(
+            `${isTypescriptProject ? 'typescript' : 'javascript'} > eslint`
+        )
         eslint({
             apply,
             files: jsFiles,
