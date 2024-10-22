@@ -24,6 +24,19 @@ module.exports = {
         },
         sourceType: 'module',
     },
+    // Limit TypeScript linting to TS/TSX
+    overrides: [
+        {
+            files: ['**/*.{ts,tsx}'],
+            extends: [
+                'plugin:@typescript-eslint/recommended',
+                'plugin:import/typescript',
+            ],
+            rules: {
+                'import/extensions': 'off',
+            },
+        },
+    ],
 
     rules: {
         'max-params': [
