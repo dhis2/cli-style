@@ -1,3 +1,10 @@
+# [10.8.0-alpha.1](https://github.com/dhis2/cli-style/compare/v10.7.4...v10.8.0-alpha.1) (2024-10-22)
+
+
+### Features
+
+* support typescript linting and type checking ([#474](https://github.com/dhis2/cli-style/issues/474)) ([b68f69a](https://github.com/dhis2/cli-style/commit/b68f69a428ab9867f96099c29953e9dd62977a3b))
+
 ## [10.7.4](https://github.com/dhis2/cli-style/compare/v10.7.3...v10.7.4) (2024-09-18)
 
 
