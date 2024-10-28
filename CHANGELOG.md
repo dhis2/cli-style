@@ -1,3 +1,15 @@
+## [10.7.5](https://github.com/dhis2/cli-style/compare/v10.7.4...v10.7.5) (2024-10-28)
+
+
+### Bug Fixes
+
+* force a release ([2ef782a](https://github.com/dhis2/cli-style/commit/2ef782ad8900bc85207b24965e3b3bc9433c821e))
+
+
+### Features
+
+* support typescript linting and type checking ([#475](https://github.com/dhis2/cli-style/issues/475)) ([296dd60](https://github.com/dhis2/cli-style/commit/296dd608637fcc4d8b324aea03941242ba5bde9d)), closes [#474](https://github.com/dhis2/cli-style/issues/474) [#474](https://github.com/dhis2/cli-style/issues/474)
+
 # [10.8.0-alpha.1](https://github.com/dhis2/cli-style/compare/v10.7.4...v10.8.0-alpha.1) (2024-10-22)
 
 
