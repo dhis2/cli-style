@@ -10,9 +10,11 @@ module.exports = {
     ],
 
     settings: {
-        react: {
-            version: 'detect',
-        },
+        react: { version: 'detect' },
+        // Prevents "error: unable to resolve module X" for .jsx files 
+        // if .jsx extension isn't used, e.g.
+        // `import Component from './component'`
+        'import/resolver': { node: { extensions: ['.js', '.jsx'] } },
     },
 
     rules: {
