@@ -1,3 +1,10 @@
+## [10.7.6](https://github.com/dhis2/cli-style/compare/v10.7.5...v10.7.6) (2025-02-04)
+
+
+### Bug Fixes
+
+* **eslint-react-config:** handle files with .jsx extensions ([#477](https://github.com/dhis2/cli-style/issues/477)) ([5e814ad](https://github.com/dhis2/cli-style/commit/5e814ad0f329b083fde9013b308a656af14f8def))
+
 ## [10.7.5](https://github.com/dhis2/cli-style/compare/v10.7.4...v10.7.5) (2024-10-28)
 
 
