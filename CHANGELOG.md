@@ -1,3 +1,10 @@
+## [10.7.7](https://github.com/dhis2/cli-style/compare/v10.7.6...v10.7.7) (2025-04-03)
+
+
+### Bug Fixes
+
+* update commitlint.config header max length ([#478](https://github.com/dhis2/cli-style/issues/478)) ([d60482d](https://github.com/dhis2/cli-style/commit/d60482d416b9c70a82d031df735e52a06e821ae6))
+
 ## [10.7.6](https://github.com/dhis2/cli-style/compare/v10.7.5...v10.7.6) (2025-02-04)
 
 
