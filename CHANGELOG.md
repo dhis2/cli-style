@@ -1,3 +1,10 @@
+## [10.7.8](https://github.com/dhis2/cli-style/compare/v10.7.7...v10.7.8) (2025-05-27)
+
+
+### Bug Fixes
+
+* declare TS module to avoid error in TS projects ([f54d797](https://github.com/dhis2/cli-style/commit/f54d79747006da73293b91201540006c29484fc9))
+
 ## [10.7.7](https://github.com/dhis2/cli-style/compare/v10.7.6...v10.7.7) (2025-04-03)
 
 
