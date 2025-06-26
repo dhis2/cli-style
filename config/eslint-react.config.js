@@ -29,5 +29,6 @@ module.exports = {
             },
         ],
         'react/no-unused-prop-types': 'error',
+        'react/no-object-type-as-default-prop': 'error',
     },
 }
