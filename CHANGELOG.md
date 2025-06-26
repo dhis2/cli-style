@@ -1,3 +1,10 @@
+## [10.7.9](https://github.com/dhis2/cli-style/compare/v10.7.8...v10.7.9) (2025-06-26)
+
+
+### Bug Fixes
+
+* add no-object-type-as-default-prop rule ([#481](https://github.com/dhis2/cli-style/issues/481)) ([b2c7d6d](https://github.com/dhis2/cli-style/commit/b2c7d6d6f4e1ccc8f4e0f76450214546e93171cf))
+
 ## [10.7.8](https://github.com/dhis2/cli-style/compare/v10.7.7...v10.7.8) (2025-05-27)
 
 
