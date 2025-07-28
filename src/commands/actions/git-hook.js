@@ -31,11 +31,11 @@ exports.builder = (yargs) =>
             type: 'boolean',
         })
         .example(
-            '$0 add git-hook pre-push "yarn test"',
-            'Adds a pre-push git hook that runs the command "yarn test".'
+            '$0 add git-hook pre-push "pnpm test"',
+            'Adds a pre-push git hook that runs the command "pnpm test".'
         )
         .example(
-            '$0 add git-hook pre-commit "yarn d2-style apply --staged"',
+            '$0 add git-hook pre-commit "pnpm d2-style apply --staged"',
             'Applies code style to staged files before committing.'
         )
 

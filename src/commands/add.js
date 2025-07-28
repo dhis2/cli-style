@@ -17,6 +17,6 @@ exports.builder = (yargs) =>
             'Adds React specific ESLint configuration to the project.'
         )
         .example(
-            '$0 add git-hook pre-push "yarn test"',
-            'Adds a pre-push git hook that runs the command "yarn test"'
+            '$0 add git-hook pre-push "pnpm test"',
+            'Adds a pre-push git hook that runs the command "pnpm test"'
         )

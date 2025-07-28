@@ -30,15 +30,15 @@ are not necessary to explicitly install:
 ## Usage
 
 ```
-yarn d2-style --help
+pnpm d2-style --help
 
-yarn d2-style install --help
+pnpm d2-style install --help
 
-yarn d2-style check --help
-yarn d2-style check js --help
+pnpm d2-style check --help
+pnpm d2-style check js --help
 
-yarn d2-style apply --help
-yarn d2-style apply text --help
+pnpm d2-style apply --help
+pnpm d2-style apply text --help
 ```
 
 ## Report an issue

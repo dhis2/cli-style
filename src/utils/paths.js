@@ -14,6 +14,7 @@ const PROJECT_ROOT =
                 '.git',
                 '.github',
                 'yarn.lock',
+                'pnpm-lock.yaml',
                 'package-lock.json',
             ].map((i) => findup.sync.exists(path.join(directory, i)))
             return amiroot.includes(true) && directory

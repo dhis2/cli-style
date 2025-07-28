@@ -3,7 +3,7 @@
 ## After cloning a repository
 
 The first time you check out a repo, you need to enable the Git hooks
-manually. Husky used to do this by default, but both NPM and Yarn are
+manually. Husky used to do this by default, but both NPM and pnpm are
 moving away from `postinstall` scripts.
 
 This introduces a manual step. So a standard clone and install
@@ -12,19 +12,19 @@ operations looks like:
 ```bash
 git clone /path/to/repo && cd repo
 
-yarn install
+pnpm install
 
-yarn d2-style install # this enables the hooks in .hooks
+pnpm d2-style install # this enables the hooks in .hooks
 ```
 
 ## Fresh install
 
 First up you will need to add `d2-style` as a development dependency. We
-recommend using Yarn as it is what we use by default, but NPM will work
+recommend using `pnpm` as it is what we use by default, but NPM will work
 just fine.
 
 ```bash
-yarn add @dhis2/cli-style --dev
+pnpm add @dhis2/cli-style --dev
 ```
 
 ## Setup scripts
@@ -38,11 +38,11 @@ Some example scripts follow:
 
 ```json
 "scripts": {
-    "lint": "yarn d2-style check",
-    "lint:staged": "yarn lint --staged",
+    "lint": "pnpm d2-style check",
+    "lint:staged": "pnpm lint --staged",
 
-    "format": "yarn d2-style apply"
-    "format:staged": "yarn format --staged",
+    "format": "pnpm d2-style apply"
+    "format:staged": "pnpm format --staged",
 },
 ```
 
@@ -53,7 +53,7 @@ repository for you. For a list of valid groups and what tools they will
 configure, use:
 
 ```bash
-yarn d2-style add --help
+pnpm d2-style add --help
 ```
 
 If a config file already exists, it may have local modifications, so the
@@ -72,30 +72,30 @@ The structure is: `d2-style add {tool} {template}`
 To add the default react eslint configuration:
 
 ```sh
-yarn d2-style add eslint react
+pnpm d2-style add eslint react
 ```
 
 To add prettier configuration:
 
 ```sh
-yarn d2-style add prettier
+pnpm d2-style add prettier
 ```
 
 To add stylelint configuration:
 
 ```sh
-yarn d2-style add stylelint
+pnpm d2-style add stylelint
 ```
 
 To add Git hooks, the format is:
 
 ```sh
-yarn d2-style add git-hook {hook} {command}
+pnpm d2-style add git-hook {hook} {command}
 ```
 
 Examples:
 
 ```sh
-yarn d2-style add git-hook pre-commit "yarn d2-style apply && git add -u"
-yarn d2-style add git-hook pre-push "yarn test"
+pnpm d2-style add git-hook pre-commit "pnpm d2-style apply && git add -u"
+pnpm d2-style add git-hook pre-push "pnpm test"
 ```

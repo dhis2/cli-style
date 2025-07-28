@@ -15,9 +15,9 @@
     },
     "scripts": {
         "test": "tape tests/**/*.js",
-        "lint:staged": "yarn lint --staged",
+        "lint:staged": "pnpm lint --staged",
         "lint": "./bin/d2-style check",
-        "format:staged": "yarn format --staged",
+        "format:staged": "pnpm format --staged",
         "format": "./bin/d2-style apply",
         "build:docs": "mkdir -p dist && cp docs/index.html dist/",
         "build:jsdoc": "d2-utils-docsite build ./docs -o ./dist --jsdoc src/ --jsdocOutputFile api.md",
@@ -27,16 +27,16 @@
     "license": "BSD-3-Clause",
     "dependencies": {
         "@commitlint/cli": "^12.1.4",
-        "@commitlint/config-conventional": "^13.1.0",
+        "@commitlint/config-conventional": "^13.2.0",
         "@dhis2/cli-helpers-engine": "^3.0.0",
         "@ls-lint/ls-lint": "^1.10.0",
         "@typescript-eslint/eslint-plugin": "^8.9.0",
         "@typescript-eslint/parser": "^8.9.0",
         "eslint": "^8",
-        "eslint-config-prettier": "^9.1.0",
-        "eslint-plugin-import": "^2.22.1",
-        "eslint-plugin-react": "^7.37.1",
-        "eslint-plugin-react-hooks": "^5.0.0",
+        "eslint-config-prettier": "^9.1.2",
+        "eslint-plugin-import": "^2.32.0",
+        "eslint-plugin-react": "^7.37.5",
+        "eslint-plugin-react-hooks": "^5.2.0",
         "fast-glob": "^3.2.5",
         "find-up": "^5.0.0",
         "fs-extra": "^10.0.0",
@@ -60,5 +60,5 @@
         "@dhis2/cli-utils-docsite": "3.1.2",
         "tape": "5.3.2"
     },
-    "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+    "packageManager": "pnpm@10.14.0-0+sha512.2cd47a0cbf5f1d1de7693a88307a0ede5be94e0d3b34853d800ee775efbea0650cb562b77605ec80bc8d925f5cd27c4dfe8bb04d3a0b76090784c664450d32d6"
 }
