@@ -1,3 +1,10 @@
+# [10.8.0-alpha.4](https://github.com/dhis2/cli-style/compare/v10.8.0-alpha.3...v10.8.0-alpha.4) (2025-07-29)
+
+
+### Bug Fixes
+
+* force alpha release to npm ([9d5a57e](https://github.com/dhis2/cli-style/commit/9d5a57e56e895c92378773301ffbb25804338d66))
+
 # [10.8.0-alpha.3](https://github.com/dhis2/cli-style/compare/v10.8.0-alpha.2...v10.8.0-alpha.3) (2025-07-29)
 
 
