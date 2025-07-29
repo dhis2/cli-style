@@ -64,7 +64,7 @@ jobs:
                   cache: 'pnpm'
             - run: pnpm install --frozen-lockfile
 
-            - uses: dhis2/action-semantic-release@pnpm
+            - uses: dhis2/action-semantic-release@master
               with:
                   publish-npm: true
                   publish-github: true
