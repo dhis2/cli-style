@@ -1,3 +1,11 @@
+# [10.8.0-alpha.5](https://github.com/dhis2/cli-style/compare/v10.8.0-alpha.4...v10.8.0-alpha.5) (2025-07-29)
+
+
+### Bug Fixes
+
+* revert to action-semantic-release@master ([a459980](https://github.com/dhis2/cli-style/commit/a45998096b225c165c70e0044174358d60d734d4))
+* use action-semantic-release@pnpm instead of master ([75ebcea](https://github.com/dhis2/cli-style/commit/75ebcea8cc4144e177ce2b2d00dc7b065b47f58c))
+
 # [10.8.0-alpha.4](https://github.com/dhis2/cli-style/compare/v10.8.0-alpha.3...v10.8.0-alpha.4) (2025-07-29)
 
 
