@@ -1,3 +1,11 @@
+## [10.7.10](https://github.com/dhis2/cli-style/compare/v10.7.9...v10.7.10) (2026-04-08)
+
+
+### Bug Fixes
+
+* ignore '[skip ci]' commits ([#482](https://github.com/dhis2/cli-style/issues/482)) ([64b65ed](https://github.com/dhis2/cli-style/commit/64b65edd6b275065a3c9f9013ac40c9b6c6ec63d))
+* prettier issue with config ([#483](https://github.com/dhis2/cli-style/issues/483)) ([b63b05c](https://github.com/dhis2/cli-style/commit/b63b05c102898fe720d11c73200e78696baa84d3))
+
 ## [10.7.9](https://github.com/dhis2/cli-style/compare/v10.7.8...v10.7.9) (2025-06-26)
 
 
