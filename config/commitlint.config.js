@@ -9,5 +9,8 @@ module.exports = {
      * commits often exceed the max. amount of characters because
      * of the appended changelog. This ignores those commits.
      */
-    ignores: [(commit) => commit.includes('[skip release]') || commit.includes('[skip ci]') ],
+    ignores: [
+        (commit) =>
+            commit.includes('[skip release]') || commit.includes('[skip ci]'),
+    ],
 }
